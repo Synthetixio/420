@@ -8,7 +8,7 @@ async function magicWallet(magicWallet) {
     const network = await rpcProvider.getNetwork();
     window.$chainId = network.chainId;
 
-    const { getMagicProvider } = await import('@snx-v3/useBlockchain');
+    const { getMagicProvider } = await import('@_/useBlockchain');
     const magicProvider = getMagicProvider();
     window.ethereum = magicProvider
       ? new Proxy(magicProvider, {

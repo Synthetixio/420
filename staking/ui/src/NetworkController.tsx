@@ -11,13 +11,13 @@ import {
   MenuList,
   Text,
 } from '@chakra-ui/react';
-import { prettyString, renderAccountId } from '@snx-v3/format';
-import { WalletIcon } from '@snx-v3/icons';
-import { Tooltip } from '@snx-v3/Tooltip';
-import { useAccounts } from '@snx-v3/useAccounts';
-import { MAINNET, NetworkIcon, OPTIMISM, useNetwork, useWallet } from '@snx-v3/useBlockchain';
-import { useCreateAccount } from '@snx-v3/useCreateAccount';
-import { makeSearch, useParams } from '@snx-v3/useParams';
+import { prettyString, renderAccountId } from '@_/format';
+import { WalletIcon } from '@_/icons';
+import { Tooltip } from '@_/Tooltip';
+import { useAccounts } from '@_/useAccounts';
+import { MAINNET, NetworkIcon, OPTIMISM, useNetwork, useWallet } from '@_/useBlockchain';
+import { useCreateAccount } from '@_/useCreateAccount';
+import { makeSearch, useParams } from '@_/useParams';
 import { ethers } from 'ethers';
 import React from 'react';
 

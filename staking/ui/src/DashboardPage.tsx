@@ -1,8 +1,8 @@
 import { Flex, Heading, Text } from '@chakra-ui/react';
-import { useWallet } from '@snx-v3/useBlockchain';
-import { useCollateralType } from '@snx-v3/useCollateralTypes';
-import { useLiquidityPosition } from '@snx-v3/useLiquidityPosition';
-import { type HomePageSchemaType, useParams } from '@snx-v3/useParams';
+import { useWallet } from '@_/useBlockchain';
+import { useCollateralType } from '@_/useCollateralTypes';
+import { useLiquidityPosition } from '@_/useLiquidityPosition';
+import { type HomePageSchemaType, useParams } from '@_/useParams';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { ConnectYourWallet } from './Staking/ConnectYourWallet';

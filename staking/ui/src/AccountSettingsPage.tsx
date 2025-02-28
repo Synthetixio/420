@@ -1,5 +1,5 @@
 import { Flex, Heading } from '@chakra-ui/react';
-import { Permissions } from '@snx-v3/Permissions';
+import { Permissions } from '@_/Permissions';
 import { Helmet } from 'react-helmet';
 
 export function AccountSettingsPage() {

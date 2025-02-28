@@ -1,0 +1,16 @@
+{
+  "name": "@_/useCollateralPrices",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.2",
+  "dependencies": {
+    "@_/tsHelpers": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
+    "@_/useCoreProxy": "workspace:*",
+    "@_/withERC7412": "workspace:*",
+    "@tanstack/react-query": "^5.8.3",
+    "debug": "^4.4.0",
+    "ethers": "^5.7.2",
+    "react": "^18.2.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@_/useIsAndromedaStataUSDC",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.2",
+  "dependencies": {
+    "@_/useBlockchain": "workspace:*",
+    "@_/useSynthTokens": "workspace:*",
+    "react": "^18.2.0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@_/Rewards",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/Amount": "workspace:*",
+    "@_/TokenIcon": "workspace:*",
+    "@_/Tooltip": "workspace:*",
+    "@_/WithdrawIncrease": "workspace:*",
+    "@_/etherscanLink": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
+    "@_/useClaimAllRewards": "workspace:*",
+    "@_/useParams": "workspace:*",
+    "@_/useRewards": "workspace:*",
+    "@_/useSynthTokens": "workspace:*",
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@synthetixio/wei": "^2.74.4",
+    "react": "^18.2.0"
+  }
+}

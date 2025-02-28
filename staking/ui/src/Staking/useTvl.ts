@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchPythPrice } from '@snx-v3/usePythPrice';
+import { fetchPythPrice } from '@_/usePythPrice';
 import { wei } from '@synthetixio/wei';
 
 export async function fetchTvl() {

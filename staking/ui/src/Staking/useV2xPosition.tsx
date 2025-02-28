@@ -1,7 +1,7 @@
-import { contractsHash } from '@snx-v3/tsHelpers';
-import { useNetwork, useProvider, useWallet } from '@snx-v3/useBlockchain';
-import { usePositionManagerNewPool } from '@snx-v3/usePositionManagerNewPool';
-import { useV2xSynthetix } from '@snx-v3/useV2xSynthetix';
+import { contractsHash } from '@_/tsHelpers';
+import { useNetwork, useProvider, useWallet } from '@_/useBlockchain';
+import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
+import { useV2xSynthetix } from '@_/useV2xSynthetix';
 import { useQuery } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';

@@ -1,11 +1,11 @@
 import { useToast } from '@chakra-ui/react';
-import { ContractError } from '@snx-v3/ContractError';
-import { useNetwork, useProvider, useSigner } from '@snx-v3/useBlockchain';
-import { useContractErrorParser } from '@snx-v3/useContractErrorParser';
-import { useLegacyMarket } from '@snx-v3/useLegacyMarket';
-import { usePositionManagerNewPool } from '@snx-v3/usePositionManagerNewPool';
-import { useTreasuryMarketProxy } from '@snx-v3/useTreasuryMarketProxy';
-import { useTrustedMulticallForwarder } from '@snx-v3/useTrustedMulticallForwarder';
+import { ContractError } from '@_/ContractError';
+import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
+import { useContractErrorParser } from '@_/useContractErrorParser';
+import { useLegacyMarket } from '@_/useLegacyMarket';
+import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
+import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
+import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';

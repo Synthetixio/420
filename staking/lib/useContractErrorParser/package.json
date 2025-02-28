@@ -1,0 +1,16 @@
+{
+  "name": "@_/useContractErrorParser",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/parseContractError": "workspace:*",
+    "@_/useAllErrors": "workspace:*",
+    "@_/useClosePosition": "workspace:*",
+    "@_/usePositionManager": "workspace:*",
+    "@_/usePositionManagerAndromedaStataUSDC": "workspace:*",
+    "@_/usePositionManagerAndromedaUSDC": "workspace:*",
+    "@_/useStaticAaveUSDC": "workspace:*",
+    "react": "^18.2.0"
+  }
+}

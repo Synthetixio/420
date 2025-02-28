@@ -1,0 +1,28 @@
+{
+  "name": "@_/ManageAction",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/Borrow": "workspace:*",
+    "@_/Claim": "workspace:*",
+    "@_/ClaimModal": "workspace:*",
+    "@_/Deposit": "workspace:*",
+    "@_/DepositModal": "workspace:*",
+    "@_/DepositModalAndromeda": "workspace:*",
+    "@_/ManagePositionContext": "workspace:*",
+    "@_/Repay": "workspace:*",
+    "@_/RepayModal": "workspace:*",
+    "@_/Undelegate": "workspace:*",
+    "@_/UndelegateModal": "workspace:*",
+    "@_/Withdraw": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
+    "@_/useCollateralTypes": "workspace:*",
+    "@_/useLiquidityPosition": "workspace:*",
+    "@_/useParams": "workspace:*",
+    "@_/validatePosition": "workspace:*",
+    "@chakra-ui/react": "^2.8.2",
+    "@synthetixio/wei": "^2.74.4",
+    "react": "^18.2.0"
+  }
+}

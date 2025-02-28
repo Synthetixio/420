@@ -1,7 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react';
-import { Amount } from '@snx-v3/Amount';
-import { CRatioAmount } from '@snx-v3/CRatioBar';
-import { usePythPrice } from '@snx-v3/usePythPrice';
+import { Amount } from '@_/Amount';
+import { CRatioAmount } from '@_/CRatioBar';
+import { usePythPrice } from '@_/usePythPrice';
 import { Wei, wei } from '@synthetixio/wei';
 import { ethers } from 'ethers';
 import React from 'react';

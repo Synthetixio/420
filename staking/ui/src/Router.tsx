@@ -1,5 +1,5 @@
 import { Container, Flex } from '@chakra-ui/react';
-import { useParams } from '@snx-v3/useParams';
+import { useParams } from '@_/useParams';
 import { AccountSettingsPage } from './AccountSettingsPage';
 import { DashboardPage } from './DashboardPage';
 import { Footer } from './Footer';

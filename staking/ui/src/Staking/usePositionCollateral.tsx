@@ -1,8 +1,8 @@
-import { contractsHash } from '@snx-v3/tsHelpers';
-import { useNetwork, useProvider } from '@snx-v3/useBlockchain';
-import { useCollateralType } from '@snx-v3/useCollateralTypes';
-import { type PositionPageSchemaType, useParams } from '@snx-v3/useParams';
-import { useCoreProxy } from '@snx-v3/useCoreProxy';
+import { contractsHash } from '@_/tsHelpers';
+import { useNetwork, useProvider } from '@_/useBlockchain';
+import { useCollateralType } from '@_/useCollateralTypes';
+import { type PositionPageSchemaType, useParams } from '@_/useParams';
+import { useCoreProxy } from '@_/useCoreProxy';
 import { useQuery } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';

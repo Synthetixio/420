@@ -1,0 +1,22 @@
+{
+  "name": "@_/useClearDebt",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/constants": "workspace:*",
+    "@_/isBaseAndromeda": "workspace:*",
+    "@_/txnReducer": "workspace:*",
+    "@_/useAccountProxy": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
+    "@_/useCollateralPriceUpdates": "workspace:*",
+    "@_/useCoreProxy": "workspace:*",
+    "@_/useDebtRepayer": "workspace:*",
+    "@_/useSpotMarketProxy": "workspace:*",
+    "@_/withERC7412": "workspace:*",
+    "@tanstack/react-query": "^5.8.3",
+    "debug": "^4.4.0",
+    "ethers": "^5.7.2",
+    "react": "^18.2.0"
+  }
+}

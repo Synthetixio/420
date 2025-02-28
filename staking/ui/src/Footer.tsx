@@ -1,5 +1,5 @@
 import { Container, Flex, Link } from '@chakra-ui/react';
-import { DiscordIcon, GithubIcon, Logo, WarpcastIcon, XIcon, YoutubeIcon } from '@snx-v3/icons';
+import { DiscordIcon, GithubIcon, Logo, WarpcastIcon, XIcon, YoutubeIcon } from '@_/icons';
 
 export const Footer = () => {
   return (

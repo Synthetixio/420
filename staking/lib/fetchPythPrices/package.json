@@ -1,0 +1,12 @@
+{
+  "name": "@_/fetchPythPrices",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/constants": "workspace:*",
+    "@pythnetwork/pyth-evm-js": "^1.42.0",
+    "@synthetixio/wei": "^2.74.4",
+    "ethers": "^5.7.2"
+  }
+}

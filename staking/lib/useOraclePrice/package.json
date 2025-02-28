@@ -1,0 +1,15 @@
+{
+  "name": "@_/useOraclePrice",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/contracts": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
+    "@_/withERC7412": "workspace:*",
+    "@synthetixio/wei": "^2.74.4",
+    "@tanstack/react-query": "^5.8.3",
+    "ethers": "^5.7.2",
+    "react": "^18.2.0"
+  }
+}

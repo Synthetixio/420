@@ -1,0 +1,26 @@
+{
+  "name": "@_/Synths",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/Amount": "workspace:*",
+    "@_/ContractError": "workspace:*",
+    "@_/TokenIcon": "workspace:*",
+    "@_/Tooltip": "workspace:*",
+    "@_/constants": "workspace:*",
+    "@_/etherscanLink": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
+    "@_/useContractErrorParser": "workspace:*",
+    "@_/useStaticAaveUSDC": "workspace:*",
+    "@_/useSynthBalances": "workspace:*",
+    "@_/useUnwrapAllSynths": "workspace:*",
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@synthetixio/wei": "^2.74.4",
+    "@tanstack/react-query": "^5.8.3",
+    "debug": "^4.4.0",
+    "ethers": "^5.7.2",
+    "react": "^18.2.0"
+  }
+}

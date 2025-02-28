@@ -187,7 +187,7 @@ jobs:
 
       - run:
           name: Run server localhost:3000
-          working_directory: liquidity/ui
+          working_directory: staking/ui
           command: NODE_ENV=test yarn start
           background: true
 
@@ -197,7 +197,7 @@ jobs:
 
       - run:
           name: 'Run tests'
-          working_directory: liquidity/cypress
+          working_directory: staking/cypress
           command: |-
             echo "0" > /tmp/cypress_exit_code
             export NODE_ENV=test
@@ -214,23 +214,23 @@ jobs:
           command: |-
             curl -Os https://uploader.codecov.io/latest/linux/codecov
             chmod +x codecov
-            ./codecov -t ${CODECOV_TOKEN} --file liquidity/cypress/.nyc_output/out.json
+            ./codecov -t ${CODECOV_TOKEN} --file staking/cypress/.nyc_output/out.json
 
       - run: exit $(cat /tmp/cypress_exit_code)
 
       - store_test_results:
-          path: 'liquidity/cypress/cypress/reports'
+          path: 'staking/cypress/cypress/reports'
 
       - store_artifacts:
-          path: 'liquidity/cypress/.nyc_output'
+          path: 'staking/cypress/.nyc_output'
           destination: 'coverage'
 
       - store_artifacts:
-          path: 'liquidity/cypress/cypress/screenshots'
+          path: 'staking/cypress/cypress/screenshots'
           destination: 'screenshots'
 
       - store_artifacts:
-          path: 'liquidity/cypress/cypress/videos'
+          path: 'staking/cypress/cypress/videos'
           destination: 'videos'
 
   cy:
@@ -245,7 +245,7 @@ jobs:
       - run: sudo apt install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb lcov
 
       - run:
-          working_directory: liquidity/cypress
+          working_directory: staking/cypress
           command: yarn cypress run --component
 
       - run:
@@ -253,21 +253,21 @@ jobs:
           command: |-
             curl -Os https://uploader.codecov.io/latest/linux/codecov
             chmod +x codecov
-            ./codecov -t ${CODECOV_TOKEN} --file liquidity/cypress/.nyc_output/out.json
+            ./codecov -t ${CODECOV_TOKEN} --file staking/cypress/.nyc_output/out.json
 
       - store_test_results:
-          path: 'liquidity/cypress/cypress/reports'
+          path: 'staking/cypress/cypress/reports'
 
       - store_artifacts:
-          path: 'liquidity/cypress/.nyc_output'
+          path: 'staking/cypress/.nyc_output'
           destination: 'coverage'
 
       - store_artifacts:
-          path: 'liquidity/cypress/cypress/screenshots'
+          path: 'staking/cypress/cypress/screenshots'
           destination: 'screenshots'
 
       - store_artifacts:
-          path: 'liquidity/cypress/cypress/videos'
+          path: 'staking/cypress/cypress/videos'
           destination: 'videos'
 
   ipfs:
@@ -277,9 +277,9 @@ jobs:
     steps:
       - checkout
       - yarn-install
-      - run: yarn workspace @snx-v3/liquidity build
+      - run: yarn workspace @_/staking build
       - ipfs-deploy:
-          source-dir: './liquidity/ui/dist'
+          source-dir: './staking/ui/dist'
           ipfs-api: 'https://ipfs.synthetix.io:5001/api/v0'
           ipfs-cluster-api: 'https://ipfs.synthetix.io/api/v0'
           ipns-key: 'v3.synthetix.eth'
@@ -336,30 +336,10 @@ workflows:
       - tests
 
       - contract-test:
-          name: pm-universal
-          working_directory: 'contracts/position-manager'
-
-      - contract-test:
-          name: pm-usdc-andromeda
-          working_directory: 'contracts/position-manager-andromeda-usdc'
-
-      - contract-test:
-          name: pm-statausdc-andromeda
-          working_directory: 'contracts/position-manager-andromeda-statausdc'
-
-      - contract-test:
-          name: pm-jubilee-pool
+          name: pm-420-pool
           working_directory: 'contracts/position-manager-new-pool'
 
       #- cy
-      - e2e:
-          name: e2e-base
-          dir: '8453-andromeda'
-          parallelism: 3
-      - e2e:
-          name: e2e-arbitrum
-          dir: '42161-main'
-          parallelism: 3
       - e2e:
           name: e2e-mainnet
           dir: '1-main'
@@ -370,8 +350,6 @@ workflows:
             - checks
             - tests
             #- cy
-            - e2e-base
-            - e2e-arbitrum
             - e2e-mainnet
           filters:
             branches:

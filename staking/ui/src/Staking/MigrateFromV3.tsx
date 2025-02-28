@@ -14,9 +14,9 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { useCollateralType } from '@snx-v3/useCollateralTypes';
-import { useLiquidityPosition } from '@snx-v3/useLiquidityPosition';
-import { type PositionPageSchemaType, useParams } from '@snx-v3/useParams';
+import { useCollateralType } from '@_/useCollateralTypes';
+import { useLiquidityPosition } from '@_/useLiquidityPosition';
+import { type PositionPageSchemaType, useParams } from '@_/useParams';
 import React from 'react';
 import burn from './burn.webp';
 import coinburn from './coinburn.svg';

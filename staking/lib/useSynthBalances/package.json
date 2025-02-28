@@ -1,0 +1,17 @@
+{
+  "name": "@_/useSynthBalances",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.2",
+  "dependencies": {
+    "@_/tsHelpers": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
+    "@_/useSynthTokens": "workspace:*",
+    "@_/useTrustedMulticallForwarder": "workspace:*",
+    "@synthetixio/wei": "^2.74.4",
+    "@tanstack/react-query": "^5.8.3",
+    "debug": "^4.4.0",
+    "ethers": "^5.7.2",
+    "react": "^18.2.0"
+  }
+}

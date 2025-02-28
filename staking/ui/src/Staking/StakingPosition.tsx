@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
-import { Amount } from '@snx-v3/Amount';
-import { LogoIcon } from '@snx-v3/icons';
-import { usePythPrice } from '@snx-v3/usePythPrice';
+import { Amount } from '@_/Amount';
+import { LogoIcon } from '@_/icons';
+import { usePythPrice } from '@_/usePythPrice';
 import { wei } from '@synthetixio/wei';
 import React from 'react';
 import { LoanChart } from './LoanChart';

@@ -1,20 +1,20 @@
 import { useToast } from '@chakra-ui/react';
-import { POOL_ID } from '@snx-v3/constants';
-import { ContractError } from '@snx-v3/ContractError';
-import { useAccountProxy } from '@snx-v3/useAccountProxy';
-import { useNetwork, useProvider, useSigner } from '@snx-v3/useBlockchain';
-import { useCollateralType } from '@snx-v3/useCollateralTypes';
-import { useContractErrorParser } from '@snx-v3/useContractErrorParser';
-import { useLiquidityPosition } from '@snx-v3/useLiquidityPosition';
-import { type PositionPageSchemaType, useParams } from '@snx-v3/useParams';
-import { usePositionManagerNewPool } from '@snx-v3/usePositionManagerNewPool';
-import { useTrustedMulticallForwarder } from '@snx-v3/useTrustedMulticallForwarder';
+import { POOL_ID } from '@_/constants';
+import { ContractError } from '@_/ContractError';
+import { useAccountProxy } from '@_/useAccountProxy';
+import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
+import { useCollateralType } from '@_/useCollateralTypes';
+import { useContractErrorParser } from '@_/useContractErrorParser';
+import { useLiquidityPosition } from '@_/useLiquidityPosition';
+import { type PositionPageSchemaType, useParams } from '@_/useParams';
+import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
+import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';
 import React from 'react';
 import { useTargetCRatio } from './useTargetCRatio';
-import { useTreasuryMarketProxy } from '@snx-v3/useTreasuryMarketProxy';
+import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 
 const log = debug('snx:useMigrateNewPool');
 

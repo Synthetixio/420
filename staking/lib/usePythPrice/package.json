@@ -1,0 +1,13 @@
+{
+  "name": "@_/usePythPrice",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.2",
+  "dependencies": {
+    "@_/constants": "workspace:*",
+    "@pythnetwork/pyth-evm-js": "^1.42.0",
+    "@tanstack/react-query": "^5.8.3",
+    "ethers": "^5.7.2",
+    "react": "^18.2.0"
+  }
+}

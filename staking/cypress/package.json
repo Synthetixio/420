@@ -1,0 +1,36 @@
+{
+  "name": "@_/staking-cypress",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.9",
+  "scripts": {
+    "cy": "NODE_ENV=test CYPRESS_INFURA_KEY=$INFURA_KEY cypress open --component",
+    "cy:run": "NODE_ENV=test CYPRESS_INFURA_KEY=$INFURA_KEY cypress run --component",
+    "e2e": "NODE_ENV=test CYPRESS_INFURA_KEY=$INFURA_KEY cypress open --e2e",
+    "e2e:run": "NODE_ENV=test CYPRESS_INFURA_KEY=$INFURA_KEY cypress run --e2e"
+  },
+  "devDependencies": {
+    "@_/contracts": "workspace:*",
+    "@_/staking": "workspace:*",
+    "@chakra-ui/react": "^2.8.2",
+    "@cypress/code-coverage": "^3.13.11",
+    "@cypress/react": "^9.0.0",
+    "cypress": "14.0.2",
+    "cypress-terminal-report": "^7.1.0",
+    "ethers": "^5.7.2",
+    "react-router-dom": "^6.18.0"
+  },
+  "dependencies": {
+    "@_/parseContractError": "workspace:*",
+    "@_/theme": "workspace:*"
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "../ui/src/**/*.tsx",
+      "../ui/src/**/*.ts",
+      "../lib/**/*.tsx",
+      "../lib/**/*.ts"
+    ]
+  }
+}

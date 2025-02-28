@@ -1,5 +1,5 @@
 import { Flex, Heading, Image, Text } from '@chakra-ui/react';
-import { LogoIcon } from '@snx-v3/icons';
+import { LogoIcon } from '@_/icons';
 import React from 'react';
 
 export function LayoutWithImage({

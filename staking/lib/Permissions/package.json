@@ -1,0 +1,19 @@
+{
+  "name": "@_/Permissions",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/Address": "workspace:*",
+    "@_/format": "workspace:*",
+    "@_/useAccountPermissions": "workspace:*",
+    "@_/useAccounts": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
+    "@_/useManagePermissions": "workspace:*",
+    "@_/useTransferAccountId": "workspace:*",
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "ethers": "^5.7.2",
+    "react": "^18.2.0"
+  }
+}

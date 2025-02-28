@@ -1,0 +1,31 @@
+{
+  "name": "@_/RepayModal",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/Amount": "workspace:*",
+    "@_/ContractError": "workspace:*",
+    "@_/Manage": "workspace:*",
+    "@_/ManagePositionContext": "workspace:*",
+    "@_/Multistep": "workspace:*",
+    "@_/constants": "workspace:*",
+    "@_/useApprove": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
+    "@_/useCollateralTypes": "workspace:*",
+    "@_/useContractErrorParser": "workspace:*",
+    "@_/useCoreProxy": "workspace:*",
+    "@_/useLiquidityPosition": "workspace:*",
+    "@_/useParams": "workspace:*",
+    "@_/useRepay": "workspace:*",
+    "@_/useRepayBaseAndromeda": "workspace:*",
+    "@_/useSpotMarketProxy": "workspace:*",
+    "@_/useSynthTokens": "workspace:*",
+    "@_/useSystemToken": "workspace:*",
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@xstate/react": "^3.2.2",
+    "react": "^18.2.0",
+    "xstate": "^4.38.3"
+  }
+}

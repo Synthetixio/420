@@ -1,0 +1,11 @@
+{
+  "name": "@_/useWithdrawTimer",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/useAccountCollateralUnlockDate": "workspace:*",
+    "react": "^18.2.0",
+    "react-timer-hook": "^3.0.7"
+  }
+}

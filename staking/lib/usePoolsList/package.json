@@ -1,0 +1,11 @@
+{
+  "name": "@_/usePoolsList",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.2",
+  "dependencies": {
+    "@_/constants": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
+    "@tanstack/react-query": "^5.8.3"
+  }
+}

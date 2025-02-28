@@ -25,9 +25,9 @@ const htmlPlugin = new HtmlWebpackPlugin({
 const babelRule = {
   test: /\.(ts|tsx|js|jsx)$/,
   include: [
-    /liquidity\/ui/,
-    /liquidity\/lib/,
-    /liquidity\/cypress/,
+    /staking\/ui/,
+    /staking\/lib/,
+    /staking\/cypress/,
 
     /staking\/ui/,
     /staking\/lib/,

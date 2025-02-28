@@ -51,8 +51,8 @@ module.exports = {
         //
         'staking/ui/**/*',
         'staking/lib/**/*',
-        'liquidity/ui/**/*',
-        'liquidity/lib/**/*',
+        'staking/ui/**/*',
+        'staking/lib/**/*',
       ],
 
       env: {

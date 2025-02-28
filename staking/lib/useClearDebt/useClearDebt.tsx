@@ -1,0 +1,137 @@
+import { POOL_ID } from '@_/constants';
+import { USDC_BASE_MARKET } from '@_/isBaseAndromeda';
+import { initialState, reducer } from '@_/txnReducer';
+import { useAccountProxy } from '@_/useAccountProxy';
+import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
+import { useCollateralPriceUpdates } from '@_/useCollateralPriceUpdates';
+import { useCoreProxy } from '@_/useCoreProxy';
+import { useDebtRepayer } from '@_/useDebtRepayer';
+import { useSpotMarketProxy } from '@_/useSpotMarketProxy';
+import { withERC7412 } from '@_/withERC7412';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import debug from 'debug';
+import { ethers } from 'ethers';
+import React from 'react';
+
+const log = debug('snx:useClearDebt');
+
+export const useClearDebt = ({
+  accountId,
+  collateralTypeAddress,
+}: {
+  accountId?: string;
+  collateralTypeAddress?: string;
+}) => {
+  const [txnState, dispatch] = React.useReducer(reducer, initialState);
+  const { data: CoreProxy } = useCoreProxy();
+  const { data: SpotMarketProxy } = useSpotMarketProxy();
+  const { data: AccountProxy } = useAccountProxy();
+  const { data: priceUpdateTx } = useCollateralPriceUpdates();
+
+  const signer = useSigner();
+  const { network } = useNetwork();
+  const provider = useProvider();
+
+  const { data: DebtRepayer } = useDebtRepayer();
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: async () => {
+      if (!signer || !network || !provider) throw new Error('No signer or network');
+      if (
+        !(
+          CoreProxy &&
+          accountId &&
+          collateralTypeAddress &&
+          SpotMarketProxy &&
+          DebtRepayer &&
+          AccountProxy
+        )
+      ) {
+        return;
+      }
+
+      dispatch({ type: 'prompting' });
+
+      const AccountProxyContract = new ethers.Contract(
+        AccountProxy.address,
+        AccountProxy.abi,
+        signer
+      );
+      const DebtRepayerContract = new ethers.Contract(DebtRepayer.address, DebtRepayer.abi, signer);
+
+      const approveAccountTx = AccountProxyContract.populateTransaction.approve(
+        DebtRepayer.address,
+        accountId
+      );
+
+      const depositDebtToRepay = DebtRepayerContract.populateTransaction.depositDebtToRepay(
+        CoreProxy.address,
+        SpotMarketProxy.address,
+        AccountProxy.address,
+        accountId,
+        POOL_ID,
+        collateralTypeAddress,
+        USDC_BASE_MARKET
+      );
+
+      const callsPromise = Promise.all([approveAccountTx, depositDebtToRepay]);
+      const [calls] = await Promise.all([callsPromise]);
+
+      if (priceUpdateTx) {
+        calls.unshift(priceUpdateTx as any);
+      }
+
+      const walletAddress = await signer.getAddress();
+      const { multicallTxn: erc7412Tx, gasLimit } = await withERC7412(
+        provider,
+        network,
+        calls,
+        'useRepay',
+        walletAddress
+      );
+
+      const txn = await signer.sendTransaction({
+        ...erc7412Tx,
+        gasLimit: gasLimit.mul(15).div(10),
+      });
+      log('txn', txn);
+      dispatch({ type: 'pending', payload: { txnHash: txn.hash } });
+
+      const receipt = await provider.waitForTransaction(txn.hash);
+      log('receipt', receipt);
+      dispatch({ type: 'success' });
+      return receipt;
+    },
+
+    onSuccess: async () => {
+      const deployment = `${network?.id}-${network?.preset}`;
+      await Promise.all(
+        [
+          //
+          'PriceUpdates',
+          'LiquidityPosition',
+          'LiquidityPositions',
+          'TokenBalance',
+          'SynthBalances',
+          'EthBalance',
+          'Allowance',
+          'TransferableSynthetix',
+        ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
+      );
+      dispatch({ type: 'success' });
+    },
+
+    onError: (error) => {
+      dispatch({ type: 'error', payload: { error } });
+      throw error;
+    },
+  });
+  return {
+    mutation,
+    txnState,
+    settle: () => dispatch({ type: 'settled' }),
+    isLoading: mutation.isPending,
+    exec: mutation.mutateAsync,
+  };
+};

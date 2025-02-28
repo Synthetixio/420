@@ -12,7 +12,7 @@
   "repository": "github:Synthetixio/v3ui",
   "license": "MIT",
   "dependencies": {
-    "@snx-v3/useBlockchain": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
     "ethers": "^5.7.2"
   }
 }

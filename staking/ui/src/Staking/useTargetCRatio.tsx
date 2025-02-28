@@ -1,6 +1,6 @@
-import { contractsHash } from '@snx-v3/tsHelpers';
-import { useNetwork, useProvider } from '@snx-v3/useBlockchain';
-import { useTreasuryMarketProxy } from '@snx-v3/useTreasuryMarketProxy';
+import { contractsHash } from '@_/tsHelpers';
+import { useNetwork, useProvider } from '@_/useBlockchain';
+import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 import { useQuery } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';

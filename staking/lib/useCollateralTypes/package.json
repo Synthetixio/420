@@ -1,0 +1,18 @@
+{
+  "name": "@_/useCollateralTypes",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.2",
+  "dependencies": {
+    "@_/constants": "workspace:*",
+    "@_/contracts": "workspace:*",
+    "@_/tsHelpers": "workspace:*",
+    "@_/useBlockchain": "workspace:*",
+    "@_/useSNX": "workspace:*",
+    "@_/useSystemToken": "workspace:*",
+    "@synthetixio/wei": "^2.74.4",
+    "@tanstack/react-query": "^5.8.3",
+    "ethers": "^5.7.2",
+    "react": "^18.2.0"
+  }
+}

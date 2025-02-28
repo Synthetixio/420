@@ -1,5 +1,5 @@
 {
-  "name": "@snx-v3/position-manager-new-pool",
+  "name": "@_/position-manager-new-pool",
   "version": "0.0.0",
   "publishConfig": {
     "access": "public"
@@ -9,7 +9,7 @@
     "src",
     "*.toml"
   ],
-  "repository": "Synthetixio/liquidity-ui",
+  "repository": "Synthetixio/420",
   "author": "Synthetix",
   "license": "MIT",
   "scripts": {

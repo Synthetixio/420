@@ -1,0 +1,32 @@
+{
+  "name": "@_/DepositModal",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/Amount": "workspace:*",
+    "@_/CRatioBar": "workspace:*",
+    "@_/ChangeStat": "workspace:*",
+    "@_/ContractError": "workspace:*",
+    "@_/Manage": "workspace:*",
+    "@_/ManagePositionContext": "workspace:*",
+    "@_/Multistep": "workspace:*",
+    "@_/TransactionSummary": "workspace:*",
+    "@_/constants": "workspace:*",
+    "@_/format": "workspace:*",
+    "@_/useApprove": "workspace:*",
+    "@_/useCollateralTypes": "workspace:*",
+    "@_/useContractErrorParser": "workspace:*",
+    "@_/useCoreProxy": "workspace:*",
+    "@_/useDeposit": "workspace:*",
+    "@_/useLiquidityPosition": "workspace:*",
+    "@_/useParams": "workspace:*",
+    "@_/useWrapEth": "workspace:*",
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@synthetixio/wei": "^2.74.4",
+    "@xstate/react": "^3.2.2",
+    "react": "^18.2.0",
+    "xstate": "^4.38.3"
+  }
+}

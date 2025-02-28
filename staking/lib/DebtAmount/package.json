@@ -1,0 +1,12 @@
+{
+  "name": "@_/DebtAmount",
+  "private": true,
+  "main": "index.ts",
+  "version": "0.0.1",
+  "dependencies": {
+    "@_/Amount": "workspace:*",
+    "@_/constants": "workspace:*",
+    "@chakra-ui/react": "^2.8.2",
+    "@synthetixio/wei": "^2.74.4"
+  }
+}

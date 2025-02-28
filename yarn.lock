@@ -5,6 +5,2195 @@ __metadata:
   version: 8
   cacheKey: 10
 
+"@_/Address@workspace:*, @_/Address@workspace:staking/lib/Address":
+  version: 0.0.0-use.local
+  resolution: "@_/Address@workspace:staking/lib/Address"
+  dependencies:
+    "@_/etherscanLink": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/Amount@workspace:*, @_/Amount@workspace:staking/lib/Amount":
+  version: 0.0.0-use.local
+  resolution: "@_/Amount@workspace:staking/lib/Amount"
+  dependencies:
+    "@_/format": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/Balance@workspace:staking/lib/Balance":
+  version: 0.0.0-use.local
+  resolution: "@_/Balance@workspace:staking/lib/Balance"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/BorderBox@workspace:*, @_/BorderBox@workspace:staking/lib/BorderBox":
+  version: 0.0.0-use.local
+  resolution: "@_/BorderBox@workspace:staking/lib/BorderBox"
+  dependencies:
+    "@chakra-ui/react": "npm:^2.8.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/Borrow@workspace:*, @_/Borrow@workspace:staking/lib/Borrow":
+  version: 0.0.0-use.local
+  resolution: "@_/Borrow@workspace:staking/lib/Borrow"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/BorderBox": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/NumberInput": "workspace:*"
+    "@_/TokenIcon": "workspace:*"
+    "@_/WithdrawIncrease": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/etherscanLink": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useBorrow": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@_/validatePosition": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/CRatioBar@workspace:*, @_/CRatioBar@workspace:staking/lib/CRatioBar":
+  version: 0.0.0-use.local
+  resolution: "@_/CRatioBar@workspace:staking/lib/CRatioBar"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/calculations": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/ChangeStat@workspace:*, @_/ChangeStat@workspace:staking/lib/ChangeStat":
+  version: 0.0.0-use.local
+  resolution: "@_/ChangeStat@workspace:staking/lib/ChangeStat"
+  dependencies:
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/Claim@workspace:*, @_/Claim@workspace:staking/lib/Claim":
+  version: 0.0.0-use.local
+  resolution: "@_/Claim@workspace:staking/lib/Claim"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/BorderBox": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/NumberInput": "workspace:*"
+    "@_/TokenIcon": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@_/useTokenPrice": "workspace:*"
+    "@_/validatePosition": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/ClaimModal@workspace:*, @_/ClaimModal@workspace:staking/lib/ClaimModal":
+  version: 0.0.0-use.local
+  resolution: "@_/ClaimModal@workspace:staking/lib/ClaimModal"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/Manage": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/Multistep": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useBorrow": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/ClosePosition@workspace:staking/lib/ClosePosition":
+  version: 0.0.0-use.local
+  resolution: "@_/ClosePosition@workspace:staking/lib/ClosePosition"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/BorderBox": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/Manage": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/Multistep": "workspace:*"
+    "@_/NumberInput": "workspace:*"
+    "@_/TokenIcon": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/useAccountProxy": "workspace:*"
+    "@_/useApprove": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useBorrow": "workspace:*"
+    "@_/useClosePosition": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useDebtRepayer": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/usePythFeeds": "workspace:*"
+    "@_/usePythVerifier": "workspace:*"
+    "@_/useRepay": "workspace:*"
+    "@_/useSynthTokens": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@_/useTokenBalance": "workspace:*"
+    "@_/useTokenPrice": "workspace:*"
+    "@_/useTrustedMulticallForwarder": "workspace:*"
+    "@_/useUSDC": "workspace:*"
+    "@_/useUndelegate": "workspace:*"
+    "@_/useUndelegateBaseAndromeda": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/CollateralAlert@workspace:staking/lib/CollateralAlert":
+  version: 0.0.0-use.local
+  resolution: "@_/CollateralAlert@workspace:staking/lib/CollateralAlert"
+  dependencies:
+    "@_/useParams": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/ContractError@workspace:*, @_/ContractError@workspace:staking/lib/ContractError":
+  version: 0.0.0-use.local
+  resolution: "@_/ContractError@workspace:staking/lib/ContractError"
+  dependencies:
+    "@_/parseContractError": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    date-fns: "npm:^2.30.0"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/CustomTable@workspace:staking/lib/CustomTable":
+  version: 0.0.0-use.local
+  resolution: "@_/CustomTable@workspace:staking/lib/CustomTable"
+  dependencies:
+    "@chakra-ui/react": "npm:^2.8.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/DebtAmount@workspace:*, @_/DebtAmount@workspace:staking/lib/DebtAmount":
+  version: 0.0.0-use.local
+  resolution: "@_/DebtAmount@workspace:staking/lib/DebtAmount"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+  languageName: unknown
+  linkType: soft
+
+"@_/Deposit@workspace:*, @_/Deposit@workspace:staking/lib/Deposit":
+  version: 0.0.0-use.local
+  resolution: "@_/Deposit@workspace:staking/lib/Deposit"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/BorderBox": "workspace:*"
+    "@_/CRatioBar": "workspace:*"
+    "@_/ChangeStat": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/NumberInput": "workspace:*"
+    "@_/TokenIcon": "workspace:*"
+    "@_/TransactionSummary": "workspace:*"
+    "@_/WithdrawIncrease": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/formatters": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useEthBalance": "workspace:*"
+    "@_/useIsAndromedaStataUSDC": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useTokenBalance": "workspace:*"
+    "@_/useTokenPrice": "workspace:*"
+    "@_/useTransferableSynthetix": "workspace:*"
+    "@_/useUSDC": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/DepositModal@workspace:*, @_/DepositModal@workspace:staking/lib/DepositModal":
+  version: 0.0.0-use.local
+  resolution: "@_/DepositModal@workspace:staking/lib/DepositModal"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/CRatioBar": "workspace:*"
+    "@_/ChangeStat": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/Manage": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/Multistep": "workspace:*"
+    "@_/TransactionSummary": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/useApprove": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useDeposit": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useWrapEth": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@xstate/react": "npm:^3.2.2"
+    react: "npm:^18.2.0"
+    xstate: "npm:^4.38.3"
+  languageName: unknown
+  linkType: soft
+
+"@_/DepositModalAndromeda@workspace:*, @_/DepositModalAndromeda@workspace:staking/lib/DepositModalAndromeda":
+  version: 0.0.0-use.local
+  resolution: "@_/DepositModalAndromeda@workspace:staking/lib/DepositModalAndromeda"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/Multistep": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useAccountProxy": "workspace:*"
+    "@_/useApprove": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/usePositionManagerForCollateral": "workspace:*"
+    "@_/useUSDC": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/Manage@workspace:*, @_/Manage@workspace:staking/lib/Manage":
+  version: 0.0.0-use.local
+  resolution: "@_/Manage@workspace:staking/lib/Manage"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/BorderBox": "workspace:*"
+    "@_/CRatioBar": "workspace:*"
+    "@_/ChangeStat": "workspace:*"
+    "@_/DebtAmount": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/Multistep": "workspace:*"
+    "@_/TokenIcon": "workspace:*"
+    "@_/Tooltip": "workspace:*"
+    "@_/calculations": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/formatters": "workspace:*"
+    "@_/getStatsUrl": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useIsAndromedaStataUSDC": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useStaticAaveUSDCRate": "workspace:*"
+    "@_/useVaultsData": "workspace:*"
+    "@_/validatePosition": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/ManageAction@workspace:staking/lib/ManageAction":
+  version: 0.0.0-use.local
+  resolution: "@_/ManageAction@workspace:staking/lib/ManageAction"
+  dependencies:
+    "@_/Borrow": "workspace:*"
+    "@_/Claim": "workspace:*"
+    "@_/ClaimModal": "workspace:*"
+    "@_/Deposit": "workspace:*"
+    "@_/DepositModal": "workspace:*"
+    "@_/DepositModalAndromeda": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/Repay": "workspace:*"
+    "@_/RepayModal": "workspace:*"
+    "@_/Undelegate": "workspace:*"
+    "@_/UndelegateModal": "workspace:*"
+    "@_/Withdraw": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/validatePosition": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/ManagePositionContext@workspace:*, @_/ManagePositionContext@workspace:staking/lib/ManagePositionContext":
+  version: 0.0.0-use.local
+  resolution: "@_/ManagePositionContext@workspace:staking/lib/ManagePositionContext"
+  dependencies:
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/Multistep@workspace:*, @_/Multistep@workspace:staking/lib/Multistep":
+  version: 0.0.0-use.local
+  resolution: "@_/Multistep@workspace:staking/lib/Multistep"
+  dependencies:
+    "@chakra-ui/icon": "npm:^3.2.0"
+    "@chakra-ui/react": "npm:^2.8.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/NumberInput@workspace:*, @_/NumberInput@workspace:staking/lib/NumberInput":
+  version: 0.0.0-use.local
+  resolution: "@_/NumberInput@workspace:staking/lib/NumberInput"
+  dependencies:
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/PercentBadges@workspace:staking/lib/PercentBadges":
+  version: 0.0.0-use.local
+  resolution: "@_/PercentBadges@workspace:staking/lib/PercentBadges"
+  dependencies:
+    "@chakra-ui/react": "npm:^2.8.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/Permissions@workspace:*, @_/Permissions@workspace:staking/lib/Permissions":
+  version: 0.0.0-use.local
+  resolution: "@_/Permissions@workspace:staking/lib/Permissions"
+  dependencies:
+    "@_/Address": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/useAccountPermissions": "workspace:*"
+    "@_/useAccounts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useManagePermissions": "workspace:*"
+    "@_/useTransferAccountId": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/Pools@workspace:staking/lib/Pools":
+  version: 0.0.0-use.local
+  resolution: "@_/Pools@workspace:staking/lib/Pools"
+  dependencies:
+    "@_/TokenIcon": "workspace:*"
+    "@_/Tooltip": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/formatters": "workspace:*"
+    "@_/icons": "workspace:*"
+    "@_/useApr": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useIsAndromedaStataUSDC": "workspace:*"
+    "@_/useOraclePrice": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/usePoolsList": "workspace:*"
+    "@_/useStaticAaveUSDCRate": "workspace:*"
+    "@_/useSynthTokens": "workspace:*"
+    "@_/useTokenBalance": "workspace:*"
+    "@_/useUSDC": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/Positions@workspace:staking/lib/Positions":
+  version: 0.0.0-use.local
+  resolution: "@_/Positions@workspace:staking/lib/Positions"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/CRatioBar": "workspace:*"
+    "@_/DebtAmount": "workspace:*"
+    "@_/SynthSkeleton": "workspace:*"
+    "@_/TokenIcon": "workspace:*"
+    "@_/Tooltip": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/useApr": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useIsAndromedaStataUSDC": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useLiquidityPositions": "workspace:*"
+    "@_/useLocks": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useWithdrawTimer": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    date-fns: "npm:^2.30.0"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/Repay@workspace:*, @_/Repay@workspace:staking/lib/Repay":
+  version: 0.0.0-use.local
+  resolution: "@_/Repay@workspace:staking/lib/Repay"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/BorderBox": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/NumberInput": "workspace:*"
+    "@_/TokenIcon": "workspace:*"
+    "@_/WithdrawIncrease": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/etherscanLink": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/useApprove": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useClearDebt": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useDebtRepayer": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useRepay": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@_/useTokenBalance": "workspace:*"
+    "@_/useUSDC": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/RepayModal@workspace:*, @_/RepayModal@workspace:staking/lib/RepayModal":
+  version: 0.0.0-use.local
+  resolution: "@_/RepayModal@workspace:staking/lib/RepayModal"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/Manage": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/Multistep": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/useApprove": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useRepay": "workspace:*"
+    "@_/useRepayBaseAndromeda": "workspace:*"
+    "@_/useSpotMarketProxy": "workspace:*"
+    "@_/useSynthTokens": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@xstate/react": "npm:^3.2.2"
+    react: "npm:^18.2.0"
+    xstate: "npm:^4.38.3"
+  languageName: unknown
+  linkType: soft
+
+"@_/Rewards@workspace:staking/lib/Rewards":
+  version: 0.0.0-use.local
+  resolution: "@_/Rewards@workspace:staking/lib/Rewards"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/TokenIcon": "workspace:*"
+    "@_/Tooltip": "workspace:*"
+    "@_/WithdrawIncrease": "workspace:*"
+    "@_/etherscanLink": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useClaimAllRewards": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useRewards": "workspace:*"
+    "@_/useSynthTokens": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/StatsBox@workspace:*, @_/StatsBox@workspace:staking/lib/StatsBox":
+  version: 0.0.0-use.local
+  resolution: "@_/StatsBox@workspace:staking/lib/StatsBox"
+  dependencies:
+    "@_/SynthSkeleton": "workspace:*"
+    "@_/Tooltip": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/StatsTotalLocked@workspace:staking/lib/StatsTotalLocked":
+  version: 0.0.0-use.local
+  resolution: "@_/StatsTotalLocked@workspace:staking/lib/StatsTotalLocked"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/StatsBox": "workspace:*"
+    "@_/useLiquidityPositions": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/StatsTotalPnl@workspace:staking/lib/StatsTotalPnl":
+  version: 0.0.0-use.local
+  resolution: "@_/StatsTotalPnl@workspace:staking/lib/StatsTotalPnl"
+  dependencies:
+    "@_/DebtAmount": "workspace:*"
+    "@_/StatsBox": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPrices": "workspace:*"
+    "@_/useLiquidityPositions": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/usePythPrice": "workspace:*"
+    "@_/useRewards": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/SynthSkeleton@workspace:*, @_/SynthSkeleton@workspace:staking/lib/SynthSkeleton":
+  version: 0.0.0-use.local
+  resolution: "@_/SynthSkeleton@workspace:staking/lib/SynthSkeleton"
+  dependencies:
+    "@chakra-ui/react": "npm:^2.8.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/Synths@workspace:staking/lib/Synths":
+  version: 0.0.0-use.local
+  resolution: "@_/Synths@workspace:staking/lib/Synths"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/TokenIcon": "workspace:*"
+    "@_/Tooltip": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/etherscanLink": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useStaticAaveUSDC": "workspace:*"
+    "@_/useSynthBalances": "workspace:*"
+    "@_/useUnwrapAllSynths": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/TermsModal@workspace:*, @_/TermsModal@workspace:staking/lib/TermsModal":
+  version: 0.0.0-use.local
+  resolution: "@_/TermsModal@workspace:staking/lib/TermsModal"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/theme": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    react: "npm:^18.2.0"
+    react-router-dom: "npm:^6.18.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/TokenIcon@workspace:*, @_/TokenIcon@workspace:staking/lib/TokenIcon":
+  version: 0.0.0-use.local
+  resolution: "@_/TokenIcon@workspace:staking/lib/TokenIcon"
+  dependencies:
+    "@chakra-ui/react": "npm:^2.8.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/Tooltip@workspace:*, @_/Tooltip@workspace:staking/lib/Tooltip":
+  version: 0.0.0-use.local
+  resolution: "@_/Tooltip@workspace:staking/lib/Tooltip"
+  dependencies:
+    "@chakra-ui/react": "npm:^2.8.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/TransactionSummary@workspace:*, @_/TransactionSummary@workspace:staking/lib/TransactionSummary":
+  version: 0.0.0-use.local
+  resolution: "@_/TransactionSummary@workspace:staking/lib/TransactionSummary"
+  dependencies:
+    "@chakra-ui/react": "npm:^2.8.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/Undelegate@workspace:*, @_/Undelegate@workspace:staking/lib/Undelegate":
+  version: 0.0.0-use.local
+  resolution: "@_/Undelegate@workspace:staking/lib/Undelegate"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/BorderBox": "workspace:*"
+    "@_/CRatioBar": "workspace:*"
+    "@_/ChangeStat": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/NumberInput": "workspace:*"
+    "@_/TokenIcon": "workspace:*"
+    "@_/TransactionSummary": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/etherscanLink": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/useApprove": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useDebtRepayer": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/usePoolConfiguration": "workspace:*"
+    "@_/useUSDC": "workspace:*"
+    "@_/useUndelegate": "workspace:*"
+    "@_/useUndelegateBaseAndromeda": "workspace:*"
+    "@_/useWithdrawTimer": "workspace:*"
+    "@_/validatePosition": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/UndelegateModal@workspace:*, @_/UndelegateModal@workspace:staking/lib/UndelegateModal":
+  version: 0.0.0-use.local
+  resolution: "@_/UndelegateModal@workspace:staking/lib/UndelegateModal"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/CRatioBar": "workspace:*"
+    "@_/ChangeStat": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/Manage": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/Multistep": "workspace:*"
+    "@_/TransactionSummary": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/useApprove": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useDebtRepayer": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useUSDC": "workspace:*"
+    "@_/useUndelegate": "workspace:*"
+    "@_/useUndelegateBaseAndromeda": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@xstate/react": "npm:^3.2.2"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+    xstate: "npm:^4.38.3"
+  languageName: unknown
+  linkType: soft
+
+"@_/Withdraw@workspace:*, @_/Withdraw@workspace:staking/lib/Withdraw":
+  version: 0.0.0-use.local
+  resolution: "@_/Withdraw@workspace:staking/lib/Withdraw"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/BorderBox": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/ManagePositionContext": "workspace:*"
+    "@_/NumberInput": "workspace:*"
+    "@_/TokenIcon": "workspace:*"
+    "@_/WithdrawIncrease": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/etherscanLink": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useAccountCollateralUnlockDate": "workspace:*"
+    "@_/useAccountProxy": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/usePositionManagerForCollateral": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@_/useWithdraw": "workspace:*"
+    "@_/useWithdrawTimer": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/WithdrawIncrease@workspace:*, @_/WithdrawIncrease@workspace:staking/lib/WithdrawIncrease":
+  version: 0.0.0-use.local
+  resolution: "@_/WithdrawIncrease@workspace:staking/lib/WithdrawIncrease"
+  dependencies:
+    "@_/useAccountCollateralUnlockDate": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/assertAddressType@workspace:staking/lib/assertAddressType":
+  version: 0.0.0-use.local
+  resolution: "@_/assertAddressType@workspace:staking/lib/assertAddressType"
+  languageName: unknown
+  linkType: soft
+
+"@_/calculations@workspace:*, @_/calculations@workspace:staking/lib/calculations":
+  version: 0.0.0-use.local
+  resolution: "@_/calculations@workspace:staking/lib/calculations"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+  languageName: unknown
+  linkType: soft
+
+"@_/constants@workspace:*, @_/constants@workspace:staking/lib/constants":
+  version: 0.0.0-use.local
+  resolution: "@_/constants@workspace:staking/lib/constants"
+  dependencies:
+    "@synthetixio/wei": "npm:^2.74.4"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/contracts@workspace:*, @_/contracts@workspace:staking/lib/contracts/importers":
+  version: 0.0.0-use.local
+  resolution: "@_/contracts@workspace:staking/lib/contracts/importers"
+  dependencies:
+    "@synthetixio/v3-contracts": "npm:^8.1.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/etherscanLink@workspace:*, @_/etherscanLink@workspace:staking/lib/etherscanLink":
+  version: 0.0.0-use.local
+  resolution: "@_/etherscanLink@workspace:staking/lib/etherscanLink"
+  languageName: unknown
+  linkType: soft
+
+"@_/fetchPythPrices@workspace:staking/lib/fetchPythPrices":
+  version: 0.0.0-use.local
+  resolution: "@_/fetchPythPrices@workspace:staking/lib/fetchPythPrices"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@pythnetwork/pyth-evm-js": "npm:^1.42.0"
+    "@synthetixio/wei": "npm:^2.74.4"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/format@workspace:*, @_/format@workspace:staking/lib/format":
+  version: 0.0.0-use.local
+  resolution: "@_/format@workspace:staking/lib/format"
+  dependencies:
+    "@synthetixio/wei": "npm:^2.74.4"
+    ethers: "npm:^5.7.2"
+    numbro: "npm:^2.5.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/formatters@workspace:*, @_/formatters@workspace:staking/lib/formatters":
+  version: 0.0.0-use.local
+  resolution: "@_/formatters@workspace:staking/lib/formatters"
+  dependencies:
+    date-fns: "npm:^2.30.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/getStatsUrl@workspace:*, @_/getStatsUrl@workspace:staking/lib/getStatsUrl":
+  version: 0.0.0-use.local
+  resolution: "@_/getStatsUrl@workspace:staking/lib/getStatsUrl"
+  languageName: unknown
+  linkType: soft
+
+"@_/icons@workspace:*, @_/icons@workspace:staking/lib/icons":
+  version: 0.0.0-use.local
+  resolution: "@_/icons@workspace:staking/lib/icons"
+  dependencies:
+    "@chakra-ui/react": "npm:^2.8.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/isBaseAndromeda@workspace:*, @_/isBaseAndromeda@workspace:staking/lib/isBaseAndromeda":
+  version: 0.0.0-use.local
+  resolution: "@_/isBaseAndromeda@workspace:staking/lib/isBaseAndromeda"
+  languageName: unknown
+  linkType: soft
+
+"@_/parseContractError@workspace:*, @_/parseContractError@workspace:staking/lib/parseContractError":
+  version: 0.0.0-use.local
+  resolution: "@_/parseContractError@workspace:staking/lib/parseContractError"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/position-manager-new-pool@workspace:contracts/position-manager-new-pool":
+  version: 0.0.0-use.local
+  resolution: "@_/position-manager-new-pool@workspace:contracts/position-manager-new-pool"
+  dependencies:
+    "@synthetixio/core-contracts": "npm:^3.10.1"
+    "@synthetixio/core-modules": "npm:^3.10.1"
+    "@synthetixio/main": "npm:^3.10.1"
+    "@synthetixio/oracle-manager": "npm:^3.10.1"
+    "@synthetixio/pyth-erc7412-wrapper": "npm:^3.10.1"
+    forge-std: "github:foundry-rs/forge-std"
+  languageName: unknown
+  linkType: soft
+
+"@_/staking-cypress@workspace:staking/cypress":
+  version: 0.0.0-use.local
+  resolution: "@_/staking-cypress@workspace:staking/cypress"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/parseContractError": "workspace:*"
+    "@_/staking": "workspace:*"
+    "@_/theme": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@cypress/code-coverage": "npm:^3.13.11"
+    "@cypress/react": "npm:^9.0.0"
+    cypress: "npm:14.0.2"
+    cypress-terminal-report: "npm:^7.1.0"
+    ethers: "npm:^5.7.2"
+    react-router-dom: "npm:^6.18.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/staking@workspace:*, @_/staking@workspace:staking/ui":
+  version: 0.0.0-use.local
+  resolution: "@_/staking@workspace:staking/ui"
+  dependencies:
+    "@_/Amount": "workspace:*"
+    "@_/CRatioBar": "workspace:*"
+    "@_/ContractError": "workspace:*"
+    "@_/Permissions": "workspace:*"
+    "@_/TermsModal": "workspace:*"
+    "@_/Tooltip": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/icons": "workspace:*"
+    "@_/theme": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/useAccountProxy": "workspace:*"
+    "@_/useAccounts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useCreateAccount": "workspace:*"
+    "@_/useLegacyMarket": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/usePositionManagerNewPool": "workspace:*"
+    "@_/usePythPrice": "workspace:*"
+    "@_/useSNX": "workspace:*"
+    "@_/useTreasuryMarketProxy": "workspace:*"
+    "@_/useTrustedMulticallForwarder": "workspace:*"
+    "@_/useV2xSynthetix": "workspace:*"
+    "@babel/core": "npm:^7.24.6"
+    "@babel/plugin-transform-runtime": "npm:^7.24.6"
+    "@babel/preset-env": "npm:^7.24.6"
+    "@babel/preset-react": "npm:^7.24.6"
+    "@babel/preset-typescript": "npm:^7.24.6"
+    "@babel/runtime-corejs3": "npm:^7.24.6"
+    "@chakra-ui/icons": "npm:^2.1.1"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@emotion/react": "npm:^11.11.1"
+    "@emotion/styled": "npm:^11.11.0"
+    "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.5.11"
+    "@safe-global/safe-apps-provider": "npm:^0.18.3"
+    "@safe-global/safe-apps-sdk": "npm:^8.0.0"
+    "@synthetixio/devtools-formatters": "workspace:*"
+    "@synthetixio/magic-wallet": "workspace:*"
+    "@synthetixio/safe-import": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    "@tanstack/react-query-devtools": "npm:^5.8.3"
+    "@web3-onboard/coinbase": "npm:^2.4.1"
+    "@web3-onboard/common": "npm:^2.4.2"
+    "@web3-onboard/gnosis": "npm:^2.3.2"
+    "@web3-onboard/injected-wallets": "npm:^2.11.2"
+    "@web3-onboard/ledger": "npm:2.7.1"
+    "@web3-onboard/react": "npm:^2.10.0"
+    "@web3-onboard/trezor": "npm:^2.4.6"
+    "@web3-onboard/walletconnect": "npm:^2.6.1"
+    babel-loader: "npm:^9.1.3"
+    babel-plugin-istanbul: "npm:^6.1.1"
+    bn.js: "npm:^5.2.1"
+    copy-webpack-plugin: "npm:^11.0.0"
+    core-js: "npm:^3.33.2"
+    crypto-browserify: "npm:^3.12.0"
+    css-loader: "npm:^6.8.1"
+    date-fns: "npm:^2.30.0"
+    debug: "npm:^4.4.0"
+    dotenv: "npm:^16.4.3"
+    ethers: "npm:^5.7.2"
+    framer-motion: "npm:^10.16.5"
+    html-webpack-plugin: "npm:^5.5.3"
+    numbro: "npm:^2.5.0"
+    process: "npm:^0.11.10"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+    react-helmet: "npm:^6.1.0"
+    react-refresh: "npm:^0.14.0"
+    react-router-dom: "npm:^6.18.0"
+    stream-browserify: "npm:^3.0.0"
+    style-loader: "npm:^3.3.3"
+    terser-webpack-plugin: "npm:^5.3.9"
+    webpack: "npm:^5.89.0"
+    webpack-bundle-analyzer: "npm:^4.10.0"
+    webpack-cli: "npm:^5.1.4"
+    webpack-dev-server: "npm:^4.15.1"
+  languageName: unknown
+  linkType: soft
+
+"@_/theme@workspace:*, @_/theme@workspace:staking/lib/theme":
+  version: 0.0.0-use.local
+  resolution: "@_/theme@workspace:staking/lib/theme"
+  dependencies:
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@chakra-ui/theme-tools": "npm:^2.1.2"
+    "@emotion/react": "npm:^11.11.1"
+    "@emotion/styled": "npm:^11.11.0"
+    framer-motion: "npm:^10.16.5"
+    react: "npm:^18.2.0"
+    react-dom: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/tsHelpers@workspace:*, @_/tsHelpers@workspace:staking/lib/tsHelpers":
+  version: 0.0.0-use.local
+  resolution: "@_/tsHelpers@workspace:staking/lib/tsHelpers"
+  languageName: unknown
+  linkType: soft
+
+"@_/txnReducer@workspace:*, @_/txnReducer@workspace:staking/lib/txnReducer":
+  version: 0.0.0-use.local
+  resolution: "@_/txnReducer@workspace:staking/lib/txnReducer"
+  languageName: unknown
+  linkType: soft
+
+"@_/useAccountAvailableCollateral@workspace:staking/lib/useAccountAvailableCollateral":
+  version: 0.0.0-use.local
+  resolution: "@_/useAccountAvailableCollateral@workspace:staking/lib/useAccountAvailableCollateral"
+  dependencies:
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useAccountCollateral@workspace:staking/lib/useAccountCollateral":
+  version: 0.0.0-use.local
+  resolution: "@_/useAccountCollateral@workspace:staking/lib/useAccountCollateral"
+  dependencies:
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useAccountCollateralUnlockDate@workspace:*, @_/useAccountCollateralUnlockDate@workspace:staking/lib/useAccountCollateralUnlockDate":
+  version: 0.0.0-use.local
+  resolution: "@_/useAccountCollateralUnlockDate@workspace:staking/lib/useAccountCollateralUnlockDate"
+  dependencies:
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useAccountPermissions@workspace:*, @_/useAccountPermissions@workspace:staking/lib/useAccountInfo":
+  version: 0.0.0-use.local
+  resolution: "@_/useAccountPermissions@workspace:staking/lib/useAccountInfo"
+  dependencies:
+    "@_/tsHelpers": "workspace:*"
+    "@_/useAccountProxy": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/useAccountProxy@workspace:*, @_/useAccountProxy@workspace:staking/lib/contracts/useAccountProxy":
+  version: 0.0.0-use.local
+  resolution: "@_/useAccountProxy@workspace:staking/lib/contracts/useAccountProxy"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+  languageName: unknown
+  linkType: soft
+
+"@_/useAccounts@workspace:*, @_/useAccounts@workspace:staking/lib/useAccounts":
+  version: 0.0.0-use.local
+  resolution: "@_/useAccounts@workspace:staking/lib/useAccounts"
+  dependencies:
+    "@_/tsHelpers": "workspace:*"
+    "@_/useAccountProxy": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useTrustedMulticallForwarder": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/useAllErrors@workspace:*, @_/useAllErrors@workspace:staking/lib/contracts/useAllErrors":
+  version: 0.0.0-use.local
+  resolution: "@_/useAllErrors@workspace:staking/lib/contracts/useAllErrors"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useAllowance@workspace:*, @_/useAllowance@workspace:staking/lib/useAllowance":
+  version: 0.0.0-use.local
+  resolution: "@_/useAllowance@workspace:staking/lib/useAllowance"
+  dependencies:
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/useApprove@workspace:*, @_/useApprove@workspace:staking/lib/useApprove":
+  version: 0.0.0-use.local
+  resolution: "@_/useApprove@workspace:staking/lib/useApprove"
+  dependencies:
+    "@_/txnReducer": "workspace:*"
+    "@_/useAllowance": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useApr@workspace:*, @_/useApr@workspace:staking/lib/useApr":
+  version: 0.0.0-use.local
+  resolution: "@_/useApr@workspace:staking/lib/useApr"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/isBaseAndromeda": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@aave/math-utils": "npm:^1.30.2"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useBlockNumber@workspace:staking/lib/useBlockNumber":
+  version: 0.0.0-use.local
+  resolution: "@_/useBlockNumber@workspace:staking/lib/useBlockNumber"
+  dependencies:
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useBlockchain@workspace:*, @_/useBlockchain@workspace:staking/lib/useBlockchain":
+  version: 0.0.0-use.local
+  resolution: "@_/useBlockchain@workspace:staking/lib/useBlockchain"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/contracts": "workspace:*"
+    "@_/icons": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@tanstack/react-query": "npm:^5.8.3"
+    "@web3-onboard/react": "npm:^2.10.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useBorrow@workspace:*, @_/useBorrow@workspace:staking/lib/useBorrow":
+  version: 0.0.0-use.local
+  resolution: "@_/useBorrow@workspace:staking/lib/useBorrow"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useClaimAllRewards@workspace:*, @_/useClaimAllRewards@workspace:staking/lib/useClaimAllRewards":
+  version: 0.0.0-use.local
+  resolution: "@_/useClaimAllRewards@workspace:staking/lib/useClaimAllRewards"
+  dependencies:
+    "@_/ContractError": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useRewards": "workspace:*"
+    "@_/useSpotMarketProxy": "workspace:*"
+    "@_/useSynthTokens": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useClearDebt@workspace:*, @_/useClearDebt@workspace:staking/lib/useClearDebt":
+  version: 0.0.0-use.local
+  resolution: "@_/useClearDebt@workspace:staking/lib/useClearDebt"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/isBaseAndromeda": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useAccountProxy": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useDebtRepayer": "workspace:*"
+    "@_/useSpotMarketProxy": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useClosePosition@workspace:*, @_/useClosePosition@workspace:staking/lib/contracts/useClosePosition":
+  version: 0.0.0-use.local
+  resolution: "@_/useClosePosition@workspace:staking/lib/contracts/useClosePosition"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useCollateralPriceUpdates@workspace:*, @_/useCollateralPriceUpdates@workspace:staking/lib/useCollateralPriceUpdates":
+  version: 0.0.0-use.local
+  resolution: "@_/useCollateralPriceUpdates@workspace:staking/lib/useCollateralPriceUpdates"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/contracts": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/usePoolsList": "workspace:*"
+    "@pythnetwork/pyth-evm-js": "npm:^1.42.0"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useCollateralPrices@workspace:*, @_/useCollateralPrices@workspace:staking/lib/useCollateralPrices":
+  version: 0.0.0-use.local
+  resolution: "@_/useCollateralPrices@workspace:staking/lib/useCollateralPrices"
+  dependencies:
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useCollateralTypes@workspace:*, @_/useCollateralTypes@workspace:staking/lib/useCollateralTypes":
+  version: 0.0.0-use.local
+  resolution: "@_/useCollateralTypes@workspace:staking/lib/useCollateralTypes"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/contracts": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useSNX": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useContractErrorParser@workspace:*, @_/useContractErrorParser@workspace:staking/lib/useContractErrorParser":
+  version: 0.0.0-use.local
+  resolution: "@_/useContractErrorParser@workspace:staking/lib/useContractErrorParser"
+  dependencies:
+    "@_/parseContractError": "workspace:*"
+    "@_/useAllErrors": "workspace:*"
+    "@_/useClosePosition": "workspace:*"
+    "@_/usePositionManager": "workspace:*"
+    "@_/usePositionManagerAndromedaStataUSDC": "workspace:*"
+    "@_/usePositionManagerAndromedaUSDC": "workspace:*"
+    "@_/useStaticAaveUSDC": "workspace:*"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useCoreProxy@workspace:*, @_/useCoreProxy@workspace:staking/lib/contracts/useCoreProxy":
+  version: 0.0.0-use.local
+  resolution: "@_/useCoreProxy@workspace:staking/lib/contracts/useCoreProxy"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useCreateAccount@workspace:*, @_/useCreateAccount@workspace:staking/lib/useCreateAccount":
+  version: 0.0.0-use.local
+  resolution: "@_/useCreateAccount@workspace:staking/lib/useCreateAccount"
+  dependencies:
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/useDebtRepayer@workspace:*, @_/useDebtRepayer@workspace:staking/lib/contracts/useDebtRepayer":
+  version: 0.0.0-use.local
+  resolution: "@_/useDebtRepayer@workspace:staking/lib/contracts/useDebtRepayer"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useDeposit@workspace:*, @_/useDeposit@workspace:staking/lib/useDeposit":
+  version: 0.0.0-use.local
+  resolution: "@_/useDeposit@workspace:staking/lib/useDeposit"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useEthBalance@workspace:*, @_/useEthBalance@workspace:staking/lib/useEthBalance":
+  version: 0.0.0-use.local
+  resolution: "@_/useEthBalance@workspace:staking/lib/useEthBalance"
+  dependencies:
+    "@_/useBlockchain": "workspace:*"
+    "@_/zod": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+  languageName: unknown
+  linkType: soft
+
+"@_/useGetUSDTokens@workspace:*, @_/useGetUSDTokens@workspace:staking/lib/useGetUSDTokens":
+  version: 0.0.0-use.local
+  resolution: "@_/useGetUSDTokens@workspace:staking/lib/useGetUSDTokens"
+  dependencies:
+    "@_/isBaseAndromeda": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useSpotMarketProxy": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useIsAndromedaStataUSDC@workspace:*, @_/useIsAndromedaStataUSDC@workspace:staking/lib/useIsAndromedaStataUSDC":
+  version: 0.0.0-use.local
+  resolution: "@_/useIsAndromedaStataUSDC@workspace:staking/lib/useIsAndromedaStataUSDC"
+  dependencies:
+    "@_/useBlockchain": "workspace:*"
+    "@_/useSynthTokens": "workspace:*"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useLegacyMarket@workspace:*, @_/useLegacyMarket@workspace:staking/lib/contracts/useLegacyMarket":
+  version: 0.0.0-use.local
+  resolution: "@_/useLegacyMarket@workspace:staking/lib/contracts/useLegacyMarket"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useLiquidityPosition@workspace:*, @_/useLiquidityPosition@workspace:staking/lib/useLiquidityPosition":
+  version: 0.0.0-use.local
+  resolution: "@_/useLiquidityPosition@workspace:staking/lib/useLiquidityPosition"
+  dependencies:
+    "@_/calculations": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useLiquidityPositions@workspace:*, @_/useLiquidityPositions@workspace:staking/lib/useLiquidityPositions":
+  version: 0.0.0-use.local
+  resolution: "@_/useLiquidityPositions@workspace:staking/lib/useLiquidityPositions"
+  dependencies:
+    "@_/calculations": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/useLocalStorage@workspace:staking/lib/useLocalStorage":
+  version: 0.0.0-use.local
+  resolution: "@_/useLocalStorage@workspace:staking/lib/useLocalStorage"
+  dependencies:
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useLocks@workspace:*, @_/useLocks@workspace:staking/lib/useLocks":
+  version: 0.0.0-use.local
+  resolution: "@_/useLocks@workspace:staking/lib/useLocks"
+  dependencies:
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useManagePermissions@workspace:*, @_/useManagePermissions@workspace:staking/lib/useManagePermissions":
+  version: 0.0.0-use.local
+  resolution: "@_/useManagePermissions@workspace:staking/lib/useManagePermissions"
+  dependencies:
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useTrustedMulticallForwarder": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/useOracleManagerProxy@workspace:staking/lib/contracts/useOracleManagerProxy":
+  version: 0.0.0-use.local
+  resolution: "@_/useOracleManagerProxy@workspace:staking/lib/contracts/useOracleManagerProxy"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useOraclePrice@workspace:*, @_/useOraclePrice@workspace:staking/lib/useOraclePrice":
+  version: 0.0.0-use.local
+  resolution: "@_/useOraclePrice@workspace:staking/lib/useOraclePrice"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useParams@workspace:*, @_/useParams@workspace:staking/lib/useParams":
+  version: 0.0.0-use.local
+  resolution: "@_/useParams@workspace:staking/lib/useParams"
+  dependencies:
+    react: "npm:^18.2.0"
+    react-router-dom: "npm:^6.18.0"
+    zod: "npm:^3.22.4"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePoolConfiguration@workspace:*, @_/usePoolConfiguration@workspace:staking/lib/usePoolConfiguration":
+  version: 0.0.0-use.local
+  resolution: "@_/usePoolConfiguration@workspace:staking/lib/usePoolConfiguration"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@_/zod": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+    zod: "npm:^3.22.4"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePoolData@workspace:staking/lib/usePoolData":
+  version: 0.0.0-use.local
+  resolution: "@_/usePoolData@workspace:staking/lib/usePoolData"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+    zod: "npm:^3.22.4"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePools@workspace:staking/lib/usePools":
+  version: 0.0.0-use.local
+  resolution: "@_/usePools@workspace:staking/lib/usePools"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePoolsList@workspace:*, @_/usePoolsList@workspace:staking/lib/usePoolsList":
+  version: 0.0.0-use.local
+  resolution: "@_/usePoolsList@workspace:staking/lib/usePoolsList"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePositionDebt@workspace:staking/lib/usePositionDebt":
+  version: 0.0.0-use.local
+  resolution: "@_/usePositionDebt@workspace:staking/lib/usePositionDebt"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePositionManager@workspace:*, @_/usePositionManager@workspace:staking/lib/contracts/usePositionManager":
+  version: 0.0.0-use.local
+  resolution: "@_/usePositionManager@workspace:staking/lib/contracts/usePositionManager"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePositionManagerAndromedaStataUSDC@workspace:*, @_/usePositionManagerAndromedaStataUSDC@workspace:staking/lib/contracts/usePositionManagerAndromedaStataUSDC":
+  version: 0.0.0-use.local
+  resolution: "@_/usePositionManagerAndromedaStataUSDC@workspace:staking/lib/contracts/usePositionManagerAndromedaStataUSDC"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePositionManagerAndromedaUSDC@workspace:*, @_/usePositionManagerAndromedaUSDC@workspace:staking/lib/contracts/usePositionManagerAndromedaUSDC":
+  version: 0.0.0-use.local
+  resolution: "@_/usePositionManagerAndromedaUSDC@workspace:staking/lib/contracts/usePositionManagerAndromedaUSDC"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePositionManagerForCollateral@workspace:*, @_/usePositionManagerForCollateral@workspace:staking/lib/contracts/usePositionManagerForCollateral":
+  version: 0.0.0-use.local
+  resolution: "@_/usePositionManagerForCollateral@workspace:staking/lib/contracts/usePositionManagerForCollateral"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useSynthTokens": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePositionManagerNewPool@workspace:*, @_/usePositionManagerNewPool@workspace:staking/lib/contracts/usePositionManagerNewPool":
+  version: 0.0.0-use.local
+  resolution: "@_/usePositionManagerNewPool@workspace:staking/lib/contracts/usePositionManagerNewPool"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePythFeeds@workspace:*, @_/usePythFeeds@workspace:staking/lib/contracts/usePythFeeds":
+  version: 0.0.0-use.local
+  resolution: "@_/usePythFeeds@workspace:staking/lib/contracts/usePythFeeds"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePythPrice@workspace:*, @_/usePythPrice@workspace:staking/lib/usePythPrice":
+  version: 0.0.0-use.local
+  resolution: "@_/usePythPrice@workspace:staking/lib/usePythPrice"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@pythnetwork/pyth-evm-js": "npm:^1.42.0"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePythVerifier@workspace:*, @_/usePythVerifier@workspace:staking/lib/contracts/usePythVerifier":
+  version: 0.0.0-use.local
+  resolution: "@_/usePythVerifier@workspace:staking/lib/contracts/usePythVerifier"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useRates@workspace:staking/lib/useRates":
+  version: 0.0.0-use.local
+  resolution: "@_/useRates@workspace:staking/lib/useRates"
+  dependencies:
+    "@_/useBlockchain": "workspace:*"
+    "@synthetixio/contracts": "npm:^1.2.3"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useRepay@workspace:*, @_/useRepay@workspace:staking/lib/useRepay":
+  version: 0.0.0-use.local
+  resolution: "@_/useRepay@workspace:staking/lib/useRepay"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useAccountProxy": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/usePositionManager": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@_/useTokenBalance": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useRepayBaseAndromeda@workspace:*, @_/useRepayBaseAndromeda@workspace:staking/lib/useRepayBaseAndromeda":
+  version: 0.0.0-use.local
+  resolution: "@_/useRepayBaseAndromeda@workspace:staking/lib/useRepayBaseAndromeda"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/format": "workspace:*"
+    "@_/isBaseAndromeda": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useApprove": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useGetUSDTokens": "workspace:*"
+    "@_/useSpotMarketProxy": "workspace:*"
+    "@_/useSystemToken": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useRewards@workspace:*, @_/useRewards@workspace:staking/lib/useRewards":
+  version: 0.0.0-use.local
+  resolution: "@_/useRewards@workspace:staking/lib/useRewards"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useRewardsDistributors": "workspace:*"
+    "@_/useSynthTokens": "workspace:*"
+    "@_/useTrustedMulticallForwarder": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useRewardsDistributors@workspace:*, @_/useRewardsDistributors@workspace:staking/lib/contracts/useRewardsDistributors":
+  version: 0.0.0-use.local
+  resolution: "@_/useRewardsDistributors@workspace:staking/lib/contracts/useRewardsDistributors"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+  languageName: unknown
+  linkType: soft
+
+"@_/useSNX@workspace:*, @_/useSNX@workspace:staking/lib/contracts/useSNX":
+  version: 0.0.0-use.local
+  resolution: "@_/useSNX@workspace:staking/lib/contracts/useSNX"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useSpotMarketProxy@workspace:*, @_/useSpotMarketProxy@workspace:staking/lib/contracts/useSpotMarketProxy":
+  version: 0.0.0-use.local
+  resolution: "@_/useSpotMarketProxy@workspace:staking/lib/contracts/useSpotMarketProxy"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useStaticAaveUSDC@workspace:*, @_/useStaticAaveUSDC@workspace:staking/lib/contracts/useStaticAaveUSDC":
+  version: 0.0.0-use.local
+  resolution: "@_/useStaticAaveUSDC@workspace:staking/lib/contracts/useStaticAaveUSDC"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useStaticAaveUSDCRate@workspace:*, @_/useStaticAaveUSDCRate@workspace:staking/lib/useStaticAaveUSDCRate":
+  version: 0.0.0-use.local
+  resolution: "@_/useStaticAaveUSDCRate@workspace:staking/lib/useStaticAaveUSDCRate"
+  dependencies:
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useStaticAaveUSDC": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useSynthBalances@workspace:*, @_/useSynthBalances@workspace:staking/lib/useSynthBalances":
+  version: 0.0.0-use.local
+  resolution: "@_/useSynthBalances@workspace:staking/lib/useSynthBalances"
+  dependencies:
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useSynthTokens": "workspace:*"
+    "@_/useTrustedMulticallForwarder": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useSynthToken@workspace:staking/lib/useSynthToken":
+  version: 0.0.0-use.local
+  resolution: "@_/useSynthToken@workspace:staking/lib/useSynthToken"
+  dependencies:
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useSynthTokens": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useSynthTokens@workspace:*, @_/useSynthTokens@workspace:staking/lib/contracts/useSynthTokens":
+  version: 0.0.0-use.local
+  resolution: "@_/useSynthTokens@workspace:staking/lib/contracts/useSynthTokens"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useSystemToken@workspace:*, @_/useSystemToken@workspace:staking/lib/contracts/useSystemToken":
+  version: 0.0.0-use.local
+  resolution: "@_/useSystemToken@workspace:staking/lib/contracts/useSystemToken"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+  languageName: unknown
+  linkType: soft
+
+"@_/useTokenBalance@workspace:*, @_/useTokenBalance@workspace:staking/lib/useTokenBalance":
+  version: 0.0.0-use.local
+  resolution: "@_/useTokenBalance@workspace:staking/lib/useTokenBalance"
+  dependencies:
+    "@_/useBlockchain": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/useTokenPrice@workspace:*, @_/useTokenPrice@workspace:staking/lib/useTokenPrice":
+  version: 0.0.0-use.local
+  resolution: "@_/useTokenPrice@workspace:staking/lib/useTokenPrice"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useTransferAccountId@workspace:*, @_/useTransferAccountId@workspace:staking/lib/useTransferAccountId":
+  version: 0.0.0-use.local
+  resolution: "@_/useTransferAccountId@workspace:staking/lib/useTransferAccountId"
+  dependencies:
+    "@_/useAccountProxy": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/useTransferableSynthetix@workspace:*, @_/useTransferableSynthetix@workspace:staking/lib/useTransferableSynthetix":
+  version: 0.0.0-use.local
+  resolution: "@_/useTransferableSynthetix@workspace:staking/lib/useTransferableSynthetix"
+  dependencies:
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/useTreasuryMarketProxy@workspace:*, @_/useTreasuryMarketProxy@workspace:staking/lib/contracts/useTreasuryMarketProxy":
+  version: 0.0.0-use.local
+  resolution: "@_/useTreasuryMarketProxy@workspace:staking/lib/contracts/useTreasuryMarketProxy"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useTrustedMulticallForwarder@workspace:*, @_/useTrustedMulticallForwarder@workspace:staking/lib/contracts/useTrustedMulticallForwarder":
+  version: 0.0.0-use.local
+  resolution: "@_/useTrustedMulticallForwarder@workspace:staking/lib/contracts/useTrustedMulticallForwarder"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useUSDC@workspace:*, @_/useUSDC@workspace:staking/lib/contracts/useUSDC":
+  version: 0.0.0-use.local
+  resolution: "@_/useUSDC@workspace:staking/lib/contracts/useUSDC"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useUSDProxy@workspace:staking/lib/contracts/useUSDProxy":
+  version: 0.0.0-use.local
+  resolution: "@_/useUSDProxy@workspace:staking/lib/contracts/useUSDProxy"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+  languageName: unknown
+  linkType: soft
+
+"@_/useUndelegate@workspace:*, @_/useUndelegate@workspace:staking/lib/useUndelegate":
+  version: 0.0.0-use.local
+  resolution: "@_/useUndelegate@workspace:staking/lib/useUndelegate"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useUndelegateBaseAndromeda@workspace:*, @_/useUndelegateBaseAndromeda@workspace:staking/lib/useUndelegateBaseAndromeda":
+  version: 0.0.0-use.local
+  resolution: "@_/useUndelegateBaseAndromeda@workspace:staking/lib/useUndelegateBaseAndromeda"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/isBaseAndromeda": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useAccountProxy": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/useDebtRepayer": "workspace:*"
+    "@_/useLiquidityPosition": "workspace:*"
+    "@_/useParams": "workspace:*"
+    "@_/useSpotMarketProxy": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useUnwrapAllSynths@workspace:*, @_/useUnwrapAllSynths@workspace:staking/lib/useUnwrapAllSynths":
+  version: 0.0.0-use.local
+  resolution: "@_/useUnwrapAllSynths@workspace:staking/lib/useUnwrapAllSynths"
+  dependencies:
+    "@_/ContractError": "workspace:*"
+    "@_/constants": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useContractErrorParser": "workspace:*"
+    "@_/useSpotMarketProxy": "workspace:*"
+    "@_/useSynthBalances": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@chakra-ui/react": "npm:^2.8.2"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useV2xSynthetix@workspace:*, @_/useV2xSynthetix@workspace:staking/lib/contracts/useV2xSynthetix":
+  version: 0.0.0-use.local
+  resolution: "@_/useV2xSynthetix@workspace:staking/lib/contracts/useV2xSynthetix"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useVaultsData@workspace:*, @_/useVaultsData@workspace:staking/lib/useVaultsData":
+  version: 0.0.0-use.local
+  resolution: "@_/useVaultsData@workspace:staking/lib/useVaultsData"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@_/zod": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+    zod: "npm:^3.22.4"
+  languageName: unknown
+  linkType: soft
+
+"@_/useWETH@workspace:staking/lib/contracts/useWETH":
+  version: 0.0.0-use.local
+  resolution: "@_/useWETH@workspace:staking/lib/contracts/useWETH"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useWithdraw@workspace:*, @_/useWithdraw@workspace:staking/lib/useWithdraw":
+  version: 0.0.0-use.local
+  resolution: "@_/useWithdraw@workspace:staking/lib/useWithdraw"
+  dependencies:
+    "@_/format": "workspace:*"
+    "@_/txnReducer": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralPriceUpdates": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@_/withERC7412": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useWithdrawTimer@workspace:*, @_/useWithdrawTimer@workspace:staking/lib/useWithdrawTimer":
+  version: 0.0.0-use.local
+  resolution: "@_/useWithdrawTimer@workspace:staking/lib/useWithdrawTimer"
+  dependencies:
+    "@_/useAccountCollateralUnlockDate": "workspace:*"
+    react: "npm:^18.2.0"
+    react-timer-hook: "npm:^3.0.7"
+  languageName: unknown
+  linkType: soft
+
+"@_/useWrapEth@workspace:*, @_/useWrapEth@workspace:staking/lib/useWrapEth":
+  version: 0.0.0-use.local
+  resolution: "@_/useWrapEth@workspace:staking/lib/useWrapEth"
+  dependencies:
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCollateralTypes": "workspace:*"
+    "@_/useEthBalance": "workspace:*"
+    "@_/useTokenBalance": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/validatePosition@workspace:*, @_/validatePosition@workspace:staking/lib/validatePosition":
+  version: 0.0.0-use.local
+  resolution: "@_/validatePosition@workspace:staking/lib/validatePosition"
+  dependencies:
+    "@_/calculations": "workspace:*"
+    "@synthetixio/wei": "npm:^2.74.4"
+  languageName: unknown
+  linkType: soft
+
+"@_/withERC7412@workspace:*, @_/withERC7412@workspace:staking/lib/withERC7412":
+  version: 0.0.0-use.local
+  resolution: "@_/withERC7412@workspace:staking/lib/withERC7412"
+  dependencies:
+    "@_/constants": "workspace:*"
+    "@_/contracts": "workspace:*"
+    "@_/parseContractError": "workspace:*"
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@pythnetwork/pyth-evm-js": "npm:^1.42.0"
+    debug: "npm:^4.4.0"
+    ethers: "npm:^5.7.2"
+  languageName: unknown
+  linkType: soft
+
+"@_/zod@workspace:*, @_/zod@workspace:staking/lib/zod":
+  version: 0.0.0-use.local
+  resolution: "@_/zod@workspace:staking/lib/zod"
+  dependencies:
+    "@synthetixio/wei": "npm:^2.74.4"
+    ethers: "npm:^5.7.2"
+    zod: "npm:^3.22.4"
+  languageName: unknown
+  linkType: soft
+
 "@aashutoshrathi/word-wrap@npm:^1.2.3":
   version: 1.2.6
   resolution: "@aashutoshrathi/word-wrap@npm:1.2.6"
@@ -4655,2330 +6844,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@snx-v3/Address@workspace:*, @snx-v3/Address@workspace:liquidity/lib/Address":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Address@workspace:liquidity/lib/Address"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/etherscanLink": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Amount@workspace:*, @snx-v3/Amount@workspace:liquidity/lib/Amount":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Amount@workspace:liquidity/lib/Amount"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/format": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Balance@workspace:liquidity/lib/Balance":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Balance@workspace:liquidity/lib/Balance"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/BorderBox@workspace:*, @snx-v3/BorderBox@workspace:liquidity/lib/BorderBox":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/BorderBox@workspace:liquidity/lib/BorderBox"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Borrow@workspace:*, @snx-v3/Borrow@workspace:liquidity/lib/Borrow":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Borrow@workspace:liquidity/lib/Borrow"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/BorderBox": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/NumberInput": "workspace:*"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/WithdrawIncrease": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/etherscanLink": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useBorrow": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@snx-v3/validatePosition": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/CRatioBar@workspace:*, @snx-v3/CRatioBar@workspace:liquidity/lib/CRatioBar":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/CRatioBar@workspace:liquidity/lib/CRatioBar"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/calculations": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/ChangeStat@workspace:*, @snx-v3/ChangeStat@workspace:liquidity/lib/ChangeStat":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/ChangeStat@workspace:liquidity/lib/ChangeStat"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Claim@workspace:*, @snx-v3/Claim@workspace:liquidity/lib/Claim":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Claim@workspace:liquidity/lib/Claim"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/BorderBox": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/NumberInput": "workspace:*"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@snx-v3/useTokenPrice": "workspace:*"
-    "@snx-v3/validatePosition": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/ClaimModal@workspace:*, @snx-v3/ClaimModal@workspace:liquidity/lib/ClaimModal":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/ClaimModal@workspace:liquidity/lib/ClaimModal"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/Manage": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/Multistep": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useBorrow": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/ClosePosition@workspace:*, @snx-v3/ClosePosition@workspace:liquidity/lib/ClosePosition":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/ClosePosition@workspace:liquidity/lib/ClosePosition"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/BorderBox": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/Manage": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/Multistep": "workspace:*"
-    "@snx-v3/NumberInput": "workspace:*"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/useAccountProxy": "workspace:*"
-    "@snx-v3/useApprove": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useBorrow": "workspace:*"
-    "@snx-v3/useClosePosition": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useDebtRepayer": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/usePythFeeds": "workspace:*"
-    "@snx-v3/usePythVerifier": "workspace:*"
-    "@snx-v3/useRepay": "workspace:*"
-    "@snx-v3/useSynthTokens": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@snx-v3/useTokenBalance": "workspace:*"
-    "@snx-v3/useTokenPrice": "workspace:*"
-    "@snx-v3/useTrustedMulticallForwarder": "workspace:*"
-    "@snx-v3/useUSDC": "workspace:*"
-    "@snx-v3/useUndelegate": "workspace:*"
-    "@snx-v3/useUndelegateBaseAndromeda": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/CollateralAlert@workspace:*, @snx-v3/CollateralAlert@workspace:liquidity/lib/CollateralAlert":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/CollateralAlert@workspace:liquidity/lib/CollateralAlert"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/useParams": "workspace:*"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/ContractError@workspace:*, @snx-v3/ContractError@workspace:liquidity/lib/ContractError":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/ContractError@workspace:liquidity/lib/ContractError"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/parseContractError": "workspace:*"
-    date-fns: "npm:^2.30.0"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/CustomTable@workspace:liquidity/lib/CustomTable":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/CustomTable@workspace:liquidity/lib/CustomTable"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/DebtAmount@workspace:*, @snx-v3/DebtAmount@workspace:liquidity/lib/DebtAmount":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/DebtAmount@workspace:liquidity/lib/DebtAmount"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Deposit@workspace:*, @snx-v3/Deposit@workspace:liquidity/lib/Deposit":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Deposit@workspace:liquidity/lib/Deposit"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/BorderBox": "workspace:*"
-    "@snx-v3/CRatioBar": "workspace:*"
-    "@snx-v3/ChangeStat": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/NumberInput": "workspace:*"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/TransactionSummary": "workspace:*"
-    "@snx-v3/WithdrawIncrease": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/formatters": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useEthBalance": "workspace:*"
-    "@snx-v3/useIsAndromedaStataUSDC": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useTokenBalance": "workspace:*"
-    "@snx-v3/useTokenPrice": "workspace:*"
-    "@snx-v3/useTransferableSynthetix": "workspace:*"
-    "@snx-v3/useUSDC": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/DepositModal@workspace:*, @snx-v3/DepositModal@workspace:liquidity/lib/DepositModal":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/DepositModal@workspace:liquidity/lib/DepositModal"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/CRatioBar": "workspace:*"
-    "@snx-v3/ChangeStat": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/Manage": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/Multistep": "workspace:*"
-    "@snx-v3/TransactionSummary": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/useApprove": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useDeposit": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useWrapEth": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@xstate/react": "npm:^3.2.2"
-    react: "npm:^18.2.0"
-    xstate: "npm:^4.38.3"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/DepositModalAndromeda@workspace:*, @snx-v3/DepositModalAndromeda@workspace:liquidity/lib/DepositModalAndromeda":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/DepositModalAndromeda@workspace:liquidity/lib/DepositModalAndromeda"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/Multistep": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useAccountProxy": "workspace:*"
-    "@snx-v3/useApprove": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/usePositionManagerForCollateral": "workspace:*"
-    "@snx-v3/useUSDC": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Manage@workspace:*, @snx-v3/Manage@workspace:liquidity/lib/Manage":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Manage@workspace:liquidity/lib/Manage"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/BorderBox": "workspace:*"
-    "@snx-v3/CRatioBar": "workspace:*"
-    "@snx-v3/ChangeStat": "workspace:*"
-    "@snx-v3/DebtAmount": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/Multistep": "workspace:*"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/Tooltip": "workspace:*"
-    "@snx-v3/calculations": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/formatters": "workspace:*"
-    "@snx-v3/getStatsUrl": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useIsAndromedaStataUSDC": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useStaticAaveUSDCRate": "workspace:*"
-    "@snx-v3/useVaultsData": "workspace:*"
-    "@snx-v3/validatePosition": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/ManageAction@workspace:*, @snx-v3/ManageAction@workspace:liquidity/lib/ManageAction":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/ManageAction@workspace:liquidity/lib/ManageAction"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Borrow": "workspace:*"
-    "@snx-v3/Claim": "workspace:*"
-    "@snx-v3/ClaimModal": "workspace:*"
-    "@snx-v3/Deposit": "workspace:*"
-    "@snx-v3/DepositModal": "workspace:*"
-    "@snx-v3/DepositModalAndromeda": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/Repay": "workspace:*"
-    "@snx-v3/RepayModal": "workspace:*"
-    "@snx-v3/Undelegate": "workspace:*"
-    "@snx-v3/UndelegateModal": "workspace:*"
-    "@snx-v3/Withdraw": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/validatePosition": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/ManagePositionContext@workspace:*, @snx-v3/ManagePositionContext@workspace:liquidity/lib/ManagePositionContext":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/ManagePositionContext@workspace:liquidity/lib/ManagePositionContext"
-  dependencies:
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Multistep@workspace:*, @snx-v3/Multistep@workspace:liquidity/lib/Multistep":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Multistep@workspace:liquidity/lib/Multistep"
-  dependencies:
-    "@chakra-ui/icon": "npm:^3.2.0"
-    "@chakra-ui/react": "npm:^2.8.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/NumberInput@workspace:*, @snx-v3/NumberInput@workspace:liquidity/lib/NumberInput":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/NumberInput@workspace:liquidity/lib/NumberInput"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/PercentBadges@workspace:liquidity/lib/PercentBadges":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/PercentBadges@workspace:liquidity/lib/PercentBadges"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Permissions@workspace:*, @snx-v3/Permissions@workspace:liquidity/lib/Permissions":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Permissions@workspace:liquidity/lib/Permissions"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Address": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/useAccountPermissions": "workspace:*"
-    "@snx-v3/useAccounts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useManagePermissions": "workspace:*"
-    "@snx-v3/useTransferAccountId": "workspace:*"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Pools@workspace:*, @snx-v3/Pools@workspace:liquidity/lib/Pools":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Pools@workspace:liquidity/lib/Pools"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/Tooltip": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/formatters": "workspace:*"
-    "@snx-v3/icons": "workspace:*"
-    "@snx-v3/useApr": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useIsAndromedaStataUSDC": "workspace:*"
-    "@snx-v3/useOraclePrice": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/usePoolsList": "workspace:*"
-    "@snx-v3/useStaticAaveUSDCRate": "workspace:*"
-    "@snx-v3/useSynthTokens": "workspace:*"
-    "@snx-v3/useTokenBalance": "workspace:*"
-    "@snx-v3/useUSDC": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Positions@workspace:*, @snx-v3/Positions@workspace:liquidity/lib/Positions":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Positions@workspace:liquidity/lib/Positions"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/CRatioBar": "workspace:*"
-    "@snx-v3/DebtAmount": "workspace:*"
-    "@snx-v3/SynthSkeleton": "workspace:*"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/Tooltip": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/useApr": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useIsAndromedaStataUSDC": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useLiquidityPositions": "workspace:*"
-    "@snx-v3/useLocks": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useWithdrawTimer": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    date-fns: "npm:^2.30.0"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Repay@workspace:*, @snx-v3/Repay@workspace:liquidity/lib/Repay":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Repay@workspace:liquidity/lib/Repay"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/BorderBox": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/NumberInput": "workspace:*"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/WithdrawIncrease": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/etherscanLink": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/useApprove": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useClearDebt": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useDebtRepayer": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useRepay": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@snx-v3/useTokenBalance": "workspace:*"
-    "@snx-v3/useUSDC": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/RepayModal@workspace:*, @snx-v3/RepayModal@workspace:liquidity/lib/RepayModal":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/RepayModal@workspace:liquidity/lib/RepayModal"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/Manage": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/Multistep": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/useApprove": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useRepay": "workspace:*"
-    "@snx-v3/useRepayBaseAndromeda": "workspace:*"
-    "@snx-v3/useSpotMarketProxy": "workspace:*"
-    "@snx-v3/useSynthTokens": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@xstate/react": "npm:^3.2.2"
-    react: "npm:^18.2.0"
-    xstate: "npm:^4.38.3"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Rewards@workspace:*, @snx-v3/Rewards@workspace:liquidity/lib/Rewards":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Rewards@workspace:liquidity/lib/Rewards"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/Tooltip": "workspace:*"
-    "@snx-v3/WithdrawIncrease": "workspace:*"
-    "@snx-v3/etherscanLink": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useClaimAllRewards": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useRewards": "workspace:*"
-    "@snx-v3/useSynthTokens": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/StatsBox@workspace:*, @snx-v3/StatsBox@workspace:liquidity/lib/StatsBox":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/StatsBox@workspace:liquidity/lib/StatsBox"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/SynthSkeleton": "workspace:*"
-    "@snx-v3/Tooltip": "workspace:*"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/StatsTotalLocked@workspace:*, @snx-v3/StatsTotalLocked@workspace:liquidity/lib/StatsTotalLocked":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/StatsTotalLocked@workspace:liquidity/lib/StatsTotalLocked"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/StatsBox": "workspace:*"
-    "@snx-v3/useLiquidityPositions": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/StatsTotalPnl@workspace:*, @snx-v3/StatsTotalPnl@workspace:liquidity/lib/StatsTotalPnl":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/StatsTotalPnl@workspace:liquidity/lib/StatsTotalPnl"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/DebtAmount": "workspace:*"
-    "@snx-v3/StatsBox": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPrices": "workspace:*"
-    "@snx-v3/useLiquidityPositions": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/usePythPrice": "workspace:*"
-    "@snx-v3/useRewards": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/SynthSkeleton@workspace:*, @snx-v3/SynthSkeleton@workspace:liquidity/lib/SynthSkeleton":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/SynthSkeleton@workspace:liquidity/lib/SynthSkeleton"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Synths@workspace:*, @snx-v3/Synths@workspace:liquidity/lib/Synths":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Synths@workspace:liquidity/lib/Synths"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/Tooltip": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/etherscanLink": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useStaticAaveUSDC": "workspace:*"
-    "@snx-v3/useSynthBalances": "workspace:*"
-    "@snx-v3/useUnwrapAllSynths": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/TermsModal@workspace:*, @snx-v3/TermsModal@workspace:liquidity/lib/TermsModal":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/TermsModal@workspace:liquidity/lib/TermsModal"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/theme": "workspace:*"
-    react: "npm:^18.2.0"
-    react-router-dom: "npm:^6.18.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/TokenIcon@workspace:*, @snx-v3/TokenIcon@workspace:liquidity/lib/TokenIcon":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/TokenIcon@workspace:liquidity/lib/TokenIcon"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Tooltip@workspace:*, @snx-v3/Tooltip@workspace:liquidity/lib/Tooltip":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Tooltip@workspace:liquidity/lib/Tooltip"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/TransactionSummary@workspace:*, @snx-v3/TransactionSummary@workspace:liquidity/lib/TransactionSummary":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/TransactionSummary@workspace:liquidity/lib/TransactionSummary"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Undelegate@workspace:*, @snx-v3/Undelegate@workspace:liquidity/lib/Undelegate":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Undelegate@workspace:liquidity/lib/Undelegate"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/BorderBox": "workspace:*"
-    "@snx-v3/CRatioBar": "workspace:*"
-    "@snx-v3/ChangeStat": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/NumberInput": "workspace:*"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/TransactionSummary": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/etherscanLink": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/useApprove": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useDebtRepayer": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/usePoolConfiguration": "workspace:*"
-    "@snx-v3/useUSDC": "workspace:*"
-    "@snx-v3/useUndelegate": "workspace:*"
-    "@snx-v3/useUndelegateBaseAndromeda": "workspace:*"
-    "@snx-v3/useWithdrawTimer": "workspace:*"
-    "@snx-v3/validatePosition": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/UndelegateModal@workspace:*, @snx-v3/UndelegateModal@workspace:liquidity/lib/UndelegateModal":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/UndelegateModal@workspace:liquidity/lib/UndelegateModal"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/CRatioBar": "workspace:*"
-    "@snx-v3/ChangeStat": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/Manage": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/Multistep": "workspace:*"
-    "@snx-v3/TransactionSummary": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/useApprove": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useDebtRepayer": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useUSDC": "workspace:*"
-    "@snx-v3/useUndelegate": "workspace:*"
-    "@snx-v3/useUndelegateBaseAndromeda": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@xstate/react": "npm:^3.2.2"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-    xstate: "npm:^4.38.3"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/Withdraw@workspace:*, @snx-v3/Withdraw@workspace:liquidity/lib/Withdraw":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/Withdraw@workspace:liquidity/lib/Withdraw"
-  dependencies:
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/BorderBox": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/NumberInput": "workspace:*"
-    "@snx-v3/TokenIcon": "workspace:*"
-    "@snx-v3/WithdrawIncrease": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/etherscanLink": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useAccountCollateralUnlockDate": "workspace:*"
-    "@snx-v3/useAccountProxy": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/usePositionManagerForCollateral": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@snx-v3/useWithdraw": "workspace:*"
-    "@snx-v3/useWithdrawTimer": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/WithdrawIncrease@workspace:*, @snx-v3/WithdrawIncrease@workspace:liquidity/lib/WithdrawIncrease":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/WithdrawIncrease@workspace:liquidity/lib/WithdrawIncrease"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/useAccountCollateralUnlockDate": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/assertAddressType@workspace:liquidity/lib/assertAddressType":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/assertAddressType@workspace:liquidity/lib/assertAddressType"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/calculations@workspace:*, @snx-v3/calculations@workspace:liquidity/lib/calculations":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/calculations@workspace:liquidity/lib/calculations"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/constants@workspace:*, @snx-v3/constants@workspace:liquidity/lib/constants":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/constants@workspace:liquidity/lib/constants"
-  dependencies:
-    "@synthetixio/wei": "npm:^2.74.4"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/contracts@workspace:*, @snx-v3/contracts@workspace:liquidity/lib/contracts/importers":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/contracts@workspace:liquidity/lib/contracts/importers"
-  dependencies:
-    "@synthetixio/v3-contracts": "npm:^8.1.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/debt-repayer-base-andromeda@workspace:contracts/debt-repayer-base-andromeda":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/debt-repayer-base-andromeda@workspace:contracts/debt-repayer-base-andromeda"
-  dependencies:
-    forge-std: "github:foundry-rs/forge-std"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/etherscanLink@workspace:*, @snx-v3/etherscanLink@workspace:liquidity/lib/etherscanLink":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/etherscanLink@workspace:liquidity/lib/etherscanLink"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/fetchPythPrices@workspace:liquidity/lib/fetchPythPrices":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/fetchPythPrices@workspace:liquidity/lib/fetchPythPrices"
-  dependencies:
-    "@pythnetwork/pyth-evm-js": "npm:^1.42.0"
-    "@snx-v3/constants": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/format@workspace:*, @snx-v3/format@workspace:liquidity/lib/format":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/format@workspace:liquidity/lib/format"
-  dependencies:
-    "@synthetixio/wei": "npm:^2.74.4"
-    ethers: "npm:^5.7.2"
-    numbro: "npm:^2.5.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/formatters@workspace:*, @snx-v3/formatters@workspace:liquidity/lib/formatters":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/formatters@workspace:liquidity/lib/formatters"
-  dependencies:
-    date-fns: "npm:^2.30.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/getStatsUrl@workspace:*, @snx-v3/getStatsUrl@workspace:liquidity/lib/getStatsUrl":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/getStatsUrl@workspace:liquidity/lib/getStatsUrl"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/icons@workspace:*, @snx-v3/icons@workspace:liquidity/lib/icons":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/icons@workspace:liquidity/lib/icons"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/isBaseAndromeda@workspace:*, @snx-v3/isBaseAndromeda@workspace:liquidity/lib/isBaseAndromeda":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/isBaseAndromeda@workspace:liquidity/lib/isBaseAndromeda"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/liquidity-cypress@workspace:liquidity/cypress":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/liquidity-cypress@workspace:liquidity/cypress"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@cypress/code-coverage": "npm:^3.13.11"
-    "@cypress/react": "npm:^9.0.0"
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/liquidity": "workspace:*"
-    "@snx-v3/parseContractError": "workspace:*"
-    "@snx-v3/theme": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    cypress: "npm:14.0.2"
-    cypress-terminal-report: "npm:^7.1.0"
-    ethers: "npm:^5.7.2"
-    react-router-dom: "npm:^6.18.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/liquidity@workspace:*, @snx-v3/liquidity@workspace:liquidity/ui":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/liquidity@workspace:liquidity/ui"
-  dependencies:
-    "@babel/core": "npm:^7.24.6"
-    "@babel/plugin-transform-runtime": "npm:^7.24.6"
-    "@babel/preset-env": "npm:^7.24.6"
-    "@babel/preset-react": "npm:^7.24.6"
-    "@babel/preset-typescript": "npm:^7.24.6"
-    "@babel/runtime-corejs3": "npm:^7.24.6"
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@emotion/react": "npm:^11.11.1"
-    "@emotion/styled": "npm:^11.11.0"
-    "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.5.11"
-    "@safe-global/safe-apps-provider": "npm:^0.18.3"
-    "@safe-global/safe-apps-sdk": "npm:^8.0.0"
-    "@snx-v3/BorderBox": "workspace:*"
-    "@snx-v3/ClosePosition": "workspace:*"
-    "@snx-v3/CollateralAlert": "workspace:*"
-    "@snx-v3/Manage": "workspace:*"
-    "@snx-v3/ManageAction": "workspace:*"
-    "@snx-v3/ManagePositionContext": "workspace:*"
-    "@snx-v3/Permissions": "workspace:*"
-    "@snx-v3/Pools": "workspace:*"
-    "@snx-v3/Positions": "workspace:*"
-    "@snx-v3/Rewards": "workspace:*"
-    "@snx-v3/StatsTotalLocked": "workspace:*"
-    "@snx-v3/StatsTotalPnl": "workspace:*"
-    "@snx-v3/Synths": "workspace:*"
-    "@snx-v3/TermsModal": "workspace:*"
-    "@snx-v3/Tooltip": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/icons": "workspace:*"
-    "@snx-v3/theme": "workspace:*"
-    "@snx-v3/useAccounts": "workspace:*"
-    "@snx-v3/useApr": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useCreateAccount": "workspace:*"
-    "@snx-v3/useIsAndromedaStataUSDC": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useLocalStorage": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@synthetixio/devtools-formatters": "workspace:*"
-    "@synthetixio/magic-wallet": "workspace:*"
-    "@synthetixio/safe-import": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    "@tanstack/react-query-devtools": "npm:^5.8.3"
-    "@web3-onboard/coinbase": "npm:^2.4.1"
-    "@web3-onboard/common": "npm:^2.4.2"
-    "@web3-onboard/gnosis": "npm:^2.3.2"
-    "@web3-onboard/injected-wallets": "npm:^2.11.2"
-    "@web3-onboard/ledger": "npm:2.7.1"
-    "@web3-onboard/react": "npm:^2.10.0"
-    "@web3-onboard/trezor": "npm:^2.4.6"
-    "@web3-onboard/walletconnect": "npm:^2.6.1"
-    babel-loader: "npm:^9.1.3"
-    babel-plugin-istanbul: "npm:^6.1.1"
-    bn.js: "npm:^5.2.1"
-    copy-webpack-plugin: "npm:^11.0.0"
-    core-js: "npm:^3.33.2"
-    crypto-browserify: "npm:^3.12.0"
-    css-loader: "npm:^6.8.1"
-    dotenv: "npm:^16.4.3"
-    ethers: "npm:^5.7.2"
-    framer-motion: "npm:^10.16.5"
-    html-webpack-plugin: "npm:^5.5.3"
-    process: "npm:^0.11.10"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-    react-helmet: "npm:^6.1.0"
-    react-refresh: "npm:^0.14.0"
-    react-router-dom: "npm:^6.18.0"
-    stream-browserify: "npm:^3.0.0"
-    style-loader: "npm:^3.3.3"
-    terser-webpack-plugin: "npm:^5.3.9"
-    webpack: "npm:^5.89.0"
-    webpack-bundle-analyzer: "npm:^4.10.0"
-    webpack-cli: "npm:^5.1.4"
-    webpack-dev-server: "npm:^4.15.1"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/parseContractError@workspace:*, @snx-v3/parseContractError@workspace:liquidity/lib/parseContractError":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/parseContractError@workspace:liquidity/lib/parseContractError"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/position-manager-andromeda-statausdc@workspace:contracts/position-manager-andromeda-statausdc":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/position-manager-andromeda-statausdc@workspace:contracts/position-manager-andromeda-statausdc"
-  dependencies:
-    "@synthetixio/core-contracts": "npm:^3.10.1"
-    "@synthetixio/core-modules": "npm:^3.10.1"
-    "@synthetixio/main": "npm:^3.10.1"
-    "@synthetixio/oracle-manager": "npm:^3.10.1"
-    "@synthetixio/pyth-erc7412-wrapper": "npm:^3.10.1"
-    "@synthetixio/spot-market": "npm:^3.10.1"
-    forge-std: "github:foundry-rs/forge-std"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/position-manager-andromeda-usdc@workspace:contracts/position-manager-andromeda-usdc":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/position-manager-andromeda-usdc@workspace:contracts/position-manager-andromeda-usdc"
-  dependencies:
-    "@synthetixio/core-contracts": "npm:^3.10.1"
-    "@synthetixio/core-modules": "npm:^3.10.1"
-    "@synthetixio/main": "npm:^3.10.1"
-    "@synthetixio/oracle-manager": "npm:^3.10.1"
-    "@synthetixio/pyth-erc7412-wrapper": "npm:^3.10.1"
-    "@synthetixio/spot-market": "npm:^3.10.1"
-    forge-std: "github:foundry-rs/forge-std"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/position-manager-new-pool@workspace:contracts/position-manager-new-pool":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/position-manager-new-pool@workspace:contracts/position-manager-new-pool"
-  dependencies:
-    "@synthetixio/core-contracts": "npm:^3.10.1"
-    "@synthetixio/core-modules": "npm:^3.10.1"
-    "@synthetixio/main": "npm:^3.10.1"
-    "@synthetixio/oracle-manager": "npm:^3.10.1"
-    "@synthetixio/pyth-erc7412-wrapper": "npm:^3.10.1"
-    forge-std: "github:foundry-rs/forge-std"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/position-manager@workspace:contracts/position-manager":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/position-manager@workspace:contracts/position-manager"
-  dependencies:
-    "@synthetixio/core-contracts": "npm:^3.10.1"
-    "@synthetixio/core-modules": "npm:^3.10.1"
-    "@synthetixio/main": "npm:^3.10.1"
-    "@synthetixio/oracle-manager": "npm:^3.10.1"
-    "@synthetixio/pyth-erc7412-wrapper": "npm:^3.10.1"
-    forge-std: "github:foundry-rs/forge-std"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/staking@workspace:staking/ui":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/staking@workspace:staking/ui"
-  dependencies:
-    "@babel/core": "npm:^7.24.6"
-    "@babel/plugin-transform-runtime": "npm:^7.24.6"
-    "@babel/preset-env": "npm:^7.24.6"
-    "@babel/preset-react": "npm:^7.24.6"
-    "@babel/preset-typescript": "npm:^7.24.6"
-    "@babel/runtime-corejs3": "npm:^7.24.6"
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@emotion/react": "npm:^11.11.1"
-    "@emotion/styled": "npm:^11.11.0"
-    "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.5.11"
-    "@safe-global/safe-apps-provider": "npm:^0.18.3"
-    "@safe-global/safe-apps-sdk": "npm:^8.0.0"
-    "@snx-v3/Amount": "workspace:*"
-    "@snx-v3/CRatioBar": "workspace:*"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/Permissions": "workspace:*"
-    "@snx-v3/TermsModal": "workspace:*"
-    "@snx-v3/Tooltip": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/icons": "workspace:*"
-    "@snx-v3/theme": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useAccountProxy": "workspace:*"
-    "@snx-v3/useAccounts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useCreateAccount": "workspace:*"
-    "@snx-v3/useLegacyMarket": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/usePositionManagerNewPool": "workspace:*"
-    "@snx-v3/usePythPrice": "workspace:*"
-    "@snx-v3/useSNX": "workspace:*"
-    "@snx-v3/useTreasuryMarketProxy": "workspace:*"
-    "@snx-v3/useTrustedMulticallForwarder": "workspace:*"
-    "@snx-v3/useV2xSynthetix": "workspace:*"
-    "@synthetixio/devtools-formatters": "workspace:*"
-    "@synthetixio/magic-wallet": "workspace:*"
-    "@synthetixio/safe-import": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    "@tanstack/react-query-devtools": "npm:^5.8.3"
-    "@web3-onboard/coinbase": "npm:^2.4.1"
-    "@web3-onboard/common": "npm:^2.4.2"
-    "@web3-onboard/gnosis": "npm:^2.3.2"
-    "@web3-onboard/injected-wallets": "npm:^2.11.2"
-    "@web3-onboard/ledger": "npm:2.7.1"
-    "@web3-onboard/react": "npm:^2.10.0"
-    "@web3-onboard/trezor": "npm:^2.4.6"
-    "@web3-onboard/walletconnect": "npm:^2.6.1"
-    babel-loader: "npm:^9.1.3"
-    babel-plugin-istanbul: "npm:^6.1.1"
-    bn.js: "npm:^5.2.1"
-    copy-webpack-plugin: "npm:^11.0.0"
-    core-js: "npm:^3.33.2"
-    crypto-browserify: "npm:^3.12.0"
-    css-loader: "npm:^6.8.1"
-    date-fns: "npm:^2.30.0"
-    debug: "npm:^4.4.0"
-    dotenv: "npm:^16.4.3"
-    ethers: "npm:^5.7.2"
-    framer-motion: "npm:^10.16.5"
-    html-webpack-plugin: "npm:^5.5.3"
-    numbro: "npm:^2.5.0"
-    process: "npm:^0.11.10"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-    react-helmet: "npm:^6.1.0"
-    react-refresh: "npm:^0.14.0"
-    react-router-dom: "npm:^6.18.0"
-    stream-browserify: "npm:^3.0.0"
-    style-loader: "npm:^3.3.3"
-    terser-webpack-plugin: "npm:^5.3.9"
-    webpack: "npm:^5.89.0"
-    webpack-bundle-analyzer: "npm:^4.10.0"
-    webpack-cli: "npm:^5.1.4"
-    webpack-dev-server: "npm:^4.15.1"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/theme@workspace:*, @snx-v3/theme@workspace:liquidity/lib/theme":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/theme@workspace:liquidity/lib/theme"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@chakra-ui/theme-tools": "npm:^2.1.2"
-    "@emotion/react": "npm:^11.11.1"
-    "@emotion/styled": "npm:^11.11.0"
-    framer-motion: "npm:^10.16.5"
-    react: "npm:^18.2.0"
-    react-dom: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/tsHelpers@workspace:*, @snx-v3/tsHelpers@workspace:liquidity/lib/tsHelpers":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/tsHelpers@workspace:liquidity/lib/tsHelpers"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/txnReducer@workspace:*, @snx-v3/txnReducer@workspace:liquidity/lib/txnReducer":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/txnReducer@workspace:liquidity/lib/txnReducer"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useAccountAvailableCollateral@workspace:liquidity/lib/useAccountAvailableCollateral":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useAccountAvailableCollateral@workspace:liquidity/lib/useAccountAvailableCollateral"
-  dependencies:
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useAccountCollateral@workspace:liquidity/lib/useAccountCollateral":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useAccountCollateral@workspace:liquidity/lib/useAccountCollateral"
-  dependencies:
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useAccountCollateralUnlockDate@workspace:*, @snx-v3/useAccountCollateralUnlockDate@workspace:liquidity/lib/useAccountCollateralUnlockDate":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useAccountCollateralUnlockDate@workspace:liquidity/lib/useAccountCollateralUnlockDate"
-  dependencies:
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useAccountPermissions@workspace:*, @snx-v3/useAccountPermissions@workspace:liquidity/lib/useAccountInfo":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useAccountPermissions@workspace:liquidity/lib/useAccountInfo"
-  dependencies:
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useAccountProxy": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useAccountProxy@workspace:*, @snx-v3/useAccountProxy@workspace:liquidity/lib/contracts/useAccountProxy":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useAccountProxy@workspace:liquidity/lib/contracts/useAccountProxy"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useAccounts@workspace:*, @snx-v3/useAccounts@workspace:liquidity/lib/useAccounts":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useAccounts@workspace:liquidity/lib/useAccounts"
-  dependencies:
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useAccountProxy": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useTrustedMulticallForwarder": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useAllErrors@workspace:*, @snx-v3/useAllErrors@workspace:liquidity/lib/contracts/useAllErrors":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useAllErrors@workspace:liquidity/lib/contracts/useAllErrors"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useAllowance@workspace:*, @snx-v3/useAllowance@workspace:liquidity/lib/useAllowance":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useAllowance@workspace:liquidity/lib/useAllowance"
-  dependencies:
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useApprove@workspace:*, @snx-v3/useApprove@workspace:liquidity/lib/useApprove":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useApprove@workspace:liquidity/lib/useApprove"
-  dependencies:
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useAllowance": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useApr@workspace:*, @snx-v3/useApr@workspace:liquidity/lib/useApr":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useApr@workspace:liquidity/lib/useApr"
-  dependencies:
-    "@aave/math-utils": "npm:^1.30.2"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/isBaseAndromeda": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useBlockNumber@workspace:liquidity/lib/useBlockNumber":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useBlockNumber@workspace:liquidity/lib/useBlockNumber"
-  dependencies:
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useBlockchain@workspace:*, @snx-v3/useBlockchain@workspace:liquidity/lib/useBlockchain":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useBlockchain@workspace:liquidity/lib/useBlockchain"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/icons": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    "@web3-onboard/react": "npm:^2.10.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useBorrow@workspace:*, @snx-v3/useBorrow@workspace:liquidity/lib/useBorrow":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useBorrow@workspace:liquidity/lib/useBorrow"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useClaimAllRewards@workspace:*, @snx-v3/useClaimAllRewards@workspace:liquidity/lib/useClaimAllRewards":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useClaimAllRewards@workspace:liquidity/lib/useClaimAllRewards"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useRewards": "workspace:*"
-    "@snx-v3/useSpotMarketProxy": "workspace:*"
-    "@snx-v3/useSynthTokens": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useClearDebt@workspace:*, @snx-v3/useClearDebt@workspace:liquidity/lib/useClearDebt":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useClearDebt@workspace:liquidity/lib/useClearDebt"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/isBaseAndromeda": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useAccountProxy": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useDebtRepayer": "workspace:*"
-    "@snx-v3/useSpotMarketProxy": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useClosePosition@workspace:*, @snx-v3/useClosePosition@workspace:liquidity/lib/contracts/useClosePosition":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useClosePosition@workspace:liquidity/lib/contracts/useClosePosition"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useCollateralPriceUpdates@workspace:*, @snx-v3/useCollateralPriceUpdates@workspace:liquidity/lib/useCollateralPriceUpdates":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useCollateralPriceUpdates@workspace:liquidity/lib/useCollateralPriceUpdates"
-  dependencies:
-    "@pythnetwork/pyth-evm-js": "npm:^1.42.0"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/usePoolsList": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useCollateralPrices@workspace:*, @snx-v3/useCollateralPrices@workspace:liquidity/lib/useCollateralPrices":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useCollateralPrices@workspace:liquidity/lib/useCollateralPrices"
-  dependencies:
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useCollateralTypes@workspace:*, @snx-v3/useCollateralTypes@workspace:liquidity/lib/useCollateralTypes":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useCollateralTypes@workspace:liquidity/lib/useCollateralTypes"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useSNX": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useContractErrorParser@workspace:*, @snx-v3/useContractErrorParser@workspace:liquidity/lib/useContractErrorParser":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useContractErrorParser@workspace:liquidity/lib/useContractErrorParser"
-  dependencies:
-    "@snx-v3/parseContractError": "workspace:*"
-    "@snx-v3/useAllErrors": "workspace:*"
-    "@snx-v3/useClosePosition": "workspace:*"
-    "@snx-v3/usePositionManager": "workspace:*"
-    "@snx-v3/usePositionManagerAndromedaStataUSDC": "workspace:*"
-    "@snx-v3/usePositionManagerAndromedaUSDC": "workspace:*"
-    "@snx-v3/useStaticAaveUSDC": "workspace:*"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useCoreProxy@workspace:*, @snx-v3/useCoreProxy@workspace:liquidity/lib/contracts/useCoreProxy":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useCoreProxy@workspace:liquidity/lib/contracts/useCoreProxy"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useCreateAccount@workspace:*, @snx-v3/useCreateAccount@workspace:liquidity/lib/useCreateAccount":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useCreateAccount@workspace:liquidity/lib/useCreateAccount"
-  dependencies:
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useDebtRepayer@workspace:*, @snx-v3/useDebtRepayer@workspace:liquidity/lib/contracts/useDebtRepayer":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useDebtRepayer@workspace:liquidity/lib/contracts/useDebtRepayer"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useDeposit@workspace:*, @snx-v3/useDeposit@workspace:liquidity/lib/useDeposit":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useDeposit@workspace:liquidity/lib/useDeposit"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useEthBalance@workspace:*, @snx-v3/useEthBalance@workspace:liquidity/lib/useEthBalance":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useEthBalance@workspace:liquidity/lib/useEthBalance"
-  dependencies:
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/zod": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useGetUSDTokens@workspace:*, @snx-v3/useGetUSDTokens@workspace:liquidity/lib/useGetUSDTokens":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useGetUSDTokens@workspace:liquidity/lib/useGetUSDTokens"
-  dependencies:
-    "@snx-v3/isBaseAndromeda": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useSpotMarketProxy": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useIsAndromedaStataUSDC@workspace:*, @snx-v3/useIsAndromedaStataUSDC@workspace:liquidity/lib/useIsAndromedaStataUSDC":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useIsAndromedaStataUSDC@workspace:liquidity/lib/useIsAndromedaStataUSDC"
-  dependencies:
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useSynthTokens": "workspace:*"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useLegacyMarket@workspace:*, @snx-v3/useLegacyMarket@workspace:liquidity/lib/contracts/useLegacyMarket":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useLegacyMarket@workspace:liquidity/lib/contracts/useLegacyMarket"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useLiquidityPosition@workspace:*, @snx-v3/useLiquidityPosition@workspace:liquidity/lib/useLiquidityPosition":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useLiquidityPosition@workspace:liquidity/lib/useLiquidityPosition"
-  dependencies:
-    "@snx-v3/calculations": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useLiquidityPositions@workspace:*, @snx-v3/useLiquidityPositions@workspace:liquidity/lib/useLiquidityPositions":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useLiquidityPositions@workspace:liquidity/lib/useLiquidityPositions"
-  dependencies:
-    "@snx-v3/calculations": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useLocalStorage@workspace:*, @snx-v3/useLocalStorage@workspace:liquidity/lib/useLocalStorage":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useLocalStorage@workspace:liquidity/lib/useLocalStorage"
-  dependencies:
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useLocks@workspace:*, @snx-v3/useLocks@workspace:liquidity/lib/useLocks":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useLocks@workspace:liquidity/lib/useLocks"
-  dependencies:
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useManagePermissions@workspace:*, @snx-v3/useManagePermissions@workspace:liquidity/lib/useManagePermissions":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useManagePermissions@workspace:liquidity/lib/useManagePermissions"
-  dependencies:
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useTrustedMulticallForwarder": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useOracleManagerProxy@workspace:liquidity/lib/contracts/useOracleManagerProxy":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useOracleManagerProxy@workspace:liquidity/lib/contracts/useOracleManagerProxy"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useOraclePrice@workspace:*, @snx-v3/useOraclePrice@workspace:liquidity/lib/useOraclePrice":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useOraclePrice@workspace:liquidity/lib/useOraclePrice"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useParams@workspace:*, @snx-v3/useParams@workspace:liquidity/lib/useParams":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useParams@workspace:liquidity/lib/useParams"
-  dependencies:
-    react: "npm:^18.2.0"
-    react-router-dom: "npm:^6.18.0"
-    zod: "npm:^3.22.4"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePoolConfiguration@workspace:*, @snx-v3/usePoolConfiguration@workspace:liquidity/lib/usePoolConfiguration":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePoolConfiguration@workspace:liquidity/lib/usePoolConfiguration"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@snx-v3/zod": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-    zod: "npm:^3.22.4"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePoolData@workspace:liquidity/lib/usePoolData":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePoolData@workspace:liquidity/lib/usePoolData"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-    zod: "npm:^3.22.4"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePools@workspace:liquidity/lib/usePools":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePools@workspace:liquidity/lib/usePools"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePoolsList@workspace:*, @snx-v3/usePoolsList@workspace:liquidity/lib/usePoolsList":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePoolsList@workspace:liquidity/lib/usePoolsList"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePositionDebt@workspace:liquidity/lib/usePositionDebt":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePositionDebt@workspace:liquidity/lib/usePositionDebt"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePositionManager@workspace:*, @snx-v3/usePositionManager@workspace:liquidity/lib/contracts/usePositionManager":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePositionManager@workspace:liquidity/lib/contracts/usePositionManager"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePositionManagerAndromedaStataUSDC@workspace:*, @snx-v3/usePositionManagerAndromedaStataUSDC@workspace:liquidity/lib/contracts/usePositionManagerAndromedaStataUSDC":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePositionManagerAndromedaStataUSDC@workspace:liquidity/lib/contracts/usePositionManagerAndromedaStataUSDC"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePositionManagerAndromedaUSDC@workspace:*, @snx-v3/usePositionManagerAndromedaUSDC@workspace:liquidity/lib/contracts/usePositionManagerAndromedaUSDC":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePositionManagerAndromedaUSDC@workspace:liquidity/lib/contracts/usePositionManagerAndromedaUSDC"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePositionManagerForCollateral@workspace:*, @snx-v3/usePositionManagerForCollateral@workspace:liquidity/lib/contracts/usePositionManagerForCollateral":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePositionManagerForCollateral@workspace:liquidity/lib/contracts/usePositionManagerForCollateral"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useSynthTokens": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePositionManagerNewPool@workspace:*, @snx-v3/usePositionManagerNewPool@workspace:liquidity/lib/contracts/usePositionManagerNewPool":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePositionManagerNewPool@workspace:liquidity/lib/contracts/usePositionManagerNewPool"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePythFeeds@workspace:*, @snx-v3/usePythFeeds@workspace:liquidity/lib/contracts/usePythFeeds":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePythFeeds@workspace:liquidity/lib/contracts/usePythFeeds"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePythPrice@workspace:*, @snx-v3/usePythPrice@workspace:liquidity/lib/usePythPrice":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePythPrice@workspace:liquidity/lib/usePythPrice"
-  dependencies:
-    "@pythnetwork/pyth-evm-js": "npm:^1.42.0"
-    "@snx-v3/constants": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/usePythVerifier@workspace:*, @snx-v3/usePythVerifier@workspace:liquidity/lib/contracts/usePythVerifier":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/usePythVerifier@workspace:liquidity/lib/contracts/usePythVerifier"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useRates@workspace:liquidity/lib/useRates":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useRates@workspace:liquidity/lib/useRates"
-  dependencies:
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@synthetixio/contracts": "npm:^1.2.3"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useRepay@workspace:*, @snx-v3/useRepay@workspace:liquidity/lib/useRepay":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useRepay@workspace:liquidity/lib/useRepay"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useAccountProxy": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/usePositionManager": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@snx-v3/useTokenBalance": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useRepayBaseAndromeda@workspace:*, @snx-v3/useRepayBaseAndromeda@workspace:liquidity/lib/useRepayBaseAndromeda":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useRepayBaseAndromeda@workspace:liquidity/lib/useRepayBaseAndromeda"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/isBaseAndromeda": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useApprove": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useGetUSDTokens": "workspace:*"
-    "@snx-v3/useSpotMarketProxy": "workspace:*"
-    "@snx-v3/useSystemToken": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useRewards@workspace:*, @snx-v3/useRewards@workspace:liquidity/lib/useRewards":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useRewards@workspace:liquidity/lib/useRewards"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useRewardsDistributors": "workspace:*"
-    "@snx-v3/useSynthTokens": "workspace:*"
-    "@snx-v3/useTrustedMulticallForwarder": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useRewardsDistributors@workspace:*, @snx-v3/useRewardsDistributors@workspace:liquidity/lib/contracts/useRewardsDistributors":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useRewardsDistributors@workspace:liquidity/lib/contracts/useRewardsDistributors"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useSNX@workspace:*, @snx-v3/useSNX@workspace:liquidity/lib/contracts/useSNX":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useSNX@workspace:liquidity/lib/contracts/useSNX"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useSpotMarketProxy@workspace:*, @snx-v3/useSpotMarketProxy@workspace:liquidity/lib/contracts/useSpotMarketProxy":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useSpotMarketProxy@workspace:liquidity/lib/contracts/useSpotMarketProxy"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useStaticAaveUSDC@workspace:*, @snx-v3/useStaticAaveUSDC@workspace:liquidity/lib/contracts/useStaticAaveUSDC":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useStaticAaveUSDC@workspace:liquidity/lib/contracts/useStaticAaveUSDC"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useStaticAaveUSDCRate@workspace:*, @snx-v3/useStaticAaveUSDCRate@workspace:liquidity/lib/useStaticAaveUSDCRate":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useStaticAaveUSDCRate@workspace:liquidity/lib/useStaticAaveUSDCRate"
-  dependencies:
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useStaticAaveUSDC": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useSynthBalances@workspace:*, @snx-v3/useSynthBalances@workspace:liquidity/lib/useSynthBalances":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useSynthBalances@workspace:liquidity/lib/useSynthBalances"
-  dependencies:
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useSynthTokens": "workspace:*"
-    "@snx-v3/useTrustedMulticallForwarder": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useSynthToken@workspace:liquidity/lib/useSynthToken":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useSynthToken@workspace:liquidity/lib/useSynthToken"
-  dependencies:
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useSynthTokens": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useSynthTokens@workspace:*, @snx-v3/useSynthTokens@workspace:liquidity/lib/contracts/useSynthTokens":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useSynthTokens@workspace:liquidity/lib/contracts/useSynthTokens"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useSystemToken@workspace:*, @snx-v3/useSystemToken@workspace:liquidity/lib/contracts/useSystemToken":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useSystemToken@workspace:liquidity/lib/contracts/useSystemToken"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useTokenBalance@workspace:*, @snx-v3/useTokenBalance@workspace:liquidity/lib/useTokenBalance":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useTokenBalance@workspace:liquidity/lib/useTokenBalance"
-  dependencies:
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useTokenPrice@workspace:*, @snx-v3/useTokenPrice@workspace:liquidity/lib/useTokenPrice":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useTokenPrice@workspace:liquidity/lib/useTokenPrice"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useTransferAccountId@workspace:*, @snx-v3/useTransferAccountId@workspace:liquidity/lib/useTransferAccountId":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useTransferAccountId@workspace:liquidity/lib/useTransferAccountId"
-  dependencies:
-    "@snx-v3/useAccountProxy": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useTransferableSynthetix@workspace:*, @snx-v3/useTransferableSynthetix@workspace:liquidity/lib/useTransferableSynthetix":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useTransferableSynthetix@workspace:liquidity/lib/useTransferableSynthetix"
-  dependencies:
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useTreasuryMarketProxy@workspace:*, @snx-v3/useTreasuryMarketProxy@workspace:liquidity/lib/contracts/useTreasuryMarketProxy":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useTreasuryMarketProxy@workspace:liquidity/lib/contracts/useTreasuryMarketProxy"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useTrustedMulticallForwarder@workspace:*, @snx-v3/useTrustedMulticallForwarder@workspace:liquidity/lib/contracts/useTrustedMulticallForwarder":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useTrustedMulticallForwarder@workspace:liquidity/lib/contracts/useTrustedMulticallForwarder"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useUSDC@workspace:*, @snx-v3/useUSDC@workspace:liquidity/lib/contracts/useUSDC":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useUSDC@workspace:liquidity/lib/contracts/useUSDC"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useUSDProxy@workspace:liquidity/lib/contracts/useUSDProxy":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useUSDProxy@workspace:liquidity/lib/contracts/useUSDProxy"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useUndelegate@workspace:*, @snx-v3/useUndelegate@workspace:liquidity/lib/useUndelegate":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useUndelegate@workspace:liquidity/lib/useUndelegate"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useUndelegateBaseAndromeda@workspace:*, @snx-v3/useUndelegateBaseAndromeda@workspace:liquidity/lib/useUndelegateBaseAndromeda":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useUndelegateBaseAndromeda@workspace:liquidity/lib/useUndelegateBaseAndromeda"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/isBaseAndromeda": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useAccountProxy": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/useDebtRepayer": "workspace:*"
-    "@snx-v3/useLiquidityPosition": "workspace:*"
-    "@snx-v3/useParams": "workspace:*"
-    "@snx-v3/useSpotMarketProxy": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useUnwrapAllSynths@workspace:*, @snx-v3/useUnwrapAllSynths@workspace:liquidity/lib/useUnwrapAllSynths":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useUnwrapAllSynths@workspace:liquidity/lib/useUnwrapAllSynths"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@snx-v3/ContractError": "workspace:*"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useContractErrorParser": "workspace:*"
-    "@snx-v3/useSpotMarketProxy": "workspace:*"
-    "@snx-v3/useSynthBalances": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useV2xSynthetix@workspace:*, @snx-v3/useV2xSynthetix@workspace:liquidity/lib/contracts/useV2xSynthetix":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useV2xSynthetix@workspace:liquidity/lib/contracts/useV2xSynthetix"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useVaultsData@workspace:*, @snx-v3/useVaultsData@workspace:liquidity/lib/useVaultsData":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useVaultsData@workspace:liquidity/lib/useVaultsData"
-  dependencies:
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@snx-v3/zod": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-    zod: "npm:^3.22.4"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useWETH@workspace:liquidity/lib/contracts/useWETH":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useWETH@workspace:liquidity/lib/contracts/useWETH"
-  dependencies:
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useWithdraw@workspace:*, @snx-v3/useWithdraw@workspace:liquidity/lib/useWithdraw":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useWithdraw@workspace:liquidity/lib/useWithdraw"
-  dependencies:
-    "@snx-v3/format": "workspace:*"
-    "@snx-v3/txnReducer": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralPriceUpdates": "workspace:*"
-    "@snx-v3/useCoreProxy": "workspace:*"
-    "@snx-v3/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useWithdrawTimer@workspace:*, @snx-v3/useWithdrawTimer@workspace:liquidity/lib/useWithdrawTimer":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useWithdrawTimer@workspace:liquidity/lib/useWithdrawTimer"
-  dependencies:
-    "@snx-v3/useAccountCollateralUnlockDate": "workspace:*"
-    react: "npm:^18.2.0"
-    react-timer-hook: "npm:^3.0.7"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/useWrapEth@workspace:*, @snx-v3/useWrapEth@workspace:liquidity/lib/useWrapEth":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/useWrapEth@workspace:liquidity/lib/useWrapEth"
-  dependencies:
-    "@snx-v3/useBlockchain": "workspace:*"
-    "@snx-v3/useCollateralTypes": "workspace:*"
-    "@snx-v3/useEthBalance": "workspace:*"
-    "@snx-v3/useTokenBalance": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/validatePosition@workspace:*, @snx-v3/validatePosition@workspace:liquidity/lib/validatePosition":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/validatePosition@workspace:liquidity/lib/validatePosition"
-  dependencies:
-    "@snx-v3/calculations": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/withERC7412@workspace:*, @snx-v3/withERC7412@workspace:liquidity/lib/withERC7412":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/withERC7412@workspace:liquidity/lib/withERC7412"
-  dependencies:
-    "@pythnetwork/pyth-evm-js": "npm:^1.42.0"
-    "@snx-v3/constants": "workspace:*"
-    "@snx-v3/contracts": "workspace:*"
-    "@snx-v3/parseContractError": "workspace:*"
-    "@snx-v3/tsHelpers": "workspace:*"
-    "@snx-v3/useBlockchain": "workspace:*"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@snx-v3/zod@workspace:*, @snx-v3/zod@workspace:liquidity/lib/zod":
-  version: 0.0.0-use.local
-  resolution: "@snx-v3/zod@workspace:liquidity/lib/zod"
-  dependencies:
-    "@synthetixio/wei": "npm:^2.74.4"
-    ethers: "npm:^5.7.2"
-    zod: "npm:^3.22.4"
-  languageName: unknown
-  linkType: soft
-
 "@solana/buffer-layout@npm:^4.0.1":
   version: 4.0.1
   resolution: "@solana/buffer-layout@npm:4.0.1"
@@ -7233,7 +7098,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@synthetixio/magic-wallet@workspace:tools/magic-wallet"
   dependencies:
-    "@snx-v3/useBlockchain": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
     ethers: "npm:^5.7.2"
   languageName: unknown
   linkType: soft

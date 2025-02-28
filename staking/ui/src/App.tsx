@@ -1,7 +1,7 @@
 import { ChakraProvider, extendTheme, useColorMode } from '@chakra-ui/react';
-import { DEFAULT_QUERY_STALE_TIME, SESSION_STORAGE_KEYS } from '@snx-v3/constants';
-import { TermsModal } from '@snx-v3/TermsModal';
-import { Fonts, theme } from '@snx-v3/theme';
+import { DEFAULT_QUERY_STALE_TIME, SESSION_STORAGE_KEYS } from '@_/constants';
+import { TermsModal } from '@_/TermsModal';
+import { Fonts, theme } from '@_/theme';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Web3OnboardProvider } from '@web3-onboard/react';
