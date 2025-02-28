@@ -106,40 +106,6 @@ declare global {
       getSystemToken: ({ address, amount }: { address?: string; amount: number }) => Promise<void>;
 
       pythBypass: () => Promise<void>;
-
-      pmSetupPosition: ({
-        address,
-        symbol,
-        amount,
-      }: {
-        address?: string;
-        symbol: 'USDC' | 'stataUSDC';
-        amount: number;
-      }) => Promise<void>;
-
-      pmIncreasePosition: ({
-        address,
-        accountId,
-        symbol,
-        amount,
-      }: {
-        address?: string;
-        accountId?: string;
-        symbol: 'USDC' | 'stataUSDC';
-        amount: number;
-      }) => Promise<void>;
-
-      pmDecreasePosition: ({
-        address,
-        accountId,
-        symbol,
-        amount,
-      }: {
-        address?: string;
-        accountId?: string;
-        symbol: 'USDC' | 'stataUSDC';
-        amount: number;
-      }) => Promise<void>;
     }
   }
 }

@@ -2,7 +2,7 @@ import { contractsHash } from '@_/tsHelpers';
 import { useNetwork, useProvider } from '@_/useBlockchain';
 import { useCollateralType } from '@_/useCollateralTypes';
 import { useCoreProxy } from '@_/useCoreProxy';
-import { type PositionPageSchemaType, useParams } from '@_/useParams';
+import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { useQuery } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';
@@ -10,7 +10,7 @@ import { ethers } from 'ethers';
 const log = debug('snx:useAccountAvailableCollateral');
 
 export function useAccountAvailableCollateral() {
-  const [params] = useParams<PositionPageSchemaType>();
+  const [params] = useParams<HomePageSchemaType>();
 
   const provider = useProvider();
   const { network } = useNetwork();

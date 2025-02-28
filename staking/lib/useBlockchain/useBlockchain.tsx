@@ -1,15 +1,7 @@
-import { IconProps } from '@chakra-ui/react';
 import { INFURA_KEY } from '@_/constants';
 import { importPythERC7412Wrapper } from '@_/contracts';
-import {
-  ArbitrumIcon,
-  BaseIcon,
-  EthereumIcon,
-  FailedIcon,
-  LogoIcon,
-  OptimismIcon,
-  SNXChainIcon,
-} from '@_/icons';
+import { EthereumIcon, FailedIcon, OptimismIcon } from '@_/icons';
+import { IconProps } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useConnectWallet, useSetChain } from '@web3-onboard/react';
 import { ethers } from 'ethers';
@@ -37,19 +29,6 @@ export type Network = {
   isTestnet: boolean;
 };
 
-export const UNSUPPORTED_NETWORK: Network = {
-  id: 0,
-  preset: 'main',
-  hexId: `0x${Number(0).toString(16)}`,
-  token: 'ETH',
-  name: 'unsupported',
-  rpcUrl: '',
-  publicRpcUrl: '',
-  label: 'Unsupported',
-  isSupported: false,
-  isTestnet: false,
-};
-
 interface NetworkIconProps extends IconProps {
   networkId?: Network['id'];
   size?: string;
@@ -61,43 +40,10 @@ export const NetworkIcon = ({ networkId, size = '24px', ...props }: NetworkIconP
       return <EthereumIcon w={size} h={size} {...props} />;
     case 10:
       return <OptimismIcon w={size} h={size} {...props} />;
-    case 11155111:
-      return <EthereumIcon w={size} h={size} {...props} />;
-    case 84531:
-      return <BaseIcon w={size} h={size} {...props} />;
-    case 84532:
-      return <BaseIcon w={size} h={size} {...props} />;
-    case 13370:
-      return <LogoIcon w="29px" h="21px" {...props} />;
-    case 8453:
-      return <BaseIcon w={size} h={size} {...props} />;
-    case 11155420:
-      return <OptimismIcon w={size} h={size} {...props} />;
-    case 421614:
-      return <ArbitrumIcon w={size} h={size} {...props} />;
-    case 42161:
-      return <ArbitrumIcon w={size} h={size} {...props} />;
-    case 2192:
-      return <SNXChainIcon w={size} h={size} {...props} />;
-    case 13001:
-      return <SNXChainIcon w={size} h={size} {...props} />;
     default: {
       return <FailedIcon w={size} h={size} {...props} />;
     }
   }
-};
-
-export const BASE_ANDROMEDA: Network = {
-  id: 8453,
-  preset: 'andromeda',
-  hexId: `0x${Number(8453).toString(16)}`,
-  token: 'ETH',
-  name: 'base',
-  rpcUrl: `https://base-mainnet.infura.io/v3/${INFURA_KEY}`,
-  label: 'Base',
-  isSupported: true,
-  publicRpcUrl: 'https://base.publicnode.com',
-  isTestnet: false,
 };
 
 export const MAINNET: Network = {
@@ -126,123 +72,7 @@ export const OPTIMISM: Network = {
   isTestnet: false,
 };
 
-export const SEPOLIA: Network = {
-  id: 11155111,
-  preset: 'main',
-  hexId: `0x${Number(11155111).toString(16)}`,
-  token: 'ETH',
-  name: 'sepolia',
-  rpcUrl: `https://sepolia.infura.io/v3/${INFURA_KEY}`,
-  label: 'Sepolia Testnet',
-  isSupported: true,
-  publicRpcUrl: 'https://ethereum-sepolia.publicnode.com',
-  isTestnet: true,
-};
-
-export const BASE_SEPOLIA: Network = {
-  id: 84532,
-  preset: 'andromeda',
-  hexId: `0x${Number(84532).toString(16)}`,
-  token: 'ETH',
-  name: 'base-sepolia',
-  rpcUrl: `https://base-sepolia.infura.io/v3/${INFURA_KEY}`,
-  label: 'Base Sepolia',
-  isSupported: true,
-  publicRpcUrl: 'https://sepolia.base.org',
-  isTestnet: true,
-};
-
-export const CANNON: Network = {
-  id: 13370,
-  preset: 'main',
-  hexId: `0x${Number(13370).toString(16)}`,
-  token: 'ETH',
-  name: 'cannon',
-  rpcUrl: `http://127.0.0.1:8545`,
-  label: 'Cannon',
-  isSupported: false, // hidden by default but if wallet switched to Cannon it will be visible
-  publicRpcUrl: 'http://127.0.0.1:8545',
-  isTestnet: true,
-};
-
-export const OPTIMISM_SEPOLIA: Network = {
-  id: 11155420,
-  preset: 'main',
-  hexId: `0x${Number(11155420).toString(16)}`,
-  token: 'ETH',
-  name: 'optimism-sepolia',
-  rpcUrl: `https://optimism-sepolia.infura.io/v3/${INFURA_KEY}`,
-  label: 'Optimism Sepolia',
-  isSupported: false,
-  publicRpcUrl: 'https://sepolia.optimism.io/',
-  isTestnet: true,
-};
-
-export const ARBITRUM_SEPOLIA: Network = {
-  id: 421614,
-  preset: 'main',
-  hexId: `0x${Number(421614).toString(16)}`,
-  token: 'ETH',
-  name: 'arbitrum-sepolia',
-  rpcUrl: `https://arbitrum-sepolia.infura.io/v3/${INFURA_KEY}`,
-  label: 'Arbitrum Sepolia',
-  isSupported: true,
-  publicRpcUrl: 'https://sepolia-rollup.arbitrum.io/rpc',
-  isTestnet: true,
-};
-
-export const ARBITRUM: Network = {
-  id: 42161,
-  preset: 'main',
-  hexId: `0x${Number(42161).toString(16)}`,
-  token: 'ETH',
-  name: 'arbitrum',
-  rpcUrl: `https://arbitrum-mainnet.infura.io/v3/${INFURA_KEY}`,
-  label: 'Arbitrum',
-  isSupported: true,
-  publicRpcUrl: 'https://arb1.arbitrum.io/rpc',
-  isTestnet: false,
-};
-
-export const SNAX: Network = {
-  id: 2192,
-  preset: 'main',
-  hexId: `0x${Number(2192).toString(16)}`,
-  token: 'ETH',
-  name: 'SNAX',
-  rpcUrl: 'https://mainnet.snaxchain.io/',
-  label: 'Snaxchain',
-  isSupported: true,
-  publicRpcUrl: 'https://mainnet.snaxchain.io/',
-  isTestnet: false,
-};
-
-export const SNAXTESTNET: Network = {
-  id: 13001,
-  preset: 'main',
-  hexId: `0x${Number(13001).toString(16)}`,
-  token: 'ETH',
-  name: 'SNAX',
-  rpcUrl: 'https://testnet.snaxchain.io/',
-  label: 'Snaxchain',
-  isSupported: true,
-  publicRpcUrl: 'https://testnet.snaxchain.io/',
-  isTestnet: true,
-};
-
-export const NETWORKS: Network[] = [
-  BASE_ANDROMEDA,
-  MAINNET,
-  OPTIMISM,
-  SEPOLIA,
-  BASE_SEPOLIA,
-  CANNON,
-  OPTIMISM_SEPOLIA,
-  ARBITRUM_SEPOLIA,
-  ARBITRUM,
-  SNAX,
-  SNAXTESTNET,
-];
+export const NETWORKS: Network[] = [MAINNET, OPTIMISM];
 
 export async function deploymentHasERC7412(chainId: number, preset: string) {
   return importPythERC7412Wrapper(chainId, preset).then(

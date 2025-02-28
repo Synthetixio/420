@@ -3,7 +3,7 @@ import { ContractError } from '@_/ContractError';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
-import { type PositionPageSchemaType, useParams } from '@_/useParams';
+import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -16,7 +16,7 @@ import { usePositionCollateral } from './usePositionCollateral';
 const log = debug('snx:useClosePositionNewPools');
 
 export function useClosePositionNewPool() {
-  const [params] = useParams<PositionPageSchemaType>();
+  const [params] = useParams<HomePageSchemaType>();
 
   const signer = useSigner();
   const provider = useProvider();

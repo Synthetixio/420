@@ -1,6 +1,6 @@
 import { contractsHash } from '@_/tsHelpers';
 import { useNetwork, useProvider } from '@_/useBlockchain';
-import { type PositionPageSchemaType, useParams } from '@_/useParams';
+import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 import { useQuery } from '@tanstack/react-query';
 import debug from 'debug';
@@ -9,7 +9,7 @@ import { ethers } from 'ethers';
 const log = debug('snx:useLoan');
 
 export function useLoan() {
-  const [params] = useParams<PositionPageSchemaType>();
+  const [params] = useParams<HomePageSchemaType>();
 
   const provider = useProvider();
   const { network } = useNetwork();

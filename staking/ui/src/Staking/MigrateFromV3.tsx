@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { useCollateralType } from '@_/useCollateralTypes';
 import { useLiquidityPosition } from '@_/useLiquidityPosition';
-import { type PositionPageSchemaType, useParams } from '@_/useParams';
+import { type HomePageSchemaType, useParams } from '@_/useParams';
 import React from 'react';
 import burn from './burn.webp';
 import coinburn from './coinburn.svg';
@@ -32,7 +32,7 @@ export function MigrateFromV3() {
 
   const { isReady: isReadyMigrate } = useMigrateNewPool();
 
-  const [params] = useParams<PositionPageSchemaType>();
+  const [params] = useParams<HomePageSchemaType>();
   const { data: liquidityPosition } = useLiquidityPosition({
     accountId: params.accountId,
     collateralType,

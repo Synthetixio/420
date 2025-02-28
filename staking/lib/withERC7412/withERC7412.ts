@@ -1,13 +1,9 @@
 /* eslint-disable no-console */
-import { EvmPriceServiceConnection } from '@pythnetwork/pyth-evm-js';
 import { offchainMainnetEndpoint, offchainTestnetEndpoint } from '@_/constants';
 import {
   importAccountProxy,
-  importClosePosition,
   importCoreProxy,
-  importPositionManager,
-  importPositionManagerAndromedaStataUSDC,
-  importPositionManagerAndromedaUSDC,
+  importPositionManagerNewPool,
   importPythERC7412Wrapper,
   importPythVerifier,
   importSpotMarketProxy,
@@ -17,6 +13,7 @@ import {
 import { extractErrorData } from '@_/parseContractError';
 import { notNil } from '@_/tsHelpers';
 import { deploymentHasERC7412, Network } from '@_/useBlockchain';
+import { EvmPriceServiceConnection } from '@pythnetwork/pyth-evm-js';
 import debug from 'debug';
 import { ethers } from 'ethers';
 
@@ -98,14 +95,8 @@ export async function logMulticall({
           importSpotMarketProxy(network.id, network.preset).catch(() => ({ abi: [] })),
           importAccountProxy(network.id, network.preset).catch(() => ({ abi: [] })),
           importUSDProxy(network.id, network.preset).catch(() => ({ abi: [] })),
-          importClosePosition(network.id, network.preset).catch(() => ({ abi: [] })),
           importPythERC7412Wrapper(network.id, network.preset).catch(() => ({ abi: [] })),
-          importPythVerifier(network.id, network.preset).catch(() => ({ abi: [] })),
-          importPositionManager(network.id, network.preset).catch(() => ({ abi: [] })),
-          importPositionManagerAndromedaUSDC(network.id, network.preset).catch(() => ({ abi: [] })),
-          importPositionManagerAndromedaStataUSDC(network.id, network.preset).catch(() => ({
-            abi: [],
-          })),
+          importPositionManagerNewPool(network.id, network.preset).catch(() => ({ abi: [] })),
         ])
       ).flatMap((c) => (c ? c.abi : []))
     )

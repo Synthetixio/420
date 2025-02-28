@@ -6,7 +6,7 @@ import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useCollateralType } from '@_/useCollateralTypes';
 import { useContractErrorParser } from '@_/useContractErrorParser';
 import { useLiquidityPosition } from '@_/useLiquidityPosition';
-import { type PositionPageSchemaType, useParams } from '@_/useParams';
+import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -19,7 +19,7 @@ import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 const log = debug('snx:useMigrateNewPool');
 
 export function useMigrateNewPool() {
-  const [params] = useParams<PositionPageSchemaType>();
+  const [params] = useParams<HomePageSchemaType>();
 
   const signer = useSigner();
   const provider = useProvider();

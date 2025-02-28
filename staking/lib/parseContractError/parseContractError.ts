@@ -1,10 +1,4 @@
-import {
-  importAllErrors,
-  importClosePosition,
-  importPositionManager,
-  importPositionManagerAndromedaStataUSDC,
-  importPositionManagerAndromedaUSDC,
-} from '@_/contracts';
+import { importAllErrors, importPositionManagerNewPool } from '@_/contracts';
 import { ethers } from 'ethers';
 
 const ERC721_ERRORS: `error ${string}`[] = [
@@ -230,10 +224,7 @@ export async function importAllContractErrors(chainId?: number, preset?: string)
     ? combineErrors(
         await Promise.all([
           importAllErrors(chainId, preset).catch(() => undefined),
-          importClosePosition(chainId, preset).catch(() => undefined),
-          importPositionManager(chainId, preset).catch(() => undefined),
-          importPositionManagerAndromedaUSDC(chainId, preset).catch(() => undefined),
-          importPositionManagerAndromedaStataUSDC(chainId, preset).catch(() => undefined),
+          importPositionManagerNewPool(chainId, preset).catch(() => undefined),
         ])
       )
     : [];

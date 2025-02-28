@@ -15,33 +15,13 @@ export const SettingsPageSchema = z.object({
 });
 export type SettingsPageSchemaType = z.infer<typeof SettingsPageSchema>;
 
-export const ManageActionSchema = z.union([
-  z.literal('deposit'),
-  z.literal('repay'),
-  z.literal('claim'),
-  z.literal('undelegate'),
-  z.literal('withdraw'),
-  z.literal('withdraw-debt'),
-  z.literal('close'),
-  z.literal('locked'),
-]);
-export type ManageActionType = z.infer<typeof ManageActionSchema>;
-
-export const PositionPageSchema = z.object({
-  page: z.literal('position'),
-  collateralSymbol: z.string(),
-  manageAction: ManageActionSchema,
-  accountId: z.string().optional(),
-});
-export type PositionPageSchemaType = z.infer<typeof PositionPageSchema>;
-
-const AllowedQueriesSchema = z.union([HomePageSchema, SettingsPageSchema, PositionPageSchema]);
+const AllowedQueriesSchema = z.union([HomePageSchema, SettingsPageSchema]);
 type AllowedQueriesType = z.infer<typeof AllowedQueriesSchema>;
 
 export function searchParamsToObject(searchParams: URLSearchParams) {
   const params = Object.fromEntries(Array.from(searchParams));
 
-  for (const schema of [HomePageSchema, SettingsPageSchema, PositionPageSchema]) {
+  for (const schema of [HomePageSchema, SettingsPageSchema]) {
     const parsed = schema.safeParse(params);
     if (parsed.success) {
       return parsed.data;

@@ -3,7 +3,7 @@ import { ContractError } from '@_/ContractError';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
-import { type PositionPageSchemaType, useParams } from '@_/useParams';
+import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
 import { useSNX } from '@_/useSNX';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
@@ -15,7 +15,7 @@ import React from 'react';
 const log = debug('snx:useIncreasePositionNewPools');
 
 export function useIncreasePositionNewPool() {
-  const [params] = useParams<PositionPageSchemaType>();
+  const [params] = useParams<HomePageSchemaType>();
 
   const signer = useSigner();
   const provider = useProvider();
