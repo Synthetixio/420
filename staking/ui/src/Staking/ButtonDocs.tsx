@@ -7,7 +7,7 @@ export function ButtonDocs({ ...props }) {
     <Button
       as={Link}
       isExternal
-      href="https://mirror.xyz/kain.eth/8UX6Rn5wpTli0WCCC_fWC7vOAQPiOTDGrUI87mrhkvc"
+      href="https://sips.synthetix.io/sips/sip-420/"
       variant="trasparent"
       borderColor="gray.900"
       color="cyan.500"
