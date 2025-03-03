@@ -63,13 +63,13 @@ export const App = () => {
         {/* open graph */}
         <meta property="og:url" content="https://staking.synthetix.io/" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Synthetix | Staking" />
+        <meta property="og:title" content="Synthetix | 420 Pool" />
         <meta
           property="og:description"
           content="The Liquidity Layer of DeFi. Provide liquidity for the next generation of permissionless protocols"
         />
         <meta property="og:image" content="https://staking.synthetix.io/staking.jpg" />
-        <meta property="og:image:alt" content="Synthetix | Staking" />
+        <meta property="og:image:alt" content="Synthetix | 420 Pool" />
         <meta property="og:site_name" content="" />
         {/* twitter */}
         <meta name="twitter:card" content="summary_large_image" />

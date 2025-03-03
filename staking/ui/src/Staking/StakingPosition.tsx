@@ -1,7 +1,6 @@
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { Amount } from '@_/Amount';
-import { LogoIcon } from '@_/icons';
 import { usePythPrice } from '@_/usePythPrice';
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import React from 'react';
 import { LoanChart } from './LoanChart';
@@ -28,20 +27,10 @@ export function StakingPosition() {
       p={6}
       gap={9}
     >
-      <Box>
-        <Flex direction="row" flexWrap="wrap" justifyContent="space-between" alignItems="center">
-          <Heading as={Flex} alignItems="center" gap={4}>
-            <LogoIcon />
-            <Text lineHeight="20px" fontSize="14px" color="gray.500" fontWeight={500}>
-              SNX 420 Pool
-            </Text>
-          </Heading>
-        </Flex>
-        <Text mt={3} color="gray.50" maxWidth="40em">
-          Your position is fully delegated to Synthetix, and your debt is being forgiven
-          automatically over time with zero risk of liquidation.
-        </Text>
-      </Box>
+      <Text mt={3} color="gray.50" maxWidth="40em">
+        Your position is fully delegated to Synthetix, and your debt is being forgiven automatically
+        over time with zero risk of liquidation.
+      </Text>
 
       <Flex direction={{ base: 'column', sm: 'row', lg: 'row', xl: 'row' }} flexWrap="wrap" gap={4}>
         <Flex

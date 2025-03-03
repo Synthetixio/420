@@ -44,7 +44,7 @@ export const onboard = init({
   chains,
   appMetadata: {
     ...appMetadata,
-    name: 'Synthetix Staking',
+    name: 'Synthetix 420 Pool',
   },
   accountCenter: {
     desktop: {
