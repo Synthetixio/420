@@ -44,13 +44,13 @@ export function DashboardPage() {
   return (
     <>
       <Helmet>
-        <title>Synthetix Staking</title>
-        <meta name="description" content="Synthetix Staking" />
+        <title>Synthetix 420 Pool</title>
+        <meta name="description" content="Synthetix 420 Pool" />
       </Helmet>
       <Flex pt={2} direction="column" mb={16} width="100%">
         <Flex direction="column" minWidth={400} gap={3}>
           <Heading color="gray.50" maxWidth="40rem" fontSize={['2rem', '3rem']} lineHeight="120%">
-            Stake
+            Deposit
           </Heading>
 
           <Flex justifyContent="space-between" alignItems="center" gap={6} flexWrap="wrap">

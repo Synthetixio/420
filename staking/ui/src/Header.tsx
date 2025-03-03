@@ -23,7 +23,7 @@ export default function Header() {
           alignItems="center"
           height="22px"
         >
-          <Image src={snxStakingIcon} alt="SNX Staking" />
+          <Image src={snxStakingIcon} alt="Synthetix 420 Pool" />
         </Flex>
         <Flex gap={3} flexWrap="wrap-reverse" justifyContent="center" alignItems="center">
           <NetworkController />

@@ -1,6 +1,7 @@
 import { Container, Flex } from '@chakra-ui/react';
 import { useParams } from '@_/useParams';
 import { AccountSettingsPage } from './AccountSettingsPage';
+import { TestPage } from './TestPage';
 import { DashboardPage } from './DashboardPage';
 import { Footer } from './Footer';
 import Header from './Header';
@@ -9,6 +10,9 @@ function Content() {
   const [params] = useParams();
   if (params.page === 'settings') {
     return <AccountSettingsPage />;
+  }
+  if (params.page === 'test') {
+    return <TestPage />;
   }
   return <DashboardPage />;
 }

@@ -15,13 +15,19 @@ export const SettingsPageSchema = z.object({
 });
 export type SettingsPageSchemaType = z.infer<typeof SettingsPageSchema>;
 
-const AllowedQueriesSchema = z.union([HomePageSchema, SettingsPageSchema]);
+export const TestPageSchema = z.object({
+  page: z.literal('test'),
+  accountId: z.string().optional(),
+});
+export type TestPageSchemaType = z.infer<typeof TestPageSchema>;
+
+const AllowedQueriesSchema = z.union([HomePageSchema, SettingsPageSchema, TestPageSchema]);
 type AllowedQueriesType = z.infer<typeof AllowedQueriesSchema>;
 
 export function searchParamsToObject(searchParams: URLSearchParams) {
   const params = Object.fromEntries(Array.from(searchParams));
 
-  for (const schema of [HomePageSchema, SettingsPageSchema]) {
+  for (const schema of AllowedQueriesSchema.options) {
     const parsed = schema.safeParse(params);
     if (parsed.success) {
       return parsed.data;
