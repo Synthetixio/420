@@ -52,50 +52,38 @@ export function StakingPosition() {
           borderWidth="1px"
           borderRadius="5px"
           bg="navy.900"
-          p={6}
           direction="column"
-          gap={6}
+          p={3}
+          gap={3}
         >
-          <Flex gap={6} direction={{ base: 'column', sm: 'column', lg: 'row', xl: 'row' }}>
-            <Flex
-              flex={{ base: 1, sm: 2, lg: 2, xl: 2 }}
-              direction="column"
-              minWidth="400px"
-              gap={6}
-              p={3}
-            >
-              <Flex minWidth="120px" direction="column" gap={3}>
-                <Heading fontSize="20px" lineHeight="1.75rem" color="gray.50" fontWeight={700}>
-                  Debt Burned
-                </Heading>
+          <Flex minWidth="120px" direction="column" p={3} gap={3}>
+            <Heading fontSize="20px" lineHeight="1.75rem" color="gray.50" fontWeight={700}>
+              Debt Burned
+            </Heading>
 
-                {isPendingLoanedAmount || isPendingLoan || isPendingSnxPrice ? (
-                  <Text as="span" color="gray.50" fontSize="1.25em">
-                    ~
-                  </Text>
-                ) : (
-                  <Box>
-                    <Text as="span" color="gray.50" fontSize="1.25em">
-                      {loan && loanedAmount ? (
-                        <Amount prefix="$" value={wei(loan.loanAmount.sub(loanedAmount))} />
-                      ) : null}
-                    </Text>
-                    <Text as="span" color="gray.500" fontSize="1.25em">
-                      {loan ? <Amount prefix=" / $" value={wei(loan.loanAmount)} /> : null}
-                    </Text>
-                  </Box>
-                )}
-              </Flex>
+            {isPendingLoanedAmount || isPendingLoan || isPendingSnxPrice ? (
+              <Text as="span" color="gray.50" fontSize="1.25em">
+                ~
+              </Text>
+            ) : (
               <Box>
-                <LoanChart
-                  loan={loan ? wei(loan.loanAmount).toNumber() : 100}
-                  startTime={loan ? parseInt(loan.startTime.toString()) : 0}
-                  duration={365 * 24 * 60 * 60}
-                  pointsCount={50}
-                />
+                <Text as="span" color="gray.50" fontSize="1.25em">
+                  {loan && loanedAmount ? (
+                    <Amount prefix="$" value={wei(loan.loanAmount.sub(loanedAmount))} />
+                  ) : null}
+                </Text>
+                <Text as="span" color="gray.500" fontSize="1.25em">
+                  {loan ? <Amount prefix=" / $" value={wei(loan.loanAmount)} /> : null}
+                </Text>
               </Box>
-            </Flex>
+            )}
           </Flex>
+          <LoanChart
+            loan={loan ? wei(loan.loanAmount).toNumber() : 100}
+            startTime={loan ? parseInt(loan.startTime.toString()) : 0}
+            duration={365 * 24 * 60 * 60}
+            pointsCount={50}
+          />
         </Flex>
         <Flex
           order={{ base: 1, sm: 1, lg: 1, xl: 1 }}
@@ -105,8 +93,8 @@ export function StakingPosition() {
           borderColor="gray.900"
           borderWidth="1px"
           borderRadius="5px"
-          p={3}
-          gap={3}
+          p={6}
+          gap={6}
           justifyContent="space-between"
         >
           <Flex minWidth="120px" direction="column" gap={3} textAlign="center">
