@@ -13,7 +13,6 @@ const POINTS = data.map((point, i) => {
   const ts = point.ts; // Timestamp from data
   return { x, y, v, ts }; // Push structured data to points
 });
-console.log(`POINTS`, POINTS);
 
 // Helper: Find Y for a given X by interpolating the `POINTS`
 function getPoint(x: number): { y: number; v: number; ts: number } {
