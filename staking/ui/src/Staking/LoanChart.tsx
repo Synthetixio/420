@@ -96,7 +96,7 @@ export function LoanChart({
   );
 
   return (
-    <svg viewBox="-70 -70 1100 400" className="chart">
+    <svg viewBox="-70 -70 1100 400" width="100%">
       <rect
         x="0"
         y="0"
