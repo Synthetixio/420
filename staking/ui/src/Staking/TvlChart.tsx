@@ -1,30 +1,37 @@
 import { intlFormat } from 'date-fns';
 import React from 'react';
+import numbro from 'numbro';
 
-// Quadratic Debt Decay Function: Calculates current debt at a given timestamp
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const calculateLoanQuadraticDecay = (
-  timestamp: number,
-  initialLoan: number,
-  totalTime: number
-): number => {
-  // Ensure timestamp does not exceed totalTime
-  const clampedTime = Math.min(timestamp, totalTime);
+import data from './test.json';
+const [FIRST_POINT] = data;
+const [LAST_POINT] = data.slice(-1);
 
-  // Quadratic decay formula: y = initialLoan * (1 - (t / totalTime)²)
-  const normalizedTime = clampedTime / totalTime; // Scales time from 0 to 1
-  return initialLoan * (1 - Math.pow(normalizedTime, 2)); // Quadratic decay
-};
+const POINTS = data.map((point, i) => {
+  const x = (1000 / (data.length - 1)) * i; // Scale X values to fit within the SVG width (1000px viewBox width)
+  const y = 300 - (point.value / LAST_POINT.value) * 300; // Scale Y values (assuming max value is 1,000,000)
+  const v = point.value; // Value from data
+  const ts = point.ts; // Timestamp from data
+  return { x, y, v, ts }; // Push structured data to points
+});
+console.log(`POINTS`, POINTS);
 
-// Linear Debt Decay Function: Calculates current debt at a given timestamp
-const calculateLoanRepaid = (timestamp: number, initialLoan: number, totalTime: number): number => {
-  // Ensure timestamp does not exceed totalTime
-  const clampedTime = Math.min(timestamp, totalTime);
-
-  // Linear repayment formula: repaidPercentage = (t / totalTime)
-  const normalizedTime = clampedTime / totalTime; // Scales time from 0 to 1
-  return initialLoan * normalizedTime; // Linear decay
-};
+// Helper: Find Y for a given X by interpolating the `POINTS`
+function getPoint(x: number): { y: number; v: number; ts: number } {
+  for (let i = 0; i < POINTS.length - 1; i++) {
+    const { x: x1, y: y1 } = POINTS[i];
+    const { x: x2, y: y2 } = POINTS[i + 1];
+    if (x >= x1 && x <= x2) {
+      // Perform linear interpolation to find the Y-value
+      const t = (x - x1) / (x2 - x1); // Ratio between x1 and x2
+      return {
+        y: y1 + t * (y2 - y1),
+        v: POINTS[i + 1].v,
+        ts: POINTS[i + 1].ts,
+      }; // Interpolated Y-value
+    }
+  }
+  return { y: 300, v: 0, ts: FIRST_POINT.ts }; // Default fail-safe (zero debt repaid at bottom)
+}
 
 /**
  * @param loan Initial loan
@@ -33,33 +40,7 @@ const calculateLoanRepaid = (timestamp: number, initialLoan: number, totalTime: 
  * @constructor
  */
 
-export function TvlChart({
-  loan,
-  startTime,
-  duration,
-  pointsCount,
-}: {
-  loan: number;
-  startTime: number;
-  duration: number;
-  pointsCount: number;
-}) {
-  // Generate the points for the chart line
-  const POINTS = React.useMemo(() => {
-    const points = [];
-    const interval = duration / pointsCount; // Time interval between points
-
-    for (let i = 0; i <= pointsCount; i++) {
-      const x = (1000 / pointsCount) * i; // Scale X values to fit within the SVG width (1000px viewBox width)
-      const timestamp = interval * i; // Current time
-      const value = calculateLoanRepaid(timestamp, loan, duration);
-      const y = 300 - (value / loan) * 300; // Invert Y mapping (0% = bottom)
-      points.push({ x, y, repaidPercentage: value, time: timestamp + startTime });
-    }
-
-    return points;
-  }, [duration, loan, pointsCount, startTime]);
-
+export function TvlChart() {
   const [hoverX, setHoverX] = React.useState<number | null>(null);
   const handleMouseMove = (event: React.MouseEvent<SVGRectElement, MouseEvent>) => {
     const rectElement = event.target as SVGRectElement;
@@ -74,27 +55,6 @@ export function TvlChart({
   const handleMouseLeave = () => {
     setHoverX(null); // Clear the hoverX when the mouse leaves the chart
   };
-
-  // Helper: Find Y for a given X by interpolating the `POINTS`
-  const getPoint = React.useCallback(
-    (x: number): { y: number; repaidPercentage: number; time: number } => {
-      for (let i = 0; i < POINTS.length - 1; i++) {
-        const { x: x1, y: y1 } = POINTS[i];
-        const { x: x2, y: y2 } = POINTS[i + 1];
-        if (x >= x1 && x <= x2) {
-          // Perform linear interpolation to find the Y-value
-          const t = (x - x1) / (x2 - x1); // Ratio between x1 and x2
-          return {
-            y: y1 + t * (y2 - y1),
-            repaidPercentage: POINTS[i + 1].repaidPercentage,
-            time: POINTS[i + 1].time,
-          }; // Interpolated Y-value
-        }
-      }
-      return { y: 300, repaidPercentage: 0, time: startTime }; // Default fail-safe (zero debt repaid at bottom)
-    },
-    [POINTS, startTime]
-  );
 
   return (
     <svg viewBox="-70 -70 1100 400" width="100%">
@@ -144,8 +104,16 @@ export function TvlChart({
             fontSize="20"
             textAnchor={hoverX > 1000 / 2 ? 'end' : 'start'}
           >
-            ${Math.abs(getPoint(hoverX).repaidPercentage).toFixed(1)},{' '}
-            {intlFormat(new Date(getPoint(hoverX).time * 1000), {
+            $
+            {numbro(getPoint(hoverX).v).format({
+              trimMantissa: true,
+              thousandSeparated: true,
+              average: true,
+              mantissa: 1,
+              spaceSeparated: true,
+            })}
+            ,{' '}
+            {intlFormat(new Date(getPoint(hoverX).ts * 1000), {
               year: 'numeric',
               month: 'numeric',
               day: 'numeric',
@@ -157,24 +125,38 @@ export function TvlChart({
       <line x1="0" y1="300" x2="1030" y2="300" stroke="#2d2d38" strokeWidth="1" />
       <line x1="1000" y1="0" x2="1000" y2="300" stroke="#fff" strokeWidth="1" strokeDasharray="5" />
       <text x="0" y="330" fill="#9999ac" fontSize="20" textAnchor="start">
-        {intlFormat(new Date(startTime * 1000), {
+        {intlFormat(new Date(FIRST_POINT.ts * 1000), {
           year: 'numeric',
           month: 'numeric',
           day: 'numeric',
         })}
       </text>
       <text x="1000" y="330" fill="#9999ac" fontSize="20" textAnchor="end">
-        {intlFormat(new Date((startTime + duration) * 1000), {
+        {intlFormat(new Date(LAST_POINT.ts * 1000), {
           year: 'numeric',
           month: 'numeric',
           day: 'numeric',
         })}
       </text>
       <text x="-10" y="10" fill="#9999ac" fontSize="20" textAnchor="end">
-        {loan ? `$${loan.toFixed(1)}` : '0%'}
+        $
+        {numbro(LAST_POINT.value).format({
+          trimMantissa: true,
+          thousandSeparated: true,
+          average: true,
+          mantissa: 1,
+          spaceSeparated: true,
+        })}
       </text>
       <text x="-15" y="305" fill="#9999ac" fontSize="20" textAnchor="end">
-        {loan ? `$${Number(0).toFixed(1)}` : '100%'}
+        $
+        {numbro(FIRST_POINT.value).format({
+          trimMantissa: true,
+          thousandSeparated: true,
+          average: true,
+          mantissa: 1,
+          spaceSeparated: true,
+        })}
       </text>
     </svg>
   );

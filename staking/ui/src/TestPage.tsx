@@ -1,5 +1,4 @@
 import { Amount } from '@_/Amount';
-import { LogoIcon } from '@_/icons';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import React from 'react';
@@ -38,22 +37,6 @@ export function TestPage() {
             p={6}
             gap={9}
           >
-            <Box>
-              <Flex
-                direction="row"
-                flexWrap="wrap"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Heading as={Flex} alignItems="center" gap={4}>
-                  <LogoIcon />
-                  <Text lineHeight="20px" fontSize="14px" color="gray.500" fontWeight={500}>
-                    SNX 420 Pool
-                  </Text>
-                </Heading>
-              </Flex>
-            </Box>
-
             <Flex
               direction={{ base: 'column', sm: 'row', lg: 'row', xl: 'row' }}
               flexWrap="wrap"
@@ -82,12 +65,7 @@ export function TestPage() {
                     </Text>
                   </Box>
                 </Flex>
-                <TvlChart
-                  loan={1000}
-                  startTime={Date.now() / 1000}
-                  duration={365 * 24 * 60 * 60}
-                  pointsCount={50}
-                />
+                <TvlChart />
               </Flex>
               <Flex
                 order={{ base: 1, sm: 1, lg: 1, xl: 1 }}
