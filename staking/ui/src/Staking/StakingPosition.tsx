@@ -93,8 +93,8 @@ export function StakingPosition() {
           borderColor="gray.900"
           borderWidth="1px"
           borderRadius="5px"
-          p={3}
-          gap={3}
+          p={6}
+          gap={6}
           justifyContent="space-between"
         >
           <Flex minWidth="120px" direction="column" gap={3} textAlign="center">
