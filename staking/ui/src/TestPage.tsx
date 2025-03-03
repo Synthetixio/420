@@ -1,6 +1,4 @@
-import { Amount } from '@_/Amount';
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
-import { wei } from '@synthetixio/wei';
+import { Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { PoolStats } from './Staking/PoolStats';
@@ -58,12 +56,6 @@ export function TestPage() {
                   <Heading fontSize="20px" lineHeight="1.75rem" color="gray.50" fontWeight={700}>
                     TVL
                   </Heading>
-
-                  <Box>
-                    <Text as="span" color="gray.50" fontSize="1.25em">
-                      <Amount prefix="$" value={wei(1_000_000)} />
-                    </Text>
-                  </Box>
                 </Flex>
                 <TvlChart />
               </Flex>

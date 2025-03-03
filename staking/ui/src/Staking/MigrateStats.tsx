@@ -1,9 +1,9 @@
-import { Flex, Text } from '@chakra-ui/react';
-import { Amount } from '@_/Amount';
 import { CRatioAmount } from '@_/CRatioBar';
 import { usePythPrice } from '@_/usePythPrice';
+import { Flex, Text } from '@chakra-ui/react';
 import { Wei, wei } from '@synthetixio/wei';
 import { ethers } from 'ethers';
+import numbro from 'numbro';
 import React from 'react';
 
 export function MigrateStats({
@@ -25,32 +25,44 @@ export function MigrateStats({
           <Text color="gray.600" fontFamily="heading" fontSize="12px" lineHeight="16px" mr={1}>
             Deposited
           </Text>
-          {collateralAmount ? (
-            <Amount value={wei(collateralAmount)} suffix=" SNX" />
-          ) : (
-            <Text>~</Text>
-          )}
-          {snxPrice && collateralAmount ? (
-            <Amount
-              prefix="$"
-              value={wei(collateralAmount).mul(snxPrice)}
-              as={Text}
-              color="gray.500"
-              fontFamily="heading"
-              fontSize="0.75rem"
-              lineHeight="1rem"
-            />
-          ) : (
-            <Text color="gray.500" fontFamily="heading" fontSize="0.75rem" lineHeight="1rem">
-              ~
-            </Text>
-          )}
+          <Text>
+            {collateralAmount
+              ? `${numbro(wei(collateralAmount).toNumber()).format({
+                  trimMantissa: true,
+                  thousandSeparated: true,
+                  average: true,
+                  mantissa: 2,
+                  spaceSeparated: false,
+                })} SNX`
+              : '~'}
+          </Text>
+          <Text color="gray.500" fontFamily="heading" fontSize="0.75rem" lineHeight="1rem">
+            {snxPrice && collateralAmount
+              ? `$${numbro(wei(collateralAmount).mul(snxPrice).toNumber()).format({
+                  trimMantissa: true,
+                  thousandSeparated: true,
+                  average: true,
+                  mantissa: 2,
+                  spaceSeparated: false,
+                })}`
+              : '~'}
+          </Text>
         </Flex>
         <Flex direction="column" gap={3} flex={1}>
           <Text color="gray.600" fontFamily="heading" fontSize="12px" lineHeight="16px" mr={1}>
             Debt
           </Text>
-          {debt ? <Amount prefix="🔥 $" value={wei(debt)} /> : <Text>~</Text>}
+          <Text>
+            {debt
+              ? `🔥 $${numbro(wei(debt).toNumber()).format({
+                  trimMantissa: true,
+                  thousandSeparated: true,
+                  average: true,
+                  mantissa: 2,
+                  spaceSeparated: false,
+                })}`
+              : '~'}
+          </Text>
         </Flex>
         <Flex direction="column" gap={3} flex={1}>
           <Text color="gray.600" fontFamily="heading" fontSize="12px" lineHeight="16px" mr={1}>

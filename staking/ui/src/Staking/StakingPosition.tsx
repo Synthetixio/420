@@ -1,7 +1,7 @@
-import { Amount } from '@_/Amount';
 import { usePythPrice } from '@_/usePythPrice';
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
+import numbro from 'numbro';
 import React from 'react';
 import { LoanChart } from './LoanChart';
 import { useClosePositionNewPool } from './useClosePositionNewPool';
@@ -57,12 +57,26 @@ export function StakingPosition() {
             ) : (
               <Box>
                 <Text as="span" color="gray.50" fontSize="1.25em">
-                  {loan && loanedAmount ? (
-                    <Amount prefix="$" value={wei(loan.loanAmount.sub(loanedAmount))} />
-                  ) : null}
+                  {loan && loanedAmount
+                    ? `$${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
+                        trimMantissa: true,
+                        thousandSeparated: true,
+                        average: true,
+                        mantissa: 2,
+                        spaceSeparated: false,
+                      })}`
+                    : null}
                 </Text>
                 <Text as="span" color="gray.500" fontSize="1.25em">
-                  {loan ? <Amount prefix=" / $" value={wei(loan.loanAmount)} /> : null}
+                  {loan
+                    ? ` / $${numbro(wei(loan.loanAmount).toNumber()).format({
+                        trimMantissa: true,
+                        thousandSeparated: true,
+                        average: true,
+                        mantissa: 2,
+                        spaceSeparated: false,
+                      })}`
+                    : null}
                 </Text>
               </Box>
             )}
@@ -93,17 +107,29 @@ export function StakingPosition() {
                 {isPendingPositionCollateral || isPendingSnxPrice ? '~' : null}
                 {!(isPendingPositionCollateral || isPendingSnxPrice) &&
                 positionCollateral &&
-                snxPrice ? (
-                  <Amount value={wei(positionCollateral)} suffix=" SNX" />
-                ) : null}
+                snxPrice
+                  ? `${numbro(wei(positionCollateral).toNumber()).format({
+                      trimMantissa: true,
+                      thousandSeparated: true,
+                      average: true,
+                      mantissa: 2,
+                      spaceSeparated: false,
+                    })} SNX`
+                  : null}
               </Text>
               <Text color="gray.500" fontSize="1.0em">
                 {isPendingPositionCollateral || isPendingSnxPrice ? '~' : null}
                 {!(isPendingPositionCollateral || isPendingSnxPrice) &&
                 positionCollateral &&
-                snxPrice ? (
-                  <Amount prefix="$" value={wei(positionCollateral).mul(snxPrice)} />
-                ) : null}
+                snxPrice
+                  ? `$${numbro(wei(positionCollateral).mul(snxPrice).toNumber()).format({
+                      trimMantissa: true,
+                      thousandSeparated: true,
+                      average: true,
+                      mantissa: 2,
+                      spaceSeparated: false,
+                    })}`
+                  : null}
               </Text>
             </Box>
             <Button

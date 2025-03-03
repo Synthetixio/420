@@ -19,7 +19,7 @@ export function PoolStats() {
                   thousandSeparated: true,
                   average: true,
                   mantissa: 1,
-                  spaceSeparated: true,
+                  spaceSeparated: false,
                 })
               : '-'}
         </Text>

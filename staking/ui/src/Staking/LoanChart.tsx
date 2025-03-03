@@ -98,7 +98,7 @@ export function LoanChart({
   );
 
   return (
-    <svg viewBox="-20 -60 1030 420" width="100%">
+    <svg viewBox="-100 -60 1120 420" width="100%">
       <rect
         x="0"
         y="0"
@@ -124,6 +124,11 @@ export function LoanChart({
         r="8"
         fill="#9999ac"
       />
+      <line x1="-3" y1="0" x2="3" y2="0" stroke="#2d2d38" strokeWidth="1" />
+      <line x1="1000" y1="297" x2="1000" y2="303" stroke="#2d2d38" strokeWidth="1" />
+      <line x1="0" y1="0" x2="0" y2="300" stroke="#2d2d38" strokeWidth="1" />
+      <line x1="0" y1="300" x2="1010" y2="300" stroke="#2d2d38" strokeWidth="1" />
+      <line x1="1000" y1="0" x2="1000" y2="300" stroke="#fff" strokeWidth="1" strokeDasharray="5" />
 
       {hoverX !== null && (
         <>
@@ -142,7 +147,7 @@ export function LoanChart({
             x={hoverX + (hoverX > 1000 / 2 ? -20 : 20)}
             y={getPoint(hoverX).y + (hoverX > 1000 / 2 ? -5 : 20)}
             fill="#9999ac"
-            fontSize="20"
+            fontSize="25"
             textAnchor={hoverX > 1000 / 2 ? 'end' : 'start'}
           >
             $
@@ -150,8 +155,8 @@ export function LoanChart({
               trimMantissa: true,
               thousandSeparated: true,
               average: true,
-              mantissa: 1,
-              spaceSeparated: true,
+              mantissa: 2,
+              spaceSeparated: false,
             })}
             ,{' '}
             {intlFormat(new Date(getPoint(hoverX).time * 1000), {
@@ -162,33 +167,39 @@ export function LoanChart({
           </text>
         </>
       )}
-      <line x1="-3" y1="0" x2="3" y2="0" stroke="#2d2d38" strokeWidth="1" />
-      <line x1="1000" y1="297" x2="1000" y2="303" stroke="#2d2d38" strokeWidth="1" />
-      <line x1="0" y1="0" x2="0" y2="300" stroke="#2d2d38" strokeWidth="1" />
-      <line x1="0" y1="300" x2="1010" y2="300" stroke="#2d2d38" strokeWidth="1" />
-      <line x1="1000" y1="0" x2="1000" y2="300" stroke="#fff" strokeWidth="1" strokeDasharray="5" />
-      <text x="-10" y="340" fill="#9999ac" fontSize="20" textAnchor="start">
+      <text x="-10" y="340" fill="#9999ac" fontSize="25" textAnchor="start">
         {intlFormat(new Date(startTime * 1000), {
           year: 'numeric',
           month: 'numeric',
           day: 'numeric',
         })}
       </text>
-      <text x="1010" y="340" fill="#9999ac" fontSize="20" textAnchor="end">
+      <text x="1010" y="340" fill="#9999ac" fontSize="25" textAnchor="end">
         {intlFormat(new Date((startTime + duration) * 1000), {
           year: 'numeric',
           month: 'numeric',
           day: 'numeric',
         })}
       </text>
-      <text x="10" y="7" fill="#9999ac" fontSize="25" textAnchor="start">
+      <text x="-15" y="7" fill="#9999ac" fontSize="25" textAnchor="end">
         {loan
-          ? `$${numbro(loan * 2342334).format({
+          ? `$${numbro(loan).format({
               trimMantissa: true,
               thousandSeparated: true,
               average: true,
-              mantissa: 1,
-              spaceSeparated: true,
+              mantissa: 0,
+              spaceSeparated: false,
+            })}`
+          : '100%'}
+      </text>
+      <text x="-15" y="307" fill="#9999ac" fontSize="25" textAnchor="end">
+        {loan
+          ? `$${numbro(0).format({
+              trimMantissa: true,
+              thousandSeparated: true,
+              average: true,
+              mantissa: 0,
+              spaceSeparated: false,
             })}`
           : '0%'}
       </text>
