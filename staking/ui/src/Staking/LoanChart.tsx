@@ -1,5 +1,6 @@
 import { intlFormat } from 'date-fns';
 import React from 'react';
+import numbro from 'numbro';
 
 // Quadratic Debt Decay Function: Calculates current debt at a given timestamp
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -97,7 +98,7 @@ export function LoanChart({
   );
 
   return (
-    <svg viewBox="-70 -70 1100 400" width="100%">
+    <svg viewBox="-20 -60 1030 420" width="100%">
       <rect
         x="0"
         y="0"
@@ -139,12 +140,20 @@ export function LoanChart({
 
           <text
             x={hoverX + (hoverX > 1000 / 2 ? -20 : 20)}
-            y={getPoint(hoverX).y + (hoverX > 1000 / 2 ? -20 : 20)}
+            y={getPoint(hoverX).y + (hoverX > 1000 / 2 ? -5 : 20)}
             fill="#9999ac"
             fontSize="20"
             textAnchor={hoverX > 1000 / 2 ? 'end' : 'start'}
           >
-            ${Math.abs(getPoint(hoverX).repaidPercentage).toFixed(1)},{' '}
+            $
+            {numbro(Math.abs(getPoint(hoverX).repaidPercentage)).format({
+              trimMantissa: true,
+              thousandSeparated: true,
+              average: true,
+              mantissa: 1,
+              spaceSeparated: true,
+            })}
+            ,{' '}
             {intlFormat(new Date(getPoint(hoverX).time * 1000), {
               year: 'numeric',
               month: 'numeric',
@@ -153,28 +162,35 @@ export function LoanChart({
           </text>
         </>
       )}
-      <line x1="0" y1="0" x2="0" y2="330" stroke="#2d2d38" strokeWidth="1" />
-      <line x1="0" y1="300" x2="1030" y2="300" stroke="#2d2d38" strokeWidth="1" />
+      <line x1="-3" y1="0" x2="3" y2="0" stroke="#2d2d38" strokeWidth="1" />
+      <line x1="1000" y1="297" x2="1000" y2="303" stroke="#2d2d38" strokeWidth="1" />
+      <line x1="0" y1="0" x2="0" y2="300" stroke="#2d2d38" strokeWidth="1" />
+      <line x1="0" y1="300" x2="1010" y2="300" stroke="#2d2d38" strokeWidth="1" />
       <line x1="1000" y1="0" x2="1000" y2="300" stroke="#fff" strokeWidth="1" strokeDasharray="5" />
-      <text x="0" y="330" fill="#9999ac" fontSize="20" textAnchor="start">
+      <text x="-10" y="340" fill="#9999ac" fontSize="20" textAnchor="start">
         {intlFormat(new Date(startTime * 1000), {
           year: 'numeric',
           month: 'numeric',
           day: 'numeric',
         })}
       </text>
-      <text x="1000" y="330" fill="#9999ac" fontSize="20" textAnchor="end">
+      <text x="1010" y="340" fill="#9999ac" fontSize="20" textAnchor="end">
         {intlFormat(new Date((startTime + duration) * 1000), {
           year: 'numeric',
           month: 'numeric',
           day: 'numeric',
         })}
       </text>
-      <text x="-10" y="10" fill="#9999ac" fontSize="20" textAnchor="end">
-        {loan ? `$${loan.toFixed(1)}` : '0%'}
-      </text>
-      <text x="-15" y="305" fill="#9999ac" fontSize="20" textAnchor="end">
-        {loan ? `$${Number(0).toFixed(1)}` : '100%'}
+      <text x="10" y="7" fill="#9999ac" fontSize="25" textAnchor="start">
+        {loan
+          ? `$${numbro(loan * 2342334).format({
+              trimMantissa: true,
+              thousandSeparated: true,
+              average: true,
+              mantissa: 1,
+              spaceSeparated: true,
+            })}`
+          : '0%'}
       </text>
     </svg>
   );
