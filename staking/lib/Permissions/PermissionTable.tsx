@@ -63,7 +63,7 @@ export function PermissionTable({
         flexGrow="2"
         borderColor="gray.900"
         borderWidth="1px"
-        borderRadius="5px"
+        borderRadius="6px"
         p={6}
         sx={{
           borderCollapse: 'separate',

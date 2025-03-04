@@ -11,14 +11,14 @@ export function TestPage() {
         <title>Synthetix 420 Pool</title>
         <meta name="description" content="Synthetix 420 Pool" />
       </Helmet>
-      <Flex pt={2} direction="column" mb={16} width="100%">
-        <Flex direction="column" minWidth={400} gap={3}>
+      <Flex pt={8} direction="column" mb={16} width="100%">
+        <Flex direction="column" gap={3}>
           <Heading color="gray.50" maxWidth="40rem" fontSize={['2rem', '3rem']} lineHeight="120%">
             Deposit
           </Heading>
 
           <Flex justifyContent="space-between" alignItems="center" gap={6} flexWrap="wrap">
-            <Text color="gray.500" fontSize="1rem" lineHeight={6} fontFamily="heading">
+            <Text color="gray.500" fontSize="1rem" lineHeight={6}>
               Deposit into the 420 Pool to start earning yield
             </Text>
 
@@ -30,7 +30,7 @@ export function TestPage() {
             direction="column"
             borderColor="gray.900"
             borderWidth="1px"
-            borderRadius="5px"
+            borderRadius="6px"
             bg="navy.700"
             p={6}
             gap={9}
@@ -46,7 +46,7 @@ export function TestPage() {
                 width="100%"
                 borderColor="gray.900"
                 borderWidth="1px"
-                borderRadius="5px"
+                borderRadius="6px"
                 bg="navy.900"
                 direction="column"
                 p={3}
@@ -66,7 +66,7 @@ export function TestPage() {
                 direction="column"
                 borderColor="gray.900"
                 borderWidth="1px"
-                borderRadius="5px"
+                borderRadius="6px"
                 p={6}
                 gap={6}
                 justifyContent="space-between"

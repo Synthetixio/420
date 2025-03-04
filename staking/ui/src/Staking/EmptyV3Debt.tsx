@@ -10,7 +10,13 @@ export function EmptyV3Debt() {
     <LayoutWithImage
       imageSrc={coin}
       Subheader={() => (
-        <Text color="gray.50" fontSize="2em" maxWidth="20em">
+        <Text
+          color="gray.50"
+          fontSize={['30px', '36px']}
+          fontWeight={500}
+          lineHeight={1.25}
+          letterSpacing="tight"
+        >
           Debt-free staking coming soon.
         </Text>
       )}
