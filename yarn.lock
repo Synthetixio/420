@@ -18,24 +18,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/Amount@workspace:*, @_/Amount@workspace:staking/lib/Amount":
-  version: 0.0.0-use.local
-  resolution: "@_/Amount@workspace:staking/lib/Amount"
-  dependencies:
-    "@_/format": "workspace:*"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@synthetixio/wei": "npm:^2.74.4"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
 "@_/CRatioBar@workspace:*, @_/CRatioBar@workspace:staking/lib/CRatioBar":
   version: 0.0.0-use.local
   resolution: "@_/CRatioBar@workspace:staking/lib/CRatioBar"
   dependencies:
-    "@_/Amount": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
     react: "npm:^18.2.0"
   languageName: unknown
   linkType: soft
@@ -192,7 +178,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@_/staking@workspace:staking/ui"
   dependencies:
-    "@_/Amount": "workspace:*"
     "@_/CRatioBar": "workspace:*"
     "@_/ContractError": "workspace:*"
     "@_/Permissions": "workspace:*"

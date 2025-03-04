@@ -1,8 +1,9 @@
 import { intlFormat } from 'date-fns';
-import React from 'react';
 import numbro from 'numbro';
+import React from 'react';
 
 import data from './test.json';
+
 const [FIRST_POINT] = data;
 const [LAST_POINT] = data.slice(-1);
 
@@ -56,7 +57,31 @@ export function TvlChart() {
   };
 
   return (
-    <svg viewBox="-70 -70 1100 400" width="100%">
+    <svg viewBox="-100 -60 1120 420" width="100%">
+      <line x1="0" y1="0" x2="0" y2="300" stroke="#2d2d38" strokeWidth="1" strokeDasharray="5" />
+      {/*<line x1="0" y1="300" x2="1000" y2="300" stroke="#2d2d38" strokeWidth="1" />*/}
+      {/*<line x1="0" y1="0" x2="1000" y2="0" stroke="#2d2d38" strokeWidth="1" strokeDasharray="5" />*/}
+
+      <defs>
+        <linearGradient id="gradientFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#00D1FF" stopOpacity="1" />
+          {/* Opaque color at the top */}
+          <stop offset="100%" stopColor="#00D1FF" stopOpacity="0.04" />{' '}
+          {/* Transparent at the bottom */}
+        </linearGradient>
+      </defs>
+
+      <polyline
+        fill="url(#gradientFill)" // Link to the gradient
+        stroke="#00D1FF"
+        strokeWidth="2"
+        points={POINTS.map((point) => `${point.x},${point.y}`)
+          .concat([`${POINTS[POINTS.length - 1].x + 2},${POINTS[POINTS.length - 1].y}`])
+          .concat([`${POINTS[POINTS.length - 1].x + 2},300`])
+          .join(' ')}
+      />
+      {/* This line covers the vertical drop of polyline */}
+      <line x1="1003" y1="-5" x2="1003" y2="300" stroke="#06061B" strokeWidth="4" />
       <rect
         x="0"
         y="0"
@@ -65,22 +90,6 @@ export function TvlChart() {
         fill="transparent"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-      />
-
-      <polyline
-        fill="none"
-        stroke="#9999ac"
-        strokeWidth="2"
-        points={POINTS.map((point) => `${point.x},${point.y}`).join(' ')}
-      />
-      <circle cx={POINTS[0].x} cy={POINTS[0].y} r="8" fill="#9999ac" />
-
-      {/* End of the chart (last point) */}
-      <circle
-        cx={POINTS[POINTS.length - 1].x}
-        cy={POINTS[POINTS.length - 1].y}
-        r="8"
-        fill="#9999ac"
       />
 
       {hoverX !== null && (
@@ -94,68 +103,59 @@ export function TvlChart() {
             strokeWidth="1"
             strokeDasharray="4" // Dashed line
           />
-          <circle cx={hoverX} cy={getPoint(hoverX).y} r="8" fill="#9999ac" />
-
+          <circle cx={hoverX} cy={getPoint(hoverX).y} r="8" fill="#fff" />
           <text
             x={hoverX + (hoverX > 1000 / 2 ? -20 : 20)}
-            y={getPoint(hoverX).y + (hoverX > 1000 / 2 ? -20 : 20)}
-            fill="#9999ac"
-            fontSize="20"
+            y={getPoint(hoverX).y + (hoverX > 1000 / 2 ? -5 : 20)}
+            fill="#fff"
+            fontSize="25"
             textAnchor={hoverX > 1000 / 2 ? 'end' : 'start'}
           >
-            $
-            {numbro(getPoint(hoverX).v).format({
+            {`$${numbro(getPoint(hoverX).v).format({
               trimMantissa: true,
               thousandSeparated: true,
               average: true,
               mantissa: 1,
-              spaceSeparated: true,
-            })}
-            ,{' '}
-            {intlFormat(new Date(getPoint(hoverX).ts * 1000), {
+              spaceSeparated: false,
+            })}, ${intlFormat(new Date(getPoint(hoverX).ts * 1000), {
               year: 'numeric',
               month: 'numeric',
               day: 'numeric',
-            })}
+            })}`}
           </text>
         </>
       )}
-      <line x1="0" y1="0" x2="0" y2="330" stroke="#2d2d38" strokeWidth="1" />
-      <line x1="0" y1="300" x2="1030" y2="300" stroke="#2d2d38" strokeWidth="1" />
-      <line x1="1000" y1="0" x2="1000" y2="300" stroke="#fff" strokeWidth="1" strokeDasharray="5" />
-      <text x="0" y="330" fill="#9999ac" fontSize="20" textAnchor="start">
+      <text x="-10" y="340" fill="#9999ac" fontSize="25" textAnchor="start">
         {intlFormat(new Date(FIRST_POINT.ts * 1000), {
           year: 'numeric',
           month: 'numeric',
           day: 'numeric',
         })}
       </text>
-      <text x="1000" y="330" fill="#9999ac" fontSize="20" textAnchor="end">
+      <text x="1010" y="340" fill="#9999ac" fontSize="25" textAnchor="end">
         {intlFormat(new Date(LAST_POINT.ts * 1000), {
           year: 'numeric',
           month: 'numeric',
           day: 'numeric',
         })}
       </text>
-      <text x="-10" y="10" fill="#9999ac" fontSize="20" textAnchor="end">
-        $
-        {numbro(LAST_POINT.value).format({
+      <text x="-15" y="7" fill="#9999ac" fontSize="25" textAnchor="end">
+        {`$${numbro(LAST_POINT.value).format({
           trimMantissa: true,
           thousandSeparated: true,
           average: true,
-          mantissa: 1,
-          spaceSeparated: true,
-        })}
+          mantissa: 0,
+          spaceSeparated: false,
+        })}`}
       </text>
-      <text x="-15" y="305" fill="#9999ac" fontSize="20" textAnchor="end">
-        $
-        {numbro(FIRST_POINT.value).format({
+      <text x="-15" y="307" fill="#9999ac" fontSize="25" textAnchor="end">
+        {`$${numbro(FIRST_POINT.value).format({
           trimMantissa: true,
           thousandSeparated: true,
           average: true,
-          mantissa: 1,
-          spaceSeparated: true,
-        })}
+          mantissa: 0,
+          spaceSeparated: false,
+        })}`}
       </text>
     </svg>
   );
