@@ -1,4 +1,5 @@
-import { Flex, Image } from '@chakra-ui/react';
+import { Flex, Image, Circle, Text } from '@chakra-ui/react';
+import { LogoIcon } from '@_/icons';
 import React from 'react';
 
 export function LayoutWithImage({
@@ -15,18 +16,42 @@ export function LayoutWithImage({
       direction="column"
       borderColor="gray.900"
       borderWidth="1px"
-      borderRadius="5px"
+      borderRadius="6px"
       bg="navy.700"
     >
       <Flex direction="row" flexWrap="wrap" gap={4}>
-        <Flex direction="column" flex={{ base: 2, sm: 2, md: 2, lg: 1 }} p={6} gap={6}>
-          <Subheader />
+        <Flex
+          direction="column"
+          flex={{ base: 2, sm: 2, md: 2, lg: 1 }}
+          p={{ base: 4, sm: 10 }}
+          pt={{ base: 6, sm: 10 }}
+          gap={6}
+        >
+          <Flex direction="column" gap={4}>
+            <Flex alignItems="center" gap={3}>
+              <Circle
+                size="32px"
+                bg="navy.900"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                boxShadow="0px 0px 15px 0px rgba(0, 209, 255, 0.60)"
+              >
+                <LogoIcon width="20px" height="14px" />
+              </Circle>
+              <Text fontSize="12px" color="gray.500" fontWeight={500}>
+                SNX 420 Pool
+              </Text>
+            </Flex>
+
+            <Subheader />
+          </Flex>
 
           <Flex
             borderColor="gray.900"
             borderWidth="1px"
-            borderRadius="5px"
-            p={6}
+            borderRadius="6px"
+            p={{ base: 4, sm: 6 }}
             direction="column"
             gap={4}
           >

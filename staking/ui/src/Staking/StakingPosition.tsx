@@ -22,12 +22,12 @@ export function StakingPosition() {
       direction="column"
       borderColor="gray.900"
       borderWidth="1px"
-      borderRadius="5px"
+      borderRadius="6px"
       bg="navy.700"
       p={6}
       gap={9}
     >
-      <Text mt={3} color="gray.50" maxWidth="40em">
+      <Text mt={3} color="gray.500" maxWidth="40em">
         Your position is fully delegated to Synthetix, and your debt is being forgiven automatically
         over time with zero risk of liquidation.
       </Text>
@@ -39,7 +39,7 @@ export function StakingPosition() {
           width="100%"
           borderColor="gray.900"
           borderWidth="1px"
-          borderRadius="5px"
+          borderRadius="6px"
           bg="navy.900"
           direction="column"
           p={3}
@@ -95,7 +95,7 @@ export function StakingPosition() {
           direction="column"
           borderColor="gray.900"
           borderWidth="1px"
-          borderRadius="5px"
+          borderRadius="6px"
           p={6}
           gap={6}
           justifyContent="space-between"

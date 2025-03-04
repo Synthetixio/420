@@ -19,13 +19,15 @@ export function MigrateStats({
 
   return (
     <Flex direction="column" gap={6}>
-      <Text>Current Position</Text>
-      <Flex gap={6} justifyContent="space-between">
+      <Text fontSize="1.25em" fontWeight={700}>
+        Current Position
+      </Text>
+      <Flex gap={6} justifyContent="space-between" wrap="wrap">
         <Flex direction="column" gap={3} flex={1}>
-          <Text color="gray.600" fontFamily="heading" fontSize="12px" lineHeight="16px" mr={1}>
+          <Text color="gray.600" fontSize="12px">
             Deposited
           </Text>
-          <Text>
+          <Text fontSize="18px" fontWeight={500}>
             {collateralAmount
               ? `${numbro(wei(collateralAmount).toNumber()).format({
                   trimMantissa: true,
@@ -36,7 +38,7 @@ export function MigrateStats({
                 })} SNX`
               : '~'}
           </Text>
-          <Text color="gray.500" fontFamily="heading" fontSize="0.75rem" lineHeight="1rem">
+          <Text color="gray.500" fontSize="0.75rem">
             {snxPrice && collateralAmount
               ? `$${numbro(wei(collateralAmount).mul(snxPrice).toNumber()).format({
                   trimMantissa: true,
@@ -49,10 +51,10 @@ export function MigrateStats({
           </Text>
         </Flex>
         <Flex direction="column" gap={3} flex={1}>
-          <Text color="gray.600" fontFamily="heading" fontSize="12px" lineHeight="16px" mr={1}>
+          <Text color="gray.600" fontSize="12px">
             Debt
           </Text>
-          <Text>
+          <Text fontSize="18px" fontWeight={500}>
             {debt
               ? `🔥 $${numbro(wei(debt).toNumber()).format({
                   trimMantissa: true,
@@ -65,10 +67,12 @@ export function MigrateStats({
           </Text>
         </Flex>
         <Flex direction="column" gap={3} flex={1}>
-          <Text color="gray.600" fontFamily="heading" fontSize="12px" lineHeight="16px" mr={1}>
+          <Text color="gray.600" fontSize="12px">
             C-Ratio
           </Text>
-          {cRatio ? <CRatioAmount value={wei(cRatio).toNumber() * 100} /> : <Text>~</Text>}
+          <Text fontSize="18px" fontWeight={500}>
+            {cRatio ? <CRatioAmount value={wei(cRatio).toNumber() * 100} /> : <Text>~</Text>}
+          </Text>
         </Flex>
       </Flex>
     </Flex>

@@ -7,11 +7,11 @@ export function ZeroRisk({ ...props }) {
     <Flex direction="row" {...props}>
       <Flex
         direction="row"
-        color="gray.700"
-        backgroundColor="whiteAlpha.100"
-        borderRadius="5px"
-        py="1"
-        px="3"
+        color="gray.500"
+        backgroundColor="whiteAlpha.200"
+        borderRadius="6px"
+        py={3}
+        px={4}
         gap={3}
         alignItems="center"
         width="100%"
