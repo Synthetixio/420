@@ -1,3 +1,5 @@
+import { useAccountOwner, useAccountPermissions } from '@_/useAccountPermissions';
+import { useManagePermissions } from '@_/useManagePermissions';
 import {
   Badge,
   Button,
@@ -14,9 +16,7 @@ import {
   Spinner,
   Text,
 } from '@chakra-ui/react';
-import { useAccountOwner, useAccountPermissions } from '@_/useAccountPermissions';
-import { useManagePermissions } from '@_/useManagePermissions';
-import { ethers, utils } from 'ethers';
+import { type ethers, utils } from 'ethers';
 import { useEffect, useMemo, useState } from 'react';
 import { permissionsList } from './AccountPermissions';
 import { PermissionsInfo } from './PermissionsInfo';

@@ -1,10 +1,10 @@
-import { Container, Flex } from '@chakra-ui/react';
 import { useParams } from '@_/useParams';
+import { Container, Flex } from '@chakra-ui/react';
 import { AccountSettingsPage } from './AccountSettingsPage';
-import { TestPage } from './TestPage';
 import { DashboardPage } from './DashboardPage';
 import { Footer } from './Footer';
 import Header from './Header';
+import { TestPage } from './TestPage';
 
 function Content() {
   const [params] = useParams();

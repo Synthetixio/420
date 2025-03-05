@@ -3,7 +3,7 @@ import { getCollateralConfig } from './getCollateralConfig';
 import { setEthBalance } from './setEthBalance';
 
 export async function getWhale() {
-  switch (parseInt(Cypress.env('chainId'))) {
+  switch (Number.parseInt(Cypress.env('chainId'))) {
     case 1:
       return '0xffffffaEff0B96Ea8e4f94b2253f31abdD875847'; // Synthetix: Deployer
     case 5:
@@ -32,7 +32,9 @@ export async function getSNX({ address = Cypress.env('walletAddress'), amount })
     provider
   );
 
-  const oldBalance = parseFloat(ethers.utils.formatUnits(await SNXContract.balanceOf(address)));
+  const oldBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await SNXContract.balanceOf(address))
+  );
   console.log('getSNX', { address, oldBalance });
 
   if (oldBalance > amount) {
@@ -40,7 +42,9 @@ export async function getSNX({ address = Cypress.env('walletAddress'), amount })
     return null;
   }
 
-  const whaleBalance = parseFloat(ethers.utils.formatUnits(await SNXContract.balanceOf(whale)));
+  const whaleBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await SNXContract.balanceOf(whale))
+  );
   console.log('getSNX', { whale, whaleBalance });
 
   const signer = provider.getSigner(whale);
@@ -51,7 +55,9 @@ export async function getSNX({ address = Cypress.env('walletAddress'), amount })
   const receipt = await txn.wait();
   console.log('getSNX', { txEvents: receipt.events.filter((e) => Boolean(e.event)) });
 
-  const newBalance = parseFloat(ethers.utils.formatUnits(await SNXContract.balanceOf(address)));
+  const newBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await SNXContract.balanceOf(address))
+  );
   console.log('getSNX', { address, newBalance });
   return receipt;
 }

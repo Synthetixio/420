@@ -14,7 +14,7 @@ describe(__filename, () => {
   });
 
   it(__filename, () => {
-    cy.visit('/');
+    cy.visit('/?showAll=yes');
     cy.contains('[data-cy="connect wallet button"]', 'Connect Wallet').should('exist');
     cy.contains('p', 'Welcome to your final burn.').should('exist');
   });

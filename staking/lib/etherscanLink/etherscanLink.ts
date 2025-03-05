@@ -18,7 +18,6 @@ export function etherscanLink({
       return `https://basescan.org/${isTx ? 'tx' : 'address'}/${address}`;
     case 'base-sepolia':
       return `https://sepolia.basescan.org/${isTx ? 'tx' : 'address'}/${address}`;
-    case 'mainnet':
     default:
       return `https://etherscan.io/${isTx ? 'tx' : 'address'}/${address}`;
   }

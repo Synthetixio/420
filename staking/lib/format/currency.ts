@@ -1,4 +1,4 @@
-import { Wei } from '@synthetixio/wei';
+import type { Wei } from '@synthetixio/wei';
 import numbro from 'numbro';
 
 export function currency(value?: Wei) {
@@ -22,7 +22,7 @@ export function currency(value?: Wei) {
       mantissa: 0,
     });
     // Strip unnecessary .00
-    return parseFloat(m2) === parseFloat(m0)
+    return Number.parseFloat(m2) === Number.parseFloat(m0)
       ? numbro(number).format({
           thousandSeparated: true,
           mantissa: 0,

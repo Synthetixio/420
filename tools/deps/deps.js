@@ -1,14 +1,9 @@
 #!/usr/bin/env node
 
 const depcheck = require('depcheck');
-const cp = require('child_process');
-const fs = require('fs/promises');
-const prettier = require('prettier');
+const cp = require('node:child_process');
+const fs = require('node:fs/promises');
 const { fgReset, fgRed, fgGreen, fgYellow, fgCyan } = require('./lib/colors');
-
-const prettierOptions = JSON.parse(
-  require('fs').readFileSync(`${__dirname}/../../.prettierrc`, 'utf8')
-);
 
 const isFix = process.argv.includes('--fix');
 
@@ -87,35 +82,29 @@ async function run() {
 
     if (dependencies.length || missingDeps.length) {
       console.log(`${fgCyan}  "dependencies": {${fgReset}`);
-      dependencies.sort().forEach((dep) => {
+      for (const dep of dependencies.sort()) {
         console.log(`${fgRed}    "${dep}": "${packageJson.dependencies[dep]}"${fgReset}`);
         delete packageJson.dependencies[dep];
-      });
-      missingDeps.sort().forEach((dep) => {
+      }
+      for (const dep of missingDeps.sort()) {
         console.log(`${fgGreen}    "${dep}": "${deps[dep] || 'latest'}"${fgReset}`);
         if (!('dependencies' in packageJson)) {
           packageJson.dependencies = {};
         }
         packageJson.dependencies[dep] = deps[dep] || 'latest';
-      });
+      }
     }
 
     if (devDependencies.length) {
       console.log(`${fgCyan}  "devDependencies": {${fgReset}`);
-      devDependencies.sort().forEach((dep) => {
+      for (const dep of devDependencies.sort()) {
         console.log(`${fgRed}    "${dep}": "${packageJson.devDependencies[dep]}"${fgReset}`);
         delete packageJson.devDependencies[dep];
-      });
+      }
     }
     if (isFix) {
       console.log(`...FIXING ${fgYellow}${location}/package.json${fgReset}`);
-      await fs.writeFile(
-        `${location}/package.json`,
-        await prettier.format(JSON.stringify(packageJson, null, '  '), {
-          parser: 'json',
-          ...prettierOptions,
-        })
-      );
+      await fs.writeFile(`${location}/package.json`, JSON.stringify(packageJson, null, 2));
     }
   }, Promise.resolve());
 

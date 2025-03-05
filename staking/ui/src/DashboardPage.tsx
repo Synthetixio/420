@@ -1,10 +1,11 @@
-import { Flex, Heading, Text } from '@chakra-ui/react';
-import { useWallet } from '@_/useBlockchain';
+import { useNetwork, useWallet } from '@_/useBlockchain';
 import { useCollateralType } from '@_/useCollateralTypes';
 import { useLiquidityPosition } from '@_/useLiquidityPosition';
 import { type HomePageSchemaType, useParams } from '@_/useParams';
+import { Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { ChangeNetwork } from './Staking/ChangeNetwork';
 import { ConnectYourWallet } from './Staking/ConnectYourWallet';
 import { EmptyPosition } from './Staking/EmptyPosition';
 import { EmptyV3Debt } from './Staking/EmptyV3Debt';
@@ -28,17 +29,21 @@ export function DashboardPage() {
   const { data: v2xPosition, isPending: isPendingV2xPosition } = useV2xPosition();
 
   const { activeWallet } = useWallet();
+
+  const { network } = useNetwork();
+
   const isPending =
     activeWallet &&
+    network &&
     (isPendingCollateralType ||
       (params.accountId && isPendingLiquidityPosition) ||
       (params.accountId && isPendingNewPoolPositionCollateral) ||
       isPendingV2xPosition);
 
-  const hasV2xPosition = v2xPosition && v2xPosition.debt.gt(0);
-  const hasV3Position = liquidityPosition && liquidityPosition.collateralAmount.gt(0);
-  const hasV3Debt = liquidityPosition && liquidityPosition.debt.gt(0);
-  const hasStakingPosition = newPoolPositionCollateral && newPoolPositionCollateral.gt(0);
+  const hasV2xPosition = v2xPosition?.debt.gt(0);
+  const hasV3Position = liquidityPosition?.collateralAmount.gt(0);
+  const hasV3Debt = liquidityPosition?.debt.gt(0);
+  const hasStakingPosition = newPoolPositionCollateral?.gt(0);
 
   let step = 0;
   return (
@@ -75,6 +80,7 @@ export function DashboardPage() {
             </Heading>
           ) : null}
           {params.showAll || !activeWallet ? <ConnectYourWallet /> : null}
+          {params.showAll || (activeWallet && !network) ? <ChangeNetwork /> : null}
 
           {params.showAll ? (
             <Heading mt={12} color="red.500">
@@ -83,6 +89,7 @@ export function DashboardPage() {
           ) : null}
           {params.showAll ||
           (activeWallet &&
+            network &&
             !isPending &&
             !hasV2xPosition &&
             !hasV3Position &&
@@ -95,7 +102,8 @@ export function DashboardPage() {
               State {step++}. v3 position without debt
             </Heading>
           ) : null}
-          {params.showAll || (activeWallet && !isPending && hasV3Position && !hasV3Debt) ? (
+          {params.showAll ||
+          (activeWallet && network && !isPending && hasV3Position && !hasV3Debt) ? (
             <EmptyV3Debt />
           ) : null}
 
@@ -104,7 +112,7 @@ export function DashboardPage() {
               State {step++}. Migrate v2x position
             </Heading>
           ) : null}
-          {params.showAll || (activeWallet && !isPending && hasV2xPosition) ? (
+          {params.showAll || (activeWallet && network && !isPending && hasV2xPosition) ? (
             <MigrateFromV2x />
           ) : null}
 
@@ -113,7 +121,8 @@ export function DashboardPage() {
               State {step++}. Migrate v3 position
             </Heading>
           ) : null}
-          {params.showAll || (activeWallet && !isPending && hasV3Position && hasV3Debt) ? (
+          {params.showAll ||
+          (activeWallet && network && !isPending && hasV3Position && hasV3Debt) ? (
             <MigrateFromV3 />
           ) : null}
 
@@ -122,7 +131,7 @@ export function DashboardPage() {
               State {step++}. Pool 420 existing position
             </Heading>
           ) : null}
-          {params.showAll || (activeWallet && !isPending && hasStakingPosition) ? (
+          {params.showAll || (activeWallet && network && !isPending && hasStakingPosition) ? (
             <StakingPosition />
           ) : null}
         </Flex>

@@ -8,6 +8,7 @@ export default function Header() {
   const { onClose } = useDisclosure();
   const location = useLocation();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We want to close if location changes for any reason
   useEffect(() => {
     onClose();
   }, [location, onClose]);

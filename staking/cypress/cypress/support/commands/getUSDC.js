@@ -3,7 +3,7 @@ import { getCollateralConfig } from './getCollateralConfig';
 import { setEthBalance } from './setEthBalance';
 
 async function getWhale() {
-  switch (parseInt(Cypress.env('chainId'))) {
+  switch (Number.parseInt(Cypress.env('chainId'))) {
     case 8453:
       return '0x3304E22DDaa22bCdC5fCa2269b418046aE7b566A';
     default:
@@ -25,7 +25,9 @@ export async function getUSDC({ address = Cypress.env('walletAddress'), amount }
     ],
     provider
   );
-  const oldBalance = parseFloat(ethers.utils.formatUnits(await USDCContract.balanceOf(address), 6));
+  const oldBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await USDCContract.balanceOf(address), 6)
+  );
   console.log('getUSDC', { address, token: collateralConfig.address, oldBalance });
 
   if (oldBalance > amount) {
@@ -33,7 +35,9 @@ export async function getUSDC({ address = Cypress.env('walletAddress'), amount }
     return null;
   }
 
-  const whaleBalance = parseFloat(ethers.utils.formatUnits(await USDCContract.balanceOf(whale), 6));
+  const whaleBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await USDCContract.balanceOf(whale), 6)
+  );
   console.log('getUSDC', { whale, token: collateralConfig.address, whaleBalance });
 
   const signer = provider.getSigner(whale);
@@ -44,7 +48,9 @@ export async function getUSDC({ address = Cypress.env('walletAddress'), amount }
   const receipt = await txn.wait();
   console.log('getUSDC', { txEvents: receipt.events.filter((e) => Boolean(e.event)) });
 
-  const newBalance = parseFloat(ethers.utils.formatUnits(await USDCContract.balanceOf(address), 6));
+  const newBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await USDCContract.balanceOf(address), 6)
+  );
   console.log('getUSDC', { address, token: collateralConfig.address, newBalance });
   return receipt;
 }

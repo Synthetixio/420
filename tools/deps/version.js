@@ -13,8 +13,11 @@ async function getCascade() {
         (location) => workspacePackages.find((pkg) => pkg.location === location).name
       ),
     }))
-    .reduce((result, { name, deps }) => ({ ...result, [name]: { name, deps, path: [] } }), {});
-  delete all.root;
+    .reduce((result, { name, deps }) => {
+      result[name] = { name, deps, path: [] };
+      return result;
+    }, {});
+  all.root = undefined;
 
   const paths = [];
   function walkTree(node) {
@@ -29,13 +32,18 @@ async function getCascade() {
     if (!(head in result)) {
       result[head] = new Set();
     }
-    tail.forEach((name) => result[head].add(name));
+    for (const name of tail) {
+      result[head].add(name);
+    }
     return result;
   }, {});
 
   return Object.keys(sets)
     .sort()
-    .reduce((result, name) => ({ ...result, [name]: Array.from(sets[name]).sort() }), {});
+    .reduce((result, name) => {
+      result[name] = Array.from(sets[name]).sort();
+      return result;
+    }, {});
 }
 
 async function run() {
@@ -82,11 +90,6 @@ async function run() {
           );
           return `yarn workspace ${name} version --deferred patch`;
         }
-
-        // When publishing pre-release version like `1.2.3-whatever`, update all dependent packages with `prerelease` strategy
-        case /^\d+\.\d+\.\d+-.+$/.test(version):
-        // Same for `prerelease`
-        case ['prerelease'].includes(version):
         // And for any other unknown case
         default: {
           console.log(

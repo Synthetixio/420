@@ -25,7 +25,7 @@ export async function delegateCollateral({
     ethers.BigNumber.from(poolId),
     config.tokenAddress,
     ethers.utils.parseEther(`${amount}`),
-    ethers.utils.parseEther(`1`),
+    ethers.utils.parseEther('1'),
   ];
 
   const gasLimit = await CoreProxyContract.estimateGas

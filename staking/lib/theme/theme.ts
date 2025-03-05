@@ -1,6 +1,6 @@
 import {
-  ComponentMultiStyleConfig,
-  ComponentStyleConfig,
+  type ComponentMultiStyleConfig,
+  type ComponentStyleConfig,
   defineStyle,
   extendTheme,
 } from '@chakra-ui/react';
@@ -49,19 +49,19 @@ const variantSolid = defineStyle((props) => {
   const { colorScheme: c } = props;
 
   if (c === 'gray') {
-    const bg = mode(`gray.100`, `whiteAlpha.200`)(props);
+    const bg = mode('gray.100', 'whiteAlpha.200')(props);
 
     return {
       borderRadius: 'base',
-      color: mode(`black`, `whiteAlpha.900`)(props),
+      color: mode('black', 'whiteAlpha.900')(props),
       bg,
       _hover: {
-        bg: mode(`gray.200`, `whiteAlpha.300`)(props),
+        bg: mode('gray.200', 'whiteAlpha.300')(props),
         _disabled: {
           bg,
         },
       },
-      _active: { bg: mode(`gray.300`, `whiteAlpha.400`)(props) },
+      _active: { bg: mode('gray.300', 'whiteAlpha.400')(props) },
     };
   }
 
@@ -91,7 +91,7 @@ const variantSolid = defineStyle((props) => {
   return {
     borderRadius: 'base',
     bg: background,
-    color: mode(color, `white`)(props),
+    color: mode(color, 'white')(props),
     _hover: {
       bg: mode(hoverBg, `${c}.500`)(props),
       _disabled: {

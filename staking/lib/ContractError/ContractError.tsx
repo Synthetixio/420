@@ -1,5 +1,5 @@
+import type { ContractErrorType } from '@_/parseContractError';
 import { Button, Collapse, Text } from '@chakra-ui/react';
-import { ContractErrorType } from '@_/parseContractError';
 import format from 'date-fns/format';
 import React from 'react';
 

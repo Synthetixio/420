@@ -7,6 +7,6 @@ const { ethers } = require('ethers');
 const abi = require('@synthetixio/v3-contracts/8453-andromeda/AllErrors.readable.json');
 // eslint-disable-next-line no-console
 console.dir(new ethers.utils.Interface(abi).parseError(flatErrorsData), {
-  depth: Infinity,
-  maxStringLength: Infinity,
+  depth: Number.POSITIVE_INFINITY,
+  maxStringLength: Number.POSITIVE_INFINITY,
 });

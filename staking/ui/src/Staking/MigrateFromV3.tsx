@@ -1,3 +1,6 @@
+import { useCollateralType } from '@_/useCollateralTypes';
+import { useLiquidityPosition } from '@_/useLiquidityPosition';
+import { type HomePageSchemaType, useParams } from '@_/useParams';
 import {
   Button,
   CloseButton,
@@ -14,17 +17,14 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { useCollateralType } from '@_/useCollateralTypes';
-import { useLiquidityPosition } from '@_/useLiquidityPosition';
-import { type HomePageSchemaType, useParams } from '@_/useParams';
 import React from 'react';
-import burn from './burn.webp';
-import coinburn from './coinburn.svg';
 import { LayoutWithImage } from './LayoutWithImage';
 import { MigrateStats } from './MigrateStats';
 import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
-import { useMigrateNewPool } from './useMigrateNewPool';
 import { ZeroRisk } from './ZeroRisk';
+import burn from './burn.webp';
+import coinburn from './coinburn.svg';
+import { useMigrateNewPool } from './useMigrateNewPool';
 
 export function MigrateFromV3() {
   const { data: collateralType } = useCollateralType('SNX');

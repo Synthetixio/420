@@ -1,5 +1,5 @@
 import { calculateCRatio } from '@_/calculations';
-import { Wei, wei } from '@synthetixio/wei';
+import { type Wei, wei } from '@synthetixio/wei';
 
 export const validatePosition = ({
   issuanceRatioD18,

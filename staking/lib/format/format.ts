@@ -1,8 +1,8 @@
+import { type WeiSource, wei } from '@synthetixio/wei';
 import { ethers } from 'ethers';
-import { wei, WeiSource } from '@synthetixio/wei';
 
 export const formatValue = (value: ethers.BigNumberish, decimals = 18) =>
-  parseFloat(ethers.utils.formatUnits(value, decimals));
+  Number.parseFloat(ethers.utils.formatUnits(value, decimals));
 
 export const parseUnits = (value: WeiSource, decimals = 18) => wei(value, decimals).toBN();
 

@@ -1,8 +1,8 @@
 import { contractsHash } from '@_/tsHelpers';
 import { useNetwork, useProvider } from '@_/useBlockchain';
 import { useCollateralType } from '@_/useCollateralTypes';
-import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { useCoreProxy } from '@_/useCoreProxy';
+import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { useQuery } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';

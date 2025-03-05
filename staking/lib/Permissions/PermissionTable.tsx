@@ -1,4 +1,7 @@
-/* eslint-disable react/no-unescaped-entities */
+import { Address } from '@_/Address';
+import { renderAccountId } from '@_/format';
+import { useAccountOwner, useAccountPermissions } from '@_/useAccountPermissions';
+import { useWallet } from '@_/useBlockchain';
 import {
   Badge,
   Button,
@@ -15,16 +18,12 @@ import {
   Tr,
   useDisclosure,
 } from '@chakra-ui/react';
-import { Address } from '@_/Address';
-import { renderAccountId } from '@_/format';
-import { useAccountOwner, useAccountPermissions } from '@_/useAccountPermissions';
-import { useWallet } from '@_/useBlockchain';
-import { ethers } from 'ethers';
+import type { ethers } from 'ethers';
 import { useMemo } from 'react';
 import { PermissionModal } from './PermissionModal';
 import { PermissionRow } from './PermissionRow';
-import { PermissionsInfo } from './PermissionsInfo';
 import { PermissionTableLoading } from './PermissionTableLoading';
+import { PermissionsInfo } from './PermissionsInfo';
 import { TransferOwnershipModal } from './TransferOwnershipModal';
 
 export function PermissionTable({
@@ -120,7 +119,7 @@ export function PermissionTable({
                 fontSize="12px"
                 lineHeight="16px"
                 borderBottomColor="gray.900"
-              ></Th>
+              />
             </Tr>
           </Thead>
 

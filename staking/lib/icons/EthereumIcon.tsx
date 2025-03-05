@@ -1,9 +1,9 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { Icon, type IconProps } from '@chakra-ui/react';
 
 export const EthereumIcon = ({
   width = '24px',
   height = '24px',
-  fill = `#627EEA`,
+  fill = '#627EEA',
   ...props
 }: IconProps) => {
   return (

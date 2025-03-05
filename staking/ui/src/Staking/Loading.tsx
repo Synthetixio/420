@@ -1,8 +1,8 @@
 import { Flex, Spinner } from '@chakra-ui/react';
 import React from 'react';
-import burn from './burn.webp';
 import { LayoutWithImage } from './LayoutWithImage';
 import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
+import burn from './burn.webp';
 
 export function Loading() {
   return (

@@ -13,15 +13,15 @@ async function devtoolsFormatters() {
     }
     if (obj.abs().gt(1e10)) {
       // Assuming everything bigger than 1e10 is a wei
-      return `wei ${parseFloat(ethers.utils.formatEther(`${obj}`))}`;
+      return `wei ${Number.parseFloat(ethers.utils.formatEther(`${obj}`))}`;
     }
-    return parseFloat(obj.toString());
+    return Number.parseFloat(obj.toString());
   }
   // @ts-ignore
   window.devtoolsFormatters = window.devtoolsFormatters ?? [];
   // @ts-ignore
   window.devtoolsFormatters.push({
-    header: function (obj) {
+    header: (obj) => {
       if (obj instanceof ethers.BigNumber) {
         return [
           'div',
@@ -46,9 +46,7 @@ async function devtoolsFormatters() {
       }
       return null;
     },
-    hasBody: function () {
-      return false;
-    },
+    hasBody: () => false,
   });
 }
 

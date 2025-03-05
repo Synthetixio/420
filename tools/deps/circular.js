@@ -2,14 +2,18 @@
 
 async function run() {
   const workspaces = await require('./lib/workspaces')();
-  const all = workspaces
-    .map(({ name, workspaceDependencies }) => ({
+  const all = Object.fromEntries(
+    workspaces.map(({ name, workspaceDependencies }) => [
       name,
-      deps: workspaceDependencies.map(
-        (location) => workspaces.find((pkg) => pkg.location === location).name
-      ),
-    }))
-    .reduce((result, { name, deps }) => ({ ...result, [name]: { name, deps, path: [] } }), {});
+      {
+        name,
+        deps: workspaceDependencies.map(
+          (location) => workspaces.find((pkg) => pkg.location === location).name
+        ),
+        path: [],
+      },
+    ])
+  );
 
   const paths = [];
   const cycles = [];

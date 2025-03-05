@@ -1,8 +1,8 @@
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
-import { Badge, Flex, IconButton, Td, Text, Tr, useDisclosure } from '@chakra-ui/react';
 import { Address } from '@_/Address';
 import { useManagePermissions } from '@_/useManagePermissions';
-import { ethers } from 'ethers';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
+import { Badge, Flex, IconButton, Td, Text, Tr, useDisclosure } from '@chakra-ui/react';
+import type { ethers } from 'ethers';
 import { useEffect } from 'react';
 import { permissionsList } from './AccountPermissions';
 import { PermissionModal } from './PermissionModal';

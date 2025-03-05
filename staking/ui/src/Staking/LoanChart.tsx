@@ -1,10 +1,10 @@
 import { intlFormat } from 'date-fns';
-import React from 'react';
 import numbro from 'numbro';
+import React from 'react';
 
 // Quadratic Debt Decay Function: Calculates current debt at a given timestamp
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const calculateLoanQuadraticDecay = (
+const _calculateLoanQuadraticDecay = (
   timestamp: number,
   initialLoan: number,
   totalTime: number
@@ -14,7 +14,7 @@ const calculateLoanQuadraticDecay = (
 
   // Quadratic decay formula: y = initialLoan * (1 - (t / totalTime)²)
   const normalizedTime = clampedTime / totalTime; // Scales time from 0 to 1
-  return initialLoan * (1 - Math.pow(normalizedTime, 2)); // Quadratic decay
+  return initialLoan * (1 - normalizedTime ** 2); // Quadratic decay
 };
 
 // Linear Debt Decay Function: Calculates current debt at a given timestamp
@@ -99,6 +99,7 @@ export function LoanChart({
 
   return (
     <svg viewBox="-100 -60 1120 420" width="100%">
+      <title>Debt Burn Chart - Interactive</title>
       <rect
         x="0"
         y="0"

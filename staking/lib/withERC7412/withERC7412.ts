@@ -12,7 +12,7 @@ import {
 } from '@_/contracts';
 import { extractErrorData } from '@_/parseContractError';
 import { notNil } from '@_/tsHelpers';
-import { deploymentHasERC7412, Network } from '@_/useBlockchain';
+import { type Network, deploymentHasERC7412 } from '@_/useBlockchain';
 import { EvmPriceServiceConnection } from '@pythnetwork/pyth-evm-js';
 import debug from 'debug';
 import { ethers } from 'ethers';
@@ -59,18 +59,17 @@ export const getDefaultFromAddress = (chainName: string) => {
 function dedupedFunctions(abi: string[]) {
   const deduped = new Set();
   const readableAbi: string[] = [];
-  abi
-    .filter((line: string) => line.startsWith('function '))
-    .forEach((line: string) => {
-      const fragment = ethers.utils.Fragment.from(line);
-      if (fragment) {
-        const minimal = fragment.format(ethers.utils.FormatTypes.sighash);
-        if (!deduped.has(minimal)) {
-          readableAbi.push(fragment.format(ethers.utils.FormatTypes.full));
-          deduped.add(minimal);
-        }
+  const functions = abi.filter((line: string) => line.startsWith('function '));
+  for (const line of functions) {
+    const fragment = ethers.utils.Fragment.from(line);
+    if (fragment) {
+      const minimal = fragment.format(ethers.utils.FormatTypes.sighash);
+      if (!deduped.has(minimal)) {
+        readableAbi.push(fragment.format(ethers.utils.FormatTypes.full));
+        deduped.add(minimal);
       }
-    });
+    }
+  }
   return readableAbi;
 }
 
@@ -107,15 +106,17 @@ export async function logMulticall({
       try {
         // @ts-ignore
         const { name, args } = AllInterface.parseTransaction({ data, value });
-        if (Object.keys(args).filter(([key]) => `${key}` !== `${parseInt(key)}`).length > 0) {
+        if (
+          Object.keys(args).filter(([key]) => `${key}` !== `${Number.parseInt(key)}`).length > 0
+        ) {
           const namedArgs = Object.fromEntries(
-            Object.entries(args).filter(([key]) => `${key}` !== `${parseInt(key)}`)
+            Object.entries(args).filter(([key]) => `${key}` !== `${Number.parseInt(key)}`)
           );
           return { $: name, ...namedArgs };
         }
 
         const unnamedArgs = Object.entries(args)
-          .filter(([key]) => `${key}` === `${parseInt(key)}`)
+          .filter(([key]) => `${key}` === `${Number.parseInt(key)}`)
           .map(([, value]) => value);
         return { $: name, ...unnamedArgs };
       } catch {
@@ -177,7 +178,8 @@ export const withERC7412 = async (
     try {
       await logMulticall({ network, calls, label });
       return await getMulticallTransaction(network, calls, from, provider);
-    } catch (error: Error | any) {
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    } catch (error: any) {
       console.error(error);
       let errorData = extractErrorData(error);
       if (!errorData && error.transaction) {
@@ -187,6 +189,7 @@ export const withERC7412 = async (
           // provider.call wont actually revert, instead the error data is just returned
           const lookedUpError = await provider.call(error.transaction);
           errorData = lookedUpError;
+          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         } catch (newError: any) {
           // console.error(newError);
           log('provider.call(error.transaction) failed, trying to extract error', newError);
@@ -234,7 +237,7 @@ export const withERC7412 = async (
 
       // Update calls to include price update txn
       // And carry on with our while(true)
-      calls = [extraPriceUpdateTxn, ...calls];
+      calls.unshift(extraPriceUpdateTxn);
     }
   }
 };
@@ -265,7 +268,9 @@ export async function erc7412Call<T>(
   } = await withERC7412(
     provider,
     network,
-    calls.filter(notNil).map((call) => (call.from ? call : { ...call, from })), // fill missing "from"
+    calls
+      .filter(notNil)
+      .map((call) => (call.from ? call : { ...call, from })), // fill missing "from"
     label,
     from
   );
@@ -292,6 +297,6 @@ export async function erc7412Call<T>(
     throw new Error(`[${label}] Unexpected multicall response`);
   }
   const decoded = decode(decodedMulticallWithoutPriceUpdates);
-  log(`multicall decoded`, decoded);
+  log('multicall decoded', decoded);
   return decoded;
 }

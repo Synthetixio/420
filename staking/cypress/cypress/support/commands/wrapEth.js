@@ -15,7 +15,9 @@ export async function wrapEth({ address = Cypress.env('walletAddress'), amount }
     ],
     signer
   );
-  const oldBalance = parseFloat(ethers.utils.formatUnits(await WETHContract.balanceOf(address)));
+  const oldBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await WETHContract.balanceOf(address))
+  );
   console.log('wrapEth', { address, oldBalance });
 
   if (oldBalance >= amount) {
@@ -29,7 +31,9 @@ export async function wrapEth({ address = Cypress.env('walletAddress'), amount }
   const receipt = await txn.wait();
   console.log('wrapEth', { txEvents: receipt.events.filter((e) => Boolean(e.event)) });
 
-  const newBalance = parseFloat(ethers.utils.formatUnits(await WETHContract.balanceOf(address)));
+  const newBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await WETHContract.balanceOf(address))
+  );
   console.log('wrapEth', { address, newBalance });
   return receipt;
 }

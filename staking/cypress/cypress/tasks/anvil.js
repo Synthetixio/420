@@ -26,7 +26,7 @@ export async function startAnvil({ chainId, forkUrl, block }) {
     '--memory-limit',
     '6442450944', // 6G
   ];
-  console.log(`Starting anvil:`, cmd, args.join(' '));
+  console.log('Starting anvil:', cmd, args.join(' '));
   return new Promise(async (resolve, reject) => {
     let resolved = false;
 

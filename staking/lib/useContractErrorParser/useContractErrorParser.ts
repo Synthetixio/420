@@ -8,6 +8,7 @@ export function useContractErrorParser() {
   const { data: PositionManager } = usePositionManagerNewPool();
 
   return useCallback(
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     (error: any) => {
       return parseContractError({
         error,

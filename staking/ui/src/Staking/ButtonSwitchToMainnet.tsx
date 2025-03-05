@@ -1,9 +1,9 @@
-import { useWallet } from '@_/useBlockchain';
+import { MAINNET, useNetwork } from '@_/useBlockchain';
 import { Button, Text } from '@chakra-ui/react';
 import React from 'react';
 
-export function ButtonConnect({ ...props }) {
-  const { connect } = useWallet();
+export function ButtonSwitchToMainnet({ ...props }) {
+  const { setNetwork } = useNetwork();
   return (
     <Button
       display="flex"
@@ -11,10 +11,10 @@ export function ButtonConnect({ ...props }) {
       textDecoration="none"
       _hover={{ textDecoration: 'none' }}
       gap={1}
-      onClick={() => connect()}
+      onClick={() => setNetwork(MAINNET.id)}
       {...props}
     >
-      <Text>Connect Wallet</Text>
+      <Text>Switch to Mainnet</Text>
     </Button>
   );
 }
