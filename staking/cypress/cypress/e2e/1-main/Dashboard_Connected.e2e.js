@@ -26,7 +26,7 @@ describe(__filename, () => {
   it(__filename, () => {
     cy.setEthBalance({ balance: 100 });
 
-    cy.visit('/');
+    cy.visit('/?showAll=yes');
 
     cy.get('[data-cy="short wallet address"]').contains(
       `${Cypress.env('walletAddress').substring(0, 6)}...${Cypress.env('walletAddress').substring(
