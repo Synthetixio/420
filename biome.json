@@ -51,5 +51,24 @@
       "bracketSpacing": true,
       "bracketSameLine": false
     }
-  }
+  },
+  "overrides": [
+    {
+      "include": ["**/*/*.test.*"],
+      "javascript": {
+        "globals": ["it", "test", "describe", "beforeEach", "afterEach", "expect"]
+      }
+    },
+    {
+      "include": ["./staking/cypress/**/*"],
+      "javascript": {
+        "globals": ["cy", "Cypress", "it", "describe", "beforeEach", "afterEach", "expect"]
+      },
+      "linter": {
+        "rules": {
+          "suspicious": { "noAsyncPromiseExecutor": "off" }
+        }
+      }
+    }
+  ]
 }
