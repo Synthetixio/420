@@ -3,12 +3,7 @@
 const depcheck = require('depcheck');
 const cp = require('child_process');
 const fs = require('fs/promises');
-const prettier = require('prettier');
 const { fgReset, fgRed, fgGreen, fgYellow, fgCyan } = require('./lib/colors');
-
-const prettierOptions = JSON.parse(
-  require('fs').readFileSync(`${__dirname}/../../.prettierrc`, 'utf8')
-);
 
 const isFix = process.argv.includes('--fix');
 
@@ -109,13 +104,7 @@ async function run() {
     }
     if (isFix) {
       console.log(`...FIXING ${fgYellow}${location}/package.json${fgReset}`);
-      await fs.writeFile(
-        `${location}/package.json`,
-        await prettier.format(JSON.stringify(packageJson, null, '  '), {
-          parser: 'json',
-          ...prettierOptions,
-        })
-      );
+      await fs.writeFile(`${location}/package.json`, JSON.stringify(packageJson, null, 2));
     }
   }, Promise.resolve());
 

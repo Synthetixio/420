@@ -144,7 +144,6 @@ jobs:
       - run: yarn deps
       - run: yarn deps:mismatched
       - run: yarn deps:circular
-      - run: yarn pretty
       - run: yarn lint
       - run: yarn typecheck
       - run: yarn svg:check
