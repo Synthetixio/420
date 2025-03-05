@@ -1,10 +1,15 @@
+import { useNetwork } from '@_/useBlockchain';
 import { Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { PoolStats } from './Staking/PoolStats';
 import { TvlChart } from './Staking/TvlChart';
+import { useTvl420 } from './Staking/useTvl420';
 
 export function TestPage() {
+  const { network } = useNetwork();
+  const networkName = network?.id === 1 ? 'ethereum' : network?.id === 10 ? 'optimism' : 'ethereum';
+  const { data: tvl420 } = useTvl420({ networkName, span: 'hourly' });
   return (
     <>
       <Helmet>
@@ -57,21 +62,7 @@ export function TestPage() {
                     TVL
                   </Heading>
                 </Flex>
-                <TvlChart />
-              </Flex>
-              <Flex
-                order={{ base: 1, sm: 1, lg: 1, xl: 1 }}
-                flex={{ base: 1, sm: 1, lg: 1, xl: 1 }}
-                width="100%"
-                direction="column"
-                borderColor="gray.900"
-                borderWidth="1px"
-                borderRadius="6px"
-                p={6}
-                gap={6}
-                justifyContent="space-between"
-              >
-                <Flex minWidth="120px" direction="column" gap={3} textAlign="center" />
+                <TvlChart data={tvl420} />
               </Flex>
             </Flex>
           </Flex>

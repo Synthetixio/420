@@ -80,6 +80,12 @@ export function DashboardPage() {
             </Heading>
           ) : null}
           {params.showAll || !activeWallet ? <ConnectYourWallet /> : null}
+
+          {params.showAll ? (
+            <Heading mt={12} color="red.500">
+              State {step++}. Connected wallet, wrong network
+            </Heading>
+          ) : null}
           {params.showAll || (activeWallet && !network) ? <ChangeNetwork /> : null}
 
           {params.showAll ? (
