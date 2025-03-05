@@ -1,5 +1,5 @@
-import { Skeleton, Td, Text, Tr } from '@chakra-ui/react';
 import { prettyString } from '@_/format';
+import { Skeleton, Td, Text, Tr } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 
 export function PermissionTableLoading() {

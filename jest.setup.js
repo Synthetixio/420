@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { TextEncoder, TextDecoder } from 'util';
+import { TextDecoder, TextEncoder } from 'node:util';
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 

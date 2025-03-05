@@ -31,7 +31,6 @@ async function magicWallet(magicWallet) {
                       return [window.$magicWallet];
                     case 'eth_chainId':
                       return `0x${Number(window.$chainId).toString(16)}`;
-                    case 'eth_sendTransaction':
                     default: {
                       try {
                         const result = await magicProvider.send(method, params);

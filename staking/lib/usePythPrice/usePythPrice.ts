@@ -1,5 +1,5 @@
-import { EvmPriceServiceConnection } from '@pythnetwork/pyth-evm-js';
 import { offchainMainnetEndpoint } from '@_/constants';
+import { EvmPriceServiceConnection } from '@pythnetwork/pyth-evm-js';
 import { useQuery } from '@tanstack/react-query';
 import { ethers } from 'ethers';
 

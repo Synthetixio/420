@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
@@ -59,7 +59,7 @@ const imgRule = {
 
 const cssRule = {
   test: /\.css$/,
-  include: [new RegExp('./src'), new RegExp('@rainbow-me/rainbowkit')],
+  include: [/.\/src/, /@rainbow-me\/rainbowkit/],
   exclude: [],
   use: [
     {

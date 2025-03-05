@@ -1,4 +1,3 @@
-import { useToast } from '@chakra-ui/react';
 import { ContractError } from '@_/ContractError';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
@@ -7,6 +6,7 @@ import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
 import { useSNX } from '@_/useSNX';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
+import { useToast } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';

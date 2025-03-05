@@ -1,4 +1,4 @@
-import { Icon, IconProps } from '@chakra-ui/react';
+import { Icon, type IconProps } from '@chakra-ui/react';
 
 export const LogoIcon = ({ color = 'cyan.400', width = '29', height = '21' }: IconProps) => {
   return (

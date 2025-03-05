@@ -1,3 +1,5 @@
+import { SESSION_STORAGE_KEYS } from '@_/constants';
+import { theme } from '@_/theme';
 import {
   Box,
   Button,
@@ -11,8 +13,6 @@ import {
   Text,
   UnorderedList,
 } from '@chakra-ui/react';
-import { SESSION_STORAGE_KEYS } from '@_/constants';
-import { theme } from '@_/theme';
 import { useState } from 'react';
 import { Link as ReactRouterLink } from 'react-router-dom';
 
@@ -36,7 +36,7 @@ export const TermsModal = ({ defaultOpen = true }: TermsModalProps) => {
     <Modal isOpen={isOpen} onClose={() => {}}>
       <ModalOverlay />
       <ModalContent
-        bgGradient={theme.gradients['dark'][500]}
+        bgGradient={theme.gradients.dark[500]}
         pt="10"
         pb="3"
         borderWidth="1px"

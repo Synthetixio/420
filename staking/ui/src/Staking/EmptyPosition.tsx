@@ -2,8 +2,8 @@ import { Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 import { ButtonDocs } from './ButtonDocs';
 import { ButtonStake } from './ButtonStake';
-import coin from './coin.webp';
 import { LayoutWithImage } from './LayoutWithImage';
+import coin from './coin.webp';
 
 export function EmptyPosition() {
   return (

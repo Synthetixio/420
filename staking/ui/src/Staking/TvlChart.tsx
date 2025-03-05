@@ -58,6 +58,7 @@ export function TvlChart() {
 
   return (
     <svg viewBox="-100 -60 1120 420" width="100%">
+      <title>TVL Chart - Interactive</title>
       <line x1="0" y1="0" x2="0" y2="300" stroke="#2d2d38" strokeWidth="1" strokeDasharray="5" />
       {/*<line x1="0" y1="300" x2="1000" y2="300" stroke="#2d2d38" strokeWidth="1" />*/}
       {/*<line x1="0" y1="0" x2="1000" y2="0" stroke="#2d2d38" strokeWidth="1" strokeDasharray="5" />*/}

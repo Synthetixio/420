@@ -1,5 +1,5 @@
-import { currency } from './';
 import { wei } from '@synthetixio/wei';
+import { currency } from './';
 
 describe('currency', () => {
   it('should format positive Wei value with default options', () => {

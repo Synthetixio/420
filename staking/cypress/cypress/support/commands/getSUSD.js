@@ -1,9 +1,9 @@
+import { importSystemToken } from '@_/contracts';
 import { ethers } from 'ethers';
 import { setEthBalance } from './setEthBalance';
-import { importSystemToken } from '@_/contracts';
 
 export async function getWhale() {
-  switch (parseInt(Cypress.env('chainId'))) {
+  switch (Number.parseInt(Cypress.env('chainId'))) {
     case 1:
       return '0xffffffaEff0B96Ea8e4f94b2253f31abdD875847'; // Synthetix: Deployer
     case 5:
@@ -33,7 +33,9 @@ export async function getSUSD({ address = Cypress.env('walletAddress'), amount }
     provider
   );
 
-  const oldBalance = parseFloat(ethers.utils.formatUnits(await sUSDContract.balanceOf(address)));
+  const oldBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await sUSDContract.balanceOf(address))
+  );
   console.log('getSUSD', { address, oldBalance });
 
   if (oldBalance > amount) {
@@ -41,7 +43,9 @@ export async function getSUSD({ address = Cypress.env('walletAddress'), amount }
     return null;
   }
 
-  const whaleBalance = parseFloat(ethers.utils.formatUnits(await sUSDContract.balanceOf(whale)));
+  const whaleBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await sUSDContract.balanceOf(whale))
+  );
   console.log('getSUSD', { whale, whaleBalance });
 
   const signer = provider.getSigner(whale);
@@ -51,7 +55,9 @@ export async function getSUSD({ address = Cypress.env('walletAddress'), amount }
   const receipt = await txn.wait();
   console.log('getSUSD', { txEvents: receipt.events.filter((e) => Boolean(e.event)) });
 
-  const newBalance = parseFloat(ethers.utils.formatUnits(await sUSDContract.balanceOf(address)));
+  const newBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await sUSDContract.balanceOf(address))
+  );
   console.log('getSUSD', { address, newBalance });
   return receipt;
 }

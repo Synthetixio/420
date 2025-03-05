@@ -1,9 +1,9 @@
-import { CopyIcon, ExternalLinkIcon } from '@chakra-ui/icons';
-import { Flex, Tooltip } from '@chakra-ui/react';
 import { etherscanLink } from '@_/etherscanLink';
 import { prettyString } from '@_/format';
 import { useNetwork } from '@_/useBlockchain';
-import { FC, useMemo } from 'react';
+import { CopyIcon, ExternalLinkIcon } from '@chakra-ui/icons';
+import { Flex, Tooltip } from '@chakra-ui/react';
+import { type FC, useMemo } from 'react';
 
 interface AddressProps {
   address: string;

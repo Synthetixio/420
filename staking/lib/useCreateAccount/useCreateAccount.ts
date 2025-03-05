@@ -16,7 +16,7 @@ export function useCreateAccount() {
   return {
     enabled: Boolean(network && CoreProxy),
     mutation: useMutation({
-      mutationFn: async function () {
+      mutationFn: async () => {
         if (!(CoreProxy && signer && provider)) throw 'OMFG';
 
         const CoreProxyContract = new ethers.Contract(CoreProxy.address, CoreProxy.abi, signer);
@@ -25,9 +25,9 @@ export function useCreateAccount() {
         const receipt = await provider.waitForTransaction(txn.hash);
         log('receipt', receipt);
 
-        let newAccountId;
+        let newAccountId: string | undefined;
 
-        receipt.logs.forEach((txLog) => {
+        for (const txLog of receipt.logs) {
           if (txLog.topics[0] === CoreProxyContract.interface.getEventTopic('AccountCreated')) {
             const [accountId] = CoreProxyContract.interface.decodeEventLog(
               'AccountCreated',
@@ -36,14 +36,13 @@ export function useCreateAccount() {
             );
             newAccountId = accountId;
           }
-        });
+        }
         log('newAccountId', newAccountId);
 
         if (newAccountId) {
           return newAccountId;
-        } else {
-          throw new Error('Could not find new account id');
         }
+        throw new Error('Could not find new account id');
       },
 
       onSuccess: async () => {

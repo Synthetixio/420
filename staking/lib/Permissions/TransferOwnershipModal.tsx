@@ -1,3 +1,5 @@
+import { renderAccountId } from '@_/format';
+import { useTransferAccountId } from '@_/useTransferAccountId';
 import {
   Alert,
   AlertDescription,
@@ -16,8 +18,6 @@ import {
   Spinner,
   Text,
 } from '@chakra-ui/react';
-import { renderAccountId } from '@_/format';
-import { useTransferAccountId } from '@_/useTransferAccountId';
 import { ethers } from 'ethers';
 import { useMemo, useState } from 'react';
 

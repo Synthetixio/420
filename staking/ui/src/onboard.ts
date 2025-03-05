@@ -1,4 +1,4 @@
-import { appMetadata, MAINNET, OPTIMISM } from '@_/useBlockchain';
+import { MAINNET, OPTIMISM, appMetadata } from '@_/useBlockchain';
 import coinbaseModule from '@web3-onboard/coinbase';
 import type { ChainWithDecimalId } from '@web3-onboard/common';
 import gnosisModule from '@web3-onboard/gnosis';

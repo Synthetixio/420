@@ -47,7 +47,7 @@ export function usePositionDebt({
           );
           return wei(debt);
         },
-        `usePositionDebt`
+        'usePositionDebt'
       );
     },
   });

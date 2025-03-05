@@ -8,14 +8,14 @@ import { delegateCollateral } from './commands/delegateCollateral';
 import { depositCollateral } from './commands/depositCollateral';
 import { depositSystemToken } from './commands/depositSystemToken';
 import { getSNX } from './commands/getSNX';
-import { getUSDC } from './commands/getUSDC';
-import { setEthBalance } from './commands/setEthBalance';
-import { wrapCollateral } from './commands/wrapCollateral';
-import { wrapEth } from './commands/wrapEth';
-import { setWithdrawTimeout } from './commands/setWithdrawTimeout';
 import { getSUSD } from './commands/getSUSD';
 import { getSystemToken } from './commands/getSystemToken';
+import { getUSDC } from './commands/getUSDC';
 import { pythBypass } from './commands/pythBypass';
+import { setEthBalance } from './commands/setEthBalance';
+import { setWithdrawTimeout } from './commands/setWithdrawTimeout';
+import { wrapCollateral } from './commands/wrapCollateral';
+import { wrapEth } from './commands/wrapEth';
 
 installLogsCollector({
   enableExtendedCollector: true,
@@ -106,7 +106,7 @@ beforeEach(() => {
   }).as('subgraph');
   cy.intercept('https://subgraph.satsuma-prod.com/**', { log: false });
 
-  [
+  for (const networkName of [
     'mainnet',
     'optimism-mainnet',
     'base-mainnet',
@@ -114,17 +114,17 @@ beforeEach(() => {
     'base-sepolia',
     'arbitrum-mainnet',
     'arbitrum-sepolia',
-  ].forEach((networkName) => {
+  ]) {
     cy.intercept(`https://${networkName}.infura.io/v3/**`, (req) => {
       req.url = 'http://127.0.0.1:8545';
       req.continue();
     }).as(networkName);
     cy.intercept(`https://${networkName}.infura.io/v3/**`, { log: false });
-  });
+  }
 
-  cy.intercept(`http://127.0.0.1:8545`, { log: false });
+  cy.intercept('http://127.0.0.1:8545', { log: false });
   //  cy.intercept(`https://api.synthetix.io/**`, { statusCode: 400 }).as('api');
-  cy.intercept(`https://api.synthetix.io/**`, { log: false });
+  cy.intercept('https://api.synthetix.io/**', { log: false });
   cy.intercept(
     'https://gateway.thegraph.com/api/f55095f3203bcba72cbee045322be46c/subgraphs/id/GQFbb95cE6d8mV989mL5figjaGaKCQB3xqYrr1bRyXqF',
     (req) => {

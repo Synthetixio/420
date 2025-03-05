@@ -18,14 +18,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/CRatioBar@workspace:*, @_/CRatioBar@workspace:staking/lib/CRatioBar":
-  version: 0.0.0-use.local
-  resolution: "@_/CRatioBar@workspace:staking/lib/CRatioBar"
-  dependencies:
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
 "@_/ContractError@workspace:*, @_/ContractError@workspace:staking/lib/ContractError":
   version: 0.0.0-use.local
   resolution: "@_/ContractError@workspace:staking/lib/ContractError"
@@ -178,7 +170,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@_/staking@workspace:staking/ui"
   dependencies:
-    "@_/CRatioBar": "workspace:*"
     "@_/ContractError": "workspace:*"
     "@_/Permissions": "workspace:*"
     "@_/TermsModal": "workspace:*"

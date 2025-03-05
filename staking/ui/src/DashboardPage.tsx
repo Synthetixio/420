@@ -30,7 +30,7 @@ export function DashboardPage() {
 
   const { activeWallet } = useWallet();
 
-  const { network, setNetwork } = useNetwork();
+  const { network } = useNetwork();
 
   const isPending =
     activeWallet &&

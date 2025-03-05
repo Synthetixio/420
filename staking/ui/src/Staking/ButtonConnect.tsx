@@ -1,5 +1,5 @@
-import { Button, Text } from '@chakra-ui/react';
 import { useWallet } from '@_/useBlockchain';
+import { Button, Text } from '@chakra-ui/react';
 import React from 'react';
 
 export function ButtonConnect({ ...props }) {

@@ -1,5 +1,5 @@
-import { formatValue, parseUnits, compareAddress, prettyString } from './';
 import { wei } from '@synthetixio/wei';
+import { compareAddress, formatValue, parseUnits, prettyString } from './';
 
 describe('formatValue', () => {
   it('should format value correctly with default decimals', () => {

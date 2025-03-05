@@ -18,7 +18,7 @@ export function useAccountPermissions(accountId?: ethers.BigNumber) {
       { contractsHash: contractsHash([CoreProxy]) },
     ],
     enabled: Boolean(provider && CoreProxy && accountId),
-    queryFn: async function () {
+    queryFn: async () => {
       if (!(provider && CoreProxy && accountId)) throw 'OMFG';
       const CoreProxyContract = new ethers.Contract(CoreProxy.address, CoreProxy.abi, provider);
       const permissions = await CoreProxyContract.getAccountPermissions(accountId);
@@ -26,10 +26,12 @@ export function useAccountPermissions(accountId?: ethers.BigNumber) {
         (
           acc: { [key: string]: string[] },
           { user, permissions }: { user: string; permissions: string[] }
-        ) => ({
-          ...acc,
-          [user.toLowerCase()]: permissions.map((r: string) => ethers.utils.parseBytes32String(r)),
-        }),
+        ) => {
+          acc[user.toLowerCase()] = permissions.map((r: string) =>
+            ethers.utils.parseBytes32String(r)
+          );
+          return acc;
+        },
         {}
       );
     },
@@ -49,7 +51,7 @@ export function useAccountOwner(accountId?: ethers.BigNumber) {
       { contractsHash: contractsHash([AccountProxy]) },
     ],
     enabled: Boolean(provider && AccountProxy && accountId),
-    queryFn: async function () {
+    queryFn: async () => {
       if (!(provider && AccountProxy && accountId)) throw 'OMFG';
       const AccountProxyContract = new ethers.Contract(
         AccountProxy.address,

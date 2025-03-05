@@ -1,8 +1,9 @@
 import { contractsHash } from '@_/tsHelpers';
-import { Network, useNetwork, useProviderForChain } from '@_/useBlockchain';
+import { type Network, useNetwork, useProviderForChain } from '@_/useBlockchain';
 import { useCoreProxy } from '@_/useCoreProxy';
 import { erc7412Call } from '@_/withERC7412';
-import Wei, { wei } from '@synthetixio/wei';
+import type Wei from '@synthetixio/wei';
+import { wei } from '@synthetixio/wei';
 import { useQuery } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';

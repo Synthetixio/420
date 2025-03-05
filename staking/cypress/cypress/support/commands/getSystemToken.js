@@ -19,7 +19,9 @@ export async function getSystemToken({ address = Cypress.env('walletAddress'), a
     provider
   );
 
-  const oldBalance = parseFloat(ethers.utils.formatUnits(await TokenContract.balanceOf(address)));
+  const oldBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await TokenContract.balanceOf(address))
+  );
   console.log('getSystemToken', { address, oldBalance });
 
   if (oldBalance > amount) {
@@ -27,7 +29,9 @@ export async function getSystemToken({ address = Cypress.env('walletAddress'), a
     return null;
   }
 
-  const whaleBalance = parseFloat(ethers.utils.formatUnits(await TokenContract.balanceOf(whale)));
+  const whaleBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await TokenContract.balanceOf(whale))
+  );
   console.log('getSystemToken', { whale, whaleBalance });
 
   const signer = provider.getSigner(whale);
@@ -38,7 +42,9 @@ export async function getSystemToken({ address = Cypress.env('walletAddress'), a
   const receipt = await txn.wait();
   console.log('getSystemToken', { txEvents: receipt.events.filter((e) => Boolean(e.event)) });
 
-  const newBalance = parseFloat(ethers.utils.formatUnits(await TokenContract.balanceOf(address)));
+  const newBalance = Number.parseFloat(
+    ethers.utils.formatUnits(await TokenContract.balanceOf(address))
+  );
   console.log('getSystemToken', { address, newBalance });
   return receipt;
 }

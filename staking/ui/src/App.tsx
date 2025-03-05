@@ -1,15 +1,15 @@
-import { ChakraProvider, extendTheme, useColorMode } from '@chakra-ui/react';
-import { DEFAULT_QUERY_STALE_TIME, SESSION_STORAGE_KEYS } from '@_/constants';
 import { TermsModal } from '@_/TermsModal';
+import { DEFAULT_QUERY_STALE_TIME, SESSION_STORAGE_KEYS } from '@_/constants';
 import { Fonts, theme } from '@_/theme';
+import { ChakraProvider, extendTheme, useColorMode } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Web3OnboardProvider } from '@web3-onboard/react';
 import { useEffect } from 'react';
 import Head from 'react-helmet';
 import { BrowserRouter } from 'react-router-dom';
-import { onboard } from './onboard';
 import { Router } from './Router';
+import { onboard } from './onboard';
 import { Progress } from './theme';
 
 const queryClient = new QueryClient({

@@ -13,6 +13,7 @@ export type ContractErrorType = {
   data: string;
   name: string;
   signature: string;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   args: Record<string, any>;
 };
 
@@ -74,6 +75,7 @@ const PANIC_REASONS: { [key: string]: string } = {
   '51': 'Call to a zero-initialized variable of internal function type.',
 };
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function extractErrorData(error: Error | any) {
   return (
     error.cause?.cause?.cause?.error?.data ||
@@ -93,28 +95,28 @@ export function extractErrorData(error: Error | any) {
 export function dedupeErrors(abiErrors: `error ${string}`[]) {
   const unique = new Set();
   const uniqueAbiErrors: string[] = [];
-  abiErrors.forEach((errorLine) => {
+  for (const errorLine of abiErrors) {
     const fragment = ethers.utils.Fragment.from(errorLine);
     const sighash = fragment.format(ethers.utils.FormatTypes.sighash);
     if (!unique.has(sighash)) {
       uniqueAbiErrors.push(fragment.format(ethers.utils.FormatTypes.full));
       unique.add(sighash);
     }
-  });
+  }
   return uniqueAbiErrors;
 }
 
 export function combineErrors(contracts: ({ abi: string[] } | undefined)[]) {
   const abiErrors: `error ${string}`[] = [];
-  contracts.forEach((contract) => {
+  for (const contract of contracts) {
     if (contract) {
-      contract.abi.forEach((line) => {
+      for (const line of contract.abi) {
         if (line.startsWith('error ')) {
           abiErrors.push(line as `error ${string}`);
         }
-      });
+      }
     }
-  });
+  }
   return abiErrors;
 }
 
@@ -122,9 +124,10 @@ export function parseErrorData({
   errorData,
   abi,
 }: {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   errorData?: any;
   abi?: `error ${string}`[];
-}): ContractErrorType | void {
+}): ContractErrorType | undefined {
   if (`${errorData}`.startsWith('0x08c379a0')) {
     const content = `0x${errorData.substring(10)}`;
     // reason: string; for standard revert error string
@@ -166,11 +169,11 @@ export function parseErrorData({
     const errorParsed = AllErrorsInterface.parseError(errorData);
     const errorArgs = Object.fromEntries(
       Object.entries(errorParsed.args)
-        .filter(([key]) => `${parseInt(key)}` !== key)
+        .filter(([key]) => `${Number.parseInt(key)}` !== key)
         .map(([key, value]) => {
           if (value instanceof ethers.BigNumber) {
             // Guess wei
-            const unwei = parseFloat(ethers.utils.formatEther(value.toString()));
+            const unwei = Number.parseFloat(ethers.utils.formatEther(value.toString()));
             if (unwei > 0.001) {
               // must be wei
               return [key, unwei];
@@ -185,7 +188,7 @@ export function parseErrorData({
             }
 
             // Just a number
-            return [key, parseFloat(value.toString())];
+            return [key, Number.parseFloat(value.toString())];
           }
 
           // Not a number
@@ -208,9 +211,10 @@ export function parseContractError({
   error,
   abi,
 }: {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   error?: any;
   abi?: `error ${string}`[];
-}): ContractErrorType | void {
+}): ContractErrorType | undefined {
   const errorData = extractErrorData(error);
   if (!errorData) {
     console.error({ error }); // intentional logging as object so we can inspect all properties

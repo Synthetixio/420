@@ -1,14 +1,14 @@
 import { INFURA_KEY } from '@_/constants';
 import { importPythERC7412Wrapper } from '@_/contracts';
 import { EthereumIcon, FailedIcon, OptimismIcon } from '@_/icons';
-import { IconProps } from '@chakra-ui/react';
+import type { IconProps } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 import { useConnectWallet, useSetChain } from '@web3-onboard/react';
 import { ethers } from 'ethers';
 import React, { useCallback } from 'react';
-import { MagicProvider } from './magic';
 import SynthetixIcon from './SynthetixIcon.svg';
 import SynthetixLogo from './SynthetixLogo.svg';
+import { MagicProvider } from './magic';
 
 export function getMagicProvider(): ethers.providers.JsonRpcProvider | undefined {
   if (window.$magicWallet && window.$chainId) {
@@ -44,6 +44,19 @@ export const NetworkIcon = ({ networkId, size = '24px', ...props }: NetworkIconP
       return <FailedIcon w={size} h={size} {...props} />;
     }
   }
+};
+
+export const UNSUPPORTED_NETWORK: Network = {
+  id: 0,
+  preset: 'main',
+  hexId: `0x${Number(0).toString(16)}`,
+  token: 'ETH',
+  name: 'unsupported',
+  rpcUrl: '',
+  publicRpcUrl: '',
+  label: 'Unsupported',
+  isSupported: false,
+  isTestnet: false,
 };
 
 export const MAINNET: Network = {

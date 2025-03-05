@@ -1,6 +1,7 @@
-import { Flex, Image, Circle, Text } from '@chakra-ui/react';
-import { LogoIcon } from '@_/icons';
-import React from 'react';
+// import { LogoIcon } from '@_/icons';
+// import { Circle, Flex, Image, Text } from '@chakra-ui/react';
+import { Flex, Image } from '@chakra-ui/react';
+import type React from 'react';
 
 export function LayoutWithImage({
   Subheader,
@@ -28,6 +29,7 @@ export function LayoutWithImage({
           gap={6}
         >
           <Flex direction="column" gap={4}>
+            {/*
             <Flex alignItems="center" gap={3}>
               <Circle
                 size="32px"
@@ -43,6 +45,7 @@ export function LayoutWithImage({
                 SNX 420 Pool
               </Text>
             </Flex>
+            */}
 
             <Subheader />
           </Flex>

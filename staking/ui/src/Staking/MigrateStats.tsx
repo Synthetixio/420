@@ -1,10 +1,23 @@
-import { CRatioAmount } from '@_/CRatioBar';
 import { usePythPrice } from '@_/usePythPrice';
 import { Flex, Text } from '@chakra-ui/react';
-import { Wei, wei } from '@synthetixio/wei';
-import { ethers } from 'ethers';
+import { type Wei, wei } from '@synthetixio/wei';
+import type { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
+
+function renderCRatio(rawValue?: Wei | ethers.BigNumber | number) {
+  if (!rawValue) {
+    return '~';
+  }
+  const value = wei(rawValue).toNumber();
+  if (value <= 0) {
+    return 'N/A';
+  }
+  if (value >= Number.MAX_SAFE_INTEGER) {
+    return 'Infinite';
+  }
+  return `${Math.round(value * 100)}%`;
+}
 
 export function MigrateStats({
   collateralAmount,
@@ -71,7 +84,7 @@ export function MigrateStats({
             C-Ratio
           </Text>
           <Text fontSize="18px" fontWeight={500}>
-            {cRatio ? <CRatioAmount value={wei(cRatio).toNumber() * 100} /> : <Text>~</Text>}
+            {renderCRatio(cRatio)}
           </Text>
         </Flex>
       </Flex>

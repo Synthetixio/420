@@ -1,4 +1,4 @@
-import { unlockDateString, formatTimeToUnlock } from './date';
+import { formatTimeToUnlock, unlockDateString } from './date';
 
 describe('unlockDateString function', () => {
   // Test case 1: accountCollateralUnlockDate is undefined

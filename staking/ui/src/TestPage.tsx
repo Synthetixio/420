@@ -71,7 +71,7 @@ export function TestPage() {
                 gap={6}
                 justifyContent="space-between"
               >
-                <Flex minWidth="120px" direction="column" gap={3} textAlign="center"></Flex>
+                <Flex minWidth="120px" direction="column" gap={3} textAlign="center" />
               </Flex>
             </Flex>
           </Flex>

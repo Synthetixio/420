@@ -1,6 +1,6 @@
-import { Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
 import { useAccounts } from '@_/useAccounts';
-import { DelegationIcon } from './DelegationIcon';
+import { Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import DelegationIcon from './DelegationIcon.svg';
 import { PermissionTable } from './PermissionTable';
 
 export function Permissions() {

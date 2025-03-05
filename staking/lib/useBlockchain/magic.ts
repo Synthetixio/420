@@ -30,6 +30,7 @@ export class MagicProvider extends ethers.providers.JsonRpcProvider {
     return [this.magicWallet];
   }
 
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   async send(method: string, params: Array<any>): Promise<any> {
     if (method === 'eth_chainId') {
       return `0x${Number(this.chainId).toString(16)}`;

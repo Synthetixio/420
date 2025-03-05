@@ -1,5 +1,5 @@
 import { ZEROWEI } from '@_/constants';
-import { Wei } from '@synthetixio/wei';
+import type { Wei } from '@synthetixio/wei';
 
 export function calculateCRatio(debt?: Wei, collateralValue?: Wei) {
   if (debt && collateralValue && !debt.eq(0) && !collateralValue.eq(0)) {

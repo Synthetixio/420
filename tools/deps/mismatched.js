@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const path = require('path');
+const path = require('node:path');
 const { fgReset, fgRed, fgGreen, fgCyan } = require('./lib/colors');
 
 // ignore certain deps that are explicitly mismatched versions
@@ -63,13 +63,13 @@ async function run() {
 
   const mismatched = mismatchedUnfiltered.filter((item) => !ignored(item));
 
-  mismatched.forEach(({ parent, name, version }) => {
+  for (const { parent, name, version } of mismatched) {
     console.log(
       '⚠️ Dependency version mismatch',
       `${fgRed}"${name}@${version}"${fgReset} found in ${fgCyan}${parent}${fgReset}`,
       `(expected ${fgGreen}${unique[name]}${fgReset})`
     );
-  });
+  }
 
   if (mismatched.length > 0) {
     console.log('');

@@ -1,10 +1,10 @@
 import { Flex } from '@chakra-ui/react';
 import React from 'react';
-import burn from './burn.webp';
 import { ButtonConnect } from './ButtonConnect';
 import { ButtonDocs } from './ButtonDocs';
 import { LayoutWithImage } from './LayoutWithImage';
 import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
+import burn from './burn.webp';
 
 export function ConnectYourWallet() {
   return (

@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
 import { fetchPythPrice } from '@_/usePythPrice';
 import { wei } from '@synthetixio/wei';
+import { useQuery } from '@tanstack/react-query';
 
 export async function fetchTvl() {
   const response = await fetch('https://api.synthetix.io/v3/tvl');

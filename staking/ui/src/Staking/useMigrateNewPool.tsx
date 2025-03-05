@@ -1,6 +1,5 @@
-import { useToast } from '@chakra-ui/react';
-import { POOL_ID } from '@_/constants';
 import { ContractError } from '@_/ContractError';
+import { POOL_ID } from '@_/constants';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useCollateralType } from '@_/useCollateralTypes';
@@ -8,13 +7,14 @@ import { useContractErrorParser } from '@_/useContractErrorParser';
 import { useLiquidityPosition } from '@_/useLiquidityPosition';
 import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
+import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
+import { useToast } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';
 import React from 'react';
 import { useTargetCRatio } from './useTargetCRatio';
-import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 
 const log = debug('snx:useMigrateNewPool');
 

@@ -6,4 +6,4 @@ export const truncateAddress = (address: string, first = 5, last = 5) => {
 };
 
 export const parseFloatWithCommas = (numberWithCommas: string) =>
-  parseFloat(numberWithCommas.replaceAll(',', ''));
+  Number.parseFloat(numberWithCommas.replaceAll(',', ''));

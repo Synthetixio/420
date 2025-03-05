@@ -15,14 +15,14 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import React from 'react';
-import burn from './burn.webp';
-import coinburn from './coinburn.svg';
 import { LayoutWithImage } from './LayoutWithImage';
 import { MigrateStats } from './MigrateStats';
 import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
+import { ZeroRisk } from './ZeroRisk';
+import burn from './burn.webp';
+import coinburn from './coinburn.svg';
 import { useMigrateNewPoolV2x } from './useMigrateNewPoolV2x';
 import { useV2xPosition } from './useV2xPosition';
-import { ZeroRisk } from './ZeroRisk';
 
 export function MigrateFromV2x() {
   const [isOpenMigrate, setIsOpenMigrate] = React.useState(false);

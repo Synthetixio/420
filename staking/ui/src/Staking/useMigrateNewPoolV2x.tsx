@@ -1,4 +1,3 @@
-import { useToast } from '@chakra-ui/react';
 import { ContractError } from '@_/ContractError';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
@@ -6,6 +5,7 @@ import { useLegacyMarket } from '@_/useLegacyMarket';
 import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
 import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
+import { useToast } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';

@@ -1,7 +1,7 @@
 import { importOracleManagerProxy } from '@_/contracts';
-import { Network, useNetwork, useProviderForChain } from '@_/useBlockchain';
+import { type Network, useNetwork, useProviderForChain } from '@_/useBlockchain';
 import { erc7412Call, getDefaultFromAddress } from '@_/withERC7412';
-import { Wei, wei } from '@synthetixio/wei';
+import { type Wei, wei } from '@synthetixio/wei';
 import { useQuery } from '@tanstack/react-query';
 import { ethers } from 'ethers';
 
@@ -42,12 +42,11 @@ export async function fetchOraclePrice({
           price: wei(result.node.price),
           timestamp: new Date(Number(result.node.timestamp.mul(1000).toString())),
         };
-      } else {
-        return {
-          price: wei(result.price),
-          timestamp: new Date(Number(result.timestamp.mul(1000).toString())),
-        };
       }
+      return {
+        price: wei(result.price),
+        timestamp: new Date(Number(result.timestamp.mul(1000).toString())),
+      };
     },
     'useOraclePrice'
   );

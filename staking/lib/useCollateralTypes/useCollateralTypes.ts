@@ -1,10 +1,10 @@
 import { tokenOverrides } from '@_/constants';
 import { importCollateralTokens } from '@_/contracts';
 import { contractsHash } from '@_/tsHelpers';
-import { MAINNET, Network, OPTIMISM, useNetwork } from '@_/useBlockchain';
+import { MAINNET, type Network, OPTIMISM, useNetwork } from '@_/useBlockchain';
 import { useSNX } from '@_/useSNX';
 import { useSystemToken } from '@_/useSystemToken';
-import { wei, Wei } from '@synthetixio/wei';
+import { type Wei, wei } from '@synthetixio/wei';
 import { useQuery } from '@tanstack/react-query';
 import { ethers } from 'ethers';
 
