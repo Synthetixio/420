@@ -1,9 +1,24 @@
+import { Tooltip } from '@_/Tooltip';
+import { prettyString, renderAccountId } from '@_/format';
+import { WalletIcon } from '@_/icons';
+import { useAccounts } from '@_/useAccounts';
+import {
+  MAINNET,
+  NetworkIcon,
+  OPTIMISM,
+  UNSUPPORTED_NETWORK,
+  useNetwork,
+  useWallet,
+} from '@_/useBlockchain';
+import { useCreateAccount } from '@_/useCreateAccount';
+import { makeSearch, useParams } from '@_/useParams';
 import { CopyIcon, SettingsIcon } from '@chakra-ui/icons';
 import {
   Badge,
   Button,
   Flex,
   IconButton,
+  Image,
   Link,
   Menu,
   MenuButton,
@@ -11,15 +26,9 @@ import {
   MenuList,
   Text,
 } from '@chakra-ui/react';
-import { prettyString, renderAccountId } from '@_/format';
-import { WalletIcon } from '@_/icons';
-import { Tooltip } from '@_/Tooltip';
-import { useAccounts } from '@_/useAccounts';
-import { MAINNET, NetworkIcon, OPTIMISM, useNetwork, useWallet } from '@_/useBlockchain';
-import { useCreateAccount } from '@_/useCreateAccount';
-import { makeSearch, useParams } from '@_/useParams';
 import { ethers } from 'ethers';
 import React from 'react';
+import CreateAccount from './CreateAccount.svg';
 
 const mainnets = [MAINNET, OPTIMISM];
 
@@ -94,40 +103,40 @@ export function NetworkController() {
   }
   return (
     <Flex>
-      {currentNetwork ? (
-        <Menu>
-          <MenuButton
-            as={Button}
-            variant="outline"
-            colorScheme="gray"
-            sx={{ '> span': { display: 'flex', alignItems: 'center' } }}
-            mr={1}
-            px={3}
-          >
-            <NetworkIcon
-              filter={currentNetwork.isTestnet ? 'grayscale(1)' : ''}
-              networkId={notConnected ? 8453 : notSupported ? 0 : currentNetwork.id}
-            />
-            <Text variant="nav" ml={2} display={{ base: 'none', md: 'inline-block' }}>
-              {currentNetwork.label}
-            </Text>
-          </MenuButton>
-          <MenuList border="1px" borderColor="gray.900">
-            {mainnets.map(({ id, preset, label }) => (
-              <MenuItem
-                key={`${id}-${preset}`}
-                onClick={() => setNetwork(id)}
-                isDisabled={window.$chainId ? window.$chainId !== id : false}
-              >
-                <NetworkIcon networkId={id} size="20px" />
-                <Text variant="nav" ml={2}>
-                  {label}
-                </Text>
-              </MenuItem>
-            ))}
-          </MenuList>
-        </Menu>
-      ) : null}
+      <Menu>
+        <MenuButton
+          as={Button}
+          variant="outline"
+          colorScheme="gray"
+          sx={{ '> span': { display: 'flex', alignItems: 'center' } }}
+          mr={1}
+          px={3}
+        >
+          <NetworkIcon
+            filter={currentNetwork?.isTestnet ? 'grayscale(1)' : ''}
+            networkId={
+              notConnected ? 8453 : notSupported ? UNSUPPORTED_NETWORK.id : currentNetwork?.id
+            }
+          />
+          <Text variant="nav" ml={2} display={{ base: 'none', md: 'inline-block' }}>
+            {notSupported ? UNSUPPORTED_NETWORK.label : currentNetwork?.label}
+          </Text>
+        </MenuButton>
+        <MenuList border="1px" borderColor="gray.900">
+          {mainnets.map(({ id, preset, label }) => (
+            <MenuItem
+              key={`${id}-${preset}`}
+              onClick={() => setNetwork(id)}
+              isDisabled={window.$chainId ? window.$chainId !== id : false}
+            >
+              <NetworkIcon networkId={id} size="20px" />
+              <Text variant="nav" ml={2}>
+                {label}
+              </Text>
+            </MenuItem>
+          ))}
+        </MenuList>
+      </Menu>
       <Menu placement="bottom-end">
         <MenuButton
           as={Button}
@@ -268,20 +277,7 @@ export function NetworkController() {
                   variant="outline"
                   colorScheme="gray"
                   color="white"
-                  leftIcon={
-                    <svg
-                      width="8"
-                      height="8"
-                      viewBox="0 0 8 8"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M3.5 3.5V0.5H4.5V3.5H7.5V4.5H4.5V7.5H3.5V4.5H0.5V3.5H3.5Z"
-                        fill="white"
-                      />
-                    </svg>
-                  }
+                  leftIcon={<Image src={CreateAccount} alt="Create account" />}
                   w="130px"
                   data-cy="create new account button"
                 >
