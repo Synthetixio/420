@@ -4,6 +4,7 @@ import { wei } from '@synthetixio/wei';
 import numbro from 'numbro';
 import React from 'react';
 import { LoanChart } from './LoanChart';
+import { ModalShare420 } from './ModalShare420';
 import { TvlChart } from './TvlChart';
 import farming from './farming.webp';
 import { useClosePositionNewPool } from './useClosePositionNewPool';
@@ -21,6 +22,8 @@ export function StakingPosition() {
   const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionNewPool();
 
   const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'hourly' });
+
+  const [isOpenShare, setIsOpenShare] = React.useState(false);
 
   return (
     <>
@@ -125,11 +128,13 @@ export function StakingPosition() {
         pt={{ base: 6, sm: 10 }}
         gap={6}
       >
-        <Text color="gray.500" maxWidth="40em">
-          Your position is fully delegated to Synthetix, and your debt is being forgiven
-          automatically over time with zero risk of liquidation.
-        </Text>
-
+        <Flex direction="row" gap={4} justifyContent="space-between">
+          <Text color="gray.500" maxWidth="40em">
+            Your position is fully delegated to Synthetix, and your debt is being forgiven
+            automatically over time with zero risk of liquidation.
+          </Text>
+          <Button onClick={() => setIsOpenShare(true)}>Share</Button>
+        </Flex>
         <Flex
           direction={{ base: 'column', sm: 'row', lg: 'row', xl: 'row' }}
           flexWrap="wrap"
@@ -246,6 +251,8 @@ export function StakingPosition() {
           </Flex>
         </Flex>
       </Flex>
+
+      <ModalShare420 isOpenShare={isOpenShare} setIsOpenShare={setIsOpenShare} />
     </>
   );
 }
