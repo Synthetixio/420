@@ -6,7 +6,7 @@ import { TvlChart } from './Staking/TvlChart';
 import { useTvl420 } from './Staking/useTvl420';
 
 export function TestPage() {
-  const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'hourly' });
+  const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'daily' });
   const [isOpenShare, setIsOpenShare] = React.useState(false);
   return (
     <>

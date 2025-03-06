@@ -21,7 +21,7 @@ export function StakingPosition() {
   const { data: snxPrice, isPending: isPendingSnxPrice } = usePythPrice('SNX');
   const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionNewPool();
 
-  const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'hourly' });
+  const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'daily' });
 
   const [isOpenShare, setIsOpenShare] = React.useState(false);
 
