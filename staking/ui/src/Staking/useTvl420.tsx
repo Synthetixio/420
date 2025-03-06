@@ -4,7 +4,7 @@ export async function fetchTvl420({
   networkName,
   span,
 }: {
-  networkName: 'ethereum' | 'optimism';
+  networkName: 'cross' | 'ethereum' | 'optimism';
   span: 'hourly' | 'daily' | 'weekly' | 'monthly';
 }) {
   const url = new URL('/v3/tvl420', 'https://api.synthetix.io');
@@ -18,7 +18,7 @@ export function useTvl420({
   networkName,
   span,
 }: {
-  networkName: 'ethereum' | 'optimism';
+  networkName: 'cross' | 'ethereum' | 'optimism';
   span: 'hourly' | 'daily' | 'weekly' | 'monthly';
 }) {
   return useQuery({

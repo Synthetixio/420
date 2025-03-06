@@ -1,5 +1,4 @@
 // import { LogoIcon } from '@_/icons';
-import { useNetwork } from '@_/useBlockchain';
 // import { Circle, Flex, Image, Text } from '@chakra-ui/react';
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import numbro from 'numbro';
@@ -17,9 +16,7 @@ export function LayoutWithImage({
   Content: () => React.ReactNode;
   imageSrc: string;
 }) {
-  const { network } = useNetwork();
-  const networkName = network?.id === 1 ? 'ethereum' : network?.id === 10 ? 'optimism' : 'ethereum';
-  const { data: tvl420 } = useTvl420({ networkName, span: 'hourly' });
+  const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'hourly' });
   return (
     <>
       <Flex

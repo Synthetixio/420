@@ -1,4 +1,3 @@
-import { useNetwork } from '@_/useBlockchain';
 import { Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
@@ -7,9 +6,7 @@ import { TvlChart } from './Staking/TvlChart';
 import { useTvl420 } from './Staking/useTvl420';
 
 export function TestPage() {
-  const { network } = useNetwork();
-  const networkName = network?.id === 1 ? 'ethereum' : network?.id === 10 ? 'optimism' : 'ethereum';
-  const { data: tvl420 } = useTvl420({ networkName, span: 'hourly' });
+  const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'hourly' });
   return (
     <>
       <Helmet>

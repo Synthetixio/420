@@ -1,4 +1,3 @@
-import { useNetwork } from '@_/useBlockchain';
 import { usePythPrice } from '@_/usePythPrice';
 import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
@@ -21,9 +20,7 @@ export function StakingPosition() {
   const { data: snxPrice, isPending: isPendingSnxPrice } = usePythPrice('SNX');
   const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionNewPool();
 
-  const { network } = useNetwork();
-  const networkName = network?.id === 1 ? 'ethereum' : network?.id === 10 ? 'optimism' : 'ethereum';
-  const { data: tvl420 } = useTvl420({ networkName, span: 'hourly' });
+  const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'hourly' });
 
   return (
     <>
