@@ -1,12 +1,13 @@
-import { Flex, Heading, Text } from '@chakra-ui/react';
+import { Button, Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { PoolStats } from './Staking/PoolStats';
+import { ModalShare420 } from './Staking/ModalShare420';
 import { TvlChart } from './Staking/TvlChart';
 import { useTvl420 } from './Staking/useTvl420';
 
 export function TestPage() {
   const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'hourly' });
+  const [isOpenShare, setIsOpenShare] = React.useState(false);
   return (
     <>
       <Helmet>
@@ -23,8 +24,7 @@ export function TestPage() {
             <Text color="gray.500" fontSize="1rem" lineHeight={6}>
               Deposit into the 420 Pool to start earning yield
             </Text>
-
-            <PoolStats />
+            <Button onClick={() => setIsOpenShare(true)}>Share</Button>
           </Flex>
         </Flex>
         <Flex direction="column" mt={6} gap={6}>
@@ -65,6 +65,8 @@ export function TestPage() {
           </Flex>
         </Flex>
       </Flex>
+
+      <ModalShare420 isOpenShare={isOpenShare} setIsOpenShare={setIsOpenShare} />
     </>
   );
 }
