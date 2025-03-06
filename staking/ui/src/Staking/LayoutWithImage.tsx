@@ -16,7 +16,7 @@ export function LayoutWithImage({
   Content: () => React.ReactNode;
   imageSrc: string;
 }) {
-  const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'hourly' });
+  const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'daily' });
   return (
     <>
       <Flex
