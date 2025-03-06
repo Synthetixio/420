@@ -28,7 +28,7 @@ export function StakingPosition() {
   return (
     <>
       <Flex direction="column">
-        <Flex direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }} gap={4}>
+        <Flex direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }} gap={6}>
           <Flex
             direction="column"
             flex={1}
@@ -39,8 +39,9 @@ export function StakingPosition() {
             borderRadius="6px"
             bg="navy.700"
             p={{ base: 4, sm: 10 }}
+            pt={{ base: 6, sm: 10 }}
           >
-            <Text fontSize="24px" lineHeight="32px" color="gray.50">
+            <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
               SNX Powered Yield Farming
             </Text>
             <Text fontSize="16px" lineHeight="24px" color="gray.500">
@@ -48,7 +49,14 @@ export function StakingPosition() {
               immediately.
             </Text>
             <Box>
-              <Image rounded="5px" src={farming} width="100%" height="100%" objectFit="cover" />
+              <Image
+                mt={2}
+                rounded="6px"
+                src={farming}
+                width="100%"
+                height="100%"
+                objectFit="cover"
+              />
             </Box>
           </Flex>
           <Flex
@@ -63,9 +71,11 @@ export function StakingPosition() {
             p={{ base: 4, sm: 10 }}
             pl={{ base: 4, sm: 4 }}
             pb={{ base: 4, sm: 4 }}
+            pt={{ base: 6, sm: 10 }}
           >
             <Text
               fontSize="24px"
+              fontWeight={500}
               lineHeight="32px"
               display={{ base: 'block', sm: 'none' }}
               color="gray.50"
@@ -87,16 +97,16 @@ export function StakingPosition() {
               justifyContent="flex-end"
               alignItems="center"
               flexWrap="nowrap"
+              mt={{ base: '4', sm: '0' }}
             >
               <Text fontSize="14px" color="gray.500">
                 420 Pool TVL
               </Text>
-              <Text fontSize="18px" color="gray.50">
+              <Text fontSize="18px" fontWeight={500} color="gray.50">
                 {tvl420 && tvl420.length > 0
                   ? `$${numbro(tvl420[tvl420.length - 1].value).format({
                       trimMantissa: true,
                       thousandSeparated: true,
-                      average: true,
                       mantissa: 0,
                       spaceSeparated: false,
                     })}`
@@ -113,11 +123,12 @@ export function StakingPosition() {
         borderColor="gray.900"
         borderWidth="1px"
         borderRadius="6px"
-        bg="navy.700"
-        p={6}
-        gap={9}
+        bg="navy.900"
+        p={{ base: 4, sm: 10 }}
+        pt={{ base: 6, sm: 10 }}
+        gap={6}
       >
-        <Text mt={3} color="gray.500" maxWidth="40em">
+        <Text color="gray.500" maxWidth="40em">
           Your position is fully delegated to Synthetix, and your debt is being forgiven
           automatically over time with zero risk of liquidation.
         </Text>
@@ -125,7 +136,7 @@ export function StakingPosition() {
         <Flex
           direction={{ base: 'column', sm: 'row', lg: 'row', xl: 'row' }}
           flexWrap="wrap"
-          gap={4}
+          gap={6}
         >
           <Flex
             order={{ base: 2, sm: 1, lg: 1, xl: 1 }}
@@ -135,10 +146,10 @@ export function StakingPosition() {
             borderRadius="6px"
             bg="navy.900"
             direction="column"
-            p={3}
+            p={{ base: 4, sm: 6 }}
             gap={3}
           >
-            <Flex minWidth="120px" direction="column" p={3} gap={3}>
+            <Flex minWidth="120px" direction="column" gap={3}>
               <Heading fontSize="20px" lineHeight="1.75rem" color="gray.50" fontWeight={700}>
                 Debt Burned
               </Heading>
@@ -188,14 +199,15 @@ export function StakingPosition() {
             borderColor="gray.900"
             borderWidth="1px"
             borderRadius="6px"
-            p={6}
+            p={{ base: 4, sm: 6 }}
             gap={6}
             justifyContent="space-between"
+            h="fit-content"
           >
             <Flex minWidth="120px" direction="column" gap={3} textAlign="center">
               <Text color="gray.500">Account Balance</Text>
               <Box>
-                <Text color="gray.50" fontSize="1.25em">
+                <Text color="gray.50" fontSize="1.25em" fontWeight={500}>
                   {isPendingPositionCollateral || isPendingSnxPrice ? '~' : null}
                   {!(isPendingPositionCollateral || isPendingSnxPrice) &&
                   positionCollateral &&

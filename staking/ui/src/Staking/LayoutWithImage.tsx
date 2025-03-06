@@ -35,7 +35,8 @@ export function LayoutWithImage({
             flex={{ base: 2, sm: 2, md: 2, lg: 1 }}
             p={{ base: 4, sm: 10 }}
             pt={{ base: 6, sm: 10 }}
-            gap={6}
+            gap={{ base: 6, sm: 10 }}
+            justifyContent="center"
           >
             <Flex direction="column" gap={4}>
               {/*
@@ -78,7 +79,7 @@ export function LayoutWithImage({
             overflow="hidden"
           >
             <Image
-              rounded="5px"
+              rounded="6px"
               src={imageSrc}
               width="100%"
               height="100%"
@@ -92,7 +93,7 @@ export function LayoutWithImage({
       </Flex>
 
       <Flex direction="column">
-        <Flex direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }} gap={4}>
+        <Flex direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }} gap={6}>
           <Flex
             direction="column"
             flex={1}
@@ -104,15 +105,15 @@ export function LayoutWithImage({
             bg="navy.700"
             p={{ base: 4, sm: 10 }}
           >
-            <Text fontSize="24px" lineHeight="32px" color="gray.50">
+            <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
               SNX Powered Yield Farming
             </Text>
             <Text fontSize="16px" lineHeight="24px" color="gray.500">
               The 420 pool starts generating yield for you from Ethena and other yield sources
               immediately.
             </Text>
-            <Box>
-              <Image rounded="5px" src={farming} width="100%" height="100%" objectFit="cover" />
+            <Box mt={2}>
+              <Image rounded="6px" src={farming} width="100%" height="100%" objectFit="cover" />
             </Box>
           </Flex>
           <Flex
@@ -130,6 +131,7 @@ export function LayoutWithImage({
           >
             <Text
               fontSize="24px"
+              fontWeight={500}
               lineHeight="32px"
               display={{ base: 'block', sm: 'none' }}
               color="gray.50"
@@ -151,6 +153,7 @@ export function LayoutWithImage({
               justifyContent="flex-end"
               alignItems="center"
               flexWrap="nowrap"
+              mt={{ base: '4', sm: '0' }}
             >
               <Text fontSize="14px" color="gray.500">
                 420 Pool TVL
@@ -160,7 +163,6 @@ export function LayoutWithImage({
                   ? `$${numbro(tvl420[tvl420.length - 1].value).format({
                       trimMantissa: true,
                       thousandSeparated: true,
-                      average: true,
                       mantissa: 0,
                       spaceSeparated: false,
                     })}`
