@@ -12,7 +12,6 @@ import { EmptyV3Debt } from './Staking/EmptyV3Debt';
 import { Loading } from './Staking/Loading';
 import { MigrateFromV2x } from './Staking/MigrateFromV2x';
 import { MigrateFromV3 } from './Staking/MigrateFromV3';
-import { PoolStats } from './Staking/PoolStats';
 import { StakingPosition } from './Staking/StakingPosition';
 import { usePositionCollateral as useNewPoolPositionCollateral } from './Staking/usePositionCollateral';
 import { useV2xPosition } from './Staking/useV2xPosition';
@@ -39,10 +38,11 @@ export function DashboardPage() {
       (params.accountId && isPendingLiquidityPosition) ||
       (params.accountId && isPendingNewPoolPositionCollateral) ||
       isPendingV2xPosition);
-
   const hasV2xPosition = v2xPosition?.debt.gt(0);
   const hasV3Position = liquidityPosition?.collateralAmount.gt(0);
   const hasV3Debt = liquidityPosition?.debt.gt(0);
+
+  // Only show POL position even if user has other v3 positions on the same account
   const hasStakingPosition = newPoolPositionCollateral?.gt(0);
 
   let step = 0;
@@ -62,8 +62,6 @@ export function DashboardPage() {
             <Text color="gray.500" fontSize="1rem" lineHeight={6}>
               Deposit into the 420 Pool to start earning yield
             </Text>
-
-            <PoolStats />
           </Flex>
         </Flex>
         <Flex direction="column" mt={6} gap={6}>
@@ -109,7 +107,12 @@ export function DashboardPage() {
             </Heading>
           ) : null}
           {params.showAll ||
-          (activeWallet && network && !isPending && hasV3Position && !hasV3Debt) ? (
+          (activeWallet &&
+            network &&
+            !isPending &&
+            hasV3Position &&
+            !hasV3Debt &&
+            !hasStakingPosition) ? (
             <EmptyV3Debt />
           ) : null}
 
@@ -128,7 +131,13 @@ export function DashboardPage() {
             </Heading>
           ) : null}
           {params.showAll ||
-          (activeWallet && network && !isPending && hasV3Position && hasV3Debt) ? (
+          (activeWallet &&
+            network &&
+            !isPending &&
+            hasV3Position &&
+            hasV3Debt &&
+            // We cannot migrate account if there is already POL position on same account
+            !hasStakingPosition) ? (
             <MigrateFromV3 />
           ) : null}
 
