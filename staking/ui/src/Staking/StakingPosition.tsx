@@ -38,7 +38,7 @@ export function StakingPosition() {
         pt={{ base: 6, sm: 10 }}
         gap={6}
       >
-        <Flex direction="row" gap={4} justifyContent="space-between">
+        <Flex direction={{ base: 'column', sm: 'row' }} gap={4} justifyContent="space-between">
           <Text color="gray.500" maxWidth="40em">
             Your position is fully delegated to Synthetix, and your debt is being forgiven
             automatically over time with zero risk of liquidation.
@@ -48,8 +48,9 @@ export function StakingPosition() {
             borderColor="gray.900"
             color="gray.50"
             onClick={() => setIsOpenShare(true)}
+            minWidth="fit-content"
           >
-            <Image mr={2} width="17px" src={share} alt="Share Synthatix 420 Pool" />
+            <Image mr={2} width="16px" src={share} alt="Share Synthetix 420 Pool" />
             Share
           </Button>
         </Flex>
@@ -193,15 +194,8 @@ export function StakingPosition() {
               The 420 pool starts generating yield for you from Ethena and other yield sources
               immediately.
             </Text>
-            <Box>
-              <Image
-                mt={2}
-                rounded="6px"
-                src={farming}
-                width="100%"
-                height="100%"
-                objectFit="cover"
-              />
+            <Box mt={2}>
+              <Image rounded="6px" src={farming} width="100%" height="100%" objectFit="cover" />
             </Box>
           </Flex>
           <Flex
