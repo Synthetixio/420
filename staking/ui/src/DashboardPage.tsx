@@ -45,7 +45,7 @@ export function DashboardPage() {
   // Only show POL position even if user has other v3 positions on the same account
   const hasStakingPosition = newPoolPositionCollateral?.gt(0);
 
-  let step = 0;
+  let step = 1;
   return (
     <>
       <Helmet>
@@ -66,28 +66,28 @@ export function DashboardPage() {
         </Flex>
         <Flex direction="column" mt={6} gap={6}>
           {params.showAll ? (
-            <Heading mt={12} color="red.500">
+            <Heading mt={16} color="red.500">
               State {step++}. Loading
             </Heading>
           ) : null}
           {params.showAll || isPending ? <Loading /> : null}
 
           {params.showAll ? (
-            <Heading mt={12} color="red.500">
+            <Heading mt={16} color="red.500">
               State {step++}. Not connected
             </Heading>
           ) : null}
           {params.showAll || !activeWallet ? <ConnectYourWallet /> : null}
 
           {params.showAll ? (
-            <Heading mt={12} color="red.500">
+            <Heading mt={16} color="red.500">
               State {step++}. Connected wallet, wrong network
             </Heading>
           ) : null}
           {params.showAll || (activeWallet && !network) ? <ChangeNetwork /> : null}
 
           {params.showAll ? (
-            <Heading mt={12} color="red.500">
+            <Heading mt={16} color="red.500">
               State {step++}. Connected wallet, no v2x/v3 positions
             </Heading>
           ) : null}
@@ -102,7 +102,7 @@ export function DashboardPage() {
           ) : null}
 
           {params.showAll ? (
-            <Heading mt={12} color="red.500">
+            <Heading mt={16} color="red.500">
               State {step++}. v3 position without debt
             </Heading>
           ) : null}
@@ -117,7 +117,7 @@ export function DashboardPage() {
           ) : null}
 
           {params.showAll ? (
-            <Heading mt={12} color="red.500">
+            <Heading mt={16} color="red.500">
               State {step++}. Migrate v2x position
             </Heading>
           ) : null}
@@ -126,7 +126,7 @@ export function DashboardPage() {
           ) : null}
 
           {params.showAll ? (
-            <Heading mt={12} color="red.500">
+            <Heading mt={16} color="red.500">
               State {step++}. Migrate v3 position
             </Heading>
           ) : null}
@@ -142,7 +142,7 @@ export function DashboardPage() {
           ) : null}
 
           {params.showAll ? (
-            <Heading mt={12} color="red.500">
+            <Heading mt={16} color="red.500">
               State {step++}. Pool 420 existing position
             </Heading>
           ) : null}

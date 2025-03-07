@@ -10,6 +10,8 @@ declare global {
   var $chainId: number; // eslint-disable-line no-var
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   var ethereum: any;
+  // biome-ignore lint/suspicious/noExplicitAny: matomo here
+  var _paq: any;
 }
 
 export async function bootstrap() {

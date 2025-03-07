@@ -6,7 +6,7 @@ export function TvlChart({
   data,
   config = {
     width: 1000,
-    height: 350,
+    height: 380,
     fontSize: 30,
   },
 }: {
@@ -77,24 +77,22 @@ export function TvlChart({
 
   return (
     <svg
-      viewBox={`0 0 ${config.width} ${config.height + config.fontSize + 20}`}
+      viewBox={`-100 -20 ${config.width + 100 + 20} ${config.height + config.fontSize + 20 + 20}`}
       width="100%"
       aria-label="TVL Chart"
       role="img"
     >
       {POINTS.length > 0 ? (
         <>
-          {/*
           <line
             x1={0}
             y1={0}
             x2={0}
             y2={config.height}
             stroke="#2d2d38"
-            strokeWidth="1"
-            strokeDasharray="5"
+            strokeWidth="3"
+            // strokeDasharray="5"
           />
-          */}
           <defs>
             <linearGradient id="gradientFill" x1={0} y1={0} x2={0} y2={1}>
               {/* Opaque color at the top */}
@@ -143,7 +141,7 @@ export function TvlChart({
         </>
       ) : (
         <>
-          <line x1="0" y1="0" x2="0" y2={config.height} stroke="#2d2d38" strokeWidth="1" />
+          <line x1="0" y1="0" x2="0" y2={config.height} stroke="#2D2D38" strokeWidth="1" />
           <line
             x1="0"
             y1={config.height}
@@ -183,9 +181,14 @@ export function TvlChart({
           })}
         </text>
       ) : null}
-      {/*
       {LAST_POINT ? (
-        <text x="-15" y="7" fill="#9999ac" fontSize={config.fontSize} textAnchor="end">
+        <text
+          x="-15"
+          y={config.fontSize - 3}
+          fill="#9999ac"
+          fontSize={config.fontSize}
+          textAnchor="end"
+        >
           {`${numbro(LAST_POINT.v).format({
             trimMantissa: true,
             thousandSeparated: true,
@@ -195,7 +198,6 @@ export function TvlChart({
           })}`}
         </text>
       ) : null}
-*/}
       {/*
       {FIRST_POINT ? (
         <text x="-15" y="307" fill="#9999ac" fontSize={config.fontSize} textAnchor="end">
@@ -208,7 +210,7 @@ export function TvlChart({
           })}`}
         </text>
       ) : null}
-*/}
+      */}
 
       {hover !== null ? (
         <>
@@ -222,8 +224,9 @@ export function TvlChart({
             strokeWidth="1"
             strokeDasharray="4" // Dashed line
           />
-*/}
-          <circle cx={hover.x} cy={getPoint(hover.x).y} r="16" fill="#00D1FF" />
+          */}
+
+          <circle cx={hover.x} cy={getPoint(hover.x).y} r="16" fill="#5CE1FF" />
 
           <g
             transform={`translate(${[

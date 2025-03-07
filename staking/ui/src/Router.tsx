@@ -1,5 +1,5 @@
 import { useParams } from '@_/useParams';
-import { Container, Flex } from '@chakra-ui/react';
+import { Container, Flex, Heading } from '@chakra-ui/react';
 import { AccountSettingsPage } from './AccountSettingsPage';
 import { DashboardPage } from './DashboardPage';
 import { Footer } from './Footer';
@@ -8,6 +8,24 @@ import { TestPage } from './TestPage';
 
 function Content() {
   const [params] = useParams();
+
+  // Combine all pages in one
+  if (params.showAll) {
+    let p = 1;
+    return (
+      <>
+        <Heading fontSize="3em" mt={16} color="yellow.500">
+          Page {p++}: Dashboard
+        </Heading>
+        <DashboardPage />
+        <Heading fontSize="3em" mt={16} color="yellow.500">
+          Page {p++}: Account Settings
+        </Heading>
+        <AccountSettingsPage />
+      </>
+    );
+  }
+
   if (params.page === 'settings') {
     return <AccountSettingsPage />;
   }

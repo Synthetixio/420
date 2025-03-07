@@ -5,24 +5,26 @@ import { z } from 'zod';
 export const HomePageSchema = z.object({
   page: z.literal('home').optional(),
   accountId: z.string().optional(),
-  showAll: z.string().optional(),
+  showAll: z.literal('yes').optional(),
 });
 export type HomePageSchemaType = z.infer<typeof HomePageSchema>;
 
 export const SettingsPageSchema = z.object({
   page: z.literal('settings'),
   accountId: z.string().optional(),
+  showAll: z.literal('yes').optional(),
 });
 export type SettingsPageSchemaType = z.infer<typeof SettingsPageSchema>;
 
 export const TestPageSchema = z.object({
   page: z.literal('test'),
   accountId: z.string().optional(),
+  showAll: z.literal('yes').optional(),
 });
 export type TestPageSchemaType = z.infer<typeof TestPageSchema>;
 
 const AllowedQueriesSchema = z.union([HomePageSchema, SettingsPageSchema, TestPageSchema]);
-type AllowedQueriesType = z.infer<typeof AllowedQueriesSchema>;
+export type AllowedQueriesType = z.infer<typeof AllowedQueriesSchema>;
 
 export function searchParamsToObject(searchParams: URLSearchParams) {
   const params = Object.fromEntries(Array.from(searchParams));

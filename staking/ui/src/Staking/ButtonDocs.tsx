@@ -17,6 +17,9 @@ export function ButtonDocs({ ...props }) {
       _hover={{ textDecoration: 'none' }}
       display="flex"
       gap={1}
+      onClick={() => {
+        window?._paq?._paq.push(['trackEvent', 'staking', 'click', 'learn_more']);
+      }}
       {...props}
     >
       <Text>Learn More</Text>

@@ -9,7 +9,7 @@ describe(__filename, () => {
       chainId: Cypress.env('chainId'),
       forkUrl:
         Cypress.env('RPC_MAINNET') ?? `https://mainnet.infura.io/v3/${Cypress.env('INFURA_KEY')}`,
-      block: '21233424',
+      block: '21993017',
     }).then(() => cy.log('Anvil started'));
     cy.pythBypass();
 

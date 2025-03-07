@@ -5,14 +5,13 @@ import numbro from 'numbro';
 import React from 'react';
 import { LoanChart } from './LoanChart';
 import { ModalShare420 } from './ModalShare420';
-import { TvlChart } from './TvlChart';
+import { PanelTvl } from './PanelTvl';
 import farming from './farming.webp';
 import share from './share.svg';
 import { useClosePositionNewPool } from './useClosePositionNewPool';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
 import { usePositionCollateral } from './usePositionCollateral';
-import { useTvl420 } from './useTvl420';
 
 export function StakingPosition() {
   const { data: loanedAmount, isPending: isPendingLoanedAmount } = useCurrentLoanedAmount();
@@ -21,8 +20,6 @@ export function StakingPosition() {
     usePositionCollateral();
   const { data: snxPrice, isPending: isPendingSnxPrice } = usePythPrice('SNX');
   const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionNewPool();
-
-  const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'daily' });
 
   const [isOpenShare, setIsOpenShare] = React.useState(false);
 
@@ -43,13 +40,7 @@ export function StakingPosition() {
             Your position is fully delegated to Synthetix, and your debt is being forgiven
             automatically over time with zero risk of liquidation.
           </Text>
-          <Button
-            variant="outline"
-            borderColor="gray.900"
-            color="gray.50"
-            onClick={() => setIsOpenShare(true)}
-            minWidth="fit-content"
-          >
+          <Button variant="outline" onClick={() => setIsOpenShare(true)} minWidth="fit-content">
             <Image mr={2} width="16px" src={share} alt="Share Synthetix 420 Pool" />
             Share
           </Button>
@@ -81,9 +72,9 @@ export function StakingPosition() {
                 </Text>
               ) : (
                 <Box>
-                  <Text as="span" color="gray.50" fontSize="1.25em">
+                  <Text as="span" color="gray.50" fontSize="1.25em" fontWeight={500}>
                     {loan && loanedAmount
-                      ? `$${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
+                      ? `🔥 $${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
                           trimMantissa: true,
                           thousandSeparated: true,
                           average: true,
@@ -162,6 +153,8 @@ export function StakingPosition() {
               <Button
                 width="100%"
                 variant="outline"
+                borderColor="gray.900"
+                color="gray.50"
                 isLoading={closePosition.isPending}
                 isDisabled={!(isReadyClosePosition && !closePosition.isPending)}
                 onClick={() => closePosition.mutateAsync()}
@@ -185,7 +178,6 @@ export function StakingPosition() {
             borderRadius="6px"
             bg="navy.700"
             p={{ base: 4, sm: 10 }}
-            pt={{ base: 6, sm: 10 }}
           >
             <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
               SNX Powered Yield Farming
@@ -198,60 +190,7 @@ export function StakingPosition() {
               <Image rounded="6px" src={farming} width="100%" height="100%" objectFit="cover" />
             </Box>
           </Flex>
-          <Flex
-            direction="column"
-            flex={1}
-            gap={4}
-            justifyContent="flex-end"
-            borderColor="gray.900"
-            borderWidth="1px"
-            borderRadius="6px"
-            bg="navy.700"
-            p={{ base: 4, sm: 10 }}
-            pb={{ base: 2, sm: 4 }}
-          >
-            <Text
-              fontSize="24px"
-              fontWeight={500}
-              lineHeight="32px"
-              display={{ base: 'block', sm: 'none' }}
-              color="gray.50"
-            >
-              SNX Powered Yield Farming
-            </Text>
-            <Text
-              fontSize="16px"
-              lineHeight="24px"
-              display={{ base: 'block', sm: 'none' }}
-              color="gray.500"
-            >
-              The 420 pool starts generating yield for you from Ethena and other yield sources
-              immediately.
-            </Text>
-            <Flex
-              textAlign="right"
-              gap={4}
-              justifyContent="flex-end"
-              alignItems="center"
-              flexWrap="nowrap"
-              mt={{ base: '4', sm: '0' }}
-            >
-              <Text fontSize="14px" color="gray.500">
-                420 Pool TVL
-              </Text>
-              <Text fontSize="18px" fontWeight={500} color="gray.50">
-                {tvl420 && tvl420.length > 0
-                  ? `${numbro(tvl420[tvl420.length - 1].value).format({
-                      trimMantissa: true,
-                      thousandSeparated: true,
-                      mantissa: 0,
-                      spaceSeparated: false,
-                    })} SNX`
-                  : null}
-              </Text>
-            </Flex>
-            <TvlChart data={tvl420} />
-          </Flex>
+          <PanelTvl />
         </Flex>
       </Flex>
 

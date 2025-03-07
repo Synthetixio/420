@@ -1,6 +1,3 @@
-import DelegationIcon from './DelegationIcon.svg';
-export { DelegationIcon };
-
 export * from './TransferOwnershipModal';
 export * from './PermissionRow';
 export * from './PermissionTableLoading';

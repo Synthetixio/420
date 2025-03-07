@@ -39,9 +39,6 @@ export function MigrateFromV3() {
   });
 
   const { isReady, mutation } = useMigrateNewPool();
-  const handleSubmit = React.useCallback(() => {
-    mutation.mutateAsync();
-  }, [mutation]);
 
   return (
     <>
@@ -101,7 +98,10 @@ export function MigrateFromV3() {
                 width="100%"
                 isLoading={mutation.isPending}
                 isDisabled={!(isReady && !mutation.isPending)}
-                onClick={handleSubmit}
+                onClick={() => {
+                  window?._paq?.push(['trackEvent', 'staking', 'submit', 'burn_my_debt']);
+                  mutation.mutateAsync();
+                }}
               >
                 Burn My Debt
               </Button>
@@ -121,7 +121,13 @@ export function MigrateFromV3() {
               cRatio={liquidityPosition?.cRatio}
             />
             <ZeroRisk />
-            <Button isDisabled={!isReadyMigrate} onClick={() => setIsOpenMigrate(true)}>
+            <Button
+              isDisabled={!isReadyMigrate}
+              onClick={() => {
+                window?._paq?.push(['trackEvent', 'staking', 'click', 'burn_my_debt']);
+                setIsOpenMigrate(true);
+              }}
+            >
               Burn My Debt
             </Button>
           </>
