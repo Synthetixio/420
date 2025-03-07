@@ -1,5 +1,5 @@
 import { useAccounts } from '@_/useAccounts';
-import { Button, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import { Button, Flex, Heading, Image, Link, Text } from '@chakra-ui/react';
 import DelegationIcon from './DelegationIcon.svg';
 import { PermissionTable } from './PermissionTable';
 
@@ -28,7 +28,7 @@ export function Permissions() {
         p="6"
         bg="navy.700"
       >
-        <DelegationIcon />
+        <Image src={DelegationIcon} width="48px" alt="Delegate permissions" />
         <Heading fontSize="14px" mt="6">
           Delegate Permissions
         </Heading>
