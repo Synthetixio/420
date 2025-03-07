@@ -99,7 +99,7 @@ export function MigrateFromV3() {
                 isLoading={mutation.isPending}
                 isDisabled={!(isReady && !mutation.isPending)}
                 onClick={() => {
-                  window?._paq?.push(['trackEvent', 'staking', 'submit', 'submit_burn_my_debt_submit']);
+                  window?._paq?.push(['trackEvent', 'staking', 'submit', 'submit_burn_my_debt']);
                   mutation.mutateAsync();
                 }}
               >
