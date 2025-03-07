@@ -1,6 +1,6 @@
 // import { LogoIcon } from '@_/icons';
 // import { Circle, Flex, Image, Text } from '@chakra-ui/react';
-import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Divider, Flex, Image, Text } from '@chakra-ui/react';
 import numbro from 'numbro';
 import type React from 'react';
 import { TvlChart } from './TvlChart';
@@ -123,7 +123,6 @@ export function LayoutWithImage({
             borderRadius="6px"
             bg="navy.700"
             p={{ base: 4, sm: 10 }}
-            pb={{ base: 2, sm: 3 }}
           >
             <Text
               fontSize="24px"
@@ -143,18 +142,22 @@ export function LayoutWithImage({
               The 420 pool starts generating yield for you from Ethena and other yield sources
               immediately.
             </Text>
+            <Divider
+              borderColor="gray.900"
+              my={{ base: '4' }}
+              display={{ base: 'block', sm: 'none' }}
+            />
             <Flex
               textAlign="right"
               gap={4}
-              justifyContent="flex-end"
-              alignItems="center"
+              justifyContent="space-between"
+              alignItems="baseline"
               flexWrap="nowrap"
-              mt={{ base: '4', sm: '0' }}
             >
-              <Text fontSize="14px" color="gray.500">
-                420 Pool TVL
+              <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
+                TVL
               </Text>
-              <Text fontSize="18px" color="gray.50">
+              <Text fontSize="18px" fontWeight={500} color="gray.50">
                 {tvl420 && tvl420.length > 0
                   ? `${numbro(tvl420[tvl420.length - 1].value).format({
                       trimMantissa: true,

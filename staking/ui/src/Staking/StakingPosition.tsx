@@ -1,5 +1,5 @@
 import { usePythPrice } from '@_/usePythPrice';
-import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import numbro from 'numbro';
 import React from 'react';
@@ -43,13 +43,7 @@ export function StakingPosition() {
             Your position is fully delegated to Synthetix, and your debt is being forgiven
             automatically over time with zero risk of liquidation.
           </Text>
-          <Button
-            variant="outline"
-            borderColor="gray.900"
-            color="gray.50"
-            onClick={() => setIsOpenShare(true)}
-            minWidth="fit-content"
-          >
+          <Button variant="outline" onClick={() => setIsOpenShare(true)} minWidth="fit-content">
             <Image mr={2} width="16px" src={share} alt="Share Synthetix 420 Pool" />
             Share
           </Button>
@@ -81,9 +75,9 @@ export function StakingPosition() {
                 </Text>
               ) : (
                 <Box>
-                  <Text as="span" color="gray.50" fontSize="1.25em">
+                  <Text as="span" color="gray.50" fontSize="1.25em" fontWeight={500}>
                     {loan && loanedAmount
-                      ? `$${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
+                      ? `🔥 $${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
                           trimMantissa: true,
                           thousandSeparated: true,
                           average: true,
@@ -162,6 +156,8 @@ export function StakingPosition() {
               <Button
                 width="100%"
                 variant="outline"
+                borderColor="gray.900"
+                color="gray.50"
                 isLoading={closePosition.isPending}
                 isDisabled={!(isReadyClosePosition && !closePosition.isPending)}
                 onClick={() => closePosition.mutateAsync()}
@@ -208,7 +204,6 @@ export function StakingPosition() {
             borderRadius="6px"
             bg="navy.700"
             p={{ base: 4, sm: 10 }}
-            pb={{ base: 2, sm: 4 }}
           >
             <Text
               fontSize="24px"
@@ -228,16 +223,20 @@ export function StakingPosition() {
               The 420 pool starts generating yield for you from Ethena and other yield sources
               immediately.
             </Text>
+            <Divider
+              borderColor="gray.900"
+              my={{ base: '4' }}
+              display={{ base: 'block', sm: 'none' }}
+            />
             <Flex
               textAlign="right"
               gap={4}
-              justifyContent="flex-end"
-              alignItems="center"
+              justifyContent="space-between"
+              alignItems="baseline"
               flexWrap="nowrap"
-              mt={{ base: '4', sm: '0' }}
             >
-              <Text fontSize="14px" color="gray.500">
-                420 Pool TVL
+              <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
+                TVL
               </Text>
               <Text fontSize="18px" fontWeight={500} color="gray.50">
                 {tvl420 && tvl420.length > 0
