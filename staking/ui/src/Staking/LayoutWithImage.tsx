@@ -123,8 +123,7 @@ export function LayoutWithImage({
             borderRadius="6px"
             bg="navy.700"
             p={{ base: 4, sm: 10 }}
-            pl={{ base: 4, sm: 4 }}
-            pb={{ base: 4, sm: 4 }}
+            pb={{ base: 2, sm: 3 }}
           >
             <Text
               fontSize="24px"
@@ -157,12 +156,12 @@ export function LayoutWithImage({
               </Text>
               <Text fontSize="18px" color="gray.50">
                 {tvl420 && tvl420.length > 0
-                  ? `$${numbro(tvl420[tvl420.length - 1].value).format({
+                  ? `${numbro(tvl420[tvl420.length - 1].value).format({
                       trimMantissa: true,
                       thousandSeparated: true,
                       mantissa: 0,
                       spaceSeparated: false,
-                    })}`
+                    })} SNX`
                   : null}
               </Text>
             </Flex>

@@ -27,97 +27,6 @@ export function StakingPosition() {
 
   return (
     <>
-      <Flex direction="column">
-        <Flex direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }} gap={6}>
-          <Flex
-            direction="column"
-            flex={1}
-            gap={4}
-            display={{ base: 'none', sm: 'flex' }}
-            borderColor="gray.900"
-            borderWidth="1px"
-            borderRadius="6px"
-            bg="navy.700"
-            p={{ base: 4, sm: 10 }}
-            pt={{ base: 6, sm: 10 }}
-          >
-            <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
-              SNX Powered Yield Farming
-            </Text>
-            <Text fontSize="16px" lineHeight="24px" color="gray.500">
-              The 420 pool starts generating yield for you from Ethena and other yield sources
-              immediately.
-            </Text>
-            <Box>
-              <Image
-                mt={2}
-                rounded="6px"
-                src={farming}
-                width="100%"
-                height="100%"
-                objectFit="cover"
-              />
-            </Box>
-          </Flex>
-          <Flex
-            direction="column"
-            flex={1}
-            gap={4}
-            justifyContent="flex-end"
-            borderColor="gray.900"
-            borderWidth="1px"
-            borderRadius="6px"
-            bg="navy.700"
-            p={{ base: 4, sm: 10 }}
-            pl={{ base: 4, sm: 4 }}
-            pb={{ base: 4, sm: 4 }}
-            pt={{ base: 6, sm: 10 }}
-          >
-            <Text
-              fontSize="24px"
-              fontWeight={500}
-              lineHeight="32px"
-              display={{ base: 'block', sm: 'none' }}
-              color="gray.50"
-            >
-              SNX Powered Yield Farming
-            </Text>
-            <Text
-              fontSize="16px"
-              lineHeight="24px"
-              display={{ base: 'block', sm: 'none' }}
-              color="gray.500"
-            >
-              The 420 pool starts generating yield for you from Ethena and other yield sources
-              immediately.
-            </Text>
-            <Flex
-              textAlign="right"
-              gap={4}
-              justifyContent="flex-end"
-              alignItems="center"
-              flexWrap="nowrap"
-              mt={{ base: '4', sm: '0' }}
-            >
-              <Text fontSize="14px" color="gray.500">
-                420 Pool TVL
-              </Text>
-              <Text fontSize="18px" fontWeight={500} color="gray.50">
-                {tvl420 && tvl420.length > 0
-                  ? `$${numbro(tvl420[tvl420.length - 1].value).format({
-                      trimMantissa: true,
-                      thousandSeparated: true,
-                      mantissa: 0,
-                      spaceSeparated: false,
-                    })}`
-                  : null}
-              </Text>
-            </Flex>
-            <TvlChart data={tvl420} />
-          </Flex>
-        </Flex>
-      </Flex>
-
       <Flex
         direction="column"
         borderColor="gray.900"
@@ -248,6 +157,95 @@ export function StakingPosition() {
                 Withdraw
               </Button>
             </Flex>
+          </Flex>
+        </Flex>
+      </Flex>
+
+      <Flex direction="column">
+        <Flex direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }} gap={6}>
+          <Flex
+            direction="column"
+            flex={1}
+            gap={4}
+            display={{ base: 'none', sm: 'flex' }}
+            borderColor="gray.900"
+            borderWidth="1px"
+            borderRadius="6px"
+            bg="navy.700"
+            p={{ base: 4, sm: 10 }}
+            pt={{ base: 6, sm: 10 }}
+          >
+            <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
+              SNX Powered Yield Farming
+            </Text>
+            <Text fontSize="16px" lineHeight="24px" color="gray.500">
+              The 420 pool starts generating yield for you from Ethena and other yield sources
+              immediately.
+            </Text>
+            <Box>
+              <Image
+                mt={2}
+                rounded="6px"
+                src={farming}
+                width="100%"
+                height="100%"
+                objectFit="cover"
+              />
+            </Box>
+          </Flex>
+          <Flex
+            direction="column"
+            flex={1}
+            gap={4}
+            justifyContent="flex-end"
+            borderColor="gray.900"
+            borderWidth="1px"
+            borderRadius="6px"
+            bg="navy.700"
+            p={{ base: 4, sm: 10 }}
+            pb={{ base: 2, sm: 4 }}
+          >
+            <Text
+              fontSize="24px"
+              fontWeight={500}
+              lineHeight="32px"
+              display={{ base: 'block', sm: 'none' }}
+              color="gray.50"
+            >
+              SNX Powered Yield Farming
+            </Text>
+            <Text
+              fontSize="16px"
+              lineHeight="24px"
+              display={{ base: 'block', sm: 'none' }}
+              color="gray.500"
+            >
+              The 420 pool starts generating yield for you from Ethena and other yield sources
+              immediately.
+            </Text>
+            <Flex
+              textAlign="right"
+              gap={4}
+              justifyContent="flex-end"
+              alignItems="center"
+              flexWrap="nowrap"
+              mt={{ base: '4', sm: '0' }}
+            >
+              <Text fontSize="14px" color="gray.500">
+                420 Pool TVL
+              </Text>
+              <Text fontSize="18px" fontWeight={500} color="gray.50">
+                {tvl420 && tvl420.length > 0
+                  ? `${numbro(tvl420[tvl420.length - 1].value).format({
+                      trimMantissa: true,
+                      thousandSeparated: true,
+                      mantissa: 0,
+                      spaceSeparated: false,
+                    })} SNX`
+                  : null}
+              </Text>
+            </Flex>
+            <TvlChart data={tvl420} />
           </Flex>
         </Flex>
       </Flex>

@@ -7,7 +7,7 @@ export function ButtonGetSnx({ ...props }) {
     <Button
       as={Link}
       isExternal
-      href="https://www.coingecko.com/en/coins/synthetix-network-token"
+      href="https://app.uniswap.org/explore/tokens/ethereum/0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f"
       variant="trasparent"
       borderColor="gray.900"
       color="cyan.500"

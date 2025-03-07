@@ -1,6 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 import { ButtonDocs } from './ButtonDocs';
+import { ButtonGetSnx } from './ButtonGetSnx';
 import { ButtonStake } from './ButtonStake';
 import { LayoutWithImage } from './LayoutWithImage';
 import coin from './coin.webp';
@@ -25,6 +26,7 @@ export function EmptyPosition() {
           <ButtonStake />
 
           <Flex gap={4} justifyContent="space-between">
+            <ButtonGetSnx />
             <ButtonDocs />
           </Flex>
         </>
