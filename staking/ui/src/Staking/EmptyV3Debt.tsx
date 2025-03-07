@@ -25,9 +25,9 @@ export function EmptyV3Debt() {
       )}
       Content={() => (
         <>
+          <Text color="gray.50">Looks like you don’t have any debt outstanding.</Text>
           <Text color="gray.600">
-            The 420 Pool is currently accepting deposits from active stakers. Get SNX now to prepare
-            for debt-free SNX yield.
+            Check back soon to take advantage of rewards for debt-free stakers!
           </Text>
           <ButtonStake />
 
