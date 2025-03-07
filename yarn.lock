@@ -338,9 +338,8 @@ __metadata:
   resolution: "@_/useAccounts@workspace:staking/lib/useAccounts"
   dependencies:
     "@_/tsHelpers": "workspace:*"
-    "@_/useAccountProxy": "workspace:*"
     "@_/useBlockchain": "workspace:*"
-    "@_/useTrustedMulticallForwarder": "workspace:*"
+    "@_/usePositionManagerNewPool": "workspace:*"
     "@tanstack/react-query": "npm:^5.8.3"
     debug: "npm:^4.4.0"
     ethers: "npm:^5.7.2"

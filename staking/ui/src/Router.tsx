@@ -8,13 +8,14 @@ import { TestPage } from './TestPage';
 
 function Content() {
   const [params] = useParams();
-  if (params.page === 'settings') {
-    return <AccountSettingsPage />;
-  }
-  if (params.page === 'test') {
-    return <TestPage />;
-  }
-  return <DashboardPage />;
+
+  return (
+    <>
+      {params.showAll || !params.page || params.page === 'home' ? <DashboardPage /> : null}
+      {params.showAll || params.page === 'settings' ? <AccountSettingsPage /> : null}
+      {!params.showAll && params.page === 'test' ? <TestPage /> : null}
+    </>
+  );
 }
 
 export function Router() {
