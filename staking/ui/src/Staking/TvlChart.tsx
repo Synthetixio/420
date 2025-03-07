@@ -6,7 +6,7 @@ export function TvlChart({
   data,
   config = {
     width: 1000,
-    height: 350,
+    height: 380,
     fontSize: 30,
   },
 }: {
@@ -90,8 +90,8 @@ export function TvlChart({
             x2={0}
             y2={config.height}
             stroke="#2d2d38"
-            strokeWidth="1"
-            strokeDasharray="5"
+            strokeWidth="3"
+            // strokeDasharray="5"
           />
           <defs>
             <linearGradient id="gradientFill" x1={0} y1={0} x2={0} y2={1}>
@@ -182,7 +182,13 @@ export function TvlChart({
         </text>
       ) : null}
       {LAST_POINT ? (
-        <text x="-15" y="7" fill="#9999ac" fontSize={config.fontSize} textAnchor="end">
+        <text
+          x="-15"
+          y={config.fontSize - 3}
+          fill="#9999ac"
+          fontSize={config.fontSize}
+          textAnchor="end"
+        >
           {`${numbro(LAST_POINT.v).format({
             trimMantissa: true,
             thousandSeparated: true,

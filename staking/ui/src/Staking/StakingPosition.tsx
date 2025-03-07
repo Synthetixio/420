@@ -1,18 +1,17 @@
 import { usePythPrice } from '@_/usePythPrice';
-import { Box, Button, Divider, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import numbro from 'numbro';
 import React from 'react';
 import { LoanChart } from './LoanChart';
 import { ModalShare420 } from './ModalShare420';
-import { TvlChart } from './TvlChart';
+import { PanelTvl } from './PanelTvl';
 import farming from './farming.webp';
 import share from './share.svg';
 import { useClosePositionNewPool } from './useClosePositionNewPool';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
 import { usePositionCollateral } from './usePositionCollateral';
-import { useTvl420 } from './useTvl420';
 
 export function StakingPosition() {
   const { data: loanedAmount, isPending: isPendingLoanedAmount } = useCurrentLoanedAmount();
@@ -21,8 +20,6 @@ export function StakingPosition() {
     usePositionCollateral();
   const { data: snxPrice, isPending: isPendingSnxPrice } = usePythPrice('SNX');
   const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionNewPool();
-
-  const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'daily' });
 
   const [isOpenShare, setIsOpenShare] = React.useState(false);
 
@@ -181,8 +178,6 @@ export function StakingPosition() {
             borderRadius="6px"
             bg="navy.700"
             p={{ base: 4, sm: 10 }}
-            pl={{ base: 2, sm: 3 }}
-            pt={{ base: 6, sm: 10 }}
           >
             <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
               SNX Powered Yield Farming
@@ -195,63 +190,7 @@ export function StakingPosition() {
               <Image rounded="6px" src={farming} width="100%" height="100%" objectFit="cover" />
             </Box>
           </Flex>
-          <Flex
-            direction="column"
-            flex={1}
-            gap={4}
-            justifyContent="flex-end"
-            borderColor="gray.900"
-            borderWidth="1px"
-            borderRadius="6px"
-            bg="navy.700"
-            p={{ base: 4, sm: 10 }}
-          >
-            <Text
-              fontSize="24px"
-              fontWeight={500}
-              lineHeight="32px"
-              display={{ base: 'block', sm: 'none' }}
-              color="gray.50"
-            >
-              SNX Powered Yield Farming
-            </Text>
-            <Text
-              fontSize="16px"
-              lineHeight="24px"
-              display={{ base: 'block', sm: 'none' }}
-              color="gray.500"
-            >
-              The 420 pool starts generating yield for you from Ethena and other yield sources
-              immediately.
-            </Text>
-            <Divider
-              borderColor="gray.900"
-              my={{ base: '4' }}
-              display={{ base: 'block', sm: 'none' }}
-            />
-            <Flex
-              textAlign="right"
-              gap={4}
-              justifyContent="space-between"
-              alignItems="baseline"
-              flexWrap="nowrap"
-            >
-              <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
-                TVL
-              </Text>
-              <Text fontSize="18px" fontWeight={500} color="gray.50">
-                {tvl420 && tvl420.length > 0
-                  ? `${numbro(tvl420[tvl420.length - 1].value).format({
-                      trimMantissa: true,
-                      thousandSeparated: true,
-                      mantissa: 0,
-                      spaceSeparated: false,
-                    })} SNX`
-                  : null}
-              </Text>
-            </Flex>
-            <TvlChart data={tvl420} />
-          </Flex>
+          <PanelTvl />
         </Flex>
       </Flex>
 
