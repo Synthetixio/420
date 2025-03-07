@@ -17,7 +17,7 @@ export function PanelTvl() {
       bg="navy.700"
       p={{ base: 4, sm: 10 }}
     >
-      <Box display={{ base: 'block', sm: 'none' }} order={{ base: 1, sm: 2 }}>
+      <Box display={{ base: 'block', sm: 'none' }}>
         <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
           SNX Powered Yield Farming
         </Text>
