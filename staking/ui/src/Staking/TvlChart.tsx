@@ -4,22 +4,33 @@ import React from 'react';
 
 export function TvlChart({
   data,
+  config = {
+    width: 1000,
+    height: 350,
+    fontSize: 30,
+  },
 }: {
   data: { ts: Date; value: number }[];
+  config?: {
+    width: number;
+    height: number;
+    fontSize: number;
+  };
 }) {
-  const [hoverX, setHoverX] = React.useState<number | null>(null);
+  const [hover, setHover] = React.useState<{ x: number; y: number } | null>(null);
   const handleMouseMove = (event: React.MouseEvent<SVGRectElement, MouseEvent>) => {
     const rectElement = event.target as SVGRectElement;
     if (rectElement) {
       const rect = rectElement.getBoundingClientRect();
       // Calculate the normalized X value relative to the SVG's viewBox
-      const normalizedX = ((event.clientX - rect.left) / rect.width) * 1000; // Scale X to viewBox scale (0 to 1000)
-      setHoverX(normalizedX);
+      const normalizedX = ((event.clientX - rect.left) / rect.width) * config.width; // Scale X to viewBox scale (0 to config.width)
+      const normalizedY = ((event.clientX - rect.left) / rect.width) * config.height; // Scale X to viewBox scale (0 to config.width)
+      setHover({ x: normalizedX, y: normalizedY });
     }
   };
 
   const handleMouseLeave = () => {
-    setHoverX(null); // Clear the hoverX when the mouse leaves the chart
+    setHover(null); // Clear the hoverX when the mouse leaves the chart
   };
 
   const POINTS = React.useMemo(() => {
@@ -27,160 +38,254 @@ export function TvlChart({
       return [];
     }
     return data.map((point, i): { x: number; y: number; v: number; ts: Date } => {
-      const x = (1000 / (data.length - 1)) * i; // Scale X values to fit within the SVG width (1000px viewBox width)
-      const y = 300 - (point.value / data[data.length - 1].value) * 300; // Scale Y values (assuming max value is 1,000,000)
+      const x = (config.width / (data.length - 1)) * i; // Scale X values to fit within the SVG width (1000px viewBox width)
+      const y = config.height - (point.value / data[data.length - 1].value) * config.height; // Scale Y values (assuming max value is 1,000,000)
       const v = point.value; // Value from data
       const ts = point.ts; // Timestamp from data
       return { x, y, v, ts }; // Push structured data to points
     });
-  }, [data]);
+  }, [data, config]);
   const [FIRST_POINT] = POINTS;
   const [LAST_POINT] = POINTS.slice(-1);
 
   // Helper: Find Y for a given X by interpolating the `POINTS`
-  function getPoint(x: number): { y: number; v: number; ts: Date } {
-    for (let i = 0; i < POINTS.length - 1; i++) {
-      const { x: x1, y: y1 } = POINTS[i];
-      const { x: x2, y: y2 } = POINTS[i + 1];
-      if (x >= x1 && x <= x2) {
-        // Perform linear interpolation to find the Y-value
-        const t = (x - x1) / (x2 - x1); // Ratio between x1 and x2
-        return {
-          y: y1 + t * (y2 - y1),
-          v: POINTS[i + 1].v,
-          ts: POINTS[i + 1].ts,
-        }; // Interpolated Y-value
+  const getPoint = React.useCallback(
+    (
+      x: number
+    ): {
+      y: number;
+      v: number;
+      ts: Date;
+    } => {
+      for (let i = 0; i < POINTS.length - 1; i++) {
+        const { x: x1, y: y1 } = POINTS[i];
+        const { x: x2, y: y2 } = POINTS[i + 1];
+        if (x >= x1 && x <= x2) {
+          // Perform linear interpolation to find the Y-value
+          const t = (x - x1) / (x2 - x1); // Ratio between x1 and x2
+          return {
+            y: y1 + t * (y2 - y1),
+            v: POINTS[i + 1].v,
+            ts: POINTS[i + 1].ts,
+          }; // Interpolated Y-value
+        }
       }
-    }
-    return { y: 300, v: 0, ts: new Date() }; // Default fail-safe (zero debt repaid at bottom)
-  }
+      return { y: config.height, v: 0, ts: new Date() }; // Default fail-safe (zero debt repaid at bottom)
+    },
+    [POINTS, config]
+  );
 
   return (
-    <svg viewBox="-100 -60 1120 420" width="100%">
-      <title>TVL Chart - Interactive</title>
-
+    <svg
+      viewBox={`0 0 ${config.width} ${config.height + config.fontSize + 20}`}
+      width="100%"
+      aria-label="TVL Chart"
+      role="img"
+    >
       {POINTS.length > 0 ? (
         <>
+          {/*
           <line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2="300"
+            x1={0}
+            y1={0}
+            x2={0}
+            y2={config.height}
             stroke="#2d2d38"
             strokeWidth="1"
             strokeDasharray="5"
           />
+          */}
           <defs>
-            <linearGradient id="gradientFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#00D1FF" stopOpacity="1" />
+            <linearGradient id="gradientFill" x1={0} y1={0} x2={0} y2={1}>
               {/* Opaque color at the top */}
-              <stop offset="100%" stopColor="#00D1FF" stopOpacity="0.04" />{' '}
+              <stop offset="0%" stopColor="#00D1FF" stopOpacity="1" />
               {/* Transparent at the bottom */}
+              <stop offset="100%" stopColor="#00D1FF" stopOpacity="0.04" />{' '}
             </linearGradient>
           </defs>
-          <polyline
-            fill="url(#gradientFill)" // Link to the gradient
+          {/* Stroke Path (Smooth line) */}
+          <path
+            fill="none" // No fill for the stroke line
             stroke="#00D1FF"
             strokeWidth="2"
-            points={POINTS.map((point) => `${point.x},${point.y}`)
-              .concat([`${POINTS[POINTS.length - 1].x + 2},${POINTS[POINTS.length - 1].y}`])
-              .concat([`${POINTS[POINTS.length - 1].x + 2},300`])
-              .join(' ')}
+            d={`
+              M ${POINTS[0].x},${POINTS[0].y}
+              ${POINTS.slice(1)
+                .map(
+                  (point, i) =>
+                    `C ${POINTS[i].x + (point.x - POINTS[i].x) / 2},${POINTS[i].y} ` +
+                    `${point.x - (point.x - POINTS[i].x) / 2},${point.y} ` +
+                    `${point.x},${point.y}`
+                )
+                .join(' ')}
+            `}
           />
-          {/* This line covers the vertical drop of polyline */}
-          <line x1="1003" y1="-5" x2="1003" y2="300" stroke="#06061B" strokeWidth="4" />
+
+          {/* Area Fill (without bottom return line) */}
+          <path
+            fill="url(#gradientFill)" // Link to the gradient
+            stroke="none" // No stroke for the fill
+            d={`
+              M ${POINTS[0].x},${POINTS[0].y} 
+              ${POINTS.slice(1)
+                .map(
+                  (point, i) =>
+                    `C ${POINTS[i].x + (point.x - POINTS[i].x) / 2},${POINTS[i].y} ` +
+                    `${point.x - (point.x - POINTS[i].x) / 2},${point.y} ` +
+                    `${point.x},${point.y}`
+                )
+                .join(' ')}
+              L ${POINTS[POINTS.length - 1].x},${config.height} 
+              L ${POINTS[0].x},${config.height} 
+              Z
+            `}
+          />
         </>
       ) : (
         <>
-          <line x1="0" y1="0" x2="0" y2="300" stroke="#2d2d38" strokeWidth="1" />
-          <line x1="0" y1="300" x2="1000" y2="300" stroke="#2d2d38" strokeWidth="1" />
+          <line x1="0" y1="0" x2="0" y2={config.height} stroke="#2d2d38" strokeWidth="1" />
+          <line
+            x1="0"
+            y1={config.height}
+            x2={config.width}
+            y2={config.height}
+            stroke="#2d2d38"
+            strokeWidth="1"
+          />
         </>
       )}
 
-      <rect
-        x="0"
-        y="0"
-        width="1000"
-        height="300"
-        fill="transparent"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-      />
+      {FIRST_POINT ? (
+        <text
+          x={10}
+          y={config.height + config.fontSize + 10}
+          fill="#9999ac"
+          fontSize={config.fontSize}
+          textAnchor="start"
+        >
+          {intlFormat(FIRST_POINT.ts, {
+            year: '2-digit',
+            month: 'short',
+          })}
+        </text>
+      ) : null}
+      {LAST_POINT ? (
+        <text
+          x={config.width - 10}
+          y={config.height + config.fontSize + 10}
+          fill="#9999ac"
+          fontSize={config.fontSize}
+          textAnchor="end"
+        >
+          {intlFormat(LAST_POINT.ts, {
+            year: '2-digit',
+            month: 'short',
+          })}
+        </text>
+      ) : null}
+      {/*
+      {LAST_POINT ? (
+        <text x="-15" y="7" fill="#9999ac" fontSize={config.fontSize} textAnchor="end">
+          {`${numbro(LAST_POINT.v).format({
+            trimMantissa: true,
+            thousandSeparated: true,
+            average: true,
+            mantissa: 0,
+            spaceSeparated: false,
+          })}`}
+        </text>
+      ) : null}
+*/}
+      {/*
+      {FIRST_POINT ? (
+        <text x="-15" y="307" fill="#9999ac" fontSize={config.fontSize} textAnchor="end">
+          {`${numbro(FIRST_POINT.v).format({
+            trimMantissa: true,
+            thousandSeparated: true,
+            average: true,
+            mantissa: 0,
+            spaceSeparated: false,
+          })}`}
+        </text>
+      ) : null}
+*/}
 
-      {hoverX !== null && (
+      {hover !== null ? (
         <>
+          {/*
           <line
-            x1={hoverX}
+            x1={hover.x}
             y1="0"
-            x2={hoverX}
-            y2="300"
+            x2={hover.x}
+            y2={config.height}
             stroke="#aaa"
             strokeWidth="1"
             strokeDasharray="4" // Dashed line
           />
-          <circle cx={hoverX} cy={getPoint(hoverX).y} r="8" fill="#fff" />
-          <text
-            x={hoverX + (hoverX > 1000 / 2 ? -20 : 20)}
-            y={getPoint(hoverX).y + (hoverX > 1000 / 2 ? -5 : 20)}
-            fill="#fff"
-            fontSize="25"
-            textAnchor={hoverX > 1000 / 2 ? 'end' : 'start'}
-          >
-            {`$${numbro(getPoint(hoverX).v).format({
-              trimMantissa: true,
-              thousandSeparated: true,
-              average: true,
-              mantissa: 1,
-              spaceSeparated: false,
-            })}, ${intlFormat(getPoint(hoverX).ts, {
-              year: 'numeric',
-              month: 'numeric',
-              day: 'numeric',
-            })}`}
-          </text>
-        </>
-      )}
+*/}
+          <circle cx={hover.x} cy={getPoint(hover.x).y} r="16" fill="#00D1FF" />
 
-      {FIRST_POINT ? (
-        <text x="-10" y="340" fill="#9999ac" fontSize="25" textAnchor="start">
-          {intlFormat(FIRST_POINT.ts, {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-          })}
-        </text>
+          <g
+            transform={`translate(${[
+              hover.x + (hover.x > config.width / 2 ? -config.fontSize * 10 - 20 : 20),
+              getPoint(hover.x).y +
+                (getPoint(hover.x).y > config.height / 2 ? -config.fontSize * 1.5 * 3 - 20 : 20),
+            ].join(',')})`}
+          >
+            <rect
+              x={0}
+              y={0}
+              width={config.fontSize * 10}
+              height={config.fontSize * 1.5 * 3}
+              rx="10"
+              ry="10"
+              fill="#06061B99"
+            />
+
+            <text
+              x={config.fontSize * 5}
+              y={config.fontSize * 1.5}
+              fill="#9999AC"
+              fontSize={config.fontSize * 0.9}
+              textAnchor="middle"
+              alignmentBaseline="middle"
+            >
+              {intlFormat(getPoint(hover.x).ts, {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })}
+            </text>
+
+            <text
+              x={config.fontSize * 5}
+              y={config.fontSize * 1.5 * 2}
+              fill="#FFFFFF"
+              fontSize={config.fontSize}
+              textAnchor="middle"
+              alignmentBaseline="middle"
+            >
+              {`${numbro(getPoint(hover.x).v).format({
+                trimMantissa: true,
+                thousandSeparated: true,
+                average: false,
+                mantissa: 0,
+                spaceSeparated: false,
+              })} SNX`}
+            </text>
+          </g>
+        </>
       ) : null}
-      {LAST_POINT ? (
-        <text x="1010" y="340" fill="#9999ac" fontSize="25" textAnchor="end">
-          {intlFormat(LAST_POINT.ts, {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-          })}
-        </text>
-      ) : null}
-      {LAST_POINT ? (
-        <text x="-15" y="7" fill="#9999ac" fontSize="25" textAnchor="end">
-          {`$${numbro(LAST_POINT.v).format({
-            trimMantissa: true,
-            thousandSeparated: true,
-            average: true,
-            mantissa: 0,
-            spaceSeparated: false,
-          })}`}
-        </text>
-      ) : null}
-      {FIRST_POINT ? (
-        <text x="-15" y="307" fill="#9999ac" fontSize="25" textAnchor="end">
-          {`$${numbro(FIRST_POINT.v).format({
-            trimMantissa: true,
-            thousandSeparated: true,
-            average: true,
-            mantissa: 0,
-            spaceSeparated: false,
-          })}`}
-        </text>
-      ) : null}
+
+      <rect
+        x={0}
+        y={0}
+        width={config.width}
+        height={config.height}
+        fill="transparent"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      />
     </svg>
   );
 }

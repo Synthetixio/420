@@ -13,7 +13,7 @@ export function ButtonStake({ ...props }) {
       gap={1}
       {...props}
     >
-      <Text>Coming Soon</Text>
+      <Text>Coming Soon - Deposit SNX</Text>
     </Button>
   );
 }

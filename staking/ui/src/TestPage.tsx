@@ -27,42 +27,16 @@ export function TestPage() {
             <Button onClick={() => setIsOpenShare(true)}>Share</Button>
           </Flex>
         </Flex>
-        <Flex direction="column" mt={6} gap={6}>
-          <Flex
-            direction="column"
-            borderColor="gray.900"
-            borderWidth="1px"
-            borderRadius="6px"
-            bg="navy.700"
-            p={6}
-            gap={9}
-          >
-            <Flex
-              direction={{ base: 'column', sm: 'row', lg: 'row', xl: 'row' }}
-              flexWrap="wrap"
-              gap={4}
-            >
-              <Flex
-                order={{ base: 2, sm: 1, lg: 1, xl: 1 }}
-                flex={{ base: 1, sm: 2, lg: 2, xl: 2 }}
-                width="100%"
-                borderColor="gray.900"
-                borderWidth="1px"
-                borderRadius="6px"
-                bg="navy.900"
-                direction="column"
-                p={3}
-                gap={3}
-              >
-                <Flex minWidth="120px" direction="column" p={3} gap={3}>
-                  <Heading fontSize="20px" lineHeight="1.75rem" color="gray.50" fontWeight={700}>
-                    TVL
-                  </Heading>
-                </Flex>
-                <TvlChart data={tvl420} />
-              </Flex>
-            </Flex>
-          </Flex>
+        <Flex
+          direction="column"
+          mt={6}
+          borderColor="gray.900"
+          borderWidth="1px"
+          borderRadius="6px"
+          bg="navy.700"
+          p={6}
+        >
+          <TvlChart data={tvl420} />
         </Flex>
       </Flex>
 
