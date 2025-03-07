@@ -7,6 +7,7 @@ import { LoanChart } from './LoanChart';
 import { ModalShare420 } from './ModalShare420';
 import { TvlChart } from './TvlChart';
 import farming from './farming.webp';
+import share from './share.svg';
 import { useClosePositionNewPool } from './useClosePositionNewPool';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
@@ -42,7 +43,15 @@ export function StakingPosition() {
             Your position is fully delegated to Synthetix, and your debt is being forgiven
             automatically over time with zero risk of liquidation.
           </Text>
-          <Button onClick={() => setIsOpenShare(true)}>Share</Button>
+          <Button
+            variant="outline"
+            borderColor="gray.900"
+            color="gray.50"
+            onClick={() => setIsOpenShare(true)}
+          >
+            <Image mr={2} width="17px" src={share} alt="Share Synthatix 420 Pool" />
+            Share
+          </Button>
         </Flex>
         <Flex
           direction={{ base: 'column', sm: 'row', lg: 'row', xl: 'row' }}
