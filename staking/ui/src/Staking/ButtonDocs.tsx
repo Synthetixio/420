@@ -18,7 +18,7 @@ export function ButtonDocs({ ...props }) {
       display="flex"
       gap={1}
       onClick={() => {
-        window?._paq?._paq.push(['trackEvent', 'staking', 'click', 'learn_more']);
+        window?._paq?._paq.push(['trackEvent', 'staking', 'click', 'click_learn_more']);
       }}
       {...props}
     >
