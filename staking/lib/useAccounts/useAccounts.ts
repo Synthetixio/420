@@ -1,7 +1,6 @@
 import { contractsHash } from '@_/tsHelpers';
-import { useAccountProxy } from '@_/useAccountProxy';
-import { useNetwork, useProvider, useWallet } from '@_/useBlockchain';
-import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
+import { useNetwork, useSigner, useWallet } from '@_/useBlockchain';
+import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
 import { useQuery } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';
@@ -11,62 +10,29 @@ const log = debug('snx:useAccounts');
 export function useAccounts() {
   const { activeWallet } = useWallet();
   const { network } = useNetwork();
-  const provider = useProvider();
-  const { data: AccountProxy } = useAccountProxy();
-  const { data: Multicall3 } = useTrustedMulticallForwarder();
+  const signer = useSigner();
   const walletAddress = activeWallet?.address;
+  const { data: PositionManagerNewPool } = usePositionManagerNewPool();
 
   return useQuery({
     queryKey: [
       `${network?.id}-${network?.preset}`,
       'Accounts',
       { walletAddress },
-      { contractsHash: contractsHash([AccountProxy, Multicall3]) },
+      { contractsHash: contractsHash([PositionManagerNewPool]) },
     ],
-    enabled: Boolean(provider && walletAddress && AccountProxy && Multicall3),
+    enabled: Boolean(signer && walletAddress && PositionManagerNewPool),
     queryFn: async (): Promise<ethers.BigNumber[]> => {
-      if (!(provider && walletAddress && AccountProxy && Multicall3)) throw 'OMFG';
+      if (!(signer && walletAddress && PositionManagerNewPool)) throw 'OMFG';
 
-      const AccountProxyContract = new ethers.Contract(
-        AccountProxy.address,
-        AccountProxy.abi,
-        provider
+      const PositionManagerNewPoolContract = new ethers.Contract(
+        PositionManagerNewPool.address,
+        PositionManagerNewPool.abi,
+        signer
       );
-      const Multicall3Contract = new ethers.Contract(Multicall3.address, Multicall3.abi, provider);
-
-      log('walletAddress', walletAddress);
-      const numberOfAccountTokens = await AccountProxyContract.balanceOf(walletAddress);
-      log('numberOfAccountTokens', numberOfAccountTokens);
-
-      if (numberOfAccountTokens.eq(0)) {
-        // No accounts created yet
-        return [];
-      }
-      const accountIndexes: number[] = Array.from(Array(numberOfAccountTokens.toNumber()).keys());
-      log('accountIndexes', accountIndexes);
-
-      const calls = accountIndexes.map((index) => ({
-        target: AccountProxy.address,
-        callData: AccountProxyContract.interface.encodeFunctionData('tokenOfOwnerByIndex', [
-          walletAddress,
-          index,
-        ]),
-      }));
-
-      const multicallResponse = await Multicall3Contract.callStatic.aggregate3(calls);
-      log('multicallResponse', multicallResponse);
-
-      const accounts = accountIndexes.map((index) => {
-        const { returnData } = multicallResponse[index];
-        const [tokenOfOwnerByIndex] = AccountProxyContract.interface.decodeFunctionResult(
-          'tokenOfOwnerByIndex',
-          returnData
-        );
-        return tokenOfOwnerByIndex;
-      });
-      log('accounts', accounts);
-
-      return accounts;
+      const accountsIds = await PositionManagerNewPoolContract.getAccounts();
+      log('accountsIds', accountsIds);
+      return accountsIds;
     },
   });
 }
