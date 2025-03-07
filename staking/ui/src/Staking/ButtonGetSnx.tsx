@@ -17,6 +17,9 @@ export function ButtonGetSnx({ ...props }) {
       _hover={{ textDecoration: 'none' }}
       display="flex"
       gap={1}
+      onClick={() => {
+        window?._paq?.push(['trackEvent', 'staking', 'click', 'get_snx']);
+      }}
       {...props}
     >
       <Text>Get SNX</Text>

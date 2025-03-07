@@ -29,9 +29,6 @@ export function MigrateFromV2x() {
   const { isReady: isReadyMigrate } = useMigrateNewPoolV2x();
   const { data: v2xPosition } = useV2xPosition();
   const { isReady, mutation } = useMigrateNewPoolV2x();
-  const handleSubmit = React.useCallback(() => {
-    mutation.mutateAsync();
-  }, [mutation]);
 
   return (
     <>
@@ -91,7 +88,10 @@ export function MigrateFromV2x() {
                 width="100%"
                 isLoading={mutation.isPending}
                 isDisabled={!(isReady && !mutation.isPending)}
-                onClick={handleSubmit}
+                onClick={() => {
+                  window?._paq?.push(['trackEvent', 'staking', 'submit', 'burn_my_debt']);
+                  mutation.mutateAsync();
+                }}
               >
                 Burn My Debt
               </Button>
@@ -110,7 +110,13 @@ export function MigrateFromV2x() {
               cRatio={v2xPosition?.cRatio}
             />
             <ZeroRisk />
-            <Button isDisabled={!isReadyMigrate} onClick={() => setIsOpenMigrate(true)}>
+            <Button
+              isDisabled={!isReadyMigrate}
+              onClick={() => {
+                window?._paq?.push(['trackEvent', 'staking', 'click', 'burn_my_debt']);
+                setIsOpenMigrate(true);
+              }}
+            >
               Burn My Debt
             </Button>
           </>
