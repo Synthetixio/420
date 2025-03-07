@@ -181,6 +181,7 @@ export function StakingPosition() {
             borderRadius="6px"
             bg="navy.700"
             p={{ base: 4, sm: 10 }}
+            pl={{ base: 2, sm: 3 }}
             pt={{ base: 6, sm: 10 }}
           >
             <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">

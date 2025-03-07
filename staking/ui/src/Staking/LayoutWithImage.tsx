@@ -123,6 +123,8 @@ export function LayoutWithImage({
             borderRadius="6px"
             bg="navy.700"
             p={{ base: 4, sm: 10 }}
+            pl={{ base: 2, sm: 3 }}
+            pb={{ base: 2, sm: 3 }}
           >
             <Text
               fontSize="24px"
