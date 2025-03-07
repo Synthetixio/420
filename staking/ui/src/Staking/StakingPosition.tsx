@@ -107,7 +107,9 @@ export function StakingPosition() {
             </Flex>
             <LoanChart
               loan={loan ? wei(loan.loanAmount).toNumber() : 100}
-              startTime={loan ? Number.parseInt(loan.startTime.toString()) : 0}
+              startTime={
+                loan ? Number.parseInt(loan.startTime.toString()) : Math.floor(Date.now() / 1000)
+              }
               duration={365 * 24 * 60 * 60}
               pointsCount={50}
             />
