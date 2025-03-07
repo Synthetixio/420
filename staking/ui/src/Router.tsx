@@ -1,5 +1,5 @@
 import { useParams } from '@_/useParams';
-import { Container, Flex } from '@chakra-ui/react';
+import { Container, Flex, Heading } from '@chakra-ui/react';
 import { AccountSettingsPage } from './AccountSettingsPage';
 import { DashboardPage } from './DashboardPage';
 import { Footer } from './Footer';
@@ -9,13 +9,30 @@ import { TestPage } from './TestPage';
 function Content() {
   const [params] = useParams();
 
-  return (
-    <>
-      {params.showAll || !params.page || params.page === 'home' ? <DashboardPage /> : null}
-      {params.showAll || params.page === 'settings' ? <AccountSettingsPage /> : null}
-      {!params.showAll && params.page === 'test' ? <TestPage /> : null}
-    </>
-  );
+  // Combine all pages in one
+  if (params.showAll) {
+    let p = 1;
+    return (
+      <>
+        <Heading fontSize="3em" mt={16} color="yellow.500">
+          Page {p++}: Dashboard
+        </Heading>
+        <DashboardPage />
+        <Heading fontSize="3em" mt={16} color="yellow.500">
+          Page {p++}: Account Settings
+        </Heading>
+        <AccountSettingsPage />
+      </>
+    );
+  }
+
+  if (params.page === 'settings') {
+    return <AccountSettingsPage />;
+  }
+  if (params.page === 'test') {
+    return <TestPage />;
+  }
+  return <DashboardPage />;
 }
 
 export function Router() {
