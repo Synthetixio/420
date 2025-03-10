@@ -76,7 +76,7 @@ export function MigrateFromV3() {
                     <Link
                       isExternal
                       color="cyan.500"
-                      href="https://sips.synthetix.io/sips/sip-420/"
+                      href="https://blog.synthetix.io/420-stake-it/"
                     >
                       Learn more about the 420 Pool
                     </Link>
