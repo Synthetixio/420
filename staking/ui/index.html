@@ -25,23 +25,27 @@
     <link rel="icon" href="favicon.ico" />
     <!-- Matomo -->
     <script>
-      var _paq = (window._paq = window._paq || []);
+     var _paq = window._paq = window._paq || [];
       /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+      _paq.push(["setCookieDomain", "*.synthetix.io"]);
       _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      (function () {
-        var u = 'https://analytics.synthetix.io/';
+     _paq.push(['enableLinkTracking']);
+      (function() {
+        var u = "https://analytics.synthetix.io/";
+        // Configure the primary tracker (site ID 1)
         _paq.push(['setTrackerUrl', u + 'matomo.php']);
-        _paq.push(['setSiteId', '10']);
-        var d = document,
-          g = d.createElement('script'),
-          s = d.getElementsByTagName('script')[0];
-        g.async = true;
-        g.src = u + 'matomo.js';
+        _paq.push(['setSiteId', '1']);
+        // Add the second tracker (site ID 10)
+        _paq.push(['addTracker', u + 'matomo.php', 10]);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        g.async = true; 
+        g.src = u + 'matomo.js'; 
         s.parentNode.insertBefore(g, s);
       })();
     </script>
     <!-- End Matomo Code -->
+
   </head>
   <body>
     <div id="app"></div>
