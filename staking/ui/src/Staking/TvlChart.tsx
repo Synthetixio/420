@@ -53,6 +53,7 @@ export function TvlChart({
     (
       x: number
     ): {
+      x: number;
       y: number;
       v: number;
       ts: Date;
@@ -60,19 +61,26 @@ export function TvlChart({
       for (let i = 0; i < POINTS.length - 1; i++) {
         const { x: x1, y: y1 } = POINTS[i];
         const { x: x2, y: y2 } = POINTS[i + 1];
-        if (x >= x1 && x <= x2) {
+        if (x >= x1 && x <= x2 && POINTS[i + 1]) {
           // Perform linear interpolation to find the Y-value
           const t = (x - x1) / (x2 - x1); // Ratio between x1 and x2
           return {
+            ...POINTS[i + 1],
+            x,
             y: y1 + t * (y2 - y1),
-            v: POINTS[i + 1].v,
-            ts: POINTS[i + 1].ts,
-          }; // Interpolated Y-value
+          };
         }
       }
-      return { y: config.height, v: 0, ts: new Date() }; // Default fail-safe (zero debt repaid at bottom)
+      if (x > config.width / 2 && LAST_POINT) {
+        return LAST_POINT;
+      }
+      if (x < config.width / 2 && FIRST_POINT) {
+        return FIRST_POINT;
+      }
+      // Default fail-safe
+      return { x: 0, y: config.height, v: 0, ts: new Date() };
     },
-    [POINTS, config]
+    [POINTS, config, FIRST_POINT, LAST_POINT]
   );
 
   return (
