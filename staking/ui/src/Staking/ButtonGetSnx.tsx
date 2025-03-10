@@ -18,7 +18,7 @@ export function ButtonGetSnx({ ...props }) {
       display="flex"
       gap={1}
       onClick={() => {
-        window?._paq?.push(['trackEvent', 'staking', 'click', 'click_get_snx']);
+        window?._paq?.push(['trackEvent', 'staking', '420_migration', 'click_get_snx']);
       }}
       {...props}
     >
