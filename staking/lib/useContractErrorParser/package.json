@@ -6,7 +6,7 @@
   "dependencies": {
     "@_/parseContractError": "workspace:*",
     "@_/useAllErrors": "workspace:*",
-    "@_/usePositionManagerNewPool": "workspace:*",
+    "@_/usePositionManager420": "workspace:*",
     "react": "^18.2.0"
   }
 }

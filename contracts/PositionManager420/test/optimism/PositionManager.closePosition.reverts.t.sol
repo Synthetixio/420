@@ -2,13 +2,13 @@ pragma solidity ^0.8.21;
 
 import "../lib/PositionManagerTest.sol";
 import "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
-import "src/PositionManager.sol";
+import "src/PositionManager420.sol";
 
-contract Mainnet_PositionManager_closePosition_reverts_Test is PositionManagerTest {
+contract Optimism_PositionManager_closePosition_reverts_Test is PositionManagerTest {
     constructor() {
-        deployment = "1-main";
-        forkUrl = vm.envString("RPC_MAINNET");
-        forkBlockNumber = 21921167;
+        deployment = "10-main";
+        forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
+        forkBlockNumber = 132431079;
         initialize();
     }
 
@@ -84,7 +84,7 @@ contract Mainnet_PositionManager_closePosition_reverts_Test is PositionManagerTe
 
         vm.expectRevert(
             abi.encodeWithSelector(
-                PositionManagerNewPool.NotEnoughBalance.selector, ALICE, address($sUSD), required$sUSD, 0 ether
+                PositionManager420.NotEnoughBalance.selector, ALICE, address($sUSD), required$sUSD, 0 ether
             )
         );
         positionManager.closePosition(accountId);
@@ -116,10 +116,10 @@ contract Mainnet_PositionManager_closePosition_reverts_Test is PositionManagerTe
         vm.startPrank(ALICE);
         AccountProxy.approve(address(positionManager), accountId);
 
-        // NotEnoughAllowance error when not enough SNX approval for PositionManager
+        // NotEnoughAllowance error when not enough SNX approval for PositionManager420
         vm.expectRevert(
             abi.encodeWithSelector(
-                PositionManagerNewPool.NotEnoughAllowance.selector, ALICE, address($sUSD), required$sUSD, 0 ether
+                PositionManager420.NotEnoughAllowance.selector, ALICE, address($sUSD), required$sUSD, 0 ether
             )
         );
         positionManager.closePosition(accountId);

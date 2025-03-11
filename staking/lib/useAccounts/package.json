@@ -6,7 +6,7 @@
   "dependencies": {
     "@_/tsHelpers": "workspace:*",
     "@_/useBlockchain": "workspace:*",
-    "@_/usePositionManagerNewPool": "workspace:*",
+    "@_/usePositionManager420": "workspace:*",
     "@tanstack/react-query": "^5.8.3",
     "debug": "^4.4.0",
     "ethers": "^5.7.2"

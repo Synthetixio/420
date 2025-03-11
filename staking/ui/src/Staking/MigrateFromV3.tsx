@@ -24,13 +24,13 @@ import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
 import { ZeroRisk } from './ZeroRisk';
 import burn from './burn.webp';
 import coinburn from './coinburn.svg';
-import { useMigrateNewPool } from './useMigrateNewPool';
+import { useMigratePool420 } from './useMigratePool420';
 
 export function MigrateFromV3() {
   const { data: collateralType } = useCollateralType('SNX');
   const [isOpenMigrate, setIsOpenMigrate] = React.useState(false);
 
-  const { isReady: isReadyMigrate } = useMigrateNewPool();
+  const { isReady: isReadyMigrate } = useMigratePool420();
 
   const [params] = useParams<HomePageSchemaType>();
   const { data: liquidityPosition } = useLiquidityPosition({
@@ -38,7 +38,7 @@ export function MigrateFromV3() {
     collateralType,
   });
 
-  const { isReady, mutation } = useMigrateNewPool();
+  const { isReady, mutation } = useMigratePool420();
 
   return (
     <>

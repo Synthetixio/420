@@ -56,7 +56,7 @@ forge create \
   --verifier-url $ETHERSCAN_API_URL \
   --etherscan-api-key $ETHERSCAN_API_KEY \
   --verify \
-  src/PositionManager.sol:PositionManagerNewPool \
+  src/PositionManager420.sol:PositionManager420 \
   --constructor-args \
       $_CoreProxy \
       $_AccountProxy \
@@ -92,7 +92,7 @@ forge create \
   --verifier-url $OPTIMISTIC_ETHERSCAN_API_URL \
   --etherscan-api-key $OPTIMISTIC_ETHERSCAN_API_KEY \
   --verify \
-  src/PositionManager.sol:PositionManagerNewPool \
+  src/PositionManager420.sol:PositionManager420 \
   --constructor-args \
       $_CoreProxy \
       $_AccountProxy \
@@ -117,15 +117,15 @@ forge create \
   --broadcast \
   --no-cache \
   --private-key $TEST_PK \
-  src/PositionManager.sol:PositionManagerNewPool \
+  src/PositionManager420.sol:PositionManager420 \
   --constructor-args \
       $_CoreProxy \
       $_AccountProxy \
       $_TreasuryMarketProxy \
       $_LegacyMarketProxy
 
-# Get the readable abi and update importPositionManagerNewPool.ts
-node ../../readableAbi.js "$(cat ./out/PositionManager.sol/PositionManagerNewPool.json | jq -c '.metadata.output.abi')"
+# Get the readable abi and update importPositionManager420.ts
+node ../../readableAbi.js "$(cat ./out/PositionManager420.sol/PositionManager420.json | jq -c '.metadata.output.abi')"
 ```
 
 Additional cast commands to setup and configure the new pool

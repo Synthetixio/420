@@ -3,7 +3,7 @@ import { offchainMainnetEndpoint, offchainTestnetEndpoint } from '@_/constants';
 import {
   importAccountProxy,
   importCoreProxy,
-  importPositionManagerNewPool,
+  importPositionManager420,
   importPythERC7412Wrapper,
   importPythVerifier,
   importSpotMarketProxy,
@@ -95,7 +95,7 @@ export async function logMulticall({
           importAccountProxy(network.id, network.preset).catch(() => ({ abi: [] })),
           importUSDProxy(network.id, network.preset).catch(() => ({ abi: [] })),
           importPythERC7412Wrapper(network.id, network.preset).catch(() => ({ abi: [] })),
-          importPositionManagerNewPool(network.id, network.preset).catch(() => ({ abi: [] })),
+          importPositionManager420(network.id, network.preset).catch(() => ({ abi: [] })),
         ])
       ).flatMap((c) => (c ? c.abi : []))
     )

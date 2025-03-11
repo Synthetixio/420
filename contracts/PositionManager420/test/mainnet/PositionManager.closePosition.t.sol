@@ -82,9 +82,9 @@ contract Mainnet_PositionManager_closePosition_Test is PositionManagerTest {
             "Position collateral should be reduced to 0"
         );
         assertEq(
-            0,
+            1000 ether,
             CoreProxy.getAccountAvailableCollateral(accountId, address($SNX)),
-            "User account should not have any $SNX available as all the SNX should be transferred to the wallet"
+            "User account should have all undelegated $SNX available on the account"
         );
         assertEq(
             0,
@@ -105,9 +105,9 @@ contract Mainnet_PositionManager_closePosition_Test is PositionManagerTest {
         );
         assertEq(
             //
-            1000 ether,
+            0,
             $SNX.balanceOf(ALICE),
-            "All delegated 1000 $SNX should be returned to the wallet"
+            "All delegated 1000 $SNX should stay in the system and withdrawn later after timeout"
         );
     }
 }

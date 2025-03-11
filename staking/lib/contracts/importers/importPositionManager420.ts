@@ -22,7 +22,7 @@ const abi = [
   'function onERC721Received(address, address, uint256, bytes) pure returns (bytes4)',
 ];
 
-export async function importPositionManagerNewPool(
+export async function importPositionManager420(
   chainId?: number,
   preset?: string
 ): Promise<{ address: string; abi: string[] }> {
@@ -37,7 +37,7 @@ export async function importPositionManagerNewPool(
       return { address: '0x693cd986b8b840607d3c7952f038bc22da636f48', abi };
     }
     default: {
-      throw new Error(`Unsupported deployment ${deployment} for PositionManagerNewPool`);
+      throw new Error(`Unsupported deployment ${deployment} for PositionManager420`);
     }
   }
 }

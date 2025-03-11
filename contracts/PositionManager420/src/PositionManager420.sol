@@ -8,7 +8,7 @@ import {
 } from "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
 import {IAccountProxy} from "@synthetixio/v3-contracts/1-main/IAccountProxy.sol";
 import {IUSDProxy} from "@synthetixio/v3-contracts/1-main/IUSDProxy.sol";
-import {ITreasuryMarketProxy} from "@synthetixio/v3-contracts/1-main/ITreasuryMarketProxy.sol";
+import {ITreasuryMarketProxy} from "./ITreasuryMarketProxy.sol";
 import {ILegacyMarketProxy} from "@synthetixio/v3-contracts/1-main/ILegacyMarketProxy.sol";
 import {IV2xUsd} from "@synthetixio/v3-contracts/1-main/IV2xUsd.sol";
 import {IV2x} from "@synthetixio/v3-contracts/1-main/IV2x.sol";
@@ -18,7 +18,7 @@ import {IERC20} from "@synthetixio/core-contracts/contracts/interfaces/IERC20.so
 import {IERC721Receiver} from "@synthetixio/core-contracts/contracts/interfaces/IERC721Receiver.sol";
 import {IAddressResolver} from "./IAddressResolver.sol";
 
-contract PositionManagerNewPool {
+contract PositionManager420 {
     error NotEnoughAllowance(
         address walletAddress, address tokenAddress, uint256 requiredAllowance, uint256 availableAllowance
     );
@@ -179,30 +179,15 @@ contract PositionManagerNewPool {
      */
     function setupPosition(uint256 $SNXAmount) public {
         address msgSender = ERC2771Context._msgSender();
+        uint128 poolId = TreasuryMarketProxy.poolId();
 
         // 1. Create new v3 account for the user
         uint128 accountId = CoreProxy.createAccount();
 
-        // 2. Delegate $SNXAmount to the SC pool
-        uint128 scPoolId = 1; // SC Pool id is always 1
-        _increasePosition(accountId, $SNXAmount, scPoolId);
+        // 2. Delegate $SNXAmount to the 420 pool
+        _increasePosition(accountId, $SNXAmount, poolId);
 
-        // 3. Mint maximum possible amount of $snxUSD against $SNX position in the SC pool
-        _maxMint(accountId, scPoolId);
-
-        // TODO: convert minted snxUSD to sUSD when core contracts are updated
-
-        // 4. Withdraw all the minted $snxUSD
-        _withdrawCollateral(accountId, get$snxUSD());
-
-        // 5. Migrate position to Delegated Staking pool and saddle account with debt
-        CoreProxy.migrateDelegation(
-            //
-            accountId,
-            scPoolId,
-            get$SNX(),
-            TreasuryMarketProxy.poolId()
-        );
+        // 3. Saddle account
         TreasuryMarketProxy.saddle(accountId);
 
         // 6. Send account NFT back to the user wallet
@@ -225,7 +210,6 @@ contract PositionManagerNewPool {
     function closePosition(uint128 accountId) public {
         address msgSender = ERC2771Context._msgSender();
         address $SNX = get$SNX();
-        address $snxUSD = get$snxUSD();
 
         // 1. Verify that minimum delegation time is respected
         uint128 poolId = TreasuryMarketProxy.poolId();
@@ -261,13 +245,7 @@ contract PositionManagerNewPool {
         AccountProxy.approve(address(TreasuryMarketProxy), accountId);
         TreasuryMarketProxy.unsaddle(accountId);
 
-        // 5. Withdraw available $snxUSD
-        _withdrawCollateral(accountId, $snxUSD);
-
-        // 6. Withdraw available $SNX
-        _withdrawCollateral(accountId, $SNX);
-
-        // 7. Send Account NFT back to the user wallet
+        // 5. Send Account NFT back to the user wallet
         AccountProxy.transferFrom(
             //
             address(this),
@@ -388,7 +366,7 @@ contract PositionManagerNewPool {
             );
         }
 
-        // 3. Transfer $SNX from user wallet to PositionManager
+        // 3. Transfer $SNX from user wallet to PositionManager420
         IERC20($SNX).transferFrom(
             //
             msgSender,
@@ -472,7 +450,7 @@ contract PositionManagerNewPool {
                 );
             }
 
-            // 3. Transfer $sUSD from user wallet to PositionManager
+            // 3. Transfer $sUSD from user wallet to PositionManager420
             IERC20($sUSD).transferFrom(
                 //
                 msgSender,

@@ -28,13 +28,9 @@ contract Mainnet_PositionManager_setupPosition_Test is PositionManagerTest {
 
         uint256 targetCratio = TreasuryMarketProxy.targetCratio();
         uint256 debtAmount = 1000 * snxPrice * 1 ether / targetCratio;
-        uint256 loanedAmount = 1000 * snxPrice / 5;
+        uint256 loanedAmount = 0;
 
-        assertEq(
-            loanedAmount,
-            TreasuryMarketProxy.loanedAmount(accountId),
-            "account loan amount should be 0.2 of provided liquidity value (1000 * snxPrice / 5)"
-        );
+        assertEq(loanedAmount, TreasuryMarketProxy.loanedAmount(accountId), "account loan amount should be 0");
         assertEq(
             1000 ether,
             CoreProxy.getPositionCollateral(accountId, TreasuryMarketProxy.poolId(), address($SNX)),
@@ -56,10 +52,6 @@ contract Mainnet_PositionManager_setupPosition_Test is PositionManagerTest {
             CoreProxy.getAccountAvailableCollateral(accountId, address($snxUSD)),
             "account should not have any $snxUSD available as it is all sent to user wallet"
         );
-        assertEq(
-            loanedAmount,
-            $snxUSD.balanceOf(ALICE),
-            "should get all the loaned $snxUSD in the wallet immediately, the amount is the same as loaned amount (1000 * snxPrice / 5) "
-        );
+        assertEq(0, $snxUSD.balanceOf(ALICE), "should have no $snxUSD in the wallet");
     }
 }

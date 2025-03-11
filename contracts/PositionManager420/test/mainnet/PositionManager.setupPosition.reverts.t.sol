@@ -1,7 +1,7 @@
 pragma solidity ^0.8.21;
 
 import "../lib/PositionManagerTest.sol";
-import "src/PositionManager.sol";
+import "src/PositionManager420.sol";
 
 contract Mainnet_PositionManager_setupPosition_reverts_Test is PositionManagerTest {
     constructor() {
@@ -18,7 +18,7 @@ contract Mainnet_PositionManager_setupPosition_reverts_Test is PositionManagerTe
         vm.prank(ALICE);
         vm.expectRevert(
             abi.encodeWithSelector(
-                PositionManagerNewPool.NotEnoughBalance.selector, ALICE, address($SNX), 100 ether, 0 ether
+                PositionManager420.NotEnoughBalance.selector, ALICE, address($SNX), 100 ether, 0 ether
             )
         );
         positionManager.setupPosition(100 ether);
@@ -30,10 +30,10 @@ contract Mainnet_PositionManager_setupPosition_reverts_Test is PositionManagerTe
 
         _deal$SNX(ALICE, 100 ether);
 
-        // NotEnoughAllowance error when not enough SNX approval for PositionManager
+        // NotEnoughAllowance error when not enough SNX approval for PositionManager420
         vm.expectRevert(
             abi.encodeWithSelector(
-                PositionManagerNewPool.NotEnoughAllowance.selector, ALICE, address($SNX), 100 ether, 0 ether
+                PositionManager420.NotEnoughAllowance.selector, ALICE, address($SNX), 100 ether, 0 ether
             )
         );
         vm.prank(ALICE);

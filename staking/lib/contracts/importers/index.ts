@@ -5,7 +5,7 @@ export * from './importCoreProxy';
 export * from './importLegacyMarket';
 export * from './importMeta';
 export * from './importOracleManagerProxy';
-export * from './importPositionManagerNewPool';
+export * from './importPositionManager420';
 export * from './importPythERC7412Wrapper';
 export * from './importPythVerifier';
 export * from './importSNX';

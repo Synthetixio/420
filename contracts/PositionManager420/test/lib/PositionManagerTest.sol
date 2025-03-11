@@ -8,7 +8,7 @@ import {
 } from "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
 import {IAccountProxy} from "@synthetixio/v3-contracts/1-main/IAccountProxy.sol";
 import {IAddressResolver} from "src/IAddressResolver.sol";
-import {ITreasuryMarketProxy} from "@synthetixio/v3-contracts/1-main/ITreasuryMarketProxy.sol";
+import {ITreasuryMarketProxy} from "src/ITreasuryMarketProxy.sol";
 import {IUSDProxy} from "@synthetixio/v3-contracts/1-main/IUSDProxy.sol";
 import {ILegacyMarketProxy} from "@synthetixio/v3-contracts/1-main/ILegacyMarketProxy.sol";
 import {IV2x} from "@synthetixio/v3-contracts/1-main/IV2x.sol";
@@ -16,7 +16,7 @@ import {IV2xUsd} from "@synthetixio/v3-contracts/1-main/IV2xUsd.sol";
 import {IERC20} from "@synthetixio/core-contracts/contracts/interfaces/IERC20.sol";
 import {IAddressResolver} from "src/IAddressResolver.sol";
 
-import {PositionManagerNewPool} from "src/PositionManager.sol";
+import {PositionManager420} from "src/PositionManager420.sol";
 import {Test} from "forge-std/src/Test.sol";
 import {Vm} from "forge-std/src/Vm.sol";
 import {console} from "forge-std/src/console.sol";
@@ -38,7 +38,7 @@ contract PositionManagerTest is Test {
     string internal deployment;
     string internal forkUrl;
 
-    PositionManagerNewPool internal positionManager;
+    PositionManager420 internal positionManager;
 
     function initialize() internal {
         string memory root = vm.projectRoot();
@@ -75,14 +75,14 @@ contract PositionManagerTest is Test {
         // Pyth bypass
         vm.etch(0x1234123412341234123412341234123412341234, "FORK");
 
-        positionManager = new PositionManagerNewPool(
+        positionManager = new PositionManager420(
             //
             address(CoreProxy),
             address(AccountProxy),
             address(TreasuryMarketProxy),
             address(LegacyMarketProxy)
         );
-        vm.label(address(positionManager), "PositionManager");
+        vm.label(address(positionManager), "PositionManager420");
 
         $SNX = IERC20(positionManager.get$SNX());
         vm.label(address($SNX), "$SNX");
@@ -182,6 +182,8 @@ contract PositionManagerTest is Test {
         // 3. Mint maximum possible amount of $snxUSD against $SNX position in the SC pool
         _maxMint(accountId, scPoolId);
 
+        _withdrawCollateral(accountId, address($snxUSD));
+
         // 5. Migrate position to Delegated Staking pool and saddle account with debt
         CoreProxy.migrateDelegation(
             //
@@ -190,6 +192,7 @@ contract PositionManagerTest is Test {
             address($SNX),
             TreasuryMarketProxy.poolId()
         );
+
         TreasuryMarketProxy.saddle(accountId);
     }
 
@@ -229,5 +232,33 @@ contract PositionManagerTest is Test {
             currentPosition + $SNXAmount,
             1e18
         );
+    }
+
+    function _withdrawCollateral(uint128 accountId, address collateralType)
+        internal
+        returns (uint256 availableCollateral)
+    {
+        // 1. Get amount of available collateral
+        availableCollateral = CoreProxy.getAccountAvailableCollateral(
+            //
+            accountId,
+            collateralType
+        );
+        if (availableCollateral > 0) {
+            // 2. Withdraw all the available collateral
+            CoreProxy.withdraw(
+                //
+                accountId,
+                collateralType,
+                availableCollateral
+            );
+
+            // 3. Send all the collateral to the wallet
+            IERC20(collateralType).transfer(
+                //
+                AccountProxy.ownerOf(accountId),
+                availableCollateral
+            );
+        }
     }
 }

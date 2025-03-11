@@ -135,9 +135,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/position-manager-new-pool@workspace:contracts/position-manager-new-pool":
+"@_/position-manager-new-pool@workspace:contracts/PositionManager420":
   version: 0.0.0-use.local
-  resolution: "@_/position-manager-new-pool@workspace:contracts/position-manager-new-pool"
+  resolution: "@_/position-manager-new-pool@workspace:contracts/PositionManager420"
   dependencies:
     "@synthetixio/core-contracts": "npm:^3.10.1"
     "@synthetixio/core-modules": "npm:^3.10.1"
@@ -189,7 +189,7 @@ __metadata:
     "@_/useLegacyMarket": "workspace:*"
     "@_/useLiquidityPosition": "workspace:*"
     "@_/useParams": "workspace:*"
-    "@_/usePositionManagerNewPool": "workspace:*"
+    "@_/usePositionManager420": "workspace:*"
     "@_/usePythPrice": "workspace:*"
     "@_/useSNX": "workspace:*"
     "@_/useTreasuryMarketProxy": "workspace:*"
@@ -339,7 +339,7 @@ __metadata:
   dependencies:
     "@_/tsHelpers": "workspace:*"
     "@_/useBlockchain": "workspace:*"
-    "@_/usePositionManagerNewPool": "workspace:*"
+    "@_/usePositionManager420": "workspace:*"
     "@tanstack/react-query": "npm:^5.8.3"
     debug: "npm:^4.4.0"
     ethers: "npm:^5.7.2"
@@ -410,7 +410,7 @@ __metadata:
   dependencies:
     "@_/parseContractError": "workspace:*"
     "@_/useAllErrors": "workspace:*"
-    "@_/usePositionManagerNewPool": "workspace:*"
+    "@_/usePositionManager420": "workspace:*"
     react: "npm:^18.2.0"
   languageName: unknown
   linkType: soft
@@ -522,9 +522,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/usePositionManagerNewPool@workspace:*, @_/usePositionManagerNewPool@workspace:staking/lib/contracts/usePositionManagerNewPool":
+"@_/usePositionManager420@workspace:*, @_/usePositionManager420@workspace:staking/lib/contracts/usePositionManager420":
   version: 0.0.0-use.local
-  resolution: "@_/usePositionManagerNewPool@workspace:staking/lib/contracts/usePositionManagerNewPool"
+  resolution: "@_/usePositionManager420@workspace:staking/lib/contracts/usePositionManager420"
   dependencies:
     "@_/contracts": "workspace:*"
     "@_/useBlockchain": "workspace:*"

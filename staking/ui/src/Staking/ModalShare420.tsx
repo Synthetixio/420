@@ -58,7 +58,7 @@ export function ModalShare420({
                 textDecoration="none"
                 _hover={{ textDecoration: 'none', backgroundColor: 'rgba(0, 209, 255, 0.12)' }}
                 href={Synthetix420}
-                download="Synthetix420Pool.webp"
+                download="SynthetixPool420.webp"
               >
                 <DownloadIcon mr={2} />
                 Download

@@ -13,7 +13,7 @@ import { Loading } from './Staking/Loading';
 import { MigrateFromV2x } from './Staking/MigrateFromV2x';
 import { MigrateFromV3 } from './Staking/MigrateFromV3';
 import { StakingPosition } from './Staking/StakingPosition';
-import { usePositionCollateral as useNewPoolPositionCollateral } from './Staking/usePositionCollateral';
+import { usePositionCollateral as usePool420PositionCollateral } from './Staking/usePositionCollateral';
 import { useV2xPosition } from './Staking/useV2xPosition';
 
 export function DashboardPage() {
@@ -23,8 +23,8 @@ export function DashboardPage() {
     accountId: params.accountId,
     collateralType,
   });
-  const { data: newPoolPositionCollateral, isPending: isPendingNewPoolPositionCollateral } =
-    useNewPoolPositionCollateral();
+  const { data: Pool420PositionCollateral, isPending: isPendingPool420PositionCollateral } =
+    usePool420PositionCollateral();
   const { data: v2xPosition, isPending: isPendingV2xPosition } = useV2xPosition();
 
   const { activeWallet } = useWallet();
@@ -36,14 +36,14 @@ export function DashboardPage() {
     network &&
     (isPendingCollateralType ||
       (params.accountId && isPendingLiquidityPosition) ||
-      (params.accountId && isPendingNewPoolPositionCollateral) ||
+      (params.accountId && isPendingPool420PositionCollateral) ||
       isPendingV2xPosition);
   const hasV2xPosition = v2xPosition?.debt.gt(0);
   const hasV3Position = liquidityPosition?.collateralAmount.gt(0);
   const hasV3Debt = liquidityPosition?.debt.gt(0);
 
   // Only show POL position even if user has other v3 positions on the same account
-  const hasStakingPosition = newPoolPositionCollateral?.gt(0);
+  const hasStakingPosition = Pool420PositionCollateral?.gt(0);
 
   let step = 1;
   return (
