@@ -23,7 +23,7 @@ export function DashboardPage() {
     accountId: params.accountId,
     collateralType,
   });
-  const { data: Pool420PositionCollateral, isPending: isPendingPool420PositionCollateral } =
+  const { data: pool420PositionCollateral, isPending: isPendingPool420PositionCollateral } =
     usePool420PositionCollateral();
   const { data: v2xPosition, isPending: isPendingV2xPosition } = useV2xPosition();
 
@@ -43,7 +43,7 @@ export function DashboardPage() {
   const hasV3Debt = liquidityPosition?.debt.gt(0);
 
   // Only show POL position even if user has other v3 positions on the same account
-  const hasStakingPosition = Pool420PositionCollateral?.gt(0);
+  const hasStakingPosition = pool420PositionCollateral?.gt(0);
 
   let step = 1;
   return (
