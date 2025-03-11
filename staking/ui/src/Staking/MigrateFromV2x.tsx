@@ -89,7 +89,12 @@ export function MigrateFromV2x() {
                 isLoading={mutation.isPending}
                 isDisabled={!(isReady && !mutation.isPending)}
                 onClick={() => {
-                  window?._paq?.push(['trackEvent', 'staking', '420_migration', 'submit_burn_my_debt']);
+                  window?._paq?.push([
+                    'trackEvent',
+                    'staking',
+                    '420_migration',
+                    'submit_burn_my_debt',
+                  ]);
                   mutation.mutateAsync();
                 }}
               >
@@ -113,7 +118,12 @@ export function MigrateFromV2x() {
             <Button
               isDisabled={!isReadyMigrate}
               onClick={() => {
-                window?._paq?.push(['trackEvent', 'staking', '420_migration', 'click_burn_my_debt']);
+                window?._paq?.push([
+                  'trackEvent',
+                  'staking',
+                  '420_migration',
+                  'click_burn_my_debt',
+                ]);
                 setIsOpenMigrate(true);
               }}
             >

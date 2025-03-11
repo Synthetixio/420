@@ -2,7 +2,7 @@ pragma solidity ^0.8.21;
 
 import "../lib/PositionManagerTest.sol";
 import "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
-import "src/PositionManager420.sol";
+import "../../src/PositionManager420.sol";
 
 contract Mainnet_PositionManager_closePosition_reverts_Test is PositionManagerTest {
     constructor() {

@@ -335,8 +335,8 @@ workflows:
       - tests
 
       - contract-test:
-          name: pm-420-pool
-          working_directory: 'contracts/position-manager-new-pool'
+          name: PositionManager420
+          working_directory: 'contracts/PositionManager420'
 
       #- cy
       - e2e:

@@ -1,7 +1,7 @@
 pragma solidity ^0.8.21;
 
 import "../lib/PositionManagerTest.sol";
-import "src/PositionManager420.sol";
+import "../../src/PositionManager420.sol";
 
 contract Optimism_PositionManager_setupPosition_reverts_Test is PositionManagerTest {
     constructor() {

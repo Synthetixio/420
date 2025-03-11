@@ -7,16 +7,16 @@ import {
     MarketConfiguration
 } from "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
 import {IAccountProxy} from "@synthetixio/v3-contracts/1-main/IAccountProxy.sol";
-import {IAddressResolver} from "src/IAddressResolver.sol";
-import {ITreasuryMarketProxy} from "src/ITreasuryMarketProxy.sol";
+import {IAddressResolver} from "../../src/IAddressResolver.sol";
+import {ITreasuryMarketProxy} from "../../src/ITreasuryMarketProxy.sol";
 import {IUSDProxy} from "@synthetixio/v3-contracts/1-main/IUSDProxy.sol";
 import {ILegacyMarketProxy} from "@synthetixio/v3-contracts/1-main/ILegacyMarketProxy.sol";
 import {IV2x} from "@synthetixio/v3-contracts/1-main/IV2x.sol";
 import {IV2xUsd} from "@synthetixio/v3-contracts/1-main/IV2xUsd.sol";
 import {IERC20} from "@synthetixio/core-contracts/contracts/interfaces/IERC20.sol";
-import {IAddressResolver} from "src/IAddressResolver.sol";
+import {IAddressResolver} from "../../src/IAddressResolver.sol";
 
-import {PositionManager420} from "src/PositionManager420.sol";
+import {PositionManager420} from "../../src/PositionManager420.sol";
 import {Test} from "forge-std/src/Test.sol";
 import {Vm} from "forge-std/src/Vm.sol";
 import {console} from "forge-std/src/console.sol";
