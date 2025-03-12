@@ -1,0 +1,45 @@
+{
+  "redirects": [
+    { "source": "/staking", "destination": "https://legacy-staking.synthetix.io/staking" },
+    {
+      "source": "/staking/:path*",
+      "destination": "https://legacy-staking.synthetix.io/staking/:path*"
+    },
+    { "source": "/earn", "destination": "https://legacy-staking.synthetix.io/earn" },
+    { "source": "/wallet", "destination": "https://legacy-staking.synthetix.io/wallet" },
+    { "source": "/terms", "destination": "https://legacy-staking.synthetix.io/terms" },
+    {
+      "source": "/wallet/balances",
+      "destination": "https://legacy-staking.synthetix.io/wallet/balances"
+    },
+    { "source": "/loans", "destination": "https://legacy-staking.synthetix.io/loans" },
+    {
+      "source": "/loans/:path*",
+      "destination": "https://legacy-staking.synthetix.io/loans/:path*"
+    },
+    {
+      "source": "/migrate-escrow",
+      "destination": "https://legacy-staking.synthetix.io/migrate-escrow"
+    },
+    {
+      "source": "/migrate-debt",
+      "destination": "https://legacy-staking.synthetix.io/migrate-debt"
+    },
+    { "source": "/escrow", "destination": "https://legacy-staking.synthetix.io/escrow" },
+    {
+      "source": "/escrow/:path*",
+      "destination": "https://legacy-staking.synthetix.io/escrow/:path*"
+    },
+    { "source": "/history", "destination": "https://legacy-staking.synthetix.io/history" },
+    { "source": "/delegate", "destination": "https://legacy-staking.synthetix.io/delegate" },
+    {
+      "source": "/merge-accounts",
+      "destination": "https://legacy-staking.synthetix.io/merge-accounts"
+    },
+    {
+      "source": "/merge-accounts/:path*",
+      "destination": "https://legacy-staking.synthetix.io/merge-accounts/:path*"
+    },
+    { "source": "/bridge", "destination": "https://legacy-staking.synthetix.io/bridge" }
+  ]
+}
