@@ -2,24 +2,8 @@
   "redirects": [
     { "source": "/staking", "destination": "https://legacy-staking.synthetix.io/staking" },
     {
-      "source": "/staking/mint",
-      "destination": "https://legacy-staking.synthetix.io/staking/mint"
-    },
-    {
-      "source": "/staking/burn",
-      "destination": "https://legacy-staking.synthetix.io/staking/burn"
-    },
-    {
-      "source": "/staking/unflag",
-      "destination": "https://legacy-staking.synthetix.io/staking/unflag"
-    },
-    {
-      "source": "/staking/swap-links",
-      "destination": "https://legacy-staking.synthetix.io/staking/swap-links"
-    },
-    {
-      "source": "/staking/self-liquidation",
-      "destination": "https://legacy-staking.synthetix.io/staking/self-liquidation"
+      "source": "/staking/:path*",
+      "destination": "https://legacy-staking.synthetix.io/staking/:path*"
     },
     { "source": "/earn", "destination": "https://legacy-staking.synthetix.io/earn" },
     { "source": "/wallet", "destination": "https://legacy-staking.synthetix.io/wallet" },
