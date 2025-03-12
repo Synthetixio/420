@@ -206,7 +206,7 @@ export _TreasuryMarketProxy=$(cat $_meta | jq -r '.contracts.TreasuryMarketProxy
 export _LegacyMarketProxy=$(cat $_meta | jq -r '.contracts.LegacyMarketProxy')
 export _SNX=$(cat $_meta | jq -r '.contracts.CollateralToken_SNX')
 export rpc="$RPC_MAINNET"
-export block=21921167
+export block=22030934
 
 export accounts='1
 2
@@ -245,7 +245,7 @@ export _TreasuryMarketProxy=$(cat $_meta | jq -r '.contracts.TreasuryMarketProxy
 export _LegacyMarketProxy=$(cat $_meta | jq -r '.contracts.LegacyMarketProxy')
 export _SNX=$(cat $_meta | jq -r '.contracts.CollateralToken_SNX')
 export rpc="$RPC_OPTIMISM_MAINNET"
-export block=132431079
+export block=133093166
 
 for i in {1136..1236}; do
   account_readable=$(cast call --rpc-url "$rpc" --block $block "$_AccountProxy" "function tokenByIndex(uint256 index) view returns (uint256)" "$i")

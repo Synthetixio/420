@@ -8,7 +8,7 @@ contract Mainnet_PositionManager_closePosition_reverts_Test is PositionManagerTe
     constructor() {
         deployment = "1-main";
         forkUrl = vm.envString("RPC_MAINNET");
-        forkBlockNumber = 21921167;
+        forkBlockNumber = 22030934;
         initialize();
     }
 

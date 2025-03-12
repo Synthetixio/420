@@ -6,7 +6,7 @@ contract Optimism_PositionManager_closePosition_Test is PositionManagerTest {
     constructor() {
         deployment = "10-main";
         forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
-        forkBlockNumber = 132431079;
+        forkBlockNumber = 133093166;
         initialize();
     }
 
