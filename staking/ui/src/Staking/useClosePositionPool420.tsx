@@ -1,45 +1,43 @@
 import { ContractError } from '@_/ContractError';
+import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
-import { useLegacyMarket } from '@_/useLegacyMarket';
-import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
-import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
+import { type HomePageSchemaType, useParams } from '@_/useParams';
+import { usePositionManager420 } from '@_/usePositionManager420';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useToast } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';
 import React from 'react';
-import { useTargetCRatio } from './useTargetCRatio';
-import { useV2xPosition } from './useV2xPosition';
+import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
+import { usePositionCollateral } from './usePositionCollateral';
 
-const log = debug('snx:useMigrateNewPoolV2x');
+const log = debug('snx:useClosePosition420');
 
-export function useMigrateNewPoolV2x() {
+export function useClosePositionPool420() {
+  const [params] = useParams<HomePageSchemaType>();
+
   const signer = useSigner();
   const provider = useProvider();
   const { network } = useNetwork();
 
-  const { data: v2xPosition } = useV2xPosition();
-
-  const { data: PositionManagerNewPool } = usePositionManagerNewPool();
-  const { data: LegacyMarket } = useLegacyMarket();
-  const { data: TreasuryMarketProxy } = useTreasuryMarketProxy();
+  const { data: PositionManager420 } = usePositionManager420();
+  const { data: AccountProxy } = useAccountProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
-  const { data: targetCRatio } = useTargetCRatio();
+  const { data: positionCollateral } = usePositionCollateral();
+  const { data: loanedAmount } = useCurrentLoanedAmount();
 
   const isReady =
     network &&
     provider &&
     signer &&
     TrustedMulticallForwarder &&
-    PositionManagerNewPool &&
-    TreasuryMarketProxy &&
-    LegacyMarket &&
-    targetCRatio &&
-    v2xPosition &&
-    v2xPosition.collateralAmount.gt(0) &&
-    (v2xPosition.cRatio.lte(0) || v2xPosition.cRatio.gte(targetCRatio)) &&
+    PositionManager420 &&
+    AccountProxy &&
+    positionCollateral &&
+    positionCollateral.gt(0) &&
+    loanedAmount &&
     true;
 
   const toast = useToast({ isClosable: true, duration: 9000 });
@@ -52,30 +50,48 @@ export function useMigrateNewPoolV2x() {
         throw new Error('Not ready');
       }
 
+      const PositionManager420Contract = new ethers.Contract(
+        PositionManager420.address,
+        PositionManager420.abi,
+        signer
+      );
+      if (loanedAmount.gt(0)) {
+        toast.closeAll();
+        toast({ title: 'Approving sUSD...', variant: 'left-accent' });
+        const sUSDAddress = await PositionManager420Contract.get$sUSD();
+        const sUSDContract = new ethers.Contract(
+          sUSDAddress,
+          ['function approve(address spender, uint256 amount) returns (bool)'],
+          signer
+        );
+        const sUSDAppoveGasLimit = await sUSDContract.estimateGas.approve(
+          PositionManager420.address,
+          loanedAmount
+        );
+        await sUSDContract.approve(PositionManager420.address, loanedAmount, {
+          gasLimit: sUSDAppoveGasLimit.mul(15).div(10),
+        });
+      }
+
       toast.closeAll();
-      toast({ title: 'Migrating...', variant: 'left-accent' });
+      toast({ title: 'Withdrawing SNX...', variant: 'left-accent' });
 
-      const accountId = `${1_000_000_000_000 + Math.floor(Math.random() * 1_000_000_000_000)}`;
+      const AccountProxyInterface = new ethers.utils.Interface(AccountProxy.abi);
+      const PositionManager420Interface = new ethers.utils.Interface(PositionManager420.abi);
 
-      const LegacyMarketProxyInterface = new ethers.utils.Interface(LegacyMarket.abi);
-      const TreasuryMarketProxyInterface = new ethers.utils.Interface(TreasuryMarketProxy.abi);
       const multicall = [
         {
-          target: TreasuryMarketProxy.address,
-          callData: TreasuryMarketProxyInterface.encodeFunctionData('rebalance'),
-          requireSuccess: true,
-        },
-        {
-          target: LegacyMarket.address,
-          callData: LegacyMarketProxyInterface.encodeFunctionData('migrate', [
-            ethers.BigNumber.from(accountId),
+          target: AccountProxy.address,
+          callData: AccountProxyInterface.encodeFunctionData('approve', [
+            PositionManager420.address,
+            ethers.BigNumber.from(params.accountId),
           ]),
           requireSuccess: true,
         },
         {
-          target: TreasuryMarketProxy.address,
-          callData: TreasuryMarketProxyInterface.encodeFunctionData('saddle', [
-            ethers.BigNumber.from(accountId),
+          target: PositionManager420.address,
+          callData: PositionManager420Interface.encodeFunctionData('closePosition', [
+            ethers.BigNumber.from(params.accountId),
           ]),
           requireSuccess: true,
         },
@@ -102,29 +118,14 @@ export function useMigrateNewPoolV2x() {
     },
 
     onSuccess: async () => {
-      const deployment = `${network?.id}-${network?.preset}`;
-      await Promise.all(
-        [
-          //
-          'New Pool',
-          //
-          'Accounts',
-          'PriceUpdates',
-          'LiquidityPosition',
-          'LiquidityPositions',
-          'TokenBalance',
-          'SynthBalances',
-          'EthBalance',
-          'Allowance',
-          'TransferableSynthetix',
-          'AccountCollateralUnlockDate',
-        ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
-      );
+      queryClient.invalidateQueries({
+        queryKey: [`${network?.id}-${network?.preset}`, 'New Pool'],
+      });
 
       toast.closeAll();
       toast({
         title: 'Success',
-        description: 'Migration completed.',
+        description: 'SNX withdrawn.',
         status: 'success',
         duration: 5000,
         variant: 'left-accent',
@@ -138,7 +139,7 @@ export function useMigrateNewPoolV2x() {
       }
       toast.closeAll();
       toast({
-        title: 'Could not complete migration',
+        title: 'Could not withdraw SNX',
         description: contractError ? (
           <ContractError contractError={contractError} />
         ) : (
@@ -148,7 +149,7 @@ export function useMigrateNewPoolV2x() {
         variant: 'left-accent',
         duration: 3_600_000,
       });
-      throw Error('Migration failed', { cause: error });
+      throw Error('Update failed', { cause: error });
     },
   });
 

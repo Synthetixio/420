@@ -8,7 +8,7 @@ import { ModalShare420 } from './ModalShare420';
 import { PanelTvl } from './PanelTvl';
 import farming from './farming.webp';
 import share from './share.svg';
-import { useClosePositionNewPool } from './useClosePositionNewPool';
+import { useClosePositionPool420 } from './useClosePositionPool420';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
 import { usePositionCollateral } from './usePositionCollateral';
@@ -19,7 +19,7 @@ export function StakingPosition() {
   const { data: positionCollateral, isPending: isPendingPositionCollateral } =
     usePositionCollateral();
   const { data: snxPrice, isPending: isPendingSnxPrice } = usePythPrice('SNX');
-  const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionNewPool();
+  const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionPool420();
 
   const [isOpenShare, setIsOpenShare] = React.useState(false);
 

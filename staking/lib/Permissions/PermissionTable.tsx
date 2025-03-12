@@ -128,9 +128,12 @@ export function PermissionTable({
               <Td width={240} py={5} borderBottomColor="gray.900">
                 <Skeleton isLoaded={!loadingOwner}>
                   {accountOwner && (
-                    <Text fontWeight={400} color="white" fontSize="16px">
-                      <Address address={accountOwner} />
-                    </Text>
+                    <Address
+                      address={accountOwner}
+                      fontWeight={400}
+                      color="white"
+                      fontSize="16px"
+                    />
                   )}
                 </Skeleton>
               </Td>

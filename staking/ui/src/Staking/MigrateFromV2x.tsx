@@ -21,14 +21,14 @@ import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
 import { ZeroRisk } from './ZeroRisk';
 import burn from './burn.webp';
 import coinburn from './coinburn.svg';
-import { useMigrateNewPoolV2x } from './useMigrateNewPoolV2x';
+import { useMigratePool420V2x } from './useMigratePool420V2x';
 import { useV2xPosition } from './useV2xPosition';
 
 export function MigrateFromV2x() {
   const [isOpenMigrate, setIsOpenMigrate] = React.useState(false);
-  const { isReady: isReadyMigrate } = useMigrateNewPoolV2x();
+  const { isReady: isReadyMigrate } = useMigratePool420V2x();
   const { data: v2xPosition } = useV2xPosition();
-  const { isReady, mutation } = useMigrateNewPoolV2x();
+  const { isReady, mutation } = useMigratePool420V2x();
 
   return (
     <>
@@ -89,7 +89,12 @@ export function MigrateFromV2x() {
                 isLoading={mutation.isPending}
                 isDisabled={!(isReady && !mutation.isPending)}
                 onClick={() => {
-                  window?._paq?.push(['trackEvent', 'staking', '420_migration', 'submit_burn_my_debt']);
+                  window?._paq?.push([
+                    'trackEvent',
+                    'staking',
+                    '420_migration',
+                    'submit_burn_my_debt',
+                  ]);
                   mutation.mutateAsync();
                 }}
               >
@@ -113,7 +118,12 @@ export function MigrateFromV2x() {
             <Button
               isDisabled={!isReadyMigrate}
               onClick={() => {
-                window?._paq?.push(['trackEvent', 'staking', '420_migration', 'click_burn_my_debt']);
+                window?._paq?.push([
+                  'trackEvent',
+                  'staking',
+                  '420_migration',
+                  'click_burn_my_debt',
+                ]);
                 setIsOpenMigrate(true);
               }}
             >

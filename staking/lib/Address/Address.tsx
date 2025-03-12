@@ -2,14 +2,15 @@ import { etherscanLink } from '@_/etherscanLink';
 import { prettyString } from '@_/format';
 import { useNetwork } from '@_/useBlockchain';
 import { CopyIcon, ExternalLinkIcon } from '@chakra-ui/icons';
-import { Flex, Tooltip } from '@chakra-ui/react';
-import { type FC, useMemo } from 'react';
+import { Flex, Text, type TextProps, Tooltip } from '@chakra-ui/react';
+import { useMemo } from 'react';
 
-interface AddressProps {
+export function Address({
+  address,
+  ...props
+}: {
   address: string;
-}
-
-export const Address: FC<AddressProps> = ({ address }) => {
+} & TextProps) {
   const { network } = useNetwork();
   const link = useMemo(
     () =>
@@ -20,24 +21,20 @@ export const Address: FC<AddressProps> = ({ address }) => {
     [address, network?.name]
   );
   return (
-    <Flex alignItems="center" gap={2}>
-      <Tooltip label={address}>{prettyString(address)}</Tooltip>
+    <Flex as={Text} alignItems="center" gap={2} {...props}>
+      <Tooltip label={address} fontSize="0.75em" whiteSpace="nowrap">
+        {prettyString(address)}
+      </Tooltip>
       <CopyIcon
         onClick={() => {
           navigator.clipboard.writeText(address);
         }}
         cursor="pointer"
-        _hover={{
-          color: 'cyan',
-        }}
+        _hover={{ color: 'cyan' }}
       />
       <a target="_blank" href={link} rel="noreferrer">
-        <ExternalLinkIcon
-          _hover={{
-            color: 'cyan',
-          }}
-        />
+        <ExternalLinkIcon _hover={{ color: 'cyan' }} />
       </a>
     </Flex>
   );
-};
+}

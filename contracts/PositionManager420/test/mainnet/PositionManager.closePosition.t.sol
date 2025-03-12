@@ -2,23 +2,15 @@ pragma solidity ^0.8.21;
 
 import "../lib/PositionManagerTest.sol";
 
-contract Optimism_PositionManager_closePosition_Test is PositionManagerTest {
+contract Mainnet_PositionManager_closePosition_Test is PositionManagerTest {
     constructor() {
-        deployment = "10-main";
-        forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
-        forkBlockNumber = 132431079;
+        deployment = "1-main";
+        forkUrl = vm.envString("RPC_MAINNET");
+        forkBlockNumber = 21921167;
         initialize();
     }
 
     function test_closePosition() public {
-        // Ensure we have someone migrated to have sUSD available
-        address V2X_STAKER = 0xa5f7a39E55D7878bC5bd754eE5d6BD7a7662355b;
-        vm.label(V2X_STAKER, "0xV2X_STAKER");
-        vm.startPrank(V2X_STAKER);
-        uint128 v2x_stakerAccountId = 888;
-        LegacyMarketProxy.migrate(v2x_stakerAccountId);
-        TreasuryMarketProxy.saddle(v2x_stakerAccountId);
-
         address ALICE = vm.addr(0xA11CE);
         vm.label(ALICE, "0xA11CE");
         vm.deal(ALICE, 1 ether);
@@ -90,9 +82,9 @@ contract Optimism_PositionManager_closePosition_Test is PositionManagerTest {
             "Position collateral should be reduced to 0"
         );
         assertEq(
-            0,
+            1000 ether,
             CoreProxy.getAccountAvailableCollateral(accountId, address($SNX)),
-            "User account should not have any $SNX available as all the SNX should be transferred to the wallet"
+            "User account should have all undelegated $SNX available on the account"
         );
         assertEq(
             0,
@@ -113,9 +105,9 @@ contract Optimism_PositionManager_closePosition_Test is PositionManagerTest {
         );
         assertEq(
             //
-            1000 ether,
+            0,
             $SNX.balanceOf(ALICE),
-            "All delegated 1000 $SNX should be returned to the wallet"
+            "All delegated 1000 $SNX should stay in the system and withdrawn later after timeout"
         );
     }
 }

@@ -26,7 +26,7 @@
     "@_/useLegacyMarket": "workspace:*",
     "@_/useLiquidityPosition": "workspace:*",
     "@_/useParams": "workspace:*",
-    "@_/usePositionManagerNewPool": "workspace:*",
+    "@_/usePositionManager420": "workspace:*",
     "@_/usePythPrice": "workspace:*",
     "@_/useSNX": "workspace:*",
     "@_/useTreasuryMarketProxy": "workspace:*",

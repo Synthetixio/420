@@ -1,4 +1,4 @@
-import { importAllErrors, importPositionManagerNewPool } from '@_/contracts';
+import { importAllErrors, importPositionManager420 } from '@_/contracts';
 import { ethers } from 'ethers';
 
 const ERC721_ERRORS: `error ${string}`[] = [
@@ -228,7 +228,7 @@ export async function importAllContractErrors(chainId?: number, preset?: string)
     ? combineErrors(
         await Promise.all([
           importAllErrors(chainId, preset).catch(() => undefined),
-          importPositionManagerNewPool(chainId, preset).catch(() => undefined),
+          importPositionManager420(chainId, preset).catch(() => undefined),
         ])
       )
     : [];

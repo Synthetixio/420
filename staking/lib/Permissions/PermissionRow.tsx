@@ -47,9 +47,7 @@ export function PermissionRow({
   return (
     <Tr>
       <Td width={240} borderBottomColor="gray.900" py="4">
-        <Text fontWeight={400} color="white" fontSize="16px">
-          <Address address={address} />
-        </Text>
+        <Address address={address} fontWeight={400} color="white" fontSize="16px" />
       </Td>
       <Td borderBottomColor="gray.900">
         <Flex py={2} flexWrap="wrap" gap={3}>

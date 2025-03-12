@@ -18,7 +18,7 @@ import {IERC20} from "@synthetixio/core-contracts/contracts/interfaces/IERC20.so
 import {IERC721Receiver} from "@synthetixio/core-contracts/contracts/interfaces/IERC721Receiver.sol";
 import {IAddressResolver} from "./IAddressResolver.sol";
 
-contract PositionManagerNewPool {
+contract PositionManager420 {
     error NotEnoughAllowance(
         address walletAddress, address tokenAddress, uint256 requiredAllowance, uint256 availableAllowance
     );
@@ -179,7 +179,6 @@ contract PositionManagerNewPool {
     function closePosition(uint128 accountId) public {
         address msgSender = ERC2771Context._msgSender();
         address $SNX = get$SNX();
-        address $snxUSD = get$snxUSD();
 
         // 1. Verify that minimum delegation time is respected
         uint128 poolId = TreasuryMarketProxy.poolId();
@@ -215,13 +214,7 @@ contract PositionManagerNewPool {
         AccountProxy.approve(address(TreasuryMarketProxy), accountId);
         TreasuryMarketProxy.unsaddle(accountId);
 
-        // 5. Withdraw available $snxUSD
-        _withdrawCollateral(accountId, $snxUSD);
-
-        // 6. Withdraw available $SNX
-        _withdrawCollateral(accountId, $SNX);
-
-        // 7. Send Account NFT back to the user wallet
+        // 5. Send Account NFT back to the user wallet
         AccountProxy.transferFrom(
             //
             address(this),
@@ -317,7 +310,7 @@ contract PositionManagerNewPool {
                 );
             }
 
-            // 3. Transfer $sUSD from user wallet to PositionManager
+            // 3. Transfer $sUSD from user wallet to PositionManager420
             IERC20($sUSD).transferFrom(
                 //
                 msgSender,

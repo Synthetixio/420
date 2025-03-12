@@ -1,39 +1,55 @@
 import { ContractError } from '@_/ContractError';
+import { POOL_ID } from '@_/constants';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
+import { useCollateralType } from '@_/useCollateralTypes';
 import { useContractErrorParser } from '@_/useContractErrorParser';
+import { useLiquidityPosition } from '@_/useLiquidityPosition';
 import { type HomePageSchemaType, useParams } from '@_/useParams';
-import { usePositionManagerNewPool } from '@_/usePositionManagerNewPool';
-import { useSNX } from '@_/useSNX';
+import { usePositionManager420 } from '@_/usePositionManager420';
+import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useToast } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';
 import React from 'react';
+import { useTargetCRatio } from './useTargetCRatio';
 
-const log = debug('snx:useIncreasePositionNewPools');
+const log = debug('snx:useMigrate420');
 
-export function useIncreasePositionNewPool() {
+export function useMigratePool420() {
   const [params] = useParams<HomePageSchemaType>();
 
   const signer = useSigner();
   const provider = useProvider();
   const { network } = useNetwork();
 
-  const { data: PositionManagerNewPool } = usePositionManagerNewPool();
+  const { data: collateralType } = useCollateralType('SNX');
+
+  const { data: liquidityPosition } = useLiquidityPosition({
+    accountId: params.accountId,
+    collateralType,
+  });
+
+  const { data: PositionManager420 } = usePositionManager420();
   const { data: AccountProxy } = useAccountProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
-  const { data: SNX } = useSNX();
+  const { data: targetCRatio } = useTargetCRatio();
+  const { data: TreasuryMarketProxy } = useTreasuryMarketProxy();
 
   const isReady =
     network &&
     provider &&
     signer &&
     TrustedMulticallForwarder &&
-    PositionManagerNewPool &&
+    PositionManager420 &&
     AccountProxy &&
-    SNX &&
+    TreasuryMarketProxy &&
+    targetCRatio &&
+    liquidityPosition &&
+    liquidityPosition.collateralAmount.gt(0) &&
+    (liquidityPosition.cRatio.lte(0) || liquidityPosition.cRatio.gte(targetCRatio)) &&
     true;
 
   const toast = useToast({ isClosable: true, duration: 9000 });
@@ -47,42 +63,31 @@ export function useIncreasePositionNewPool() {
       }
 
       toast.closeAll();
-      toast({ title: 'Approving SNX...', variant: 'left-accent' });
-
-      const walletAddress = await signer.getAddress();
-
-      const SNXContract = new ethers.Contract(SNX.address, SNX.abi, signer);
-      const snxBalance = await SNXContract.balanceOf(walletAddress);
-      const snxAppoveGasLimit = await SNXContract.estimateGas.approve(
-        PositionManagerNewPool.address,
-        snxBalance
-      );
-      await SNXContract.approve(PositionManagerNewPool.address, snxBalance, {
-        gasLimit: snxAppoveGasLimit.mul(15).div(10),
-      });
-
-      toast.closeAll();
-      toast({ title: 'Updating position...', variant: 'left-accent' });
+      toast({ title: 'Migrating...', variant: 'left-accent' });
 
       const AccountProxyInterface = new ethers.utils.Interface(AccountProxy.abi);
-      const PositionManagerNewPoolInterface = new ethers.utils.Interface(
-        PositionManagerNewPool.abi
-      );
+      const PositionManager420Interface = new ethers.utils.Interface(PositionManager420.abi);
+      const TreasuryMarketProxyInterface = new ethers.utils.Interface(TreasuryMarketProxy.abi);
 
       const multicall = [
         {
+          target: TreasuryMarketProxy.address,
+          callData: TreasuryMarketProxyInterface.encodeFunctionData('rebalance'),
+          requireSuccess: true,
+        },
+        {
           target: AccountProxy.address,
           callData: AccountProxyInterface.encodeFunctionData('approve', [
-            PositionManagerNewPool.address,
+            PositionManager420.address,
             ethers.BigNumber.from(params.accountId),
           ]),
           requireSuccess: true,
         },
         {
-          target: PositionManagerNewPool.address,
-          callData: PositionManagerNewPoolInterface.encodeFunctionData('increasePosition', [
+          target: PositionManager420.address,
+          callData: PositionManager420Interface.encodeFunctionData('migratePosition', [
+            ethers.BigNumber.from(POOL_ID),
             ethers.BigNumber.from(params.accountId),
-            ethers.constants.MaxUint256, // All-in
           ]),
           requireSuccess: true,
         },
@@ -109,14 +114,29 @@ export function useIncreasePositionNewPool() {
     },
 
     onSuccess: async () => {
-      queryClient.invalidateQueries({
-        queryKey: [`${network?.id}-${network?.preset}`, 'New Pool'],
-      });
+      const deployment = `${network?.id}-${network?.preset}`;
+      await Promise.all(
+        [
+          //
+          'New Pool',
+          //
+          'Accounts',
+          'PriceUpdates',
+          'LiquidityPosition',
+          'LiquidityPositions',
+          'TokenBalance',
+          'SynthBalances',
+          'EthBalance',
+          'Allowance',
+          'TransferableSynthetix',
+          'AccountCollateralUnlockDate',
+        ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
+      );
 
       toast.closeAll();
       toast({
         title: 'Success',
-        description: 'Position updated.',
+        description: 'Migration completed.',
         status: 'success',
         duration: 5000,
         variant: 'left-accent',
@@ -130,7 +150,7 @@ export function useIncreasePositionNewPool() {
       }
       toast.closeAll();
       toast({
-        title: 'Could not update position',
+        title: 'Could not complete migration',
         description: contractError ? (
           <ContractError contractError={contractError} />
         ) : (
@@ -140,7 +160,7 @@ export function useIncreasePositionNewPool() {
         variant: 'left-accent',
         duration: 3_600_000,
       });
-      throw Error('Update failed', { cause: error });
+      throw Error('Migration failed', { cause: error });
     },
   });
 
