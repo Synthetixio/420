@@ -100,7 +100,7 @@ contract PositionManagerTest is Test {
 
         _bypassTimeouts(address(positionManager));
         _bypassTimeouts(address(TreasuryMarketProxy));
-        _fundPool();
+        // _fundPool(); // No need anymore
     }
 
     function _bypassTimeouts(address addr) internal {
