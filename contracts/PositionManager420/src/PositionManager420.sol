@@ -206,6 +206,46 @@ contract PositionManager420 {
     }
 
     /**
+     * @notice Increases a user's position by delegating additional SNX to the pool,
+     * rebalancing the pool, and updating the account's rewards and virtual debt.
+     * @dev This function temporarily transfers the user's account NFT to the contract
+     * to perform the necessary actions. It delegates additional SNX to the pool,
+     * ensures the pool is balanced, updates the user's position, and finally
+     * returns the account NFT to the user's wallet. All steps are performed within a single transaction.
+     * @param accountId The unique ID of the user's Synthetix v3 Account NFT.
+     * @param snxAmount The additional amount of SNX to be delegated to the pool.
+     */
+    function increasePosition(uint128 accountId, uint256 snxAmount) public {
+        address msgSender = ERC2771Context._msgSender();
+        uint128 poolId = TreasuryMarketProxy.poolId();
+
+        // 1. Temporarily transfer Account NFT from the user wallet
+        AccountProxy.safeTransferFrom(
+            //
+            msgSender,
+            address(this),
+            uint256(accountId)
+        );
+
+        // 2. Must rebalance the pool
+        TreasuryMarketProxy.rebalance();
+
+        // 3. Delegate $SNXAmount to the 420 pool
+        _increasePosition(accountId, snxAmount, poolId);
+
+        // 4. Saddle account, updating rewards and virtual debt
+        TreasuryMarketProxy.saddle(accountId);
+
+        // 5. Send account NFT back to the user wallet
+        AccountProxy.safeTransferFrom(
+            //
+            address(this),
+            msgSender,
+            uint256(accountId)
+        );
+    }
+
+    /**
      * @notice Fully closes the user's position by repaying loans, withdrawing collateral, and transferring ownership of the account back to the user.
      * @dev The function ensures that the minimum delegation time is respected before proceeding.
      * Temporarily transfers the user's account NFT to perform necessary operations, such as

@@ -40,7 +40,7 @@ contract Mainnet_PositionManager_setupPosition_Test is PositionManagerTest {
             debtAmount,
             uint256(CoreProxy.getPositionDebt(accountId, TreasuryMarketProxy.poolId(), address($SNX))),
             0.1 ether,
-            "account virtual debt should be equal to half of provided liquidity value (1000 * snxPrice / targetCratio)"
+            "account virtual debt should be at the target C-Ratio (amount * snxPrice / targetCratio)"
         );
         assertEq(
             0,
