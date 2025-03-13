@@ -31,6 +31,7 @@ contract Optimism_PositionManager_migratePosition_v2x_Test is PositionManagerTes
 
         uint128 accountId = 888;
         vm.startPrank(ALICE);
+        TreasuryMarketProxy.rebalance();
         LegacyMarketProxy.migrate(accountId);
         TreasuryMarketProxy.saddle(accountId);
 

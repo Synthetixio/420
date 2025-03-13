@@ -31,6 +31,7 @@ contract Mainnet_PositionManager_migratePosition_v2x_Test is PositionManagerTest
 
         uint128 accountId = 888;
         vm.startPrank(ALICE);
+        TreasuryMarketProxy.rebalance();
         LegacyMarketProxy.migrate(accountId);
         TreasuryMarketProxy.saddle(accountId);
 
