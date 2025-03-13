@@ -7,7 +7,7 @@ import {
     MarketConfiguration
 } from "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
 import {IAccountProxy} from "@synthetixio/v3-contracts/1-main/IAccountProxy.sol";
-import {ITreasuryMarketProxy} from "@synthetixio/v3-contracts/1-main/ITreasuryMarketProxy.sol";
+import {ITreasuryMarketProxy} from "../../src/ITreasuryMarketProxy.sol";
 import {IUSDProxy} from "@synthetixio/v3-contracts/1-main/IUSDProxy.sol";
 import {ILegacyMarketProxy} from "@synthetixio/v3-contracts/1-main/ILegacyMarketProxy.sol";
 import {IV2x} from "@synthetixio/v3-contracts/1-main/IV2x.sol";

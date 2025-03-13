@@ -8,7 +8,7 @@ import {
 } from "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
 import {IAccountProxy} from "@synthetixio/v3-contracts/1-main/IAccountProxy.sol";
 import {IUSDProxy} from "@synthetixio/v3-contracts/1-main/IUSDProxy.sol";
-import {ITreasuryMarketProxy} from "@synthetixio/v3-contracts/1-main/ITreasuryMarketProxy.sol";
+import {ITreasuryMarketProxy} from "./ITreasuryMarketProxy.sol";
 import {ILegacyMarketProxy} from "@synthetixio/v3-contracts/1-main/ILegacyMarketProxy.sol";
 import {IV2xUsd} from "@synthetixio/v3-contracts/1-main/IV2xUsd.sol";
 import {IV2x} from "@synthetixio/v3-contracts/1-main/IV2x.sol";
@@ -149,7 +149,10 @@ contract PositionManager420 {
         // 3. Withdraw any available $snxUSD
         _withdrawCollateral(accountId, $snxUSD);
 
-        // 4. Migrate position to Delegated Staking pool and saddle account with debt
+        // 4. Must rebalance the pool
+        TreasuryMarketProxy.rebalance();
+
+        // 5. Migrate position to Delegated Staking pool and saddle account with debt
         CoreProxy.migrateDelegation(
             //
             accountId,
@@ -159,8 +162,82 @@ contract PositionManager420 {
         );
         TreasuryMarketProxy.saddle(accountId);
 
+        // 6. Send account NFT back to the user wallet
+        AccountProxy.transferFrom(
+            //
+            address(this),
+            msgSender,
+            uint256(accountId)
+        );
+    }
+
+    /**
+     * @notice Sets up a user's position by creating a new Synthetix V3 account, delegating SNX to the SC pool,
+     * minting snxUSD, withdrawing the minted snxUSD, migrating the position to the Delegated Staking pool,
+     * and finally transferring the account NFT to the user.
+     * @dev This function automates the process of initializing and migrating a user's position.
+     * It creates an account, delegates SNX, mints the maximum amount of snxUSD,
+     * withdraws the minted snxUSD, migrates the position, and finally sends the account NFT to the user.
+     * @param $SNXAmount The amount of SNX to be deposited into the SC pool.
+     */
+    function setupPosition(uint256 $SNXAmount) public {
+        address msgSender = ERC2771Context._msgSender();
+        uint128 poolId = TreasuryMarketProxy.poolId();
+
+        // 1. Create new v3 account for the user
+        uint128 accountId = CoreProxy.createAccount();
+
+        // 2. Must rebalance the pool
+        TreasuryMarketProxy.rebalance();
+
+        // 3. Delegate $SNXAmount to the 420 pool
+        _increasePosition(accountId, $SNXAmount, poolId);
+
+        // 4. Saddle account, updating rewards and virtual debt
+        TreasuryMarketProxy.saddle(accountId);
+
         // 5. Send account NFT back to the user wallet
         AccountProxy.transferFrom(
+            //
+            address(this),
+            msgSender,
+            uint256(accountId)
+        );
+    }
+
+    /**
+     * @notice Increases a user's position by delegating additional SNX to the pool,
+     * rebalancing the pool, and updating the account's rewards and virtual debt.
+     * @dev This function temporarily transfers the user's account NFT to the contract
+     * to perform the necessary actions. It delegates additional SNX to the pool,
+     * ensures the pool is balanced, updates the user's position, and finally
+     * returns the account NFT to the user's wallet. All steps are performed within a single transaction.
+     * @param accountId The unique ID of the user's Synthetix v3 Account NFT.
+     * @param snxAmount The additional amount of SNX to be delegated to the pool.
+     */
+    function increasePosition(uint128 accountId, uint256 snxAmount) public {
+        address msgSender = ERC2771Context._msgSender();
+        uint128 poolId = TreasuryMarketProxy.poolId();
+
+        // 1. Temporarily transfer Account NFT from the user wallet
+        AccountProxy.safeTransferFrom(
+            //
+            msgSender,
+            address(this),
+            uint256(accountId)
+        );
+
+        // 2. Must rebalance the pool
+        TreasuryMarketProxy.rebalance();
+
+        // 3. Delegate $SNXAmount to the 420 pool
+        _increasePosition(accountId, snxAmount, poolId);
+
+        // 4. Saddle account, updating rewards and virtual debt
+        TreasuryMarketProxy.saddle(accountId);
+
+        // 5. Send account NFT back to the user wallet
+        AccountProxy.safeTransferFrom(
             //
             address(this),
             msgSender,
@@ -258,6 +335,90 @@ contract PositionManager420 {
                 availableCollateral
             );
         }
+    }
+
+    /**
+     * @notice Increases the position of $SNX collateral for the specified account and pool by transferring the specified amount from the caller's wallet.
+     * @dev This function handles the following steps:
+     *      1. Verifies if the caller's wallet has sufficient transferable $SNX.
+     *      2. If the specified $SNXAmount exceeds transferable $SNX, it adjusts to use only the maximum transferable amount.
+     *      3. Ensures the caller's wallet has provided enough allowance to the contract.
+     *      4. Transfers $SNX from the wallet to the contract.
+     *      5. Deposits the transferred $SNX into the Core system.
+     *      6. Delegates the deposited $SNX to the specified pool.
+     *      If the caller's wallet doesn't have enough $SNX or allowance, the function reverts with an appropriate error.
+     * @param accountId The unique ID of the user's Synthetix v3 Account NFT.
+     * @param $SNXAmount The amount of $SNX to increase the position by. If greater than the wallet's transferable $SNX, only the maximum transferrable amount is used.
+     * @param poolId The unique ID of the pool to which the $SNX collateral is being delegated.
+     */
+    function _increasePosition(uint128 accountId, uint256 $SNXAmount, uint128 poolId) internal {
+        address msgSender = ERC2771Context._msgSender();
+        address $SNX = get$SNX();
+
+        uint256 transferable$SNXAmount = IV2x(getV2x()).transferableSynthetix(msgSender);
+        if (transferable$SNXAmount == 0) {
+            // 1a. Verify wallet has enough transferable $SNX
+            revert NotEnoughBalance(
+                //
+                msgSender,
+                $SNX,
+                $SNXAmount,
+                transferable$SNXAmount
+            );
+        }
+        if ($SNXAmount > transferable$SNXAmount) {
+            // 1b. Use ALL transferable $SNX
+            $SNXAmount = transferable$SNXAmount;
+        }
+
+        // 2. Verify wallet has enough allowance to transfer $SNX
+        uint256 available$SNXAllowance = IERC20($SNX).allowance(
+            //
+            msgSender,
+            address(this)
+        );
+        if ($SNXAmount > available$SNXAllowance) {
+            revert NotEnoughAllowance(
+                //
+                msgSender,
+                $SNX,
+                $SNXAmount,
+                available$SNXAllowance
+            );
+        }
+
+        // 3. Transfer $SNX from user wallet to PositionManager420
+        IERC20($SNX).transferFrom(
+            //
+            msgSender,
+            address(this),
+            $SNXAmount
+        );
+
+        // 4. Deposit $SNX to the Core
+        IERC20($SNX).approve(address(CoreProxy), $SNXAmount);
+        CoreProxy.deposit(
+            //
+            accountId,
+            $SNX,
+            $SNXAmount
+        );
+
+        // 5. Delegate $SNX to the Pool
+        uint256 currentPosition = CoreProxy.getPositionCollateral(
+            //
+            accountId,
+            poolId,
+            $SNX
+        );
+        CoreProxy.delegateCollateral(
+            //
+            accountId,
+            poolId,
+            $SNX,
+            currentPosition + $SNXAmount,
+            1e18
+        );
     }
 
     /**

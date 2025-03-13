@@ -7,7 +7,7 @@ contract Mainnet_PositionManager_migratePosition_Test is PositionManagerTest {
     constructor() {
         deployment = "1-main";
         forkUrl = vm.envString("RPC_MAINNET");
-        forkBlockNumber = 21921167;
+        forkBlockNumber = 22030934;
         initialize();
     }
 
@@ -88,7 +88,7 @@ contract Mainnet_PositionManager_migratePosition_Test is PositionManagerTest {
             1000 * snxPrice * 1 ether / targetCratio,
             uint256(CoreProxy.getPositionDebt(accountId, TreasuryMarketProxy.poolId(), address($SNX))),
             0.1 ether,
-            "Virtual debt for $SNX position should be at C-Ratio 200%"
+            "Virtual debt for $SNX position should be at target C-Ratio"
         );
         assertEq(
             1000 ether,
