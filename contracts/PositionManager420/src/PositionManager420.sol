@@ -149,7 +149,10 @@ contract PositionManager420 {
         // 3. Withdraw any available $snxUSD
         _withdrawCollateral(accountId, $snxUSD);
 
-        // 4. Migrate position to Delegated Staking pool and saddle account with debt
+        // 4. Must rebalance the pool
+        TreasuryMarketProxy.rebalance();
+
+        // 5. Migrate position to Delegated Staking pool and saddle account with debt
         CoreProxy.migrateDelegation(
             //
             accountId,
@@ -159,7 +162,7 @@ contract PositionManager420 {
         );
         TreasuryMarketProxy.saddle(accountId);
 
-        // 5. Send account NFT back to the user wallet
+        // 6. Send account NFT back to the user wallet
         AccountProxy.transferFrom(
             //
             address(this),
@@ -184,13 +187,16 @@ contract PositionManager420 {
         // 1. Create new v3 account for the user
         uint128 accountId = CoreProxy.createAccount();
 
-        // 2. Delegate $SNXAmount to the 420 pool
+        // 2. Must rebalance the pool
+        TreasuryMarketProxy.rebalance();
+
+        // 3. Delegate $SNXAmount to the 420 pool
         _increasePosition(accountId, $SNXAmount, poolId);
 
-        // 3. Saddle account
+        // 4. Saddle account, updating rewards and virtual debt
         TreasuryMarketProxy.saddle(accountId);
 
-        // 6. Send account NFT back to the user wallet
+        // 5. Send account NFT back to the user wallet
         AccountProxy.transferFrom(
             //
             address(this),
@@ -289,31 +295,6 @@ contract PositionManager420 {
                 availableCollateral
             );
         }
-    }
-
-    /**
-     * @notice Determines the maximum amount of snxUSD that can be minted based on the collateral available in the specified account and pool,
-     *          and mints that amount of snxUSD into the caller's account.
-     * @dev Uses the collateral-to-issuance ratio to compute the mintable amount of snxUSD.
-     *      If the pool-specific issuance ratio isn't set, it falls back to the global issuance ratio for the collateral type.
-     *      The minted snxUSD will be added to the caller's Synthetix v3 Account.
-     * @param accountId The unique ID of the user's Synthetix v3 Account NFT.
-     * @param poolId The unique ID of the pool where the collateral is managed.
-     * @return mintable$snxUSD The maximum amount of snxUSD that was calculated and minted.
-     */
-    function _maxMint(uint128 accountId, uint128 poolId) internal returns (uint256 mintable$snxUSD) {
-        address $SNX = get$SNX();
-        PoolCollateralConfiguration.Data memory poolCollateralConfig =
-            CoreProxy.getPoolCollateralConfiguration(poolId, $SNX);
-        uint256 issuanceRatioD18 = poolCollateralConfig.issuanceRatioD18;
-        if (issuanceRatioD18 == 0) {
-            CollateralConfiguration.Data memory collateralConfig = CoreProxy.getCollateralConfiguration($SNX);
-            issuanceRatioD18 = collateralConfig.issuanceRatioD18;
-        }
-
-        (, uint256 collateralValue,,) = CoreProxy.getPosition(accountId, poolId, $SNX);
-        mintable$snxUSD = (collateralValue * 1e18) / issuanceRatioD18;
-        CoreProxy.mintUsd(accountId, poolId, $SNX, mintable$snxUSD);
     }
 
     /**
