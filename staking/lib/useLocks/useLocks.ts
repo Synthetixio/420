@@ -1,8 +1,8 @@
 import { contractsHash } from '@_/tsHelpers';
-import { Network, useNetwork, useProviderForChain } from '@_/useBlockchain';
+import { type Network, useNetwork, useProviderForChain } from '@_/useBlockchain';
 import { useCoreProxy } from '@_/useCoreProxy';
 import { useQuery } from '@tanstack/react-query';
-import { BigNumber, ethers } from 'ethers';
+import { type BigNumber, ethers } from 'ethers';
 
 export function useLocks(accountId?: string, collateralType?: string, customNetwork?: Network) {
   const { network } = useNetwork();

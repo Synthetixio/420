@@ -1,37 +1,37 @@
+import { useCollateralType } from '@_/useCollateralTypes';
+import { useLiquidityPosition } from '@_/useLiquidityPosition';
+import { type HomePageSchemaType, useParams } from '@_/useParams';
+import { usePythPrice } from '@_/usePythPrice';
+import { InfoIcon } from '@chakra-ui/icons';
 import {
+  Alert,
+  AlertIcon,
+  Button,
+  Checkbox,
   CloseButton,
   Flex,
+  Grid,
+  GridItem,
   Heading,
   Modal,
-  Text,
   ModalBody,
   ModalContent,
   ModalOverlay,
-  Grid,
-  GridItem,
+  Text,
   Tooltip,
-  AlertIcon,
-  Alert,
-  Checkbox,
-  Button,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { useClosePositionPool420 } from './useClosePositionPool420';
-import { InfoIcon } from '@chakra-ui/icons';
-import { useLocks } from '../../../lib/useLocks';
-import { useCollateralType } from '@_/useCollateralTypes';
-import { HomePageSchemaType, useParams } from '@_/useParams';
-import { formatDuration, intervalToDuration, intlFormat } from 'date-fns';
 import { wei } from '@synthetixio/wei';
-import numbro from 'numbro';
-import { usePositionCollateral } from './usePositionCollateral';
-import { usePythPrice } from '@_/usePythPrice';
-import { useLiquidityPosition } from '@_/useLiquidityPosition';
+import { formatDuration, intervalToDuration, intlFormat } from 'date-fns';
 import { ethers } from 'ethers';
-import { useRepaymentPenalty } from './useRepaymentPenalty';
+import numbro from 'numbro';
+import React, { useState } from 'react';
+import { useLocks } from '../../../lib/useLocks';
+import { useAccountTimeoutWithdraw } from './useAccountTimeoutWithdraw';
+import { useClosePositionPool420 } from './useClosePositionPool420';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
-import { useAccountTimeoutWithdraw } from './useAccountTimeoutWithdraw';
+import { usePositionCollateral } from './usePositionCollateral';
+import { useRepaymentPenalty } from './useRepaymentPenalty';
 
 export function UnstakeModal({
   isOpen,
@@ -49,7 +49,7 @@ export function UnstakeModal({
     usePositionCollateral();
   const { data: snxPrice, isPending: isPendingSnxPrice } = usePythPrice('SNX');
   const { data: loanedAmount } = useCurrentLoanedAmount();
-  const { data: loan, isPending: isPendingLoan } = useLoan();
+  const { data: loan } = useLoan();
   const { data: repaymentPenalty } = useRepaymentPenalty();
   const { data: liquidityPosition, isPending: isPendingLiquidityPosition } = useLiquidityPosition({
     accountId: params.accountId ? ethers.BigNumber.from(params.accountId) : undefined,
@@ -134,7 +134,12 @@ export function UnstakeModal({
                           A portion of your SNX is still in escrow
                         </Text>
                         {locks?.map((lock) => (
-                          <Flex gap={8} alignItems="center" justifyContent="space-between">
+                          <Flex
+                            key={lock.timestamp.toString()}
+                            gap={8}
+                            alignItems="center"
+                            justifyContent="space-between"
+                          >
                             <Text>
                               Vesting date:{' '}
                               {intlFormat(lock.expirationDate, {

@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { LoanChart } from './LoanChart';
 import { ModalShare420 } from './ModalShare420';
 import { PanelTvl } from './PanelTvl';
+import { UnstakeModal } from './UnstakeModal';
 import farming from './farming.webp';
 import share from './share.svg';
 import { useAccountTimeoutWithdraw } from './useAccountTimeoutWithdraw';
@@ -14,7 +15,6 @@ import { useClosePositionPool420 } from './useClosePositionPool420';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
 import { usePositionCollateral } from './usePositionCollateral';
-import { UnstakeModal } from './UnstakeModal';
 
 export function StakingPosition() {
   const [unstakeOpen, setUnstakeOpen] = useState(false);
