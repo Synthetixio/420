@@ -5266,6 +5266,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@snx-v3/useLocks@workspace:staking/lib/useLocks":
+  version: 0.0.0-use.local
+  resolution: "@snx-v3/useLocks@workspace:staking/lib/useLocks"
+  dependencies:
+    "@_/tsHelpers": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@_/useCoreProxy": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
 "@solana/buffer-layout@npm:^4.0.1":
   version: 4.0.1
   resolution: "@solana/buffer-layout@npm:4.0.1"

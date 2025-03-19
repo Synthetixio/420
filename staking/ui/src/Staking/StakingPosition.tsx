@@ -3,7 +3,7 @@ import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import { formatDuration, intervalToDuration } from 'date-fns';
 import numbro from 'numbro';
-import React from 'react';
+import React, { useState } from 'react';
 import { LoanChart } from './LoanChart';
 import { ModalShare420 } from './ModalShare420';
 import { PanelTvl } from './PanelTvl';
@@ -14,8 +14,10 @@ import { useClosePositionPool420 } from './useClosePositionPool420';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
 import { usePositionCollateral } from './usePositionCollateral';
+import { UnstakeModal } from './UnstakeModal';
 
 export function StakingPosition() {
+  const [unstakeOpen, setUnstakeOpen] = useState(false);
   const { data: loanedAmount, isPending: isPendingLoanedAmount } = useCurrentLoanedAmount();
   const { data: loan, isPending: isPendingLoan } = useLoan();
   const { data: positionCollateral, isPending: isPendingPositionCollateral } =
@@ -39,6 +41,7 @@ export function StakingPosition() {
 
   return (
     <>
+      <UnstakeModal isOpen={unstakeOpen} setIsOpen={setUnstakeOpen} />
       <Flex
         direction="column"
         borderColor="gray.900"
@@ -171,7 +174,7 @@ export function StakingPosition() {
                 color="gray.50"
                 isLoading={closePosition.isPending}
                 isDisabled={!(isReadyClosePosition && !closePosition.isPending)}
-                onClick={() => closePosition.mutateAsync()}
+                onClick={() => setUnstakeOpen(true)}
               >
                 Unstake
               </Button>
