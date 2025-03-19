@@ -1,6 +1,7 @@
 import { usePythPrice } from '@_/usePythPrice';
 import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
+import { formatDuration, intervalToDuration } from 'date-fns';
 import numbro from 'numbro';
 import React from 'react';
 import { LoanChart } from './LoanChart';
@@ -8,6 +9,7 @@ import { ModalShare420 } from './ModalShare420';
 import { PanelTvl } from './PanelTvl';
 import farming from './farming.webp';
 import share from './share.svg';
+import { useAccountTimeoutWithdraw } from './useAccountTimeoutWithdraw';
 import { useClosePositionPool420 } from './useClosePositionPool420';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
@@ -22,6 +24,18 @@ export function StakingPosition() {
   const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionPool420();
 
   const [isOpenShare, setIsOpenShare] = React.useState(false);
+
+  const { data: accountTimeoutWithdraw } = useAccountTimeoutWithdraw();
+  const unlockTimeout = React.useMemo(() => {
+    if (!accountTimeoutWithdraw) {
+      return undefined;
+    }
+    const duration = intervalToDuration({
+      start: new Date(),
+      end: new Date(Date.now() + accountTimeoutWithdraw * 1000),
+    });
+    return formatDuration(duration, { format: ['days', 'hours', 'minutes'] });
+  }, [accountTimeoutWithdraw]);
 
   return (
     <>
@@ -159,8 +173,20 @@ export function StakingPosition() {
                 isDisabled={!(isReadyClosePosition && !closePosition.isPending)}
                 onClick={() => closePosition.mutateAsync()}
               >
-                Withdraw
+                Unstake
               </Button>
+              <Flex
+                backgroundColor="#ffffff10"
+                py="1"
+                px="3"
+                borderRadius="base"
+                gap={0}
+                justifyContent="center"
+              >
+                <Text color="gray.500" fontSize="12px">
+                  Withdrawals are locked for {unlockTimeout} after unstaking
+                </Text>
+              </Flex>
             </Flex>
           </Flex>
         </Flex>

@@ -2,7 +2,7 @@ import { useCollateralType } from '@_/useCollateralTypes';
 import { useLiquidityPosition } from '@_/useLiquidityPosition';
 import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePythPrice } from '@_/usePythPrice';
-import { Alert, AlertIcon, Box, Button, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Image, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import { ethers } from 'ethers';
 import numbro from 'numbro';
