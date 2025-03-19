@@ -19,7 +19,7 @@ export function useCurrentLoanedAmount() {
   return useQuery({
     queryKey: [
       `${network?.id}-${network?.preset}`,
-      'New Pool',
+      'Pool 420',
       'useCurrentLoanedAmount',
       { accountId: params.accountId },
       { contractsHash: contractsHash([TreasuryMarketProxy]) },

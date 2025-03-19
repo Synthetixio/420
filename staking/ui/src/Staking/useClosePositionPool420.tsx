@@ -4,7 +4,7 @@ import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
 import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePool420 } from '@_/usePool420';
-import { usePositionManager420 } from '@_/usePositionManager420';
+import { usePool420Withdraw } from '@_/usePool420Withdraw';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useToast } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -13,6 +13,7 @@ import { ethers } from 'ethers';
 import React from 'react';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { usePositionCollateral } from './usePositionCollateral';
+import { useRepaymentPenalty } from './useRepaymentPenalty';
 
 const log = debug('snx:useClosePosition420');
 
@@ -23,24 +24,26 @@ export function useClosePositionPool420() {
   const provider = useProvider();
   const { network } = useNetwork();
 
-  const { data: PositionManager420 } = usePositionManager420();
+  const { data: Pool420Withdraw } = usePool420Withdraw();
   const { data: Pool420 } = usePool420();
   const { data: AccountProxy } = useAccountProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
   const { data: positionCollateral } = usePositionCollateral();
   const { data: loanedAmount } = useCurrentLoanedAmount();
+  const { data: repaymentPenalty } = useRepaymentPenalty();
 
   const isReady =
     network &&
     provider &&
     signer &&
     TrustedMulticallForwarder &&
-    PositionManager420 &&
+    Pool420Withdraw &&
     Pool420 &&
     AccountProxy &&
     positionCollateral &&
     positionCollateral.gt(0) &&
     loanedAmount &&
+    repaymentPenalty &&
     true;
 
   const toast = useToast({ isClosable: true, duration: 9000 });
@@ -52,44 +55,54 @@ export function useClosePositionPool420() {
       if (!isReady) {
         throw new Error('Not ready');
       }
+      const repaymentAmount = loanedAmount.add(repaymentPenalty);
 
-      if (loanedAmount.gt(0)) {
-        toast.closeAll();
-        toast({ title: 'Approving sUSD...', variant: 'left-accent' });
+      if (repaymentAmount.gt(0)) {
         const Pool420Contract = new ethers.Contract(Pool420.address, Pool420.abi, provider);
         const sUSDAddress = await Pool420Contract.get$sUSD();
         const sUSDContract = new ethers.Contract(
           sUSDAddress,
-          ['function approve(address spender, uint256 amount) returns (bool)'],
+          [
+            'function allowance(address owner, address spender) view returns (uint256)',
+            'function approve(address spender, uint256 amount) returns (bool)',
+          ],
           signer
         );
-        const sUSDAppoveGasLimit = await sUSDContract.estimateGas.approve(
-          PositionManager420.address,
-          loanedAmount
-        );
-        await sUSDContract.approve(PositionManager420.address, loanedAmount, {
-          gasLimit: sUSDAppoveGasLimit.mul(15).div(10),
-        });
+        const walletAddress = await signer.getAddress();
+        const sUSDAllowance = await sUSDContract.allowance(walletAddress, Pool420Withdraw.address);
+        log('sUSDAllowance', sUSDAllowance);
+
+        if (sUSDAllowance.lt(repaymentAmount)) {
+          toast.closeAll();
+          toast({ title: 'Approving sUSD...', variant: 'left-accent' });
+          const sUSDAppoveGasLimit = await sUSDContract.estimateGas.approve(
+            Pool420Withdraw.address,
+            repaymentAmount
+          );
+          await sUSDContract.approve(Pool420Withdraw.address, repaymentAmount, {
+            gasLimit: sUSDAppoveGasLimit.mul(15).div(10),
+          });
+        }
       }
 
       toast.closeAll();
       toast({ title: 'Withdrawing SNX...', variant: 'left-accent' });
 
       const AccountProxyInterface = new ethers.utils.Interface(AccountProxy.abi);
-      const PositionManager420Interface = new ethers.utils.Interface(PositionManager420.abi);
+      const Pool420WithdrawInterface = new ethers.utils.Interface(Pool420Withdraw.abi);
 
       const multicall = [
         {
           target: AccountProxy.address,
           callData: AccountProxyInterface.encodeFunctionData('approve', [
-            PositionManager420.address,
+            Pool420Withdraw.address,
             ethers.BigNumber.from(params.accountId),
           ]),
           requireSuccess: true,
         },
         {
-          target: PositionManager420.address,
-          callData: PositionManager420Interface.encodeFunctionData('closePosition', [
+          target: Pool420Withdraw.address,
+          callData: Pool420WithdrawInterface.encodeFunctionData('closePosition', [
             ethers.BigNumber.from(params.accountId),
           ]),
           requireSuccess: true,
@@ -118,7 +131,7 @@ export function useClosePositionPool420() {
 
     onSuccess: async () => {
       queryClient.invalidateQueries({
-        queryKey: [`${network?.id}-${network?.preset}`, 'New Pool'],
+        queryKey: [`${network?.id}-${network?.preset}`, 'Pool 420'],
       });
 
       toast.closeAll();

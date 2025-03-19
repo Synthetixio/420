@@ -26,6 +26,7 @@
     "@_/useLiquidityPosition": "workspace:*",
     "@_/useParams": "workspace:*",
     "@_/usePool420": "workspace:*",
+    "@_/usePool420Withdraw": "workspace:*",
     "@_/usePositionManager420": "workspace:*",
     "@_/usePythPrice": "workspace:*",
     "@_/useSNX": "workspace:*",

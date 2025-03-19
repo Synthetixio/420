@@ -108,7 +108,7 @@ export function useIncreasePositionPool420() {
 
     onSuccess: async () => {
       queryClient.invalidateQueries({
-        queryKey: [`${network?.id}-${network?.preset}`, 'New Pool'],
+        queryKey: [`${network?.id}-${network?.preset}`, 'Pool 420'],
       });
 
       toast.closeAll();

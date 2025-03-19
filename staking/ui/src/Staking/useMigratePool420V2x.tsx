@@ -103,7 +103,7 @@ export function useMigratePool420V2x() {
       await Promise.all(
         [
           //
-          'New Pool',
+          'Pool 420',
           //
           'Accounts',
           'PriceUpdates',

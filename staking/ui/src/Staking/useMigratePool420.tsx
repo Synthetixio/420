@@ -118,7 +118,7 @@ export function useMigratePool420() {
       await Promise.all(
         [
           //
-          'New Pool',
+          'Pool 420',
           //
           'Accounts',
           'PriceUpdates',

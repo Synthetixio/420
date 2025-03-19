@@ -25,7 +25,7 @@ export function usePositionCollateral() {
   return useQuery({
     queryKey: [
       `${network?.id}-${network?.preset}`,
-      'New Pool',
+      'Pool 420',
       'positionCollateral',
       { accountId, poolId, collateralAddress },
       { contractsHash: contractsHash([CoreProxy]) },

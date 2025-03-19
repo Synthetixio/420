@@ -96,38 +96,42 @@ and all transactions will be automatically signed, without any popups
     cast balance 0xWalletAddress -e
     ```
 
-## Testing with an empty test wallet (Base Mainnet)
-
-Run Anvil at the block when the latest PM was deployed
+## Testing with a test wallet
 
 ```sh
-anvil --auto-impersonate --chain-id 8453 --fork-url $RPC_BASE_MAINNET --no-rate-limit --accounts 0 --fork-block-number 25229684 --memory-limit 6442450944
+anvil --auto-impersonate --chain-id 1 --fork-url $RPC_MAINNET --no-rate-limit
 ```
 
-Enable debugging and set magic wallet to `0xaaaa6c341C4Df916d9f0583Ba9Ea953618e5f008`
+Enable debugging and set magic wallet to `0xc3Cf311e04c1f8C74eCF6a795Ae760dc6312F345`
 
 ```js
 localStorage.DEBUG = 'true';
 localStorage.debug = 'snx:*';
-localStorage.MAGIC_WALLET = '0xaaaa6c341C4Df916d9f0583Ba9Ea953618e5f008';
+localStorage.MAGIC_WALLET = '0xc3Cf311e04c1f8C74eCF6a795Ae760dc6312F345';
 ```
 
-Fund the account with `ETH`, `USDC` and `snxUSD`
+Fund the account with `ETH`, `sUSD` and `snxUSD`
 
 ```sh
-export USDC=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
-export AaveUSDCPool=0x4e65fE4DbA92790696d040ac24Aa414708F5c0AB
-export walletAddress=0xaaaa6c341C4Df916d9f0583Ba9Ea953618e5f008
 cast rpc anvil_setCode 0x1234123412341234123412341234123412341234 $(cast from-utf8 FORK)
-cast rpc anvil_setBalance $AaveUSDCPool $(cast to-unit 1ether)
+
+export walletAddress=0xc3Cf311e04c1f8C74eCF6a795Ae760dc6312F345
 cast rpc anvil_setBalance $walletAddress $(cast to-unit 1ether)
+
+export curve=0x4b5E827F4C0a1042272a11857a355dA1F4Ceebae
+cast rpc anvil_setBalance $curve $(cast to-unit 1ether)
+
 export transfer='function transfer(address to, uint256 value) returns (bool)'
 export balanceOf='function balanceOf(address account) view returns (uint256)'
-cast send --unlocked --from $AaveUSDCPool $USDC $transfer $walletAddress 1000000000
-cast call $USDC $balanceOf $walletAddress
 
-export snxUSD="0x09d51516F38980035153a554c26Df3C6f51a23C3"
-export CoreProxy="0x32C222A9A159782aFD7529c87FA34b96CA72C696"
+export sUSD=0x57Ab1ec28D129707052df4dF418D58a2D46d5f51
+cast send --unlocked --from $curve $sUSD $transfer $walletAddress 1000ether
+cast call $sUSD $balanceOf $walletAddress
+
+export CoreProxy="0xffffffaEff0B96Ea8e4f94b2253f31abdD875847"
 cast rpc anvil_setBalance $CoreProxy $(cast to-unit 1ether)
+
+export snxUSD="0xb2F30A7C980f052f02563fb518dcc39e6bf38175"
 cast send --unlocked --from $CoreProxy $snxUSD $transfer $walletAddress 1000ether
+cast call $snxUSD $balanceOf $walletAddress
 ```

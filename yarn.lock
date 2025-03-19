@@ -208,6 +208,7 @@ __metadata:
     "@_/useLiquidityPosition": "workspace:*"
     "@_/useParams": "workspace:*"
     "@_/usePool420": "workspace:*"
+    "@_/usePool420Withdraw": "workspace:*"
     "@_/usePositionManager420": "workspace:*"
     "@_/usePythPrice": "workspace:*"
     "@_/useSNX": "workspace:*"
@@ -484,6 +485,17 @@ __metadata:
 "@_/usePool420@workspace:*, @_/usePool420@workspace:staking/lib/contracts/usePool420":
   version: 0.0.0-use.local
   resolution: "@_/usePool420@workspace:staking/lib/contracts/usePool420"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePool420Withdraw@workspace:*, @_/usePool420Withdraw@workspace:staking/lib/contracts/usePool420Withdraw":
+  version: 0.0.0-use.local
+  resolution: "@_/usePool420Withdraw@workspace:staking/lib/contracts/usePool420Withdraw"
   dependencies:
     "@_/contracts": "workspace:*"
     "@_/useBlockchain": "workspace:*"

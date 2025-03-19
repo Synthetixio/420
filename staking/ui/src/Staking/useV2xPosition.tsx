@@ -21,7 +21,7 @@ export function useV2xPosition() {
   return useQuery({
     queryKey: [
       `${network?.id}-${network?.preset}`,
-      'New Pool',
+      'Pool 420',
       'useV2xPosition',
       { walletAddress },
       { contractsHash: contractsHash([V2xSynthetix, Pool420]) },
