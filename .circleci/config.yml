@@ -335,6 +335,14 @@ workflows:
       - tests
 
       - contract-test:
+          name: Pool420
+          working_directory: 'contracts/Pool420'
+
+      - contract-test:
+          name: Pool420Withdraw
+          working_directory: 'contracts/Pool420Withdraw'
+
+      - contract-test:
           name: PositionManager420
           working_directory: 'contracts/PositionManager420'
 
