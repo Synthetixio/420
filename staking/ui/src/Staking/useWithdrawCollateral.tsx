@@ -1,39 +1,52 @@
 import { ContractError } from '@_/ContractError';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
+import type { CollateralType } from '@_/useCollateralTypes';
 import { useContractErrorParser } from '@_/useContractErrorParser';
-import { type HomePageSchemaType, useParams } from '@_/useParams';
-import { usePositionManager420 } from '@_/usePositionManager420';
-import { useSNX } from '@_/useSNX';
+import { useLiquidityPosition } from '@_/useLiquidityPosition';
+import { usePool420 } from '@_/usePool420';
+import { usePool420Withdraw } from '@_/usePool420Withdraw';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useToast } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';
 import React from 'react';
+import { useWithdrawTimer } from './useWithdrawTimer';
 
-const log = debug('snx:useIncreasePosition420');
+const log = debug('snx:useClosePosition420');
 
-export function useIncreasePositionPool420() {
-  const [params] = useParams<HomePageSchemaType>();
-
+export function useWithdrawCollateral({
+  accountId,
+  collateralType,
+}: {
+  accountId?: ethers.BigNumber;
+  collateralType?: CollateralType;
+}) {
   const signer = useSigner();
   const provider = useProvider();
   const { network } = useNetwork();
 
-  const { data: PositionManager420 } = usePositionManager420();
+  const { data: Pool420 } = usePool420();
+  const { data: Pool420Withdraw } = usePool420Withdraw();
   const { data: AccountProxy } = useAccountProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
-  const { data: SNX } = useSNX();
+  const { data: liquidityPosition } = useLiquidityPosition({ accountId, collateralType });
+  const timeToWithdraw = useWithdrawTimer({ accountId });
 
   const isReady =
+    accountId &&
+    collateralType &&
     network &&
     provider &&
     signer &&
     TrustedMulticallForwarder &&
-    PositionManager420 &&
+    Pool420Withdraw &&
+    Pool420 &&
     AccountProxy &&
-    SNX &&
+    liquidityPosition &&
+    liquidityPosition?.availableCollateral.gt(0) &&
+    !timeToWithdraw &&
     true;
 
   const toast = useToast({ isClosable: true, duration: 60_000 });
@@ -45,42 +58,26 @@ export function useIncreasePositionPool420() {
       if (!isReady) {
         throw new Error('Not ready');
       }
-
       toast.closeAll();
-      toast({ title: 'Approving SNX...', variant: 'left-accent' });
-
-      const walletAddress = await signer.getAddress();
-
-      const SNXContract = new ethers.Contract(SNX.address, SNX.abi, signer);
-      const snxBalance = await SNXContract.balanceOf(walletAddress);
-      const snxAppoveGasLimit = await SNXContract.estimateGas.approve(
-        PositionManager420.address,
-        snxBalance
-      );
-      await SNXContract.approve(PositionManager420.address, snxBalance, {
-        gasLimit: snxAppoveGasLimit.mul(15).div(10),
-      });
-
-      toast.closeAll();
-      toast({ title: 'Updating position...', variant: 'left-accent' });
+      toast({ title: 'Withdrawing SNX...', variant: 'left-accent' });
 
       const AccountProxyInterface = new ethers.utils.Interface(AccountProxy.abi);
-      const PositionManager420Interface = new ethers.utils.Interface(PositionManager420.abi);
+      const Pool420WithdrawInterface = new ethers.utils.Interface(Pool420Withdraw.abi);
 
       const multicall = [
         {
           target: AccountProxy.address,
           callData: AccountProxyInterface.encodeFunctionData('approve', [
-            PositionManager420.address,
-            ethers.BigNumber.from(params.accountId),
+            Pool420Withdraw.address,
+            accountId,
           ]),
           requireSuccess: true,
         },
         {
-          target: PositionManager420.address,
-          callData: PositionManager420Interface.encodeFunctionData('increasePosition', [
-            ethers.BigNumber.from(params.accountId),
-            ethers.constants.MaxUint256, // All-in
+          target: Pool420Withdraw.address,
+          callData: Pool420WithdrawInterface.encodeFunctionData('withdrawCollateral', [
+            accountId,
+            collateralType.tokenAddress,
           ]),
           requireSuccess: true,
         },
@@ -107,14 +104,23 @@ export function useIncreasePositionPool420() {
     },
 
     onSuccess: async () => {
-      queryClient.invalidateQueries({
-        queryKey: [`${network?.id}-${network?.preset}`, 'Pool 420'],
-      });
+      const deployment = `${network?.id}-${network?.preset}`;
+      await Promise.all(
+        [
+          //
+          'Pool 420',
+          //
+          'Accounts',
+          'LiquidityPosition',
+          'LiquidityPositions',
+          'AccountCollateralUnlockDate',
+        ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
+      );
 
       toast.closeAll();
       toast({
         title: 'Success',
-        description: 'Position updated.',
+        description: 'SNX withdrawn.',
         status: 'success',
         variant: 'left-accent',
       });
@@ -127,7 +133,7 @@ export function useIncreasePositionPool420() {
       }
       toast.closeAll();
       toast({
-        title: 'Could not update position',
+        title: 'Could not withdraw SNX',
         description: contractError ? (
           <ContractError contractError={contractError} />
         ) : (

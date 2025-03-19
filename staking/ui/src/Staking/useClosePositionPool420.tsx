@@ -46,7 +46,7 @@ export function useClosePositionPool420() {
     repaymentPenalty &&
     true;
 
-  const toast = useToast({ isClosable: true, duration: 9000 });
+  const toast = useToast({ isClosable: true, duration: 60_000 });
   const errorParser = useContractErrorParser();
 
   const queryClient = useQueryClient();
@@ -86,7 +86,7 @@ export function useClosePositionPool420() {
       }
 
       toast.closeAll();
-      toast({ title: 'Withdrawing SNX...', variant: 'left-accent' });
+      toast({ title: 'Unstaking SNX...', variant: 'left-accent' });
 
       const AccountProxyInterface = new ethers.utils.Interface(AccountProxy.abi);
       const Pool420WithdrawInterface = new ethers.utils.Interface(Pool420Withdraw.abi);
@@ -130,16 +130,23 @@ export function useClosePositionPool420() {
     },
 
     onSuccess: async () => {
-      queryClient.invalidateQueries({
-        queryKey: [`${network?.id}-${network?.preset}`, 'Pool 420'],
-      });
+      const deployment = `${network?.id}-${network?.preset}`;
+      await Promise.all(
+        [
+          //
+          'Pool 420',
+          //
+          'LiquidityPosition',
+          'LiquidityPositions',
+          'AccountCollateralUnlockDate',
+        ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
+      );
 
       toast.closeAll();
       toast({
         title: 'Success',
-        description: 'SNX withdrawn.',
+        description: 'SNX unstaked.',
         status: 'success',
-        duration: 5000,
         variant: 'left-accent',
       });
     },
@@ -151,7 +158,7 @@ export function useClosePositionPool420() {
       }
       toast.closeAll();
       toast({
-        title: 'Could not withdraw SNX',
+        title: 'Could not unstake SNX',
         description: contractError ? (
           <ContractError contractError={contractError} />
         ) : (

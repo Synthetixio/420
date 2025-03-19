@@ -39,7 +39,7 @@ export function useMigratePool420V2x() {
     (v2xPosition.cRatio.lte(0) || v2xPosition.cRatio.gte(targetCRatio)) &&
     true;
 
-  const toast = useToast({ isClosable: true, duration: 9000 });
+  const toast = useToast({ isClosable: true, duration: 60_000 });
   const errorParser = useContractErrorParser();
 
   const queryClient = useQueryClient();
@@ -106,14 +106,8 @@ export function useMigratePool420V2x() {
           'Pool 420',
           //
           'Accounts',
-          'PriceUpdates',
           'LiquidityPosition',
           'LiquidityPositions',
-          'TokenBalance',
-          'SynthBalances',
-          'EthBalance',
-          'Allowance',
-          'TransferableSynthetix',
           'AccountCollateralUnlockDate',
         ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
       );
@@ -123,7 +117,6 @@ export function useMigratePool420V2x() {
         title: 'Success',
         description: 'Migration completed.',
         status: 'success',
-        duration: 5000,
         variant: 'left-accent',
       });
     },

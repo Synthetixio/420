@@ -36,7 +36,7 @@ export function useRepaymentPenalty() {
         provider
       );
       const repaymentPenalty = await TreasuryMarketProxyContract.repaymentPenalty(
-        params.accountId,
+        ethers.BigNumber.from(params.accountId),
         0
       );
       log('repaymentPenalty', repaymentPenalty);
