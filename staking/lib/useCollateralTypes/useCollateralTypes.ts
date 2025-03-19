@@ -73,23 +73,6 @@ export function useCollateralTypes(includeDelegationOff = false, customNetwork?:
 
       const collateralTypes = (await loadCollateralTypes(network.id, network.preset))
         .map((collateralType) => {
-          if (network?.preset === 'andromeda' && collateralType.symbol === 'sUSDC') {
-            return {
-              ...collateralType,
-              symbol: 'USDC',
-              displaySymbol: 'USDC',
-              name: 'USD Coin',
-            };
-          }
-          if (network?.preset === 'andromeda' && collateralType.symbol === 'sStataUSDC') {
-            return {
-              ...collateralType,
-              symbol: 'stataUSDC',
-              displaySymbol: 'Static aUSDC',
-              name: 'Static aUSDC',
-            };
-          }
-
           return {
             ...collateralType,
             displaySymbol:

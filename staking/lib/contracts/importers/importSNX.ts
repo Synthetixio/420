@@ -33,12 +33,6 @@ export async function importSNX(
       ]);
       return { address: meta.contracts.CollateralToken_SNX, abi };
     }
-    case '11155111-main': {
-      const [{ default: meta }] = await Promise.all([
-        import('@synthetixio/v3-contracts/11155111-main/meta.json'),
-      ]);
-      return { address: meta.contracts.CollateralToken_SNX, abi };
-    }
     case '10-main': {
       const [{ default: meta }] = await Promise.all([
         import('@synthetixio/v3-contracts/10-main/meta.json'),

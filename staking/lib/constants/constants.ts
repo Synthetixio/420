@@ -33,23 +33,16 @@ export const tokenOverrides: {
       | undefined;
   };
 } = {
-  '8453-andromeda': {
-    '0x4EA71A20e655794051D1eE8b6e4A3269B13ccaCc': {
-      symbol: 'stataUSDC',
-      displaySymbol: 'Static aUSDC',
-      name: 'Static aUSDC',
-    },
-  },
   '1-main': {
     '0x10A5F7D9D65bCc2734763444D4940a31b109275f': {
       symbol: 'sUSD',
-      displaySymbol: 'V2 sUSD',
-      name: 'V2 sUSD',
+      displaySymbol: 'sUSD',
+      name: 'sUSD',
     },
     '0xb2F30A7C980f052f02563fb518dcc39e6bf38175': {
       symbol: 'sUSD',
-      displaySymbol: 'V3 sUSD',
-      name: 'V3 sUSD',
+      displaySymbol: 'snxUSD',
+      name: 'snxUSD',
     },
   },
 };

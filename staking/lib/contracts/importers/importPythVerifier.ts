@@ -86,46 +86,10 @@ export async function importPythVerifier(
 
   switch (deployment) {
     case '1-main': {
-      return {
-        address: '0x4305FB66699C3B2702D4d05CF36551390A4c69C6',
-        abi,
-      };
-    }
-    case '11155111-main': {
-      return {
-        address: '0xDd24F84d36BF92C65F92307595335bdFab5Bbd21',
-        abi,
-      };
+      return { address: '0x4305FB66699C3B2702D4d05CF36551390A4c69C6', abi };
     }
     case '10-main': {
-      return {
-        address: '0xff1a0f4744e8582DF1aE09D5611b887B6a12925C',
-        abi,
-      };
-    }
-    case '8453-andromeda': {
-      return {
-        address: '0x8250f4aF4B972684F7b336503E2D6dFeDeB1487a',
-        abi,
-      };
-    }
-    case '84532-andromeda': {
-      return {
-        address: '0xA2aa501b19aff244D90cc15a4Cf739D2725B5729',
-        abi,
-      };
-    }
-    case '42161-main': {
-      return {
-        address: '0xff1a0f4744e8582DF1aE09D5611b887B6a12925C',
-        abi,
-      };
-    }
-    case '421614-main': {
-      return {
-        address: '0x4374e5a8b9C22271E9EB878A2AA31DE97DF15DAF',
-        abi,
-      };
+      return { address: '0xff1a0f4744e8582DF1aE09D5611b887B6a12925C', abi };
     }
     default: {
       throw new Error(`Unsupported deployment ${deployment} for Extras`);

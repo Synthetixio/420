@@ -204,7 +204,6 @@ __metadata:
     "@_/useCollateralTypes": "workspace:*"
     "@_/useContractErrorParser": "workspace:*"
     "@_/useCoreProxy": "workspace:*"
-    "@_/useCreateAccount": "workspace:*"
     "@_/useLegacyMarket": "workspace:*"
     "@_/useLiquidityPosition": "workspace:*"
     "@_/useParams": "workspace:*"
@@ -295,38 +294,6 @@ __metadata:
 "@_/txnReducer@workspace:staking/lib/txnReducer":
   version: 0.0.0-use.local
   resolution: "@_/txnReducer@workspace:staking/lib/txnReducer"
-  languageName: unknown
-  linkType: soft
-
-"@_/useAccountAvailableCollateral@workspace:staking/lib/useAccountAvailableCollateral":
-  version: 0.0.0-use.local
-  resolution: "@_/useAccountAvailableCollateral@workspace:staking/lib/useAccountAvailableCollateral"
-  dependencies:
-    "@_/tsHelpers": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@_/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/useAccountCollateral@workspace:staking/lib/useAccountCollateral":
-  version: 0.0.0-use.local
-  resolution: "@_/useAccountCollateral@workspace:staking/lib/useAccountCollateral"
-  dependencies:
-    "@_/tsHelpers": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@_/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
   languageName: unknown
   linkType: soft
 
@@ -446,18 +413,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/useCreateAccount@workspace:*, @_/useCreateAccount@workspace:staking/lib/useCreateAccount":
-  version: 0.0.0-use.local
-  resolution: "@_/useCreateAccount@workspace:staking/lib/useCreateAccount"
-  dependencies:
-    "@_/useBlockchain": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
 "@_/useLegacyMarket@workspace:*, @_/useLegacyMarket@workspace:staking/lib/contracts/useLegacyMarket":
   version: 0.0.0-use.local
   resolution: "@_/useLegacyMarket@workspace:staking/lib/contracts/useLegacyMarket"
@@ -533,22 +488,6 @@ __metadata:
     "@_/contracts": "workspace:*"
     "@_/useBlockchain": "workspace:*"
     "@tanstack/react-query": "npm:^5.8.3"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/usePositionDebt@workspace:staking/lib/usePositionDebt":
-  version: 0.0.0-use.local
-  resolution: "@_/usePositionDebt@workspace:staking/lib/usePositionDebt"
-  dependencies:
-    "@_/constants": "workspace:*"
-    "@_/tsHelpers": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@_/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
     react: "npm:^18.2.0"
   languageName: unknown
   linkType: soft
@@ -640,15 +579,6 @@ __metadata:
     "@_/useBlockchain": "workspace:*"
     "@tanstack/react-query": "npm:^5.8.3"
     react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/validatePosition@workspace:staking/lib/validatePosition":
-  version: 0.0.0-use.local
-  resolution: "@_/validatePosition@workspace:staking/lib/validatePosition"
-  dependencies:
-    "@_/calculations": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
   languageName: unknown
   linkType: soft
 
