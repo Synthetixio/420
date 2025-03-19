@@ -220,7 +220,7 @@ contract PositionManager420 {
         uint128 poolId = TreasuryMarketProxy.poolId();
 
         // 1. Temporarily transfer Account NFT from the user wallet
-        AccountProxy.safeTransferFrom(
+        AccountProxy.transferFrom(
             //
             msgSender,
             address(this),
@@ -237,7 +237,7 @@ contract PositionManager420 {
         TreasuryMarketProxy.saddle(accountId);
 
         // 5. Send account NFT back to the user wallet
-        AccountProxy.safeTransferFrom(
+        AccountProxy.transferFrom(
             //
             address(this),
             msgSender,
