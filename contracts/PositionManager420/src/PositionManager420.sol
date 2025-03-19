@@ -314,11 +314,10 @@ contract PositionManager420 {
         address msgSender = ERC2771Context._msgSender();
 
         // 1. Get amount of available collateral
-        availableCollateral = CoreProxy.getAccountAvailableCollateral(
-            //
-            accountId,
-            collateralType
-        );
+        (uint256 totalDeposited,, uint256 totalLocked) = CoreProxy.getAccountCollateral(accountId, collateralType);
+
+        availableCollateral = totalDeposited - totalLocked;
+
         if (availableCollateral > 0) {
             // 2. Withdraw all the available collateral
             CoreProxy.withdraw(
