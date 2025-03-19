@@ -246,37 +246,18 @@ contract PositionManager420 {
     }
 
     /**
-     * @notice Fully closes the user's position by repaying loans, withdrawing collateral, and transferring ownership of the account back to the user.
-     * @dev The function ensures that the minimum delegation time is respected before proceeding.
-     * Temporarily transfers the user's account NFT to perform necessary operations, such as
-     * repaying outstanding loans, unsaddling the position, withdrawing all available $snxUSD and $SNX collateral,
-     * and finally transferring the account NFT back to the user's wallet. It ensures all steps for closing a position are done in a single transaction.
+     * @notice Fully closes the user's position by repaying loans, unsaddling the position,
+     * withdrawing collateral, and transferring ownership of the account NFT back to the user.
+     * @dev Temporarily transfers the user's account NFT to perform necessary operations,
+     * ensures all outstanding loans are repaid, unsaddles the account, withdraws all
+     * available collateral, and finally transfers the account NFT back to the user's wallet.
+     * This function ensures all these steps are completed in a single transaction.
      * @param accountId The unique ID of the user's Synthetix v3 Account NFT.
      */
     function closePosition(uint128 accountId) public {
         address msgSender = ERC2771Context._msgSender();
-        address $SNX = get$SNX();
 
-        // 1. Verify that minimum delegation time is respected
-        uint128 poolId = TreasuryMarketProxy.poolId();
-        uint32 lastDelegationTime = uint32(
-            CoreProxy.getLastDelegationTime(
-                //
-                accountId,
-                poolId,
-                $SNX
-            )
-        );
-        uint32 minDelegationTime = CoreProxy.getMarketMinDelegateTime(LegacyMarketProxy.marketId());
-        if (lastDelegationTime + minDelegationTime > block.timestamp) {
-            revert ICoreProxy.MinDelegationTimeoutPending(
-                //
-                poolId,
-                (lastDelegationTime + minDelegationTime) - uint32(block.timestamp)
-            );
-        }
-
-        // 2. Temporarily transfer Account NFT from the user wallet
+        // 1. Temporarily transfer Account NFT from the user wallet
         AccountProxy.transferFrom(
             //
             msgSender,
@@ -284,14 +265,37 @@ contract PositionManager420 {
             uint256(accountId)
         );
 
-        // 3. Repay outstanding loan (if needed)
+        // 2. Repay outstanding loan (if needed)
         _repayLoan(accountId);
 
-        // 4. Unsaddle account, TreasuryMarketProxy will close position on behalf
+        // 3. Unsaddle account, TreasuryMarketProxy will close position on behalf
         AccountProxy.approve(address(TreasuryMarketProxy), accountId);
         TreasuryMarketProxy.unsaddle(accountId);
 
-        // 5. Send Account NFT back to the user wallet
+        // 4. Send Account NFT back to the user wallet
+        AccountProxy.transferFrom(
+            //
+            address(this),
+            msgSender,
+            uint256(accountId)
+        );
+    }
+
+    function withdrawCollateral(uint128 accountId, address collateralType) public {
+        address msgSender = ERC2771Context._msgSender();
+
+        // 1. Temporarily transfer Account NFT from the user wallet
+        AccountProxy.transferFrom(
+            //
+            msgSender,
+            address(this),
+            uint256(accountId)
+        );
+
+        // 2. Withdraw collateral and send it to user wallet
+        _withdrawCollateral(accountId, collateralType);
+
+        // 3. Send account NFT back to the user wallet
         AccountProxy.transferFrom(
             //
             address(this),

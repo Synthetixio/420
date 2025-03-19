@@ -6,7 +6,7 @@ contract Mainnet_PositionManager_increasePosition_Test is PositionManagerTest {
     constructor() {
         deployment = "10-main";
         forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
-        forkBlockNumber = 133093166;
+        forkBlockNumber = 133373441;
         initialize();
     }
 

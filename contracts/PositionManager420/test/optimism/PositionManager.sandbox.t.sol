@@ -3,12 +3,11 @@ pragma solidity ^0.8.21;
 import "../lib/PositionManagerTest.sol";
 import "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
 
-contract Mainnet_PositionManager_sandbox_Test is PositionManagerTest {
+contract Optimism_PositionManager_sandbox_Test is PositionManagerTest {
     constructor() {
-        deployment = "1-main";
-        forkUrl = vm.envString("RPC_MAINNET");
-        forkBlockNumber = 22042368;
-
+        deployment = "10-main";
+        forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
+        forkBlockNumber = 133373441;
         initialize();
     }
 
