@@ -61,14 +61,7 @@ and all transactions will be automatically signed, without any popups
 
     ```sh
     # Mainnets
-    anvil --auto-impersonate --chain-id 1 --fork-url https://mainnet.infura.io/v3/$INFURA_KEY --fork-block-number 21993017
-    anvil --auto-impersonate --chain-id 8453 --fork-url https://base-mainnet.infura.io/v3/$INFURA_KEY --fork-block-number 22991081
-    anvil --auto-impersonate --chain-id 42161 --fork-url https://arbitrum-mainnet.infura.io/v3/$INFURA_KEY --fork-block-number 271813668
-
-    # Testnets
-    anvil --auto-impersonate --chain-id 11155111 --fork-url https://sepolia.infura.io/v3/$INFURA_KEY
-    anvil --auto-impersonate --chain-id 84532 --fork-url https://base-sepolia.infura.io/v3/$INFURA_KEY
-    anvil --auto-impersonate --chain-id 421614 --fork-url https://arbitrum-sepolia.infura.io/v3/$INFURA_KEY
+    anvil --auto-impersonate --chain-id 1 --fork-url https://mainnet.infura.io/v3/$INFURA_KEY --fork-block-number 22079028
     ```
 
 2.  Run Liquidity app locally
