@@ -10,7 +10,6 @@ import {
   useNetwork,
   useWallet,
 } from '@_/useBlockchain';
-import { useCreateAccount } from '@_/useCreateAccount';
 import { makeSearch, useParams } from '@_/useParams';
 import { CopyIcon, SettingsIcon } from '@chakra-ui/icons';
 import {
@@ -18,7 +17,6 @@ import {
   Button,
   Flex,
   IconButton,
-  Image,
   Link,
   Menu,
   MenuButton,
@@ -28,7 +26,6 @@ import {
 } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 import React from 'react';
-import CreateAccount from './CreateAccount.svg';
 
 const mainnets = [MAINNET, OPTIMISM];
 
@@ -39,7 +36,6 @@ export function NetworkController() {
   const { activeWallet, walletsInfo, connect, disconnect } = useWallet();
   const { network: currentNetwork, setNetwork } = useNetwork();
   const { data: accounts, isPending: isPendingAccounts } = useAccounts();
-  const createAccount = useCreateAccount();
 
   const paramsAccountId = React.useMemo(() => {
     try {
@@ -209,81 +205,66 @@ export function NetworkController() {
                   />
                 </Tooltip>
               </Flex>
-              <Flex
-                direction="column"
-                p="2"
-                border="1px solid"
-                borderColor="gray.900"
-                rounded="base"
-                gap="2"
-              >
-                <Flex w="100%" justifyContent="space-between">
-                  <Text fontWeight={400} fontSize="14px">
-                    Account(s)
-                  </Text>
-                  <Link
-                    href={`?${makeSearch({ page: 'settings', accountId: params.accountId })}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setParams({ page: 'settings', accountId: params.accountId });
-                    }}
-                  >
-                    <IconButton
-                      variant="outline"
-                      colorScheme="gray"
-                      size="xs"
-                      icon={<SettingsIcon />}
-                      aria-label="account settings"
-                    />
-                  </Link>
-                </Flex>
-                <Flex data-cy="accounts list" direction="column">
-                  {accounts?.map((accountId) => (
-                    <Text
-                      key={accountId.toString()}
-                      display="flex"
-                      alignItems="center"
-                      color="white"
-                      fontWeight={700}
-                      fontSize="16px"
-                      cursor="pointer"
-                      p="3"
-                      data-cy="account id"
-                      data-account-id={accountId}
-                      _hover={{ bg: 'whiteAlpha.300' }}
+
+              {accounts && accounts.length > 0 ? (
+                <Flex
+                  direction="column"
+                  p="2"
+                  border="1px solid"
+                  borderColor="gray.900"
+                  rounded="base"
+                  gap="2"
+                >
+                  <Flex w="100%" justifyContent="space-between">
+                    <Text fontWeight={400} fontSize="14px">
+                      {accounts.length > 1 ? 'Accounts' : 'Account'}
+                    </Text>
+                    <Link
+                      href={`?${makeSearch({ page: 'settings', accountId: params.accountId })}`}
                       onClick={(e) => {
-                        e.stopPropagation();
-                        setParams({ ...params, accountId: accountId.toString() });
+                        e.preventDefault();
+                        setParams({ page: 'settings', accountId: params.accountId });
                       }}
                     >
-                      {renderAccountId(accountId)}
-                      {paramsAccountId && accountId.eq(paramsAccountId) ? (
-                        <Badge ml={2} colorScheme="cyan" variant="outline">
-                          Connected
-                        </Badge>
-                      ) : null}
-                    </Text>
-                  ))}
+                      <IconButton
+                        variant="outline"
+                        colorScheme="gray"
+                        size="xs"
+                        icon={<SettingsIcon />}
+                        aria-label="account settings"
+                      />
+                    </Link>
+                  </Flex>
+                  <Flex data-cy="accounts list" direction="column">
+                    {accounts?.map((accountId) => (
+                      <Text
+                        key={accountId.toString()}
+                        display="flex"
+                        alignItems="center"
+                        color="white"
+                        fontWeight={700}
+                        fontSize="16px"
+                        cursor="pointer"
+                        p="3"
+                        data-cy="account id"
+                        data-account-id={accountId}
+                        _hover={{ bg: 'whiteAlpha.300' }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setParams({ ...params, accountId: accountId.toString() });
+                        }}
+                      >
+                        {renderAccountId(accountId)}
+                        {paramsAccountId && accountId.eq(paramsAccountId) ? (
+                          <Badge ml={2} colorScheme="cyan" variant="outline">
+                            Connected
+                          </Badge>
+                        ) : null}
+                      </Text>
+                    ))}
+                  </Flex>
                 </Flex>
-
-                <Button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    createAccount.mutation.mutate();
-                  }}
-                  isDisabled={!createAccount.enabled || createAccount.mutation.isPending}
-                  size="xs"
-                  variant="outline"
-                  colorScheme="gray"
-                  color="white"
-                  leftIcon={<Image src={CreateAccount} alt="Create account" />}
-                  w="130px"
-                  data-cy="create new account button"
-                >
-                  Create Account
-                </Button>
-              </Flex>
+              ) : null}
             </Flex>
           </Flex>
         </MenuList>

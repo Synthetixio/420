@@ -22,7 +22,6 @@
     "@_/useCollateralTypes": "workspace:*",
     "@_/useContractErrorParser": "workspace:*",
     "@_/useCoreProxy": "workspace:*",
-    "@_/useCreateAccount": "workspace:*",
     "@_/useLegacyMarket": "workspace:*",
     "@_/useLiquidityPosition": "workspace:*",
     "@_/useParams": "workspace:*",
