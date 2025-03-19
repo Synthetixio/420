@@ -206,7 +206,7 @@ export _TreasuryMarketProxy=$(cat $_meta | jq -r '.contracts.TreasuryMarketProxy
 export _LegacyMarketProxy=$(cat $_meta | jq -r '.contracts.LegacyMarketProxy')
 export _SNX=$(cat $_meta | jq -r '.contracts.CollateralToken_SNX')
 export rpc="$RPC_MAINNET"
-export block=22030934
+export block=22043658
 
 export accounts='1
 2

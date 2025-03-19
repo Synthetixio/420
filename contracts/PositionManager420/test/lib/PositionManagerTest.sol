@@ -7,7 +7,7 @@ import {
     MarketConfiguration
 } from "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
 import {IAccountProxy} from "@synthetixio/v3-contracts/1-main/IAccountProxy.sol";
-import {ITreasuryMarketProxy} from "../../src/ITreasuryMarketProxy.sol";
+import {ITreasuryMarketProxy, ITreasuryMarket} from "../../src/ITreasuryMarketProxy.sol";
 import {IUSDProxy} from "@synthetixio/v3-contracts/1-main/IUSDProxy.sol";
 import {ILegacyMarketProxy} from "@synthetixio/v3-contracts/1-main/ILegacyMarketProxy.sol";
 import {IV2x} from "@synthetixio/v3-contracts/1-main/IV2x.sol";
@@ -74,6 +74,7 @@ contract PositionManagerTest is Test {
         // Pyth bypass
         vm.etch(0x1234123412341234123412341234123412341234, "FORK");
 
+        // positionManager = PositionManager420(0x100C6C18381C9A7527762063047236356BBd0b8d);
         positionManager = new PositionManager420(
             //
             address(CoreProxy),
@@ -99,8 +100,28 @@ contract PositionManagerTest is Test {
         vm.label(address(V2xResolver), "V2xResolver");
 
         _bypassTimeouts(address(positionManager));
-        _bypassTimeouts(address(TreasuryMarketProxy));
+        // _bypassTimeouts(address(TreasuryMarketProxy)); // No need anymore
         // _fundPool(); // No need anymore
+        _setupRewards();
+    }
+
+    function _setupRewards() internal {
+        ITreasuryMarket.DepositRewardConfiguration[] memory configs =
+            new ITreasuryMarket.DepositRewardConfiguration[](1);
+        bytes32 constOneOracle = 0x066ef68c9d9ca51eee861aeb5bce51a12e61f06f10bf62243c563671ae3a9733;
+        configs[0] = ITreasuryMarket.DepositRewardConfiguration({
+            token: address($SNX),
+            power: 1,
+            duration: 365 * 24 * 3600,
+            percent: 0.2 ether,
+            valueRatioOracle: constOneOracle,
+            penaltyStart: 1.0 ether,
+            penaltyEnd: 0.5 ether
+        });
+
+        vm.startPrank(TreasuryMarketProxy.owner());
+        TreasuryMarketProxy.setDepositRewardConfigurations(configs);
+        vm.stopPrank();
     }
 
     function _bypassTimeouts(address addr) internal {
