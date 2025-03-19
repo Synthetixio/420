@@ -47,6 +47,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@_/Pool420@workspace:contracts/Pool420":
+  version: 0.0.0-use.local
+  resolution: "@_/Pool420@workspace:contracts/Pool420"
+  dependencies:
+    "@synthetixio/core-contracts": "npm:^3.10.1"
+    "@synthetixio/v3-contracts": "npm:^8.1.0"
+    forge-std: "github:foundry-rs/forge-std"
+  languageName: unknown
+  linkType: soft
+
+"@_/Pool420Withdraw@workspace:contracts/Pool420Withdraw":
+  version: 0.0.0-use.local
+  resolution: "@_/Pool420Withdraw@workspace:contracts/Pool420Withdraw"
+  dependencies:
+    "@synthetixio/core-contracts": "npm:^3.10.1"
+    forge-std: "github:foundry-rs/forge-std"
+  languageName: unknown
+  linkType: soft
+
 "@_/TermsModal@workspace:*, @_/TermsModal@workspace:staking/lib/TermsModal":
   version: 0.0.0-use.local
   resolution: "@_/TermsModal@workspace:staking/lib/TermsModal"
