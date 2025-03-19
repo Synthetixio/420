@@ -3,6 +3,7 @@ import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
 import { type HomePageSchemaType, useParams } from '@_/useParams';
+import { usePool420 } from '@_/usePool420';
 import { usePositionManager420 } from '@_/usePositionManager420';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useToast } from '@chakra-ui/react';
@@ -23,6 +24,7 @@ export function useClosePositionPool420() {
   const { network } = useNetwork();
 
   const { data: PositionManager420 } = usePositionManager420();
+  const { data: Pool420 } = usePool420();
   const { data: AccountProxy } = useAccountProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
   const { data: positionCollateral } = usePositionCollateral();
@@ -34,6 +36,7 @@ export function useClosePositionPool420() {
     signer &&
     TrustedMulticallForwarder &&
     PositionManager420 &&
+    Pool420 &&
     AccountProxy &&
     positionCollateral &&
     positionCollateral.gt(0) &&
@@ -50,15 +53,11 @@ export function useClosePositionPool420() {
         throw new Error('Not ready');
       }
 
-      const PositionManager420Contract = new ethers.Contract(
-        PositionManager420.address,
-        PositionManager420.abi,
-        signer
-      );
       if (loanedAmount.gt(0)) {
         toast.closeAll();
         toast({ title: 'Approving sUSD...', variant: 'left-accent' });
-        const sUSDAddress = await PositionManager420Contract.get$sUSD();
+        const Pool420Contract = new ethers.Contract(Pool420.address, Pool420.abi, provider);
+        const sUSDAddress = await Pool420Contract.get$sUSD();
         const sUSDContract = new ethers.Contract(
           sUSDAddress,
           ['function approve(address spender, uint256 amount) returns (bool)'],

@@ -2,7 +2,6 @@ import { ContractError } from '@_/ContractError';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
 import { useLegacyMarket } from '@_/useLegacyMarket';
-import { usePositionManager420 } from '@_/usePositionManager420';
 import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useToast } from '@chakra-ui/react';
@@ -22,7 +21,6 @@ export function useMigratePool420V2x() {
 
   const { data: v2xPosition } = useV2xPosition();
 
-  const { data: PositionManager420 } = usePositionManager420();
   const { data: LegacyMarket } = useLegacyMarket();
   const { data: TreasuryMarketProxy } = useTreasuryMarketProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
@@ -33,7 +31,6 @@ export function useMigratePool420V2x() {
     provider &&
     signer &&
     TrustedMulticallForwarder &&
-    PositionManager420 &&
     TreasuryMarketProxy &&
     LegacyMarket &&
     targetCRatio &&
