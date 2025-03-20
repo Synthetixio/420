@@ -178,7 +178,7 @@ export function StakingPosition() {
                 Unstake
               </Button>
               <Flex
-                backgroundColor="#ffffff10"
+                backgroundColor="whiteAlpha.200"
                 py="1"
                 px="3"
                 borderRadius="base"

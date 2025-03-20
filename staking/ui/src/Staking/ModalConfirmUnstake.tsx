@@ -93,7 +93,7 @@ export function ModalConfirmUnstake({
         <ModalBody pt={0} pb={6}>
           <Flex direction="column" gap={6}>
             <Grid
-              backgroundColor="#ffffff10"
+              backgroundColor="whiteAlpha.200"
               p="3"
               borderRadius="base"
               gap={3}
@@ -198,26 +198,26 @@ export function ModalConfirmUnstake({
                     {isPendingLiquidityPosition || isPendingSnxPrice
                       ? '~'
                       : liquidityPosition && snxPrice
-                        ? `$${numbro(
-                            liquidityPosition?.totalDeposited
-                              .sub(liquidityPosition?.totalLocked)
-                              .mul(snxPrice)
-                              .toNumber()
-                          ).format({
-                            trimMantissa: true,
-                            thousandSeparated: true,
-                            average: true,
-                            mantissa: 2,
-                            spaceSeparated: false,
-                          })}`
-                        : null}
+                      ? `$${numbro(
+                          liquidityPosition?.totalDeposited
+                            .sub(liquidityPosition?.totalLocked)
+                            .mul(snxPrice)
+                            .toNumber()
+                        ).format({
+                          trimMantissa: true,
+                          thousandSeparated: true,
+                          average: true,
+                          mantissa: 2,
+                          spaceSeparated: false,
+                        })}`
+                      : null}
                   </Text>
                 </Flex>
               </GridItem>
             </Grid>
 
             <Grid
-              backgroundColor="#ffffff10"
+              backgroundColor="whiteAlpha.200"
               p="3"
               borderRadius="base"
               gap={3}
@@ -229,42 +229,42 @@ export function ModalConfirmUnstake({
                 {isPendingLoanedAmount
                   ? '~'
                   : loanedAmount
-                    ? `$${numbro(wei(loanedAmount).toNumber()).format({
-                        trimMantissa: true,
-                        thousandSeparated: true,
-                        average: true,
-                        mantissa: 2,
-                        spaceSeparated: false,
-                      })}`
-                    : null}
+                  ? `$${numbro(wei(loanedAmount).toNumber()).format({
+                      trimMantissa: true,
+                      thousandSeparated: true,
+                      average: true,
+                      mantissa: 2,
+                      spaceSeparated: false,
+                    })}`
+                  : null}
               </GridItem>
               <GridItem color="gray.500">Debt Burned</GridItem>
               <GridItem color="gray.500" textAlign="right">
                 {isPendingLoanedAmount || isPendingLoan || isPendingSnxPrice
                   ? '~'
                   : loan && loanedAmount
-                    ? `$${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
-                        trimMantissa: true,
-                        thousandSeparated: true,
-                        average: true,
-                        mantissa: 2,
-                        spaceSeparated: false,
-                      })}`
-                    : null}
+                  ? `$${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
+                      trimMantissa: true,
+                      thousandSeparated: true,
+                      average: true,
+                      mantissa: 2,
+                      spaceSeparated: false,
+                    })}`
+                  : null}
               </GridItem>
               <GridItem color="gray.500">Early Withdrawal Penalty</GridItem>
               <GridItem color={repaymentPenalty?.gt(0) ? 'red.300' : 'gray.500'} textAlign="right">
                 {isPendingRepaymentPenalty
                   ? '~'
                   : repaymentPenalty
-                    ? `$${numbro(wei(repaymentPenalty).toNumber()).format({
-                        trimMantissa: true,
-                        thousandSeparated: true,
-                        average: true,
-                        mantissa: 2,
-                        spaceSeparated: false,
-                      })}`
-                    : null}
+                  ? `$${numbro(wei(repaymentPenalty).toNumber()).format({
+                      trimMantissa: true,
+                      thousandSeparated: true,
+                      average: true,
+                      mantissa: 2,
+                      spaceSeparated: false,
+                    })}`
+                  : null}
               </GridItem>
               <GridItem color="gray.50" fontWeight={700}>
                 Total Debt
@@ -273,18 +273,18 @@ export function ModalConfirmUnstake({
                 {isPendingLoanedAmount || isPendingRepaymentPenalty
                   ? '~'
                   : loanedAmount && repaymentPenalty
-                    ? `$${numbro(wei(loanedAmount).add(repaymentPenalty).toNumber()).format({
-                        trimMantissa: true,
-                        thousandSeparated: true,
-                        average: true,
-                        mantissa: 2,
-                        spaceSeparated: false,
-                      })}`
-                    : null}
+                  ? `$${numbro(wei(loanedAmount).add(repaymentPenalty).toNumber()).format({
+                      trimMantissa: true,
+                      thousandSeparated: true,
+                      average: true,
+                      mantissa: 2,
+                      spaceSeparated: false,
+                    })}`
+                  : null}
               </GridItem>
             </Grid>
 
-            <Alert colorScheme="blue" borderRadius="6px">
+            <Alert status="info" colorScheme="cyan" backgroundColor="blue.900" borderRadius="6px">
               <AlertIcon />
               <Text fontSize="14px">
                 Withdrawals are locked for {unlockTimeout} after unstaking

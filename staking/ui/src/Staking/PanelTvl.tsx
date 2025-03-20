@@ -17,7 +17,7 @@ export function PanelTvl() {
       bg="navy.700"
       p={{ base: 4, sm: 10 }}
     >
-      <Box display={{ base: 'block', sm: 'none' }}>
+      <Flex display={{ base: 'flex', sm: 'none' }} direction="column" gap={4}>
         <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
           SNX Powered Yield Farming
         </Text>
@@ -26,7 +26,7 @@ export function PanelTvl() {
           immediately.
         </Text>
         <Divider borderColor="gray.900" my={{ base: '4' }} />
-      </Box>
+      </Flex>
 
       <Flex
         gap={4}
