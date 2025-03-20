@@ -127,40 +127,38 @@ export function ModalConfirmUnstake({
               <GridItem>Account Balance</GridItem>
               <GridItem textAlign="right">
                 <Flex gap={1} direction="column">
-                  <span>
-                    {isPendingPositionCollateral || isPendingSnxPrice ? '~' : null}
-                    {!(isPendingPositionCollateral || isPendingSnxPrice) &&
-                    positionCollateral &&
-                    snxPrice
-                      ? `${numbro(wei(positionCollateral).toNumber()).format({
-                          trimMantissa: true,
-                          thousandSeparated: true,
-                          average: true,
-                          mantissa: 2,
-                          spaceSeparated: false,
-                        })} SNX`
-                      : null}
-                  </span>
+                  <Text>
+                    {isPendingPositionCollateral || isPendingSnxPrice
+                      ? '~'
+                      : positionCollateral && snxPrice
+                        ? `${numbro(wei(positionCollateral).toNumber()).format({
+                            trimMantissa: true,
+                            thousandSeparated: true,
+                            average: true,
+                            mantissa: 2,
+                            spaceSeparated: false,
+                          })} SNX`
+                        : null}
+                  </Text>
                   <Text fontWeight="normal" color="gray.500">
-                    {isPendingPositionCollateral || isPendingSnxPrice ? '~' : null}
-                    {!(isPendingPositionCollateral || isPendingSnxPrice) &&
-                    positionCollateral &&
-                    snxPrice
-                      ? `$${numbro(wei(positionCollateral).mul(snxPrice).toNumber()).format({
-                          trimMantissa: true,
-                          thousandSeparated: true,
-                          average: true,
-                          mantissa: 2,
-                          spaceSeparated: false,
-                        })}`
-                      : null}
+                    {isPendingPositionCollateral || isPendingSnxPrice
+                      ? '~'
+                      : positionCollateral && snxPrice
+                        ? `$${numbro(wei(positionCollateral).mul(snxPrice).toNumber()).format({
+                            trimMantissa: true,
+                            thousandSeparated: true,
+                            average: true,
+                            mantissa: 2,
+                            spaceSeparated: false,
+                          })}`
+                        : null}
                   </Text>
                 </Flex>
               </GridItem>
 
               <GridItem>
                 Available to Unstake
-                {locks && locks.length > 0 && (
+                {locks && locks.length > 0 ? (
                   <Tooltip
                     closeDelay={500}
                     openDelay={300}
@@ -172,7 +170,7 @@ export function ModalConfirmUnstake({
                           A portion of your SNX is still in escrow, and will be available to
                           withdraw on the vesting date
                         </Text>
-                        {locks?.map((lock) => (
+                        {locks.map((lock) => (
                           <Flex
                             key={lock.lockExpirationTime.toString()}
                             gap={8}
@@ -204,12 +202,11 @@ export function ModalConfirmUnstake({
                   >
                     <InfoIcon ml={1.5} w="10px" h="10px" />
                   </Tooltip>
-                )}
+                ) : null}
               </GridItem>
               <GridItem textAlign="right">
                 <Flex gap={1} direction="column">
-                  <span>
-                    {}
+                  <Text>
                     {`${numbro(
                       liquidityPosition?.totalDeposited
                         .sub(liquidityPosition?.totalLocked)
@@ -221,7 +218,7 @@ export function ModalConfirmUnstake({
                       mantissa: 2,
                       spaceSeparated: false,
                     })} SNX`}
-                  </span>
+                  </Text>
                   <Text fontWeight="normal" color="gray.500">
                     {isPendingLiquidityPosition || isPendingSnxPrice
                       ? '~'
