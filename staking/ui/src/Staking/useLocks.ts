@@ -2,7 +2,7 @@ import { contractsHash } from '@_/tsHelpers';
 import { type Network, useNetwork, useProviderForChain } from '@_/useBlockchain';
 import { useCoreProxy } from '@_/useCoreProxy';
 import { useQuery } from '@tanstack/react-query';
-import { type BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
 
 export function useLocks(accountId?: string, collateralType?: string, customNetwork?: Network) {
   const { network } = useNetwork();
@@ -23,8 +23,8 @@ export function useLocks(accountId?: string, collateralType?: string, customNetw
       const CoreProxyContract = new ethers.Contract(CoreProxy.address, CoreProxy.abi, provider);
 
       const locks: {
-        amountD18: BigNumber;
-        lockExpirationTime: BigNumber;
+        amountD18: ethers.BigNumber;
+        lockExpirationTime: ethers.BigNumber;
       }[] = await CoreProxyContract.getLocks(accountId, collateralType, 0, 100);
 
       return locks

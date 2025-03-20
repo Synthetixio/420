@@ -24,12 +24,12 @@ import { wei } from '@synthetixio/wei';
 import { formatDuration, intervalToDuration, intlFormat } from 'date-fns';
 import { ethers } from 'ethers';
 import numbro from 'numbro';
-import React, { useState } from 'react';
-import { useLocks } from '../../../lib/useLocks';
+import React from 'react';
 import { useAccountTimeoutWithdraw } from './useAccountTimeoutWithdraw';
 import { useClosePositionPool420 } from './useClosePositionPool420';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
+import { useLocks } from './useLocks';
 import { usePositionCollateral } from './usePositionCollateral';
 import { useRepaymentPenalty } from './useRepaymentPenalty';
 
@@ -43,7 +43,7 @@ export function UnstakeModal({
   const [params] = useParams<HomePageSchemaType>();
   const { data: collateralType } = useCollateralType('SNX');
 
-  const [disclaimerChecked, setDisclaimerChecked] = useState(false);
+  const [disclaimerChecked, setDisclaimerChecked] = React.useState(false);
   const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionPool420();
   const { data: positionCollateral, isPending: isPendingPositionCollateral } =
     usePositionCollateral();

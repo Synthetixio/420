@@ -3,7 +3,7 @@ import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import { formatDuration, intervalToDuration } from 'date-fns';
 import numbro from 'numbro';
-import React, { useState } from 'react';
+import React from 'react';
 import { LoanChart } from './LoanChart';
 import { ModalShare420 } from './ModalShare420';
 import { PanelTvl } from './PanelTvl';
@@ -17,7 +17,6 @@ import { useLoan } from './useLoan';
 import { usePositionCollateral } from './usePositionCollateral';
 
 export function StakingPosition() {
-  const [unstakeOpen, setUnstakeOpen] = useState(false);
   const { data: loanedAmount, isPending: isPendingLoanedAmount } = useCurrentLoanedAmount();
   const { data: loan, isPending: isPendingLoan } = useLoan();
   const { data: positionCollateral, isPending: isPendingPositionCollateral } =
@@ -38,6 +37,8 @@ export function StakingPosition() {
     });
     return formatDuration(duration, { format: ['days', 'hours', 'minutes'] });
   }, [accountTimeoutWithdraw]);
+
+  const [unstakeOpen, setUnstakeOpen] = React.useState(false);
 
   return (
     <>
