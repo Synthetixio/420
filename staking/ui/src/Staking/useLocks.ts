@@ -1,39 +1,39 @@
 import { contractsHash } from '@_/tsHelpers';
-import { type Network, useNetwork, useProviderForChain } from '@_/useBlockchain';
+import { useNetwork, useProviderForChain } from '@_/useBlockchain';
+import type { CollateralType } from '@_/useCollateralTypes';
 import { useCoreProxy } from '@_/useCoreProxy';
 import { useQuery } from '@tanstack/react-query';
 import { ethers } from 'ethers';
 
-export function useLocks(accountId?: string, collateralType?: string, customNetwork?: Network) {
+export function useLocks({
+  accountId,
+  collateralType,
+}: {
+  accountId?: ethers.BigNumber;
+  collateralType?: CollateralType;
+}) {
   const { network } = useNetwork();
-  const targetNetwork = customNetwork || network;
-  const { data: CoreProxy } = useCoreProxy(targetNetwork);
-  const provider = useProviderForChain(targetNetwork);
+  const { data: CoreProxy } = useCoreProxy();
+  const provider = useProviderForChain();
 
   return useQuery({
-    enabled: Boolean(provider && CoreProxy),
+    enabled: Boolean(provider && CoreProxy && accountId && collateralType),
     queryKey: [
-      `${targetNetwork?.id}-${targetNetwork?.preset}`,
-      'Locks',
-      { contractsHash: contractsHash([CoreProxy]), accountId, collateralType },
+      `${network?.id}-${network?.preset}`,
+      'Pool 420',
+      'useLocks',
+      { accountId, collateralType },
+      { contractsHash: contractsHash([CoreProxy]) },
     ],
     queryFn: async () => {
       if (!(provider && CoreProxy && accountId && collateralType)) throw 'OMFG';
-
       const CoreProxyContract = new ethers.Contract(CoreProxy.address, CoreProxy.abi, provider);
-
       const locks: {
         amountD18: ethers.BigNumber;
         lockExpirationTime: ethers.BigNumber;
-      }[] = await CoreProxyContract.getLocks(accountId, collateralType, 0, 100);
+      }[] = await CoreProxyContract.getLocks(accountId, collateralType.tokenAddress, 0, 100);
 
-      return locks
-        .map((lock) => ({
-          timestamp: lock.lockExpirationTime,
-          expirationDate: new Date(lock.lockExpirationTime.toNumber() * 1000),
-          amount: lock.amountD18,
-        }))
-        .sort((a, b) => a.timestamp.toNumber() - b.timestamp.toNumber());
+      return locks;
     },
   });
 }

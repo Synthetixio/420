@@ -22,7 +22,7 @@ export function useAccountTimeoutWithdraw() {
       const [accountTimeoutWithdraw] = await Promise.all([
         CoreProxyContract.getConfigUint(ethers.utils.formatBytes32String('accountTimeoutWithdraw')),
       ]);
-      return accountTimeoutWithdraw.toNumber();
+      return accountTimeoutWithdraw;
     },
   });
 }

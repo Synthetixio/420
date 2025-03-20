@@ -18,3 +18,4 @@ export * from './importTreasuryMarketProxy';
 export * from './importTrustedMulticallForwarder';
 export * from './importUSDProxy';
 export * from './importV2x';
+export * from './importV2xUsd';

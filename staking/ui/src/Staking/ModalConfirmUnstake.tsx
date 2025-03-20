@@ -9,6 +9,7 @@ import {
   Button,
   Checkbox,
   CloseButton,
+  Collapse,
   Flex,
   Grid,
   GridItem,
@@ -26,7 +27,10 @@ import { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
 import { useAccountTimeoutWithdraw } from './useAccountTimeoutWithdraw';
+import { useAccountUnstakingUnlockDate } from './useAccountUnstakingUnlockDate';
+import { useBalanceOfV2xUsd } from './useBalanceOfV2xUsd';
 import { useClosePositionPool420 } from './useClosePositionPool420';
+import { useCountdown } from './useCountdown';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
 import { useLocks } from './useLocks';
@@ -41,6 +45,7 @@ export function ModalConfirmUnstake({
   setIsOpenUnstake: (isOpen: boolean) => void;
 }) {
   const [params] = useParams<HomePageSchemaType>();
+  const accountId = params.accountId ? ethers.BigNumber.from(params.accountId) : undefined;
   const { data: collateralType } = useCollateralType('SNX');
 
   const [disclaimerChecked, setDisclaimerChecked] = React.useState(false);
@@ -52,10 +57,10 @@ export function ModalConfirmUnstake({
   const { data: loan, isPending: isPendingLoan } = useLoan();
   const { data: repaymentPenalty, isPending: isPendingRepaymentPenalty } = useRepaymentPenalty();
   const { data: liquidityPosition, isPending: isPendingLiquidityPosition } = useLiquidityPosition({
-    accountId: params.accountId ? ethers.BigNumber.from(params.accountId) : undefined,
+    accountId,
     collateralType,
   });
-  const { data: locks } = useLocks(params.accountId, collateralType?.address);
+  const { data: locks } = useLocks({ accountId, collateralType });
 
   const { data: accountTimeoutWithdraw } = useAccountTimeoutWithdraw();
   const unlockTimeout = React.useMemo(() => {
@@ -64,7 +69,7 @@ export function ModalConfirmUnstake({
     }
     const duration = intervalToDuration({
       start: new Date(),
-      end: new Date(Date.now() + accountTimeoutWithdraw * 1000),
+      end: new Date(Date.now() + accountTimeoutWithdraw.toNumber() * 1000),
     });
     return formatDuration(duration, { format: ['days', 'hours', 'minutes'] });
   }, [accountTimeoutWithdraw]);
@@ -73,6 +78,24 @@ export function ModalConfirmUnstake({
     setDisclaimerChecked(false);
     setIsOpenUnstake(false);
   }, [setIsOpenUnstake]);
+
+  const { data: accountUnstakingUnlockDate, isLoading: isLoadingAccountUnstakingUnlockDate } =
+    useAccountUnstakingUnlockDate({ accountId });
+  const timeToUnstake = useCountdown({
+    date: accountUnstakingUnlockDate,
+    isLoading: isLoadingAccountUnstakingUnlockDate,
+  });
+
+  const { data: balanceOfV2xUsd } = useBalanceOfV2xUsd();
+  const needsMoreV2xUsd =
+    loanedAmount &&
+    repaymentPenalty &&
+    balanceOfV2xUsd &&
+    loanedAmount.add(repaymentPenalty).gt(balanceOfV2xUsd);
+  const missingV2xUsdAmount =
+    loanedAmount && repaymentPenalty && balanceOfV2xUsd
+      ? loanedAmount.add(repaymentPenalty).sub(balanceOfV2xUsd)
+      : ethers.BigNumber.from(0);
 
   return (
     <Modal size="lg" isOpen={isOpenUnstake} onClose={onClose} closeOnOverlayClick={false}>
@@ -151,18 +174,23 @@ export function ModalConfirmUnstake({
                         </Text>
                         {locks?.map((lock) => (
                           <Flex
-                            key={lock.timestamp.toString()}
+                            key={lock.lockExpirationTime.toString()}
                             gap={8}
                             justifyContent="space-between"
                           >
                             <Text>
-                              {`Vesting date: ${intlFormat(lock.expirationDate, {
-                                year: 'numeric',
-                                month: 'short',
-                                day: 'numeric',
-                              })}`}
+                              {`Vesting date: ${intlFormat(
+                                new Date(lock.lockExpirationTime.toNumber() * 1000),
+                                {
+                                  year: 'numeric',
+                                  month: 'short',
+                                  day: 'numeric',
+                                }
+                              )}`}
                             </Text>
-                            <Text fontWeight={700}>{`${numbro(wei(lock.amount).toNumber()).format({
+                            <Text fontWeight={700}>{`${numbro(
+                              wei(lock.amountD18).toNumber()
+                            ).format({
                               trimMantissa: true,
                               thousandSeparated: true,
                               average: true,
@@ -198,19 +226,19 @@ export function ModalConfirmUnstake({
                     {isPendingLiquidityPosition || isPendingSnxPrice
                       ? '~'
                       : liquidityPosition && snxPrice
-                      ? `$${numbro(
-                          liquidityPosition?.totalDeposited
-                            .sub(liquidityPosition?.totalLocked)
-                            .mul(snxPrice)
-                            .toNumber()
-                        ).format({
-                          trimMantissa: true,
-                          thousandSeparated: true,
-                          average: true,
-                          mantissa: 2,
-                          spaceSeparated: false,
-                        })}`
-                      : null}
+                        ? `$${numbro(
+                            liquidityPosition?.totalDeposited
+                              .sub(liquidityPosition?.totalLocked)
+                              .mul(snxPrice)
+                              .toNumber()
+                          ).format({
+                            trimMantissa: true,
+                            thousandSeparated: true,
+                            average: true,
+                            mantissa: 2,
+                            spaceSeparated: false,
+                          })}`
+                        : null}
                   </Text>
                 </Flex>
               </GridItem>
@@ -229,42 +257,42 @@ export function ModalConfirmUnstake({
                 {isPendingLoanedAmount
                   ? '~'
                   : loanedAmount
-                  ? `$${numbro(wei(loanedAmount).toNumber()).format({
-                      trimMantissa: true,
-                      thousandSeparated: true,
-                      average: true,
-                      mantissa: 2,
-                      spaceSeparated: false,
-                    })}`
-                  : null}
+                    ? `$${numbro(wei(loanedAmount).toNumber()).format({
+                        trimMantissa: true,
+                        thousandSeparated: true,
+                        average: true,
+                        mantissa: 2,
+                        spaceSeparated: false,
+                      })}`
+                    : null}
               </GridItem>
               <GridItem color="gray.500">Debt Burned</GridItem>
               <GridItem color="gray.500" textAlign="right">
                 {isPendingLoanedAmount || isPendingLoan || isPendingSnxPrice
                   ? '~'
                   : loan && loanedAmount
-                  ? `$${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
-                      trimMantissa: true,
-                      thousandSeparated: true,
-                      average: true,
-                      mantissa: 2,
-                      spaceSeparated: false,
-                    })}`
-                  : null}
+                    ? `$${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
+                        trimMantissa: true,
+                        thousandSeparated: true,
+                        average: true,
+                        mantissa: 2,
+                        spaceSeparated: false,
+                      })}`
+                    : null}
               </GridItem>
               <GridItem color="gray.500">Early Withdrawal Penalty</GridItem>
               <GridItem color={repaymentPenalty?.gt(0) ? 'red.300' : 'gray.500'} textAlign="right">
                 {isPendingRepaymentPenalty
                   ? '~'
                   : repaymentPenalty
-                  ? `$${numbro(wei(repaymentPenalty).toNumber()).format({
-                      trimMantissa: true,
-                      thousandSeparated: true,
-                      average: true,
-                      mantissa: 2,
-                      spaceSeparated: false,
-                    })}`
-                  : null}
+                    ? `$${numbro(wei(repaymentPenalty).toNumber()).format({
+                        trimMantissa: true,
+                        thousandSeparated: true,
+                        average: true,
+                        mantissa: 2,
+                        spaceSeparated: false,
+                      })}`
+                    : null}
               </GridItem>
               <GridItem color="gray.50" fontWeight={700}>
                 Total Debt
@@ -273,23 +301,46 @@ export function ModalConfirmUnstake({
                 {isPendingLoanedAmount || isPendingRepaymentPenalty
                   ? '~'
                   : loanedAmount && repaymentPenalty
-                  ? `$${numbro(wei(loanedAmount).add(repaymentPenalty).toNumber()).format({
-                      trimMantissa: true,
-                      thousandSeparated: true,
-                      average: true,
-                      mantissa: 2,
-                      spaceSeparated: false,
-                    })}`
-                  : null}
+                    ? `$${numbro(wei(loanedAmount.add(repaymentPenalty)).toNumber()).format({
+                        trimMantissa: true,
+                        thousandSeparated: true,
+                        average: true,
+                        mantissa: 2,
+                        spaceSeparated: false,
+                      })}`
+                    : null}
               </GridItem>
             </Grid>
 
-            <Alert status="info" colorScheme="cyan" backgroundColor="blue.900" borderRadius="6px">
+            <Alert status="info" borderRadius="6px">
               <AlertIcon />
               <Text fontSize="14px">
                 Withdrawals are locked for {unlockTimeout} after unstaking
               </Text>
             </Alert>
+
+            <Collapse in={Boolean(timeToUnstake)} animateOpacity>
+              <Alert status="warning" borderRadius="6px">
+                <AlertIcon />
+                <Text fontSize="14px">{timeToUnstake} until you can unstake</Text>
+              </Alert>
+            </Collapse>
+
+            <Collapse in={needsMoreV2xUsd} animateOpacity>
+              <Alert status="warning" borderRadius="6px">
+                <AlertIcon />
+                <Text fontSize="14px">
+                  {`You need $${numbro(wei(missingV2xUsdAmount).toNumber()).format({
+                    trimMantissa: true,
+                    thousandSeparated: true,
+                    average: true,
+                    mantissa: 2,
+                    spaceSeparated: false,
+                  })} sUSD in your wallet to pay off your debt and unstake your
+                  position`}
+                </Text>
+              </Alert>
+            </Collapse>
 
             <Checkbox
               fontSize="14px"
@@ -304,7 +355,15 @@ export function ModalConfirmUnstake({
               mb={-2}
               width="100%"
               isLoading={closePosition.isPending}
-              isDisabled={!(isReadyClosePosition && !closePosition.isPending && disclaimerChecked)}
+              isDisabled={
+                !(
+                  isReadyClosePosition &&
+                  !closePosition.isPending &&
+                  disclaimerChecked &&
+                  !needsMoreV2xUsd &&
+                  !timeToUnstake
+                )
+              }
               onClick={() => closePosition.mutateAsync()}
             >
               Repay & Unstake

@@ -10,8 +10,9 @@ import React from 'react';
 import { PanelTvl } from './PanelTvl';
 import clock from './clock.svg';
 import farming from './farming.webp';
+import { useAccountCollateralUnlockDate } from './useAccountCollateralUnlockDate';
+import { useCountdown } from './useCountdown';
 import { useWithdrawCollateral } from './useWithdrawCollateral';
-import { useWithdrawTimer } from './useWithdrawTimer';
 
 export function WithdrawPosition() {
   const [params] = useParams<HomePageSchemaType>();
@@ -24,7 +25,12 @@ export function WithdrawPosition() {
     collateralType,
   });
 
-  const timeToWithdraw = useWithdrawTimer({ accountId });
+  const { data: accountCollateralUnlockDate, isLoading: isLoadingAccountCollateralUnlockDate } =
+    useAccountCollateralUnlockDate({ accountId });
+  const timeToWithdraw = useCountdown({
+    date: accountCollateralUnlockDate,
+    isLoading: isLoadingAccountCollateralUnlockDate,
+  });
 
   const { data: snxPrice, isPending: isPendingSnxPrice } = usePythPrice('SNX');
   const { isReady: isReadyWithdrawCollateral, mutation: withdrawCollateral } =

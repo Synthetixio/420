@@ -215,6 +215,7 @@ __metadata:
     "@_/useTreasuryMarketProxy": "workspace:*"
     "@_/useTrustedMulticallForwarder": "workspace:*"
     "@_/useV2xSynthetix": "workspace:*"
+    "@_/useV2xUsd": "workspace:*"
     "@babel/core": "npm:^7.24.6"
     "@babel/plugin-transform-runtime": "npm:^7.24.6"
     "@babel/preset-env": "npm:^7.24.6"
@@ -586,6 +587,17 @@ __metadata:
 "@_/useV2xSynthetix@workspace:*, @_/useV2xSynthetix@workspace:staking/lib/contracts/useV2xSynthetix":
   version: 0.0.0-use.local
   resolution: "@_/useV2xSynthetix@workspace:staking/lib/contracts/useV2xSynthetix"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/useV2xUsd@workspace:*, @_/useV2xUsd@workspace:staking/lib/contracts/useV2xUsd":
+  version: 0.0.0-use.local
+  resolution: "@_/useV2xUsd@workspace:staking/lib/contracts/useV2xUsd"
   dependencies:
     "@_/contracts": "workspace:*"
     "@_/useBlockchain": "workspace:*"
