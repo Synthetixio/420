@@ -7,7 +7,7 @@ contract Optimism_PositionManager_migratePosition_Test is PositionManagerTest {
     constructor() {
         deployment = "10-main";
         forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
-        forkBlockNumber = 132431079;
+        forkBlockNumber = 133373441;
         initialize();
     }
 
@@ -88,7 +88,7 @@ contract Optimism_PositionManager_migratePosition_Test is PositionManagerTest {
             1000 * snxPrice * 1 ether / targetCratio,
             uint256(CoreProxy.getPositionDebt(accountId, TreasuryMarketProxy.poolId(), address($SNX))),
             0.1 ether,
-            "Virtual debt for $SNX position should be at C-Ratio 200%"
+            "Virtual debt for $SNX position should be at the target C-Ratio (amount * snxPrice / targetCratio)"
         );
         assertEq(
             1000 ether,
