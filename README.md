@@ -125,7 +125,7 @@ export transfer='function transfer(address to, uint256 value) returns (bool)'
 export balanceOf='function balanceOf(address account) view returns (uint256)'
 
 export sUSD=0x57Ab1ec28D129707052df4dF418D58a2D46d5f51
-cast send --unlocked --from $curve $sUSD $transfer $walletAddress 1000ether
+cast send --unlocked --from $curve $sUSD $transfer $walletAddress 50000ether
 cast call $sUSD $balanceOf $walletAddress
 
 export CoreProxy="0xffffffaEff0B96Ea8e4f94b2253f31abdD875847"
@@ -134,4 +134,20 @@ cast rpc anvil_setBalance $CoreProxy $(cast to-unit 1ether)
 export snxUSD="0xb2F30A7C980f052f02563fb518dcc39e6bf38175"
 cast send --unlocked --from $CoreProxy $snxUSD $transfer $walletAddress 1000ether
 cast call $snxUSD $balanceOf $walletAddress
+```
+
+Optimism
+```sh
+export walletAddress=0xc3Cf311e04c1f8C74eCF6a795Ae760dc6312F345
+cast rpc anvil_setBalance $walletAddress $(cast to-unit 1ether)
+
+export whale=0x6d80113e533a2c0fe82eabd35f1875dcea89ea97
+cast rpc anvil_setBalance $whale $(cast to-unit 1ether)
+
+export transfer='function transfer(address to, uint256 value) returns (bool)'
+export balanceOf='function balanceOf(address account) view returns (uint256)'
+
+export sUSD=0x8c6f28f2F1A3C87F0f938b96d27520d9751ec8d9
+cast send --unlocked --from $whale $sUSD $transfer $walletAddress 50000ether
+cast call $sUSD $balanceOf $walletAddress
 ```

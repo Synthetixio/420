@@ -10,8 +10,9 @@ import React from 'react';
 import { PanelTvl } from './PanelTvl';
 import clock from './clock.svg';
 import farming from './farming.webp';
+import { useAccountCollateralUnlockDate } from './useAccountCollateralUnlockDate';
+import { useCountdown } from './useCountdown';
 import { useWithdrawCollateral } from './useWithdrawCollateral';
-import { useWithdrawTimer } from './useWithdrawTimer';
 
 export function WithdrawPosition() {
   const [params] = useParams<HomePageSchemaType>();
@@ -24,7 +25,12 @@ export function WithdrawPosition() {
     collateralType,
   });
 
-  const timeToWithdraw = useWithdrawTimer({ accountId });
+  const { data: accountCollateralUnlockDate, isLoading: isLoadingAccountCollateralUnlockDate } =
+    useAccountCollateralUnlockDate({ accountId });
+  const timeToWithdraw = useCountdown({
+    date: accountCollateralUnlockDate,
+    isLoading: isLoadingAccountCollateralUnlockDate,
+  });
 
   const { data: snxPrice, isPending: isPendingSnxPrice } = usePythPrice('SNX');
   const { isReady: isReadyWithdrawCollateral, mutation: withdrawCollateral } =
@@ -60,6 +66,8 @@ export function WithdrawPosition() {
           direction={{ base: 'column', sm: 'row', lg: 'row', xl: 'row' }}
           flexWrap="wrap"
           gap={6}
+          width="100%"
+          maxWidth="36em"
         >
           <Flex
             order={{ base: 1, sm: 1, lg: 1, xl: 1 }}
@@ -73,7 +81,7 @@ export function WithdrawPosition() {
             justifyContent="space-between"
             h="fit-content"
           >
-            <Flex minWidth="20em" direction="column" gap={3} textAlign="center">
+            <Flex direction="column" gap={3} textAlign="center">
               <Text color="gray.500">Available to Withdraw</Text>
               <Box>
                 <Text color="gray.50" fontSize="1.25em" fontWeight={500}>
@@ -121,7 +129,7 @@ export function WithdrawPosition() {
 
               {timeToWithdraw ? (
                 <Flex
-                  backgroundColor="#ffffff10"
+                  backgroundColor="whiteAlpha.200"
                   py="1"
                   px="3"
                   borderRadius="base"

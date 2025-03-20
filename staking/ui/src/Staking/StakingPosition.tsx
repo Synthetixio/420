@@ -1,16 +1,20 @@
+import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePythPrice } from '@_/usePythPrice';
 import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
-import { formatDuration, intervalToDuration } from 'date-fns';
+import { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
 import { LoanChart } from './LoanChart';
+import { ModalConfirmUnstake } from './ModalConfirmUnstake';
 import { ModalShare420 } from './ModalShare420';
 import { PanelTvl } from './PanelTvl';
+import clock from './clock.svg';
 import farming from './farming.webp';
 import share from './share.svg';
-import { useAccountTimeoutWithdraw } from './useAccountTimeoutWithdraw';
+import { useAccountUnstakingUnlockDate } from './useAccountUnstakingUnlockDate';
 import { useClosePositionPool420 } from './useClosePositionPool420';
+import { useCountdown } from './useCountdown';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
 import { usePositionCollateral } from './usePositionCollateral';
@@ -24,18 +28,17 @@ export function StakingPosition() {
   const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionPool420();
 
   const [isOpenShare, setIsOpenShare] = React.useState(false);
+  const [isOpenUnstake, setIsOpenUnstake] = React.useState(false);
 
-  const { data: accountTimeoutWithdraw } = useAccountTimeoutWithdraw();
-  const unlockTimeout = React.useMemo(() => {
-    if (!accountTimeoutWithdraw) {
-      return undefined;
-    }
-    const duration = intervalToDuration({
-      start: new Date(),
-      end: new Date(Date.now() + accountTimeoutWithdraw * 1000),
-    });
-    return formatDuration(duration, { format: ['days', 'hours', 'minutes'] });
-  }, [accountTimeoutWithdraw]);
+  const [params] = useParams<HomePageSchemaType>();
+  const accountId = params.accountId ? ethers.BigNumber.from(params.accountId) : undefined;
+  const { data: accountUnstakingUnlockDate, isLoading: isLoadingAccountUnstakingUnlockDate } =
+    useAccountUnstakingUnlockDate({ accountId });
+
+  const timeToUnstake = useCountdown({
+    date: accountUnstakingUnlockDate,
+    isLoading: isLoadingAccountUnstakingUnlockDate,
+  });
 
   return (
     <>
@@ -170,23 +173,27 @@ export function StakingPosition() {
                 borderColor="gray.900"
                 color="gray.50"
                 isLoading={closePosition.isPending}
-                isDisabled={!(isReadyClosePosition && !closePosition.isPending)}
-                onClick={() => closePosition.mutateAsync()}
+                isDisabled={!(isReadyClosePosition && !closePosition.isPending && !timeToUnstake)}
+                onClick={() => setIsOpenUnstake(true)}
               >
                 Unstake
               </Button>
-              <Flex
-                backgroundColor="#ffffff10"
-                py="1"
-                px="3"
-                borderRadius="base"
-                gap={0}
-                justifyContent="center"
-              >
-                <Text color="gray.500" fontSize="12px">
-                  Withdrawals are locked for {unlockTimeout} after unstaking
-                </Text>
-              </Flex>
+              {timeToUnstake ? (
+                <Flex
+                  backgroundColor="whiteAlpha.200"
+                  py="1"
+                  px="3"
+                  borderRadius="base"
+                  gap={0}
+                  justifyContent="center"
+                >
+                  <Image mr={2} width="12px" src={clock} alt="Clock" />
+                  <Text
+                    color="gray.500"
+                    fontSize="12px"
+                  >{`${timeToUnstake} until you can unstake`}</Text>
+                </Flex>
+              ) : null}
             </Flex>
           </Flex>
         </Flex>
@@ -221,6 +228,7 @@ export function StakingPosition() {
       </Flex>
 
       <ModalShare420 isOpenShare={isOpenShare} setIsOpenShare={setIsOpenShare} />
+      <ModalConfirmUnstake isOpenUnstake={isOpenUnstake} setIsOpenUnstake={setIsOpenUnstake} />
     </>
   );
 }

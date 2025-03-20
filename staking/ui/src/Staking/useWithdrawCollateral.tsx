@@ -12,7 +12,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';
 import React from 'react';
-import { useWithdrawTimer } from './useWithdrawTimer';
+import { useAccountCollateralUnlockDate } from './useAccountCollateralUnlockDate';
+import { useCountdown } from './useCountdown';
 
 const log = debug('snx:useClosePosition420');
 
@@ -32,7 +33,13 @@ export function useWithdrawCollateral({
   const { data: AccountProxy } = useAccountProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
   const { data: liquidityPosition } = useLiquidityPosition({ accountId, collateralType });
-  const timeToWithdraw = useWithdrawTimer({ accountId });
+
+  const { data: accountCollateralUnlockDate, isLoading: isLoadingAccountCollateralUnlockDate } =
+    useAccountCollateralUnlockDate({ accountId });
+  const timeToWithdraw = useCountdown({
+    date: accountCollateralUnlockDate,
+    isLoading: isLoadingAccountCollateralUnlockDate,
+  });
 
   const isReady =
     accountId &&

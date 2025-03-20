@@ -33,6 +33,7 @@
     "@_/useTreasuryMarketProxy": "workspace:*",
     "@_/useTrustedMulticallForwarder": "workspace:*",
     "@_/useV2xSynthetix": "workspace:*",
+    "@_/useV2xUsd": "workspace:*",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.1",
