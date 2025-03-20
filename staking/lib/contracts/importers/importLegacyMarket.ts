@@ -14,13 +14,6 @@ export async function importLegacyMarket(
       ]);
       return { address: meta.contracts.LegacyMarketProxy, abi };
     }
-    case '11155111-main': {
-      const [{ default: meta }, { default: abi }] = await Promise.all([
-        import('@synthetixio/v3-contracts/11155111-main/meta.json'),
-        import('@synthetixio/v3-contracts/11155111-main/LegacyMarketProxy.readable.json'),
-      ]);
-      return { address: meta.contracts.LegacyMarketProxy, abi };
-    }
     case '10-main': {
       const [{ default: meta }, { default: abi }] = await Promise.all([
         import('@synthetixio/v3-contracts/10-main/meta.json'),

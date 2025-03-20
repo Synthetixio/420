@@ -1,6 +1,6 @@
 import type { ContractErrorType } from '@_/parseContractError';
 import { Button, Collapse, Text } from '@chakra-ui/react';
-import format from 'date-fns/format';
+import { format } from 'date-fns';
 import React from 'react';
 
 const defaultOpen = window?.localStorage?.CONTRACT_ERROR_OPEN === 'true';

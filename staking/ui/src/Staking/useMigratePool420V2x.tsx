@@ -2,7 +2,6 @@ import { ContractError } from '@_/ContractError';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
 import { useLegacyMarket } from '@_/useLegacyMarket';
-import { usePositionManager420 } from '@_/usePositionManager420';
 import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useToast } from '@chakra-ui/react';
@@ -22,7 +21,6 @@ export function useMigratePool420V2x() {
 
   const { data: v2xPosition } = useV2xPosition();
 
-  const { data: PositionManager420 } = usePositionManager420();
   const { data: LegacyMarket } = useLegacyMarket();
   const { data: TreasuryMarketProxy } = useTreasuryMarketProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
@@ -33,7 +31,6 @@ export function useMigratePool420V2x() {
     provider &&
     signer &&
     TrustedMulticallForwarder &&
-    PositionManager420 &&
     TreasuryMarketProxy &&
     LegacyMarket &&
     targetCRatio &&
@@ -42,7 +39,7 @@ export function useMigratePool420V2x() {
     (v2xPosition.cRatio.lte(0) || v2xPosition.cRatio.gte(targetCRatio)) &&
     true;
 
-  const toast = useToast({ isClosable: true, duration: 9000 });
+  const toast = useToast({ isClosable: true, duration: 60_000 });
   const errorParser = useContractErrorParser();
 
   const queryClient = useQueryClient();
@@ -106,17 +103,11 @@ export function useMigratePool420V2x() {
       await Promise.all(
         [
           //
-          'New Pool',
+          'Pool 420',
           //
           'Accounts',
-          'PriceUpdates',
           'LiquidityPosition',
           'LiquidityPositions',
-          'TokenBalance',
-          'SynthBalances',
-          'EthBalance',
-          'Allowance',
-          'TransferableSynthetix',
           'AccountCollateralUnlockDate',
         ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
       );
@@ -126,7 +117,6 @@ export function useMigratePool420V2x() {
         title: 'Success',
         description: 'Migration completed.',
         status: 'success',
-        duration: 5000,
         variant: 'left-accent',
       });
     },

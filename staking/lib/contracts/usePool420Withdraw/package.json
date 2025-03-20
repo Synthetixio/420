@@ -1,13 +1,12 @@
 {
-  "name": "@_/useCreateAccount",
+  "name": "@_/usePool420Withdraw",
   "private": true,
   "main": "index.ts",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "dependencies": {
+    "@_/contracts": "workspace:*",
     "@_/useBlockchain": "workspace:*",
-    "@_/useCoreProxy": "workspace:*",
     "@tanstack/react-query": "^5.8.3",
-    "debug": "^4.4.0",
-    "ethers": "^5.7.2"
+    "react": "^18.2.0"
   }
 }

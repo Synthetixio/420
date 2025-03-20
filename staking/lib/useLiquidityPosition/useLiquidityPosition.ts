@@ -32,7 +32,7 @@ export const useLiquidityPosition = ({
   accountId,
   collateralType,
 }: {
-  accountId?: string;
+  accountId?: ethers.BigNumber;
   collateralType?: CollateralType;
 }) => {
   const { data: CoreProxy } = useCoreProxy();

@@ -24,7 +24,7 @@ __metadata:
   dependencies:
     "@_/parseContractError": "workspace:*"
     "@chakra-ui/react": "npm:^2.8.2"
-    date-fns: "npm:^2.30.0"
+    date-fns: "npm:^4.1.0"
     react: "npm:^18.2.0"
   languageName: unknown
   linkType: soft
@@ -132,7 +132,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@_/formatters@workspace:staking/lib/formatters"
   dependencies:
-    date-fns: "npm:^2.30.0"
+    date-fns: "npm:^4.1.0"
   languageName: unknown
   linkType: soft
 
@@ -204,10 +204,11 @@ __metadata:
     "@_/useCollateralTypes": "workspace:*"
     "@_/useContractErrorParser": "workspace:*"
     "@_/useCoreProxy": "workspace:*"
-    "@_/useCreateAccount": "workspace:*"
     "@_/useLegacyMarket": "workspace:*"
     "@_/useLiquidityPosition": "workspace:*"
     "@_/useParams": "workspace:*"
+    "@_/usePool420": "workspace:*"
+    "@_/usePool420Withdraw": "workspace:*"
     "@_/usePositionManager420": "workspace:*"
     "@_/usePythPrice": "workspace:*"
     "@_/useSNX": "workspace:*"
@@ -248,7 +249,7 @@ __metadata:
     core-js: "npm:^3.33.2"
     crypto-browserify: "npm:^3.12.0"
     css-loader: "npm:^6.8.1"
-    date-fns: "npm:^2.30.0"
+    date-fns: "npm:^4.1.0"
     debug: "npm:^4.4.0"
     dotenv: "npm:^16.4.3"
     ethers: "npm:^5.7.2"
@@ -297,38 +298,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/useAccountAvailableCollateral@workspace:staking/lib/useAccountAvailableCollateral":
-  version: 0.0.0-use.local
-  resolution: "@_/useAccountAvailableCollateral@workspace:staking/lib/useAccountAvailableCollateral"
-  dependencies:
-    "@_/tsHelpers": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@_/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/useAccountCollateral@workspace:staking/lib/useAccountCollateral":
-  version: 0.0.0-use.local
-  resolution: "@_/useAccountCollateral@workspace:staking/lib/useAccountCollateral"
-  dependencies:
-    "@_/tsHelpers": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@_/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
 "@_/useAccountPermissions@workspace:*, @_/useAccountPermissions@workspace:staking/lib/useAccountInfo":
   version: 0.0.0-use.local
   resolution: "@_/useAccountPermissions@workspace:staking/lib/useAccountInfo"
@@ -358,7 +327,7 @@ __metadata:
   dependencies:
     "@_/tsHelpers": "workspace:*"
     "@_/useBlockchain": "workspace:*"
-    "@_/usePositionManager420": "workspace:*"
+    "@_/usePool420": "workspace:*"
     "@tanstack/react-query": "npm:^5.8.3"
     debug: "npm:^4.4.0"
     ethers: "npm:^5.7.2"
@@ -445,18 +414,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/useCreateAccount@workspace:*, @_/useCreateAccount@workspace:staking/lib/useCreateAccount":
-  version: 0.0.0-use.local
-  resolution: "@_/useCreateAccount@workspace:staking/lib/useCreateAccount"
-  dependencies:
-    "@_/useBlockchain": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
 "@_/useLegacyMarket@workspace:*, @_/useLegacyMarket@workspace:staking/lib/contracts/useLegacyMarket":
   version: 0.0.0-use.local
   resolution: "@_/useLegacyMarket@workspace:staking/lib/contracts/useLegacyMarket"
@@ -525,18 +482,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/usePositionDebt@workspace:staking/lib/usePositionDebt":
+"@_/usePool420@workspace:*, @_/usePool420@workspace:staking/lib/contracts/usePool420":
   version: 0.0.0-use.local
-  resolution: "@_/usePositionDebt@workspace:staking/lib/usePositionDebt"
+  resolution: "@_/usePool420@workspace:staking/lib/contracts/usePool420"
   dependencies:
-    "@_/constants": "workspace:*"
-    "@_/tsHelpers": "workspace:*"
+    "@_/contracts": "workspace:*"
     "@_/useBlockchain": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@_/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
     "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
+    react: "npm:^18.2.0"
+  languageName: unknown
+  linkType: soft
+
+"@_/usePool420Withdraw@workspace:*, @_/usePool420Withdraw@workspace:staking/lib/contracts/usePool420Withdraw":
+  version: 0.0.0-use.local
+  resolution: "@_/usePool420Withdraw@workspace:staking/lib/contracts/usePool420Withdraw"
+  dependencies:
+    "@_/contracts": "workspace:*"
+    "@_/useBlockchain": "workspace:*"
+    "@tanstack/react-query": "npm:^5.8.3"
     react: "npm:^18.2.0"
   languageName: unknown
   linkType: soft
@@ -628,15 +591,6 @@ __metadata:
     "@_/useBlockchain": "workspace:*"
     "@tanstack/react-query": "npm:^5.8.3"
     react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/validatePosition@workspace:staking/lib/validatePosition":
-  version: 0.0.0-use.local
-  resolution: "@_/validatePosition@workspace:staking/lib/validatePosition"
-  dependencies:
-    "@_/calculations": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
   languageName: unknown
   linkType: soft
 
@@ -2101,7 +2055,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.23.4, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.23.4, @babel/runtime@npm:^7.8.4":
   version: 7.24.5
   resolution: "@babel/runtime@npm:7.24.5"
   dependencies:
@@ -9656,12 +9610,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.30.0":
-  version: 2.30.0
-  resolution: "date-fns@npm:2.30.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.21.0"
-  checksum: 10/70b3e8ea7aaaaeaa2cd80bd889622a4bcb5d8028b4de9162cbcda359db06e16ff6e9309e54eead5341e71031818497f19aaf9839c87d1aba1e27bb4796e758a9
+"date-fns@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: 10/d5f6e9de5bbc52310f786099e18609289ed5e30af60a71e0646784c8185ddd1d0eebcf7c96b7faaaefc4a8366f3a3a4244d099b6d0866ee2bec80d1361e64342
   languageName: node
   linkType: hard
 

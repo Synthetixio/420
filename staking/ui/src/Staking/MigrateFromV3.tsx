@@ -17,6 +17,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { ethers } from 'ethers';
 import React from 'react';
 import { LayoutWithImage } from './LayoutWithImage';
 import { MigrateStats } from './MigrateStats';
@@ -34,7 +35,7 @@ export function MigrateFromV3() {
 
   const [params] = useParams<HomePageSchemaType>();
   const { data: liquidityPosition } = useLiquidityPosition({
-    accountId: params.accountId,
+    accountId: params.accountId ? ethers.BigNumber.from(params.accountId) : undefined,
     collateralType,
   });
 

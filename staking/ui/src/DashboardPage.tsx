@@ -3,6 +3,7 @@ import { useCollateralType } from '@_/useCollateralTypes';
 import { useLiquidityPosition } from '@_/useLiquidityPosition';
 import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { Flex, Heading, Text } from '@chakra-ui/react';
+import { ethers } from 'ethers';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { ChangeNetwork } from './Staking/ChangeNetwork';
@@ -13,6 +14,7 @@ import { Loading } from './Staking/Loading';
 import { MigrateFromV2x } from './Staking/MigrateFromV2x';
 import { MigrateFromV3 } from './Staking/MigrateFromV3';
 import { StakingPosition } from './Staking/StakingPosition';
+import { WithdrawPosition } from './Staking/WithdrawPosition';
 import { usePositionCollateral as usePool420PositionCollateral } from './Staking/usePositionCollateral';
 import { useV2xPosition } from './Staking/useV2xPosition';
 
@@ -20,7 +22,7 @@ export function DashboardPage() {
   const [params] = useParams<HomePageSchemaType>();
   const { data: collateralType, isPending: isPendingCollateralType } = useCollateralType('SNX');
   const { data: liquidityPosition, isPending: isPendingLiquidityPosition } = useLiquidityPosition({
-    accountId: params.accountId,
+    accountId: params.accountId ? ethers.BigNumber.from(params.accountId) : undefined,
     collateralType,
   });
   const { data: pool420PositionCollateral, isPending: isPendingPool420PositionCollateral } =
@@ -41,6 +43,7 @@ export function DashboardPage() {
   const hasV2xPosition = v2xPosition?.debt.gt(0);
   const hasV3Position = liquidityPosition?.collateralAmount.gt(0);
   const hasV3Debt = liquidityPosition?.debt.gt(0);
+  const hasAvailableCollateral = liquidityPosition?.availableCollateral.gt(0);
 
   // Only show POL position even if user has other v3 positions on the same account
   const hasStakingPosition = pool420PositionCollateral?.gt(0);
@@ -97,7 +100,8 @@ export function DashboardPage() {
             !isPending &&
             !hasV2xPosition &&
             !hasV3Position &&
-            !hasStakingPosition) ? (
+            !hasStakingPosition &&
+            !hasAvailableCollateral) ? (
             <EmptyPosition />
           ) : null}
 
@@ -148,6 +152,20 @@ export function DashboardPage() {
           ) : null}
           {params.showAll || (activeWallet && network && !isPending && hasStakingPosition) ? (
             <StakingPosition />
+          ) : null}
+
+          {params.showAll ? (
+            <Heading mt={16} color="red.500">
+              State {step++}. Pool 420 existing position
+            </Heading>
+          ) : null}
+          {params.showAll ||
+          (activeWallet &&
+            network &&
+            !isPending &&
+            !hasStakingPosition &&
+            hasAvailableCollateral) ? (
+            <WithdrawPosition />
           ) : null}
         </Flex>
       </Flex>

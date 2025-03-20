@@ -4,6 +4,6 @@
   "main": "index.ts",
   "version": "0.0.0",
   "dependencies": {
-    "date-fns": "^2.30.0"
+    "date-fns": "^4.1.0"
   }
 }

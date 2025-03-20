@@ -24,7 +24,7 @@ export function useAccountAvailableCollateral() {
   return useQuery({
     queryKey: [
       `${network?.id}-${network?.preset}`,
-      'New Pool',
+      'Pool 420',
       'accountAvailableCollateral',
       { accountId, collateralAddress },
       { contractsHash: contractsHash([CoreProxy]) },

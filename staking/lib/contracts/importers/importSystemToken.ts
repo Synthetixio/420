@@ -18,39 +18,9 @@ export async function importSystemToken(
       ]);
       return systemToken;
     }
-    case '11155111-main': {
-      const [{ default: systemToken }] = await Promise.all([
-        import('@synthetixio/v3-contracts/11155111-main/systemToken.json'),
-      ]);
-      return systemToken;
-    }
     case '10-main': {
       const [{ default: systemToken }] = await Promise.all([
         import('@synthetixio/v3-contracts/10-main/systemToken.json'),
-      ]);
-      return systemToken;
-    }
-    case '8453-andromeda': {
-      const [{ default: systemToken }] = await Promise.all([
-        import('@synthetixio/v3-contracts/8453-andromeda/systemToken.json'),
-      ]);
-      return systemToken;
-    }
-    case '84532-andromeda': {
-      const [{ default: systemToken }] = await Promise.all([
-        import('@synthetixio/v3-contracts/84532-andromeda/systemToken.json'),
-      ]);
-      return systemToken;
-    }
-    case '42161-main': {
-      const [{ default: systemToken }] = await Promise.all([
-        import('@synthetixio/v3-contracts/42161-main/systemToken.json'),
-      ]);
-      return systemToken;
-    }
-    case '421614-main': {
-      const [{ default: systemToken }] = await Promise.all([
-        import('@synthetixio/v3-contracts/421614-main/systemToken.json'),
       ]);
       return systemToken;
     }
