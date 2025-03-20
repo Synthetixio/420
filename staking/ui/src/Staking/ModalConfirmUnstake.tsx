@@ -33,12 +33,12 @@ import { useLocks } from './useLocks';
 import { usePositionCollateral } from './usePositionCollateral';
 import { useRepaymentPenalty } from './useRepaymentPenalty';
 
-export function UnstakeModal({
-  isOpen,
-  setIsOpen,
+export function ModalConfirmUnstake({
+  isOpenUnstake,
+  setIsOpenUnstake,
 }: {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  isOpenUnstake: boolean;
+  setIsOpenUnstake: (isOpen: boolean) => void;
 }) {
   const [params] = useParams<HomePageSchemaType>();
   const { data: collateralType } = useCollateralType('SNX');
@@ -48,9 +48,9 @@ export function UnstakeModal({
   const { data: positionCollateral, isPending: isPendingPositionCollateral } =
     usePositionCollateral();
   const { data: snxPrice, isPending: isPendingSnxPrice } = usePythPrice('SNX');
-  const { data: loanedAmount } = useCurrentLoanedAmount();
-  const { data: loan } = useLoan();
-  const { data: repaymentPenalty } = useRepaymentPenalty();
+  const { data: loanedAmount, isPending: isPendingLoanedAmount } = useCurrentLoanedAmount();
+  const { data: loan, isPending: isPendingLoan } = useLoan();
+  const { data: repaymentPenalty, isPending: isPendingRepaymentPenalty } = useRepaymentPenalty();
   const { data: liquidityPosition, isPending: isPendingLiquidityPosition } = useLiquidityPosition({
     accountId: params.accountId ? ethers.BigNumber.from(params.accountId) : undefined,
     collateralType,
@@ -69,15 +69,26 @@ export function UnstakeModal({
     return formatDuration(duration, { format: ['days', 'hours', 'minutes'] });
   }, [accountTimeoutWithdraw]);
 
+  const onClose = React.useCallback(() => {
+    setDisclaimerChecked(false);
+    setIsOpenUnstake(false);
+  }, [setIsOpenUnstake]);
+
   return (
-    <Modal size="lg" isOpen={isOpen} onClose={() => setIsOpen(false)} closeOnOverlayClick={false}>
+    <Modal size="lg" isOpen={isOpenUnstake} onClose={onClose} closeOnOverlayClick={false}>
       <ModalOverlay />
-      <ModalContent mt="100px" borderWidth="1px" borderColor="gray.900" bg="navy.900" color="white">
+      <ModalContent
+        mt="100px"
+        borderWidth="1px"
+        borderColor="gray.900"
+        bg="navy.900"
+        color="gray.50"
+      >
         <Flex justifyContent="space-between" p={6} alignItems="center">
           <Heading fontSize="18px" lineHeight="28px">
             Unstake
           </Heading>
-          <CloseButton onClick={() => setIsOpen(false)} color="gray" />
+          <CloseButton onClick={onClose} color="gray.500" />
         </Flex>
         <ModalBody pt={0} pb={6}>
           <Flex direction="column" gap={6}>
@@ -128,25 +139,28 @@ export function UnstakeModal({
                 Available to Unstake
                 {locks && locks.length > 0 && (
                   <Tooltip
+                    closeDelay={500}
+                    openDelay={300}
+                    hasArrow={true}
+                    offset={[0, 10]}
                     label={
                       <Flex py={2} direction="column" gap={2.5}>
-                        <Text color="gray.500" fontWeight={400} textAlign="center">
-                          A portion of your SNX is still in escrow
+                        <Text color="gray.500" fontWeight={400} textAlign="left">
+                          A portion of your SNX is still in escrow, and will be available to
+                          withdraw on the vesting date
                         </Text>
                         {locks?.map((lock) => (
                           <Flex
                             key={lock.timestamp.toString()}
                             gap={8}
-                            alignItems="center"
                             justifyContent="space-between"
                           >
                             <Text>
-                              Vesting date:{' '}
-                              {intlFormat(lock.expirationDate, {
+                              {`Vesting date: ${intlFormat(lock.expirationDate, {
                                 year: 'numeric',
                                 month: 'short',
                                 day: 'numeric',
-                              })}
+                              })}`}
                             </Text>
                             <Text fontWeight={700}>{`${numbro(wei(lock.amount).toNumber()).format({
                               trimMantissa: true,
@@ -181,23 +195,22 @@ export function UnstakeModal({
                     })} SNX`}
                   </span>
                   <Text fontWeight="normal" color="gray.500">
-                    {isPendingLiquidityPosition || isPendingSnxPrice ? '~' : null}
-                    {!(isPendingLiquidityPosition || isPendingSnxPrice) &&
-                    liquidityPosition &&
-                    snxPrice
-                      ? `$${numbro(
-                          liquidityPosition?.totalDeposited
-                            .sub(liquidityPosition?.totalLocked)
-                            .mul(snxPrice)
-                            .toNumber()
-                        ).format({
-                          trimMantissa: true,
-                          thousandSeparated: true,
-                          average: true,
-                          mantissa: 2,
-                          spaceSeparated: false,
-                        })}`
-                      : null}
+                    {isPendingLiquidityPosition || isPendingSnxPrice
+                      ? '~'
+                      : liquidityPosition && snxPrice
+                        ? `$${numbro(
+                            liquidityPosition?.totalDeposited
+                              .sub(liquidityPosition?.totalLocked)
+                              .mul(snxPrice)
+                              .toNumber()
+                          ).format({
+                            trimMantissa: true,
+                            thousandSeparated: true,
+                            average: true,
+                            mantissa: 2,
+                            spaceSeparated: false,
+                          })}`
+                        : null}
                   </Text>
                 </Flex>
               </GridItem>
@@ -213,51 +226,61 @@ export function UnstakeModal({
             >
               <GridItem color="gray.500">Current Debt</GridItem>
               <GridItem color="gray.500" textAlign="right">
-                {loanedAmount &&
-                  numbro(wei(loanedAmount).toNumber()).format({
-                    trimMantissa: true,
-                    thousandSeparated: true,
-                    average: true,
-                    mantissa: 2,
-                    spaceSeparated: false,
-                  })}
+                {isPendingLoanedAmount
+                  ? '~'
+                  : loanedAmount
+                    ? `$${numbro(wei(loanedAmount).toNumber()).format({
+                        trimMantissa: true,
+                        thousandSeparated: true,
+                        average: true,
+                        mantissa: 2,
+                        spaceSeparated: false,
+                      })}`
+                    : null}
               </GridItem>
               <GridItem color="gray.500">Debt Burned</GridItem>
               <GridItem color="gray.500" textAlign="right">
-                {loan && loanedAmount
-                  ? `$${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
-                      trimMantissa: true,
-                      thousandSeparated: true,
-                      average: true,
-                      mantissa: 2,
-                      spaceSeparated: false,
-                    })}`
-                  : null}
+                {isPendingLoanedAmount || isPendingLoan || isPendingSnxPrice
+                  ? '~'
+                  : loan && loanedAmount
+                    ? `$${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
+                        trimMantissa: true,
+                        thousandSeparated: true,
+                        average: true,
+                        mantissa: 2,
+                        spaceSeparated: false,
+                      })}`
+                    : null}
               </GridItem>
               <GridItem color="gray.500">Early Withdrawal Penalty</GridItem>
-              <GridItem color="red.300" textAlign="right">
-                {repaymentPenalty &&
-                  numbro(wei(repaymentPenalty).toNumber()).format({
-                    trimMantissa: true,
-                    thousandSeparated: true,
-                    average: true,
-                    mantissa: 2,
-                    spaceSeparated: false,
-                  })}
+              <GridItem color={repaymentPenalty?.gt(0) ? 'red.300' : 'gray.500'} textAlign="right">
+                {isPendingRepaymentPenalty
+                  ? '~'
+                  : repaymentPenalty
+                    ? `$${numbro(wei(repaymentPenalty).toNumber()).format({
+                        trimMantissa: true,
+                        thousandSeparated: true,
+                        average: true,
+                        mantissa: 2,
+                        spaceSeparated: false,
+                      })}`
+                    : null}
               </GridItem>
-              <GridItem color="white" fontWeight={700}>
+              <GridItem color="gray.50" fontWeight={700}>
                 Total Debt
               </GridItem>
-              <GridItem textAlign="right" color="white" fontWeight={700}>
-                {loanedAmount &&
-                  repaymentPenalty &&
-                  numbro(wei(loanedAmount).add(repaymentPenalty).toNumber()).format({
-                    trimMantissa: true,
-                    thousandSeparated: true,
-                    average: true,
-                    mantissa: 2,
-                    spaceSeparated: false,
-                  })}
+              <GridItem textAlign="right" color="gray.50" fontWeight={700}>
+                {isPendingLoanedAmount || isPendingRepaymentPenalty
+                  ? '~'
+                  : loanedAmount && repaymentPenalty
+                    ? `$${numbro(wei(loanedAmount).add(repaymentPenalty).toNumber()).format({
+                        trimMantissa: true,
+                        thousandSeparated: true,
+                        average: true,
+                        mantissa: 2,
+                        spaceSeparated: false,
+                      })}`
+                    : null}
               </GridItem>
             </Grid>
 
@@ -292,7 +315,7 @@ export function UnstakeModal({
               variant="outline"
               borderColor="gray.900"
               color="gray.50"
-              onClick={() => setIsOpen(false)}
+              onClick={onClose}
             >
               Cancel
             </Button>

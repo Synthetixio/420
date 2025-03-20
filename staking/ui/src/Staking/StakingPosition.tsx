@@ -5,9 +5,9 @@ import { formatDuration, intervalToDuration } from 'date-fns';
 import numbro from 'numbro';
 import React from 'react';
 import { LoanChart } from './LoanChart';
+import { ModalConfirmUnstake } from './ModalConfirmUnstake';
 import { ModalShare420 } from './ModalShare420';
 import { PanelTvl } from './PanelTvl';
-import { UnstakeModal } from './UnstakeModal';
 import farming from './farming.webp';
 import share from './share.svg';
 import { useAccountTimeoutWithdraw } from './useAccountTimeoutWithdraw';
@@ -24,8 +24,6 @@ export function StakingPosition() {
   const { data: snxPrice, isPending: isPendingSnxPrice } = usePythPrice('SNX');
   const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionPool420();
 
-  const [isOpenShare, setIsOpenShare] = React.useState(false);
-
   const { data: accountTimeoutWithdraw } = useAccountTimeoutWithdraw();
   const unlockTimeout = React.useMemo(() => {
     if (!accountTimeoutWithdraw) {
@@ -38,11 +36,11 @@ export function StakingPosition() {
     return formatDuration(duration, { format: ['days', 'hours', 'minutes'] });
   }, [accountTimeoutWithdraw]);
 
-  const [unstakeOpen, setUnstakeOpen] = React.useState(false);
+  const [isOpenShare, setIsOpenShare] = React.useState(false);
+  const [isOpenUnstake, setIsOpenUnstake] = React.useState(false);
 
   return (
     <>
-      <UnstakeModal isOpen={unstakeOpen} setIsOpen={setUnstakeOpen} />
       <Flex
         direction="column"
         borderColor="gray.900"
@@ -175,7 +173,7 @@ export function StakingPosition() {
                 color="gray.50"
                 isLoading={closePosition.isPending}
                 isDisabled={!(isReadyClosePosition && !closePosition.isPending)}
-                onClick={() => setUnstakeOpen(true)}
+                onClick={() => setIsOpenUnstake(true)}
               >
                 Unstake
               </Button>
@@ -225,6 +223,7 @@ export function StakingPosition() {
       </Flex>
 
       <ModalShare420 isOpenShare={isOpenShare} setIsOpenShare={setIsOpenShare} />
+      <ModalConfirmUnstake isOpenUnstake={isOpenUnstake} setIsOpenUnstake={setIsOpenUnstake} />
     </>
   );
 }
