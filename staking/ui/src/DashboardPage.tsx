@@ -2,7 +2,7 @@ import { useNetwork, useWallet } from '@_/useBlockchain';
 import { useCollateralType } from '@_/useCollateralTypes';
 import { useLiquidityPosition } from '@_/useLiquidityPosition';
 import { type HomePageSchemaType, useParams } from '@_/useParams';
-import { Flex, Heading, Text } from '@chakra-ui/react';
+import { Alert, AlertIcon, Collapse, Flex, Heading, Text } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 import React from 'react';
 import { Helmet } from 'react-helmet';
@@ -57,6 +57,15 @@ export function DashboardPage() {
       </Helmet>
       <Flex pt={8} direction="column" mb={16} width="100%">
         <Flex direction="column" gap={3}>
+          <Collapse in={hasV2xPosition || hasV3Debt} animateOpacity unmountOnExit>
+            <Alert status="warning" mb="6">
+              <AlertIcon />
+              <Text>
+                From March 24th the liquidation ratio is being raised on legacy positions. Migrate
+                to 420 Pool immediately.
+              </Text>
+            </Alert>
+          </Collapse>
           <Heading color="gray.50" maxWidth="40rem" fontSize={['2rem', '3rem']} lineHeight="120%">
             Deposit
           </Heading>
