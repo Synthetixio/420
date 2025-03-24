@@ -22,10 +22,11 @@ import {
   Tooltip,
 } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
-import { formatDuration, intervalToDuration, intlFormat } from 'date-fns';
+import { formatDuration, intervalToDuration } from 'date-fns';
 import { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
+import { EscrowTable } from './EscrowTable';
 import { useAccountTimeoutWithdraw } from './useAccountTimeoutWithdraw';
 import { useAccountUnstakingUnlockDate } from './useAccountUnstakingUnlockDate';
 import { useBalanceOfV2xUsd } from './useBalanceOfV2xUsd';
@@ -33,7 +34,6 @@ import { useClosePositionPool420 } from './useClosePositionPool420';
 import { useCountdown } from './useCountdown';
 import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
 import { useLoan } from './useLoan';
-import { useLocks } from './useLocks';
 import { usePositionCollateral } from './usePositionCollateral';
 import { useRepaymentPenalty } from './useRepaymentPenalty';
 
@@ -60,7 +60,6 @@ export function ModalConfirmUnstake({
     accountId,
     collateralType,
   });
-  const { data: locks } = useLocks({ accountId, collateralType });
 
   const { data: accountTimeoutWithdraw } = useAccountTimeoutWithdraw();
   const unlockTimeout = React.useMemo(() => {
@@ -158,7 +157,7 @@ export function ModalConfirmUnstake({
 
               <GridItem>
                 Available to Unstake
-                {locks && locks.length > 0 ? (
+                {liquidityPosition?.totalLocked.gt(0) ? (
                   <Tooltip
                     closeDelay={500}
                     openDelay={300}
@@ -170,33 +169,7 @@ export function ModalConfirmUnstake({
                           A portion of your SNX is still in escrow, and will be available to
                           withdraw on the vesting date
                         </Text>
-                        {locks.map((lock) => (
-                          <Flex
-                            key={lock.lockExpirationTime.toString()}
-                            gap={8}
-                            justifyContent="space-between"
-                          >
-                            <Text>
-                              {`Vesting date: ${intlFormat(
-                                new Date(lock.lockExpirationTime.toNumber() * 1000),
-                                {
-                                  year: 'numeric',
-                                  month: 'short',
-                                  day: 'numeric',
-                                }
-                              )}`}
-                            </Text>
-                            <Text fontWeight={700}>{`${numbro(
-                              wei(lock.amountD18).toNumber()
-                            ).format({
-                              trimMantissa: true,
-                              thousandSeparated: true,
-                              average: true,
-                              mantissa: 2,
-                              spaceSeparated: false,
-                            })} SNX`}</Text>
-                          </Flex>
-                        ))}
+                        <EscrowTable />
                       </Flex>
                     }
                   >

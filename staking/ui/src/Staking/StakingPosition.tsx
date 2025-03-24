@@ -1,10 +1,12 @@
 import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePythPrice } from '@_/usePythPrice';
-import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { InfoIcon } from '@chakra-ui/icons';
+import { Box, Button, Flex, Heading, Image, Text, Tooltip } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
+import { EscrowedSNX } from './EscrowedSNX';
 import { LoanChart } from './LoanChart';
 import { ModalConfirmUnstake } from './ModalConfirmUnstake';
 import { ModalShare420 } from './ModalShare420';
@@ -135,8 +137,31 @@ export function StakingPosition() {
             justifyContent="space-between"
             h="fit-content"
           >
-            <Flex minWidth="120px" direction="column" gap={3} textAlign="center">
-              <Text color="gray.500">Account Balance</Text>
+            <Flex
+              minWidth="120px"
+              direction="column"
+              gap={3}
+              textAlign="center"
+              alignItems="center"
+            >
+              <Text color="gray.500">
+                Account Balance
+                <Tooltip
+                  closeDelay={500}
+                  openDelay={300}
+                  hasArrow={true}
+                  offset={[0, 10]}
+                  label={
+                    <Flex py={2} direction="column" gap={2.5}>
+                      <Text color="gray.500" fontWeight={400} textAlign="left">
+                        Account Balance consists of staked SNX and escrowed SNX
+                      </Text>
+                    </Flex>
+                  }
+                >
+                  <InfoIcon ml={1.5} h="14px" verticalAlign="baseline" />
+                </Tooltip>
+              </Text>
               <Box>
                 <Text color="gray.50" fontSize="1.25em" fontWeight={500}>
                   {isPendingPositionCollateral || isPendingSnxPrice ? '~' : null}
@@ -153,20 +178,22 @@ export function StakingPosition() {
                     : null}
                 </Text>
                 <Text color="gray.500" fontSize="1.0em">
-                  {isPendingPositionCollateral || isPendingSnxPrice ? '~' : null}
-                  {!(isPendingPositionCollateral || isPendingSnxPrice) &&
-                  positionCollateral &&
-                  snxPrice
-                    ? `$${numbro(wei(positionCollateral).mul(snxPrice).toNumber()).format({
-                        trimMantissa: true,
-                        thousandSeparated: true,
-                        average: true,
-                        mantissa: 2,
-                        spaceSeparated: false,
-                      })}`
-                    : null}
+                  {isPendingPositionCollateral || isPendingSnxPrice
+                    ? '~'
+                    : positionCollateral && snxPrice
+                      ? `$${numbro(wei(positionCollateral).mul(snxPrice).toNumber()).format({
+                          trimMantissa: true,
+                          thousandSeparated: true,
+                          average: true,
+                          mantissa: 2,
+                          spaceSeparated: false,
+                        })}`
+                      : null}
                 </Text>
               </Box>
+
+              <EscrowedSNX />
+
               <Button
                 width="100%"
                 variant="outline"
@@ -208,7 +235,7 @@ export function StakingPosition() {
             display={{ base: 'none', sm: 'flex' }}
             borderColor="gray.900"
             borderWidth="1px"
-            borderRadius="6px"
+            borderRadius="base"
             bg="navy.700"
             p={{ base: 4, sm: 10 }}
           >
