@@ -2,16 +2,15 @@ import { useCollateralType } from '@_/useCollateralTypes';
 import { useLiquidityPosition } from '@_/useLiquidityPosition';
 import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePythPrice } from '@_/usePythPrice';
-import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Image, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
+import { EscrowedSNX } from './EscrowedSNX';
 import { LayoutWithImage } from './LayoutWithImage';
-import { PanelTvl } from './PanelTvl';
 import clock from './clock.svg';
 import coin from './coin.webp';
-import farming from './farming.webp';
 import { useAccountCollateralUnlockDate } from './useAccountCollateralUnlockDate';
 import { useCountdown } from './useCountdown';
 import { useWithdrawCollateral } from './useWithdrawCollateral';
@@ -53,40 +52,41 @@ export function WithdrawPosition() {
         </Text>
       )}
       Content={() => (
-        <Flex direction="column" gap={3} textAlign="center">
+        <Flex direction="column" gap={3} textAlign="center" alignItems="center">
           <Text color="gray.500">Available to Withdraw</Text>
           <Box>
             <Text color="gray.50" fontSize="1.25em" fontWeight={500}>
-              {isPendingLiquidityPosition || isPendingSnxPrice ? '~' : null}
-              {!(isPendingLiquidityPosition || isPendingSnxPrice) &&
-              liquidityPosition?.availableCollateral &&
-              snxPrice
-                ? `${numbro(wei(liquidityPosition?.availableCollateral).toNumber()).format({
-                    trimMantissa: true,
-                    thousandSeparated: true,
-                    average: true,
-                    mantissa: 2,
-                    spaceSeparated: false,
-                  })} SNX`
-                : null}
+              {isPendingLiquidityPosition || isPendingSnxPrice
+                ? '~'
+                : liquidityPosition?.availableCollateral && snxPrice
+                  ? `${numbro(wei(liquidityPosition?.availableCollateral).toNumber()).format({
+                      trimMantissa: true,
+                      thousandSeparated: true,
+                      average: true,
+                      mantissa: 2,
+                      spaceSeparated: false,
+                    })} SNX`
+                  : null}
             </Text>
             <Text color="gray.500" fontSize="1.0em">
-              {isPendingLiquidityPosition || isPendingSnxPrice ? '~' : null}
-              {!(isPendingLiquidityPosition || isPendingSnxPrice) &&
-              liquidityPosition?.availableCollateral &&
-              snxPrice
-                ? `$${numbro(
-                    wei(liquidityPosition?.availableCollateral).mul(snxPrice).toNumber()
-                  ).format({
-                    trimMantissa: true,
-                    thousandSeparated: true,
-                    average: true,
-                    mantissa: 2,
-                    spaceSeparated: false,
-                  })}`
-                : null}
+              {isPendingLiquidityPosition || isPendingSnxPrice
+                ? '~'
+                : liquidityPosition?.availableCollateral && snxPrice
+                  ? `$${numbro(
+                      wei(liquidityPosition?.availableCollateral).mul(snxPrice).toNumber()
+                    ).format({
+                      trimMantissa: true,
+                      thousandSeparated: true,
+                      average: true,
+                      mantissa: 2,
+                      spaceSeparated: false,
+                    })}`
+                  : null}
             </Text>
           </Box>
+
+          <EscrowedSNX />
+
           <Button
             width="100%"
             variant="outline"
@@ -107,6 +107,7 @@ export function WithdrawPosition() {
               borderRadius="base"
               gap={0}
               justifyContent="center"
+              width="100%"
             >
               <Image mr={2} width="12px" src={clock} alt="Clock" />
               <Text

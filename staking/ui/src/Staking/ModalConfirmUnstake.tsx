@@ -26,7 +26,7 @@ import { formatDuration, intervalToDuration } from 'date-fns';
 import { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
-import { TooltipLocks } from './TooltipLocks';
+import { EscrowTable } from './EscrowTable';
 import { useAccountTimeoutWithdraw } from './useAccountTimeoutWithdraw';
 import { useAccountUnstakingUnlockDate } from './useAccountUnstakingUnlockDate';
 import { useBalanceOfV2xUsd } from './useBalanceOfV2xUsd';
@@ -163,7 +163,15 @@ export function ModalConfirmUnstake({
                     openDelay={300}
                     hasArrow={true}
                     offset={[0, 10]}
-                    label={<TooltipLocks />}
+                    label={
+                      <Flex py={2} direction="column" gap={2.5}>
+                        <Text color="gray.500" fontWeight={400} textAlign="left">
+                          A portion of your SNX is still in escrow, and will be available to
+                          withdraw on the vesting date
+                        </Text>
+                        <EscrowTable />
+                      </Flex>
+                    }
                   >
                     <InfoIcon ml={1.5} w="10px" h="10px" />
                   </Tooltip>
