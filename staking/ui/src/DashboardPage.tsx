@@ -18,6 +18,38 @@ import { WithdrawPosition } from './Staking/WithdrawPosition';
 import { usePositionCollateral as usePool420PositionCollateral } from './Staking/usePositionCollateral';
 import { useV2xPosition } from './Staking/useV2xPosition';
 
+function HeaderDeposit() {
+  return (
+    <Flex direction="column" gap={3}>
+      <Heading color="gray.50" maxWidth="40rem" fontSize={['2rem', '3rem']} lineHeight="120%">
+        Deposit
+      </Heading>
+
+      <Flex justifyContent="space-between" alignItems="center" gap={6} flexWrap="wrap">
+        <Text color="gray.500" fontSize="1rem" lineHeight={6}>
+          Deposit into the 420 Pool to start earning yield
+        </Text>
+      </Flex>
+    </Flex>
+  );
+}
+
+function Header420() {
+  return (
+    <Flex direction="column" gap={3}>
+      <Heading color="gray.50" maxWidth="40rem" fontSize={['2rem', '3rem']} lineHeight="120%">
+        420 Pool
+      </Heading>
+
+      <Flex justifyContent="space-between" alignItems="center" gap={6} flexWrap="wrap">
+        <Text color="gray.500" fontSize="1rem" lineHeight={6}>
+          Simple SNX staking for maximum yield
+        </Text>
+      </Flex>
+    </Flex>
+  );
+}
+
 export function DashboardPage() {
   const [params] = useParams<HomePageSchemaType>();
   const { data: collateralType, isPending: isPendingCollateralType } = useCollateralType('SNX');
@@ -56,47 +88,52 @@ export function DashboardPage() {
         <meta name="description" content="Synthetix 420 Pool" />
       </Helmet>
       <Flex pt={8} direction="column" mb={16} width="100%">
-        <Flex direction="column" gap={3}>
-          <Collapse in={hasV2xPosition || hasV3Debt} animateOpacity unmountOnExit>
-            <Alert status="warning" mb="6">
-              <AlertIcon />
-              <Text>
-                From March 24th the liquidation ratio is being raised on legacy positions. Migrate
-                to 420 Pool immediately.
-              </Text>
-            </Alert>
-          </Collapse>
-          <Heading color="gray.50" maxWidth="40rem" fontSize={['2rem', '3rem']} lineHeight="120%">
-            Deposit
-          </Heading>
-
-          <Flex justifyContent="space-between" alignItems="center" gap={6} flexWrap="wrap">
-            <Text color="gray.500" fontSize="1rem" lineHeight={6}>
-              Deposit into the 420 Pool to start earning yield
+        <Collapse in={hasV2xPosition || hasV3Debt} animateOpacity unmountOnExit>
+          <Alert status="warning" mb="6">
+            <AlertIcon />
+            <Text>
+              From March 24th the liquidation ratio is being raised on legacy positions. Migrate to
+              420 Pool immediately.
             </Text>
-          </Flex>
-        </Flex>
+          </Alert>
+        </Collapse>
+
         <Flex direction="column" mt={6} gap={6}>
           {params.showAll ? (
             <Heading mt={16} color="red.500">
               State {step++}. Loading
             </Heading>
           ) : null}
-          {params.showAll || isPending ? <Loading /> : null}
+          {params.showAll || isPending ? (
+            <>
+              <HeaderDeposit />
+              <Loading />
+            </>
+          ) : null}
 
           {params.showAll ? (
             <Heading mt={16} color="red.500">
               State {step++}. Not connected
             </Heading>
           ) : null}
-          {params.showAll || !activeWallet ? <ConnectYourWallet /> : null}
+          {params.showAll || !activeWallet ? (
+            <>
+              <HeaderDeposit />
+              <ConnectYourWallet />
+            </>
+          ) : null}
 
           {params.showAll ? (
             <Heading mt={16} color="red.500">
               State {step++}. Connected wallet, wrong network
             </Heading>
           ) : null}
-          {params.showAll || (activeWallet && !network) ? <ChangeNetwork /> : null}
+          {params.showAll || (activeWallet && !network) ? (
+            <>
+              <HeaderDeposit />
+              <ChangeNetwork />
+            </>
+          ) : null}
 
           {params.showAll ? (
             <Heading mt={16} color="red.500">
@@ -111,7 +148,10 @@ export function DashboardPage() {
             !hasV3Position &&
             !hasStakingPosition &&
             !hasAvailableCollateral) ? (
-            <EmptyPosition />
+            <>
+              <HeaderDeposit />
+              <EmptyPosition />
+            </>
           ) : null}
 
           {params.showAll ? (
@@ -126,7 +166,10 @@ export function DashboardPage() {
             hasV3Position &&
             !hasV3Debt &&
             !hasStakingPosition) ? (
-            <EmptyV3Debt />
+            <>
+              <HeaderDeposit />
+              <EmptyV3Debt />
+            </>
           ) : null}
 
           {params.showAll ? (
@@ -135,7 +178,10 @@ export function DashboardPage() {
             </Heading>
           ) : null}
           {params.showAll || (activeWallet && network && !isPending && hasV2xPosition) ? (
-            <MigrateFromV2x />
+            <>
+              <HeaderDeposit />
+              <MigrateFromV2x />
+            </>
           ) : null}
 
           {params.showAll ? (
@@ -151,7 +197,10 @@ export function DashboardPage() {
             hasV3Debt &&
             // We cannot migrate account if there is already POL position on same account
             !hasStakingPosition) ? (
-            <MigrateFromV3 />
+            <>
+              <HeaderDeposit />
+              <MigrateFromV3 />
+            </>
           ) : null}
 
           {params.showAll ? (
@@ -160,7 +209,10 @@ export function DashboardPage() {
             </Heading>
           ) : null}
           {params.showAll || (activeWallet && network && !isPending && hasStakingPosition) ? (
-            <StakingPosition />
+            <>
+              <Header420 />
+              <StakingPosition />
+            </>
           ) : null}
 
           {params.showAll ? (
@@ -174,7 +226,10 @@ export function DashboardPage() {
             !isPending &&
             !hasStakingPosition &&
             hasAvailableCollateral) ? (
-            <WithdrawPosition />
+            <>
+              <Header420 />
+              <WithdrawPosition />
+            </>
           ) : null}
         </Flex>
       </Flex>
