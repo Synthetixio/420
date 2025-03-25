@@ -7,7 +7,7 @@ contract Mainnet_PositionManager_migratePosition_Test is PositionManagerTest {
     constructor() {
         deployment = "1-main";
         forkUrl = vm.envString("RPC_MAINNET");
-        forkBlockNumber = 21921167;
+        forkBlockNumber = 22043658;
         initialize();
     }
 
@@ -46,7 +46,6 @@ contract Mainnet_PositionManager_migratePosition_Test is PositionManagerTest {
             CoreProxy.getPositionCollateralRatio(accountId, oldPoolId, address($SNX)),
             "C-Ratio should be exactly 500%"
         );
-        CoreProxy.getPositionDebt(accountId, oldPoolId, address($SNX));
         uint256 debtAmount = 1000 * snxPrice / 5;
         assertApproxEqAbs(
             debtAmount, uint256(CoreProxy.getPositionDebt(accountId, oldPoolId, address($SNX))), 0.1 ether
@@ -88,7 +87,7 @@ contract Mainnet_PositionManager_migratePosition_Test is PositionManagerTest {
             1000 * snxPrice * 1 ether / targetCratio,
             uint256(CoreProxy.getPositionDebt(accountId, TreasuryMarketProxy.poolId(), address($SNX))),
             0.1 ether,
-            "Virtual debt for $SNX position should be at C-Ratio 200%"
+            "Virtual debt for $SNX position should be at target C-Ratio"
         );
         assertEq(
             1000 ether,
