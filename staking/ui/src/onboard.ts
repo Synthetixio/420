@@ -17,6 +17,7 @@ export const chains: ChainWithDecimalId[] = [MAINNET, OPTIMISM].map((network) =>
 }));
 
 export const onboard = init({
+  theme: 'dark',
   connect: {
     autoConnectLastWallet: true,
     autoConnectAllPreviousWallet: true,
