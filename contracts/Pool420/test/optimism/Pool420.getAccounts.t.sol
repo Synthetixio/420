@@ -6,7 +6,7 @@ contract Optimism_Pool420_getAccounts_Test is Pool420Test {
     constructor() {
         deployment = "10-main";
         forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
-        forkBlockNumber = 133373441;
+        forkBlockNumber = 133634421;
         initialize();
     }
 
@@ -29,7 +29,7 @@ contract Optimism_Pool420_getAccounts_Test is Pool420Test {
         assertEq(ALICE, AccountProxy.ownerOf(ACCOUNT_ID_3));
 
         vm.prank(ALICE);
-        uint128[] memory accounts = pool420.getAccounts();
+        uint128[] memory accounts = pool420.getAccounts(ALICE);
 
         assertEq(accounts.length, 3);
         assertEq(accounts[0], ACCOUNT_ID_1);
@@ -41,7 +41,7 @@ contract Optimism_Pool420_getAccounts_Test is Pool420Test {
         address ALICE = vm.addr(0xA11CE);
 
         vm.prank(ALICE);
-        uint128[] memory accounts = pool420.getAccounts();
+        uint128[] memory accounts = pool420.getAccounts(ALICE);
 
         assertEq(accounts.length, 0);
     }

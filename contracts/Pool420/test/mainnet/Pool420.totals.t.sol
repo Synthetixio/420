@@ -6,7 +6,7 @@ contract Mainnet_Pool420_totals_Test is Pool420Test {
     constructor() {
         deployment = "1-main";
         forkUrl = vm.envString("RPC_MAINNET");
-        forkBlockNumber = 22030934;
+        forkBlockNumber = 22120630;
         initialize();
     }
 
@@ -25,12 +25,24 @@ contract Mainnet_Pool420_totals_Test is Pool420Test {
         _setupPosition(300 ether);
         _setupPosition(600 ether);
 
-        uint128[] memory accounts = pool420.getAccounts();
-        assertEq(accounts.length, 3, "should have 3 accounts created");
-
-        uint256 loanedAmount = 1000 * snxPrice / 5;
-
-        assertEq(1000 ether, pool420.getTotalDeposit(), "should have combined deposit of 1000 SNX");
-        assertEq(loanedAmount, pool420.getTotalLoan(), "should have combined loan amount of (1000 * snxPrice / 5)");
+        uint128[] memory accounts = pool420.getAccounts(ALICE);
+        assertEq(
+            //
+            3,
+            accounts.length,
+            "should have 3 accounts created"
+        );
+        assertEq(
+            //
+            1000 ether,
+            pool420.getTotalDeposit(ALICE),
+            "should have combined deposit of 1000 SNX"
+        );
+        assertEq(
+            //
+            1000 * snxPrice / 5,
+            pool420.getTotalLoan(ALICE),
+            "should have combined loan amount of (1000 * snxPrice / 5)"
+        );
     }
 }
