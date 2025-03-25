@@ -45,13 +45,13 @@ contract Pool420 {
     }
 
     /**
-     * @notice Retrieves the list of account IDs associated with the caller
-     * @dev Uses the ERC2771Context to get the correct sender address for meta-transactions
-     * @return accountIds An array containing all account IDs owned by the caller
+     * @notice Retrieves the list of account IDs associated with the specified wallet address
+     * @dev Loops through the tokens owned by the wallet address to gather account IDs
+     * @param walletAddress The address of the wallet whose account IDs are being retrieved
+     * @return accountIds An array containing all account IDs owned by the specified wallet address
      */
-    function getAccounts() public view returns (uint128[] memory accountIds) {
-        address msgSender = ERC2771Context._msgSender();
-        uint256 numberOfAccountTokens = AccountProxy.balanceOf(msgSender);
+    function getAccounts(address walletAddress) public view returns (uint128[] memory accountIds) {
+        uint256 numberOfAccountTokens = AccountProxy.balanceOf(walletAddress);
         if (numberOfAccountTokens == 0) {
             return new uint128[](0);
         }
@@ -60,7 +60,7 @@ contract Pool420 {
             // Retrieve the token/account ID at the index
             uint256 accountId = AccountProxy.tokenOfOwnerByIndex(
                 //
-                msgSender,
+                walletAddress,
                 i
             );
             accountIds[i] = uint128(accountId); // Downcast to uint128, assuming IDs fit within uint128
@@ -69,12 +69,13 @@ contract Pool420 {
     }
 
     /**
-     * @notice Retrieves the total deposit amount of SNX collateral across all accounts owned by the caller
-     * @dev Iterates through all accounts owned by the caller and sums up their collateral in the specified pool
-     * @return totalDeposit The total amount of SNX collateral deposited across all caller-owned accounts
+     * @notice Retrieves the total deposit amount of SNX collateral across all accounts owned by the specified wallet address
+     * @dev Iterates through all accounts owned by the specified wallet address and sums up their collateral in the specified pool
+     * @param walletAddress The address of the wallet whose SNX collateral deposits are being calculated
+     * @return totalDeposit The total amount of SNX collateral deposited across all accounts owned by the specified wallet address
      */
-    function getTotalDeposit() public view returns (uint256 totalDeposit) {
-        uint128[] memory accountIds = getAccounts();
+    function getTotalDeposit(address walletAddress) public view returns (uint256 totalDeposit) {
+        uint128[] memory accountIds = getAccounts(walletAddress);
         totalDeposit = 0;
         uint128 poolId = TreasuryMarketProxy.poolId();
         address $SNX = V2xResolver.getAddress("ProxySynthetix");
@@ -84,15 +85,59 @@ contract Pool420 {
     }
 
     /**
-     * @notice Retrieves the total loan amount across all accounts owned by the caller
-     * @dev Iterates through all accounts owned by the caller and sums up their loaned amounts
-     * @return totalLoan The total loan amount across all caller-owned accounts
+     * @notice Retrieves the total loan amount across all accounts owned by the specified wallet address
+     * @dev Iterates through all accounts owned by the specified wallet address and sums up their loaned amounts
+     * @param walletAddress The address of the wallet whose loan amounts are being calculated
+     * @return totalLoan The total loan amount across all accounts owned by the specified wallet address
      */
-    function getTotalLoan() public view returns (uint256 totalLoan) {
-        uint128[] memory accountIds = getAccounts();
+    function getTotalLoan(address walletAddress) public view returns (uint256 totalLoan) {
+        uint128[] memory accountIds = getAccounts(walletAddress);
         totalLoan = 0;
         for (uint256 i = 0; i < accountIds.length; i++) {
             totalLoan = totalLoan + TreasuryMarketProxy.loanedAmount(accountIds[i]);
         }
+    }
+
+    /**
+     * @notice Retrieves all positions for accounts owned by the specified wallet address
+     * @dev Aggregates information about each account, including loan details and collateral details
+     * @param walletAddress The address of the wallet whose account positions are being retrieved
+     * @return positions An array of `Position` structs representing the positions of the wallet's accounts
+     */
+    function getPositions(address walletAddress) public view returns (Position[] memory positions) {
+        uint128[] memory accountIds = getAccounts(walletAddress);
+        uint128 poolId = TreasuryMarketProxy.poolId();
+        address $SNX = V2xResolver.getAddress("ProxySynthetix");
+
+        positions = new Position[](accountIds.length);
+
+        uint256 collateralPrice = CoreProxy.getCollateralPrice($SNX);
+        for (uint256 i = 0; i < accountIds.length; i++) {
+            (uint64 startTime, uint32 power, uint32 duration, uint128 loanAmount) =
+                TreasuryMarketProxy.loans(accountIds[i]);
+            uint256 collateralAmount = CoreProxy.getPositionCollateral(accountIds[i], poolId, $SNX);
+            uint256 collateralValue = collateralPrice * collateralAmount / 1e18;
+            positions[i] = Position({
+                accountId: accountIds[i],
+                loanAmount: loanAmount,
+                loanStartTime: startTime,
+                loanDuration: duration,
+                loanDecayPower: power,
+                collateralAmount: collateralAmount,
+                collateralPrice: collateralPrice,
+                collateralValue: collateralValue
+            });
+        }
+    }
+
+    struct Position {
+        uint128 accountId;
+        uint128 loanAmount;
+        uint64 loanStartTime;
+        uint32 loanDuration;
+        uint32 loanDecayPower;
+        uint256 collateralAmount;
+        uint256 collateralPrice;
+        uint256 collateralValue;
     }
 }
