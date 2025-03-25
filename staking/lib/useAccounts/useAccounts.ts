@@ -26,7 +26,7 @@ export function useAccounts() {
       if (!(signer && walletAddress && Pool420)) throw 'OMFG';
 
       const Pool420Contract = new ethers.Contract(Pool420.address, Pool420.abi, signer);
-      const accountsIds = await Pool420Contract.getAccounts();
+      const accountsIds = await Pool420Contract.getAccounts(walletAddress);
       log('accountsIds', accountsIds);
       return accountsIds;
     },

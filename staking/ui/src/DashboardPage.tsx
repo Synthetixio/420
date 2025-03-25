@@ -1,9 +1,6 @@
 import { useNetwork, useWallet } from '@_/useBlockchain';
-import { useCollateralType } from '@_/useCollateralTypes';
-import { useLiquidityPosition } from '@_/useLiquidityPosition';
 import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { Alert, AlertIcon, Collapse, Flex, Heading, Text } from '@chakra-ui/react';
-import { ethers } from 'ethers';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { ChangeNetwork } from './Staking/ChangeNetwork';
@@ -15,7 +12,9 @@ import { MigrateFromV2x } from './Staking/MigrateFromV2x';
 import { MigrateFromV3 } from './Staking/MigrateFromV3';
 import { StakingPosition } from './Staking/StakingPosition';
 import { WithdrawPosition } from './Staking/WithdrawPosition';
-import { usePositionCollateral as usePool420PositionCollateral } from './Staking/usePositionCollateral';
+import { useBalances } from './Staking/useBalances';
+import { useLiquidityPositions } from './Staking/useLiquidityPositions';
+import { usePositions } from './Staking/usePositions';
 import { useV2xPosition } from './Staking/useV2xPosition';
 
 function HeaderDeposit() {
@@ -52,33 +51,33 @@ function Header420() {
 
 export function DashboardPage() {
   const [params] = useParams<HomePageSchemaType>();
-  const { data: collateralType, isPending: isPendingCollateralType } = useCollateralType('SNX');
-  const { data: liquidityPosition, isPending: isPendingLiquidityPosition } = useLiquidityPosition({
-    accountId: params.accountId ? ethers.BigNumber.from(params.accountId) : undefined,
-    collateralType,
-  });
-  const { data: pool420PositionCollateral, isPending: isPendingPool420PositionCollateral } =
-    usePool420PositionCollateral();
+  const { data: balances, isPending: isPendingBalances } = useBalances();
+  const { data: positions, isPending: isPendingPositions } = usePositions();
+  const { data: liquidityPositions, isPending: isPendingLiquidityPositions } =
+    useLiquidityPositions();
   const { data: v2xPosition, isPending: isPendingV2xPosition } = useV2xPosition();
-
   const { activeWallet } = useWallet();
-
   const { network } = useNetwork();
 
   const isPending =
     activeWallet &&
     network &&
-    (isPendingCollateralType ||
-      (params.accountId && isPendingLiquidityPosition) ||
-      (params.accountId && isPendingPool420PositionCollateral) ||
+    (isPendingPositions ||
+      isPendingBalances ||
+      isPendingLiquidityPositions ||
       isPendingV2xPosition);
-  const hasV2xPosition = v2xPosition?.debt.gt(0);
-  const hasV3Position = liquidityPosition?.collateralAmount.gt(0);
-  const hasV3Debt = liquidityPosition?.debt.gt(0);
-  const hasAvailableCollateral = liquidityPosition?.availableCollateral.gt(0);
 
-  // Only show POL position even if user has other v3 positions on the same account
-  const hasStakingPosition = pool420PositionCollateral?.gt(0);
+  const hasV2xPosition = v2xPosition?.debt.gt(0);
+  const hasV3Position = liquidityPositions?.some((liquidityPosition) =>
+    liquidityPosition.collateralAmount.gt(0)
+  );
+  const hasV3Debt = liquidityPositions?.some((liquidityPosition) =>
+    liquidityPosition.debtAmount.gt(0)
+  );
+  const hasAvailableCollateral = balances?.some((balance) => balance.collateralAvailable.gt(0));
+
+  // Only show 420 position even if user has other v3 positions on the same account
+  const hasStakingPosition = positions?.some((position) => position.collateralAmount.gt(0));
 
   let step = 1;
   return (
