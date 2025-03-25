@@ -17,7 +17,7 @@ export function useTargetCRatio() {
     queryKey: [
       `${network?.id}-${network?.preset}`,
       'Pool 420',
-      'targetCRatio',
+      'useTargetCRatio',
       { contractsHash: contractsHash([TreasuryMarketProxy]) },
     ],
     enabled: Boolean(network && provider && TreasuryMarketProxy),
