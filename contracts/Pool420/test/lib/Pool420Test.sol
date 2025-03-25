@@ -153,6 +153,17 @@ contract Pool420Test is Test {
         TreasuryMarketProxy.saddle(accountId);
     }
 
+    function _setupPosition(uint256 $SNXAmount, uint128 poolId) internal returns (uint128 accountId) {
+        // 1. Create new v3 account for the user
+        accountId = CoreProxy.createAccount();
+
+        // 2. Delegate $SNXAmount to the Pool
+        _increasePosition(accountId, $SNXAmount, poolId);
+
+        // 3. Mint maximum possible amount of $snxUSD against $SNX position in the SC pool
+        _maxMint(accountId, poolId);
+    }
+
     function _maxMint(uint128 accountId, uint128 poolId) internal returns (uint256 mintable$snxUSD) {
         PoolCollateralConfiguration.Data memory poolCollateralConfig =
             CoreProxy.getPoolCollateralConfiguration(poolId, address($SNX));
