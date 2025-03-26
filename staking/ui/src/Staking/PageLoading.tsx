@@ -4,7 +4,7 @@ import { LayoutWithImage } from './LayoutWithImage';
 import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
 import burn from './burn.webp';
 
-export function Loading() {
+export function PageLoading() {
   return (
     <LayoutWithImage
       imageSrc={burn}

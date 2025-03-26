@@ -24,7 +24,7 @@ import coinburn from './coinburn.svg';
 import { useMigratePool420V2x } from './useMigratePool420V2x';
 import { useV2xPosition } from './useV2xPosition';
 
-export function MigrateFromV2x() {
+export function PageMigrateFromV2x() {
   const [isOpenMigrate, setIsOpenMigrate] = React.useState(false);
   const { isReady: isReadyMigrate } = useMigratePool420V2x();
   const { data: v2xPosition } = useV2xPosition();

@@ -9,11 +9,14 @@ const log = debug('snx:usePositions');
 
 export type Position = {
   accountId: ethers.BigNumber;
-  loanAmount: ethers.BigNumber;
-  loanStartTime: number;
+  loan: ethers.BigNumber;
+  burn: ethers.BigNumber;
+  penalty: ethers.BigNumber;
+  collateral: ethers.BigNumber;
+  initialLoan: ethers.BigNumber;
+  loanStartTime: ethers.BigNumber;
   loanDuration: number;
   loanDecayPower: number;
-  collateralAmount: ethers.BigNumber;
   collateralPrice: ethers.BigNumber;
 };
 
@@ -24,7 +27,7 @@ export function usePositions() {
   const walletAddress = activeWallet?.address;
   const { data: Pool420 } = usePool420();
 
-  return useQuery({
+  return useQuery<Position[], Error>({
     queryKey: [
       `${network?.id}-${network?.preset}`,
       'Pool 420',
@@ -33,18 +36,21 @@ export function usePositions() {
       { contractsHash: contractsHash([Pool420]) },
     ],
     enabled: Boolean(signer && walletAddress && Pool420),
-    queryFn: async (): Promise<Position[]> => {
+    queryFn: async () => {
       if (!(signer && walletAddress && Pool420)) throw 'OMFG';
 
       const Pool420Contract = new ethers.Contract(Pool420.address, Pool420.abi, signer);
       const positionsRaw = await Pool420Contract.getPositions(walletAddress);
       const positions = positionsRaw.map((position: Position) => ({
         accountId: position.accountId,
-        loanAmount: position.loanAmount,
+        loan: position.loan,
+        burn: position.burn,
+        penalty: position.penalty,
+        collateral: position.collateral,
+        initialLoan: position.initialLoan,
         loanStartTime: position.loanStartTime,
         loanDuration: position.loanDuration,
         loanDecayPower: position.loanDecayPower,
-        collateralAmount: position.collateralAmount,
         collateralPrice: position.collateralPrice,
       }));
       log('positions', positions);

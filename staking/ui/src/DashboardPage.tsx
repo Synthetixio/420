@@ -3,15 +3,15 @@ import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { Alert, AlertIcon, Collapse, Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { ChangeNetwork } from './Staking/ChangeNetwork';
-import { ConnectYourWallet } from './Staking/ConnectYourWallet';
-import { EmptyPosition } from './Staking/EmptyPosition';
-import { EmptyV3Debt } from './Staking/EmptyV3Debt';
-import { Loading } from './Staking/Loading';
-import { MigrateFromV2x } from './Staking/MigrateFromV2x';
-import { MigrateFromV3 } from './Staking/MigrateFromV3';
-import { StakingPosition } from './Staking/StakingPosition';
-import { WithdrawPosition } from './Staking/WithdrawPosition';
+import { PageChangeNetwork } from './Staking/PageChangeNetwork';
+import { PageConnectYourWallet } from './Staking/PageConnectYourWallet';
+import { PageEmptyPosition } from './Staking/PageEmptyPosition';
+import { PageEmptyV3Debt } from './Staking/PageEmptyV3Debt';
+import { PageLoading } from './Staking/PageLoading';
+import { PageMigrateFromV2x } from './Staking/PageMigrateFromV2x';
+import { PageMigrateFromV3 } from './Staking/PageMigrateFromV3';
+import { PagePool420Position } from './Staking/PagePool420Position';
+import { PageWithdrawPosition } from './Staking/PageWithdrawPosition';
 import { useBalances } from './Staking/useBalances';
 import { useLiquidityPositions } from './Staking/useLiquidityPositions';
 import { usePositions } from './Staking/usePositions';
@@ -69,15 +69,13 @@ export function DashboardPage() {
 
   const hasV2xPosition = v2xPosition?.debt.gt(0);
   const hasV3Position = liquidityPositions?.some((liquidityPosition) =>
-    liquidityPosition.collateralAmount.gt(0)
+    liquidityPosition.collateral.gt(0)
   );
-  const hasV3Debt = liquidityPositions?.some((liquidityPosition) =>
-    liquidityPosition.debtAmount.gt(0)
-  );
+  const hasV3Debt = liquidityPositions?.some((liquidityPosition) => liquidityPosition.debt.gt(0));
   const hasAvailableCollateral = balances?.some((balance) => balance.collateralAvailable.gt(0));
 
   // Only show 420 position even if user has other v3 positions on the same account
-  const hasStakingPosition = positions?.some((position) => position.collateralAmount.gt(0));
+  const hasStakingPosition = positions?.some((position) => position.collateral.gt(0));
 
   let step = 1;
   return (
@@ -106,7 +104,7 @@ export function DashboardPage() {
           {params.showAll || isPending ? (
             <>
               <HeaderDeposit />
-              <Loading />
+              <PageLoading />
             </>
           ) : null}
 
@@ -118,7 +116,7 @@ export function DashboardPage() {
           {params.showAll || !activeWallet ? (
             <>
               <HeaderDeposit />
-              <ConnectYourWallet />
+              <PageConnectYourWallet />
             </>
           ) : null}
 
@@ -130,7 +128,7 @@ export function DashboardPage() {
           {params.showAll || (activeWallet && !network) ? (
             <>
               <HeaderDeposit />
-              <ChangeNetwork />
+              <PageChangeNetwork />
             </>
           ) : null}
 
@@ -149,7 +147,7 @@ export function DashboardPage() {
             !hasAvailableCollateral) ? (
             <>
               <HeaderDeposit />
-              <EmptyPosition />
+              <PageEmptyPosition />
             </>
           ) : null}
 
@@ -167,7 +165,7 @@ export function DashboardPage() {
             !hasStakingPosition) ? (
             <>
               <HeaderDeposit />
-              <EmptyV3Debt />
+              <PageEmptyV3Debt />
             </>
           ) : null}
 
@@ -179,7 +177,7 @@ export function DashboardPage() {
           {params.showAll || (activeWallet && network && !isPending && hasV2xPosition) ? (
             <>
               <HeaderDeposit />
-              <MigrateFromV2x />
+              <PageMigrateFromV2x />
             </>
           ) : null}
 
@@ -198,7 +196,7 @@ export function DashboardPage() {
             !hasStakingPosition) ? (
             <>
               <HeaderDeposit />
-              <MigrateFromV3 />
+              <PageMigrateFromV3 />
             </>
           ) : null}
 
@@ -210,13 +208,13 @@ export function DashboardPage() {
           {params.showAll || (activeWallet && network && !isPending && hasStakingPosition) ? (
             <>
               <Header420 />
-              <StakingPosition />
+              <PagePool420Position />
             </>
           ) : null}
 
           {params.showAll ? (
             <Heading mt={16} color="red.500">
-              State {step++}. Pool 420 existing position
+              State {step++}. Pool 420 withdraw
             </Heading>
           ) : null}
           {params.showAll ||
@@ -227,7 +225,7 @@ export function DashboardPage() {
             hasAvailableCollateral) ? (
             <>
               <Header420 />
-              <WithdrawPosition />
+              <PageWithdrawPosition />
             </>
           ) : null}
         </Flex>

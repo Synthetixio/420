@@ -7,7 +7,7 @@ import { LayoutWithImage } from './LayoutWithImage';
 import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
 import burn from './burn.webp';
 
-export function ChangeNetwork() {
+export function PageChangeNetwork() {
   return (
     <LayoutWithImage
       imageSrc={burn}

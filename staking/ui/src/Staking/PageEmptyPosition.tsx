@@ -6,7 +6,7 @@ import { ButtonStake } from './ButtonStake';
 import { LayoutWithImage } from './LayoutWithImage';
 import coin from './coin.webp';
 
-export function EmptyPosition() {
+export function PageEmptyPosition() {
   return (
     <LayoutWithImage
       imageSrc={coin}

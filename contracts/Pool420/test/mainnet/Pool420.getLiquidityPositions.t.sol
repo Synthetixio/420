@@ -37,8 +37,8 @@ contract Mainnet_Pool420_getLiquidityPositions_Test is Pool420Test {
         assertEq(accountId0, lp[0].accountId, "positions[0].accountId == accountId0");
         assertEq(accountId1, lp[1].accountId, "positions[1].accountId == accountId1");
 
-        assertEq(0, uint256(lp[0].debtAmount), "positions[0].debtAmount == 0");
-        assertEq(300 * snxPrice / 5, uint256(lp[1].debtAmount), "positions[1].debtAmount == 300 * snxPrice / 5");
+        assertEq(0, uint256(lp[0].debt), "positions[0].debt == 0");
+        assertEq(300 * snxPrice / 5, uint256(lp[1].debt), "positions[1].debt == 300 * snxPrice / 5");
 
         assertEq(0, lp[0].cRatio, "positions[0].cRatio == 0");
         assertEq(5, lp[1].cRatio, "positions[1].cRatio == 5");
@@ -46,10 +46,7 @@ contract Mainnet_Pool420_getLiquidityPositions_Test is Pool420Test {
         assertEq(snxPrice, lp[0].collateralPrice, "positions[0].collateralPrice == snxPrice");
         assertEq(snxPrice, lp[1].collateralPrice, "positions[1].collateralPrice == snxPrice");
 
-        assertEq(100 ether, lp[0].collateralAmount, "positions[0].collateralAmount == 100");
-        assertEq(300 ether, lp[1].collateralAmount, "positions[1].collateralAmount == 300");
-
-        assertEq(100 * snxPrice, lp[0].collateralValue, "positions[0].collateralValue == 100 * snxPrice");
-        assertEq(300 * snxPrice, lp[1].collateralValue, "positions[1].collateralValue == 300 * snxPrice");
+        assertEq(100 ether, lp[0].collateral, "positions[0].collateral == 100");
+        assertEq(300 ether, lp[1].collateral, "positions[1].collateral == 300");
     }
 }
