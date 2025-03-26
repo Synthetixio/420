@@ -37,16 +37,12 @@ contract Mainnet_Pool420_getPositions_Test is Pool420Test {
         assertEq(block.timestamp, positions[1].loanStartTime, "positions[1].loanStartTime == block.timestamp");
         assertEq(block.timestamp, positions[2].loanStartTime, "positions[2].loanStartTime == block.timestamp");
 
-        assertEq(100 ether, positions[0].collateralAmount, "positions[0].collateralAmount == 100 ether");
-        assertEq(300 ether, positions[1].collateralAmount, "positions[1].collateralAmount == 300 ether");
-        assertEq(600 ether, positions[2].collateralAmount, "positions[2].collateralAmount == 600 ether");
+        assertEq(100 ether, positions[0].collateral, "positions[0].collateral == 100 ether");
+        assertEq(300 ether, positions[1].collateral, "positions[1].collateral == 300 ether");
+        assertEq(600 ether, positions[2].collateral, "positions[2].collateral == 600 ether");
 
         assertEq(snxPrice, positions[0].collateralPrice, "positions[0].collateralPrice == snxPrice");
         assertEq(snxPrice, positions[1].collateralPrice, "positions[1].collateralPrice == snxPrice");
         assertEq(snxPrice, positions[2].collateralPrice, "positions[2].collateralPrice == snxPrice");
-
-        assertEq(100 * snxPrice, positions[0].collateralValue, "positions[0].collateralValue == 100 * snxPrice");
-        assertEq(300 * snxPrice, positions[1].collateralValue, "positions[1].collateralValue == 300 * snxPrice");
-        assertEq(600 * snxPrice, positions[2].collateralValue, "positions[2].collateralValue == 600 * snxPrice");
     }
 }

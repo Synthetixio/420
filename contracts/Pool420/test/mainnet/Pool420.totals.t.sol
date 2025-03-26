@@ -25,24 +25,10 @@ contract Mainnet_Pool420_totals_Test is Pool420Test {
         _setupPosition(300 ether);
         _setupPosition(600 ether);
 
-        uint128[] memory accounts = pool420.getAccounts(ALICE);
-        assertEq(
-            //
-            3,
-            accounts.length,
-            "should have 3 accounts created"
-        );
-        assertEq(
-            //
-            1000 ether,
-            pool420.getTotalDeposit(ALICE),
-            "should have combined deposit of 1000 SNX"
-        );
-        assertEq(
-            //
-            1000 * snxPrice / 5,
-            pool420.getTotalLoan(ALICE),
-            "should have combined loan amount of (1000 * snxPrice / 5)"
-        );
+        Pool420.Totals memory totals = pool420.getTotals(ALICE);
+        assertEq(1000 ether, totals.deposit, "totals.deposit === 1000");
+        assertEq(1000 * snxPrice / 5, totals.loan, "totals.loan == 1000 * snxPrice / 5");
+        assertEq(0, totals.burn, "totals.burn == 0");
+        assertEq(snxPrice, totals.collateralPrice, "totals.collateralPrice == snxPrice");
     }
 }

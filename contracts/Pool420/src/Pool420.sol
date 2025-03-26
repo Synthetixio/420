@@ -57,44 +57,34 @@ contract Pool420 {
         }
         accountIds = new uint128[](numberOfAccountTokens);
         for (uint256 i = 0; i < numberOfAccountTokens; i++) {
-            // Retrieve the token/account ID at the index
-            uint256 accountId = AccountProxy.tokenOfOwnerByIndex(
-                //
-                walletAddress,
-                i
-            );
-            accountIds[i] = uint128(accountId); // Downcast to uint128, assuming IDs fit within uint128
+            accountIds[i] = uint128(AccountProxy.tokenOfOwnerByIndex(walletAddress, i));
         }
         return accountIds;
     }
 
     /**
-     * @notice Retrieves the total deposit amount of SNX collateral across all accounts owned by the specified wallet address
-     * @dev Iterates through all accounts owned by the specified wallet address and sums up their collateral in the specified pool
-     * @param walletAddress The address of the wallet whose SNX collateral deposits are being calculated
-     * @return totalDeposit The total amount of SNX collateral deposited across all accounts owned by the specified wallet address
+     * @notice Retrieves the total deposit, total loan, total burned SNX, and collateral price for all accounts owned by the specified wallet address
+     * @dev Iterates through all accounts associated with the wallet address to calculate the summed values
+     * @param walletAddress The address of the wallet whose account totals are being retrieved
+     * @return totals A struct containing the total deposit of SNX across all accounts, the total SNX loan,
+     * the total burned SNX (difference between initial loan and current loan), and the collateral price
      */
-    function getTotalDeposit(address walletAddress) public view returns (uint256 totalDeposit) {
-        uint128[] memory accountIds = getAccounts(walletAddress);
-        totalDeposit = 0;
+    function getTotals(address walletAddress) public view returns (Totals memory totals) {
         uint128 poolId = TreasuryMarketProxy.poolId();
         address $SNX = V2xResolver.getAddress("ProxySynthetix");
-        for (uint256 i = 0; i < accountIds.length; i++) {
-            totalDeposit = totalDeposit + CoreProxy.getPositionCollateral(accountIds[i], poolId, $SNX);
-        }
-    }
 
-    /**
-     * @notice Retrieves the total loan amount across all accounts owned by the specified wallet address
-     * @dev Iterates through all accounts owned by the specified wallet address and sums up their loaned amounts
-     * @param walletAddress The address of the wallet whose loan amounts are being calculated
-     * @return totalLoan The total loan amount across all accounts owned by the specified wallet address
-     */
-    function getTotalLoan(address walletAddress) public view returns (uint256 totalLoan) {
+        totals = Totals(0, 0, 0, 0);
+        totals.collateralPrice = CoreProxy.getCollateralPrice($SNX);
+
         uint128[] memory accountIds = getAccounts(walletAddress);
-        totalLoan = 0;
         for (uint256 i = 0; i < accountIds.length; i++) {
-            totalLoan = totalLoan + TreasuryMarketProxy.loanedAmount(accountIds[i]);
+            totals.deposit = totals.deposit + CoreProxy.getPositionCollateral(accountIds[i], poolId, $SNX);
+
+            uint256 loan = TreasuryMarketProxy.loanedAmount(accountIds[i]);
+            totals.loan = totals.loan + loan;
+
+            (,,, uint128 initialLoan) = TreasuryMarketProxy.loans(accountIds[i]);
+            totals.burn = totals.burn + (uint256(initialLoan) - loan);
         }
     }
 
@@ -105,27 +95,29 @@ contract Pool420 {
      * @return positions An array of `Position` structs representing the positions of the wallet's accounts
      */
     function getPositions(address walletAddress) public view returns (Position[] memory positions) {
-        uint128[] memory accountIds = getAccounts(walletAddress);
         uint128 poolId = TreasuryMarketProxy.poolId();
         address $SNX = V2xResolver.getAddress("ProxySynthetix");
 
+        uint256 collateralPrice = CoreProxy.getCollateralPrice($SNX);
+
+        uint128[] memory accountIds = getAccounts(walletAddress);
         positions = new Position[](accountIds.length);
 
-        uint256 collateralPrice = CoreProxy.getCollateralPrice($SNX);
         for (uint256 i = 0; i < accountIds.length; i++) {
-            (uint64 startTime, uint32 power, uint32 duration, uint128 loanAmount) =
+            uint256 loan = TreasuryMarketProxy.loanedAmount(accountIds[i]);
+            (uint64 loanStartTime, uint32 loanDecayPower, uint32 loanDuration, uint128 initialLoan) =
                 TreasuryMarketProxy.loans(accountIds[i]);
-            uint256 collateralAmount = CoreProxy.getPositionCollateral(accountIds[i], poolId, $SNX);
-            uint256 collateralValue = collateralPrice * collateralAmount / 1e18;
             positions[i] = Position({
                 accountId: accountIds[i],
-                loanAmount: loanAmount,
-                loanStartTime: startTime,
-                loanDuration: duration,
-                loanDecayPower: power,
-                collateralAmount: collateralAmount,
-                collateralPrice: collateralPrice,
-                collateralValue: collateralValue
+                loan: loan,
+                burn: initialLoan > loan ? uint256(initialLoan) - loan : 0,
+                penalty: initialLoan > 0 ? TreasuryMarketProxy.repaymentPenalty(accountIds[i], 0) : 0,
+                collateral: CoreProxy.getPositionCollateral(accountIds[i], poolId, $SNX),
+                initialLoan: initialLoan,
+                loanStartTime: loanStartTime,
+                loanDuration: loanDuration,
+                loanDecayPower: loanDecayPower,
+                collateralPrice: collateralPrice
             });
         }
     }
@@ -148,18 +140,14 @@ contract Pool420 {
 
         uint256 collateralPrice = CoreProxy.getCollateralPrice($SNX);
         for (uint256 i = 0; i < accountIds.length; i++) {
-            int256 debtAmount = CoreProxy.getPositionDebt(accountIds[i], poolId, $SNX);
-            uint256 collateralAmount = CoreProxy.getPositionCollateral(accountIds[i], poolId, $SNX);
-            uint256 collateralValue = collateralPrice * collateralAmount / 1e18;
-            uint256 cRatio = debtAmount > 0 ? collateralValue / uint256(debtAmount) : 0;
-            CoreProxy.getAccountCollateral(accountIds[i], $SNX);
+            int256 debt = CoreProxy.getPositionDebt(accountIds[i], poolId, $SNX);
+            uint256 collateral = CoreProxy.getPositionCollateral(accountIds[i], poolId, $SNX);
             liquidityPositions[i] = LiquidityPosition({
                 accountId: accountIds[i],
-                debtAmount: debtAmount,
-                cRatio: cRatio,
-                collateralAmount: collateralAmount,
-                collateralPrice: collateralPrice,
-                collateralValue: collateralValue
+                debt: debt,
+                cRatio: debt > 0 ? collateralPrice * collateral / uint256(debt) / 1e18 : 0,
+                collateral: collateral,
+                collateralPrice: collateralPrice
             });
         }
     }
@@ -181,18 +169,20 @@ contract Pool420 {
         for (uint256 i = 0; i < accountIds.length; i++) {
             (uint256 collateralDeposited, uint256 collateralAssigned, uint256 collateralLocked) =
                 CoreProxy.getAccountCollateral(accountIds[i], $SNX);
-            uint256 collateralAvailable = collateralDeposited - collateralAssigned - collateralLocked;
+            uint256 collateralAvailableToDelegate = CoreProxy.getAccountAvailableCollateral(accountIds[i], $SNX);
             (uint256 usdDeposited, uint256 usdAssigned, uint256 usdLocked) =
                 CoreProxy.getAccountCollateral(accountIds[i], $snxUSD);
-            uint256 usdAvailable = usdDeposited - usdAssigned - usdLocked;
+            uint256 usdAvailableToDelegate = CoreProxy.getAccountAvailableCollateral(accountIds[i], $snxUSD);
             balances[i] = Balance({
                 accountId: accountIds[i],
-                usdAvailable: usdAvailable,
+                usdAvailable: usdAvailableToDelegate > usdLocked ? usdAvailableToDelegate - usdLocked : 0,
                 usdDeposited: usdDeposited,
                 usdAssigned: usdAssigned,
                 usdLocked: usdLocked,
                 collateralPrice: collateralPrice,
-                collateralAvailable: collateralAvailable,
+                collateralAvailable: collateralAvailableToDelegate > collateralLocked
+                    ? collateralAvailableToDelegate - collateralLocked
+                    : 0,
                 collateralDeposited: collateralDeposited,
                 collateralAssigned: collateralAssigned,
                 collateralLocked: collateralLocked
@@ -200,24 +190,32 @@ contract Pool420 {
         }
     }
 
+    struct Totals {
+        uint256 deposit;
+        uint256 loan;
+        uint256 burn;
+        uint256 collateralPrice;
+    }
+
     struct Position {
         uint128 accountId;
-        uint128 loanAmount;
+        uint256 loan;
+        uint256 burn;
+        uint256 penalty;
+        uint256 collateral;
+        uint256 initialLoan;
         uint64 loanStartTime;
         uint32 loanDuration;
         uint32 loanDecayPower;
-        uint256 collateralAmount;
         uint256 collateralPrice;
-        uint256 collateralValue;
     }
 
     struct LiquidityPosition {
         uint128 accountId;
-        int256 debtAmount;
+        int256 debt;
         uint256 cRatio;
-        uint256 collateralAmount;
+        uint256 collateral;
         uint256 collateralPrice;
-        uint256 collateralValue;
     }
 
     struct Balance {

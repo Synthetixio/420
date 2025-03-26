@@ -1,6 +1,5 @@
 import { contractsHash } from '@_/tsHelpers';
 import { useNetwork, useProvider } from '@_/useBlockchain';
-import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 import { useQuery } from '@tanstack/react-query';
 import debug from 'debug';
@@ -8,9 +7,7 @@ import { ethers } from 'ethers';
 
 const log = debug('snx:useLoan');
 
-export function useLoan() {
-  const [params] = useParams<HomePageSchemaType>();
-
+export function useLoan({ accountId }: { accountId: ethers.BigNumber }) {
   const provider = useProvider();
   const { network } = useNetwork();
 
@@ -21,28 +18,33 @@ export function useLoan() {
       `${network?.id}-${network?.preset}`,
       'Pool 420',
       'useLoan',
-      { accountId: params.accountId },
+      { accountId },
       { contractsHash: contractsHash([TreasuryMarketProxy]) },
     ],
-    enabled: Boolean(network && provider && TreasuryMarketProxy && params.accountId),
-    queryFn: async () => {
-      if (!(network && provider && TreasuryMarketProxy && params.accountId)) {
+    enabled: Boolean(provider && TreasuryMarketProxy && accountId),
+    queryFn: async (): Promise<{
+      startTime: ethers.BigNumber;
+      duration: ethers.BigNumber;
+      power: ethers.BigNumber;
+      loanAmount: ethers.BigNumber;
+    }> => {
+      if (!(provider && TreasuryMarketProxy && accountId)) {
         throw new Error('OMFG');
       }
-      log('accountId', params.accountId);
+      log('accountId', accountId);
       const TreasuryMarketProxyContract = new ethers.Contract(
         TreasuryMarketProxy.address,
         TreasuryMarketProxy.abi,
         provider
       );
-      const loan: {
-        startTime: ethers.BigNumber;
-        duration: ethers.BigNumber;
-        power: ethers.BigNumber;
-        loanAmount: ethers.BigNumber;
-      } = await TreasuryMarketProxyContract.loans(params.accountId);
+      const loanRaw = await TreasuryMarketProxyContract.loans(accountId);
+      const loan = {
+        startTime: loanRaw.startTime,
+        duration: loanRaw.duration,
+        power: loanRaw.power,
+        loanAmount: loanRaw.loanAmount,
+      };
       log('loan', loan);
-
       return loan;
     },
   });

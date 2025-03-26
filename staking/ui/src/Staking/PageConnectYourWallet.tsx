@@ -7,7 +7,7 @@ import { LayoutWithImage } from './LayoutWithImage';
 import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
 import burn from './burn.webp';
 
-export function ConnectYourWallet() {
+export function PageConnectYourWallet() {
   return (
     <LayoutWithImage
       imageSrc={burn}

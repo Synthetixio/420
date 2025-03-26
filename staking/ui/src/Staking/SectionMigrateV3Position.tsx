@@ -17,7 +17,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { ethers } from 'ethers';
+import type { ethers } from 'ethers';
 import React from 'react';
 import { LayoutWithImage } from './LayoutWithImage';
 import { MigrateStats } from './MigrateStats';
@@ -27,15 +27,14 @@ import burn from './burn.webp';
 import coinburn from './coinburn.svg';
 import { useMigratePool420 } from './useMigratePool420';
 
-export function MigrateFromV3() {
+export function SectionMigrateV3Position({ accountId }: { accountId: ethers.BigNumber }) {
   const { data: collateralType } = useCollateralType('SNX');
   const [isOpenMigrate, setIsOpenMigrate] = React.useState(false);
 
   const { isReady: isReadyMigrate } = useMigratePool420();
 
-  const [params] = useParams<HomePageSchemaType>();
   const { data: liquidityPosition } = useLiquidityPosition({
-    accountId: params.accountId ? ethers.BigNumber.from(params.accountId) : undefined,
+    accountId,
     collateralType,
   });
 
@@ -116,34 +115,21 @@ export function MigrateFromV3() {
         </ModalContent>
       </Modal>
 
-      <LayoutWithImage
-        imageSrc={burn}
-        Subheader={() => <SubheaderMigrateAndEarn />}
-        Content={() => (
-          <>
-            <MigrateStats
-              debt={liquidityPosition?.debt}
-              collateralAmount={liquidityPosition?.collateralAmount}
-              cRatio={liquidityPosition?.cRatio}
-            />
-            <ZeroRisk />
-            <Button
-              isDisabled={!isReadyMigrate}
-              onClick={() => {
-                window?._paq?.push([
-                  'trackEvent',
-                  'staking',
-                  '420_migration',
-                  'click_burn_my_debt',
-                ]);
-                setIsOpenMigrate(true);
-              }}
-            >
-              Burn My Debt
-            </Button>
-          </>
-        )}
+      <MigrateStats
+        debt={liquidityPosition?.debt}
+        collateralAmount={liquidityPosition?.collateralAmount}
+        cRatio={liquidityPosition?.cRatio}
       />
+      <ZeroRisk />
+      <Button
+        isDisabled={!isReadyMigrate}
+        onClick={() => {
+          window?._paq?.push(['trackEvent', 'staking', '420_migration', 'click_burn_my_debt']);
+          setIsOpenMigrate(true);
+        }}
+      >
+        Burn My Debt
+      </Button>
     </>
   );
 }

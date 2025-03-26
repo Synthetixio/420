@@ -1,39 +1,26 @@
-import { type HomePageSchemaType, useParams } from '@_/useParams';
-import { usePythPrice } from '@_/usePythPrice';
 import { InfoIcon } from '@chakra-ui/icons';
 import { Box, Button, Flex, Heading, Image, Text, Tooltip } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
-import { ethers } from 'ethers';
+import type { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
 import { EscrowedSNX } from './EscrowedSNX';
 import { LoanChart } from './LoanChart';
 import { ModalConfirmUnstake } from './ModalConfirmUnstake';
 import { ModalShare420 } from './ModalShare420';
-import { PanelTvl } from './PanelTvl';
 import clock from './clock.svg';
-import farming from './farming.webp';
 import share from './share.svg';
 import { useAccountUnstakingUnlockDate } from './useAccountUnstakingUnlockDate';
 import { useClosePositionPool420 } from './useClosePositionPool420';
 import { useCountdown } from './useCountdown';
-import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
-import { useLoan } from './useLoan';
-import { usePositionCollateral } from './usePositionCollateral';
+import { usePosition } from './usePosition';
 
-export function StakingPosition() {
-  const { data: loanedAmount, isPending: isPendingLoanedAmount } = useCurrentLoanedAmount();
-  const { data: loan, isPending: isPendingLoan } = useLoan();
-  const { data: positionCollateral, isPending: isPendingPositionCollateral } =
-    usePositionCollateral();
-  const { data: snxPrice, isPending: isPendingSnxPrice } = usePythPrice('SNX');
-  const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionPool420();
+export function SectionPool420Position({ accountId }: { accountId: ethers.BigNumber }) {
+  const { data: position, isPending: isPendingPosition } = usePosition({ accountId });
+  const { isReady: isReadyClosePosition, mutation: closePosition } = useClosePositionPool420({
+    accountId,
+  });
 
-  const [isOpenShare, setIsOpenShare] = React.useState(false);
-  const [isOpenUnstake, setIsOpenUnstake] = React.useState(false);
-
-  const [params] = useParams<HomePageSchemaType>();
-  const accountId = params.accountId ? ethers.BigNumber.from(params.accountId) : undefined;
   const { data: accountUnstakingUnlockDate, isLoading: isLoadingAccountUnstakingUnlockDate } =
     useAccountUnstakingUnlockDate({ accountId });
 
@@ -41,6 +28,9 @@ export function StakingPosition() {
     date: accountUnstakingUnlockDate,
     isLoading: isLoadingAccountUnstakingUnlockDate,
   });
+
+  const [isOpenShare, setIsOpenShare] = React.useState(false);
+  const [isOpenUnstake, setIsOpenUnstake] = React.useState(false);
 
   return (
     <>
@@ -85,41 +75,39 @@ export function StakingPosition() {
                 Debt Burned
               </Heading>
 
-              {isPendingLoanedAmount || isPendingLoan || isPendingSnxPrice ? (
+              {isPendingPosition ? (
                 <Text as="span" color="gray.50" fontSize="1.25em">
                   ~
                 </Text>
-              ) : (
+              ) : position ? (
                 <Box>
                   <Text as="span" color="gray.50" fontSize="1.25em" fontWeight={500}>
-                    {loan && loanedAmount
-                      ? `🔥 $${numbro(wei(loan.loanAmount.sub(loanedAmount)).toNumber()).format({
-                          trimMantissa: true,
-                          thousandSeparated: true,
-                          average: true,
-                          mantissa: 2,
-                          spaceSeparated: false,
-                        })}`
-                      : null}
+                    {`🔥 $${numbro(wei(position.burn).toNumber()).format({
+                      trimMantissa: true,
+                      thousandSeparated: true,
+                      average: true,
+                      mantissa: 2,
+                      spaceSeparated: false,
+                    })}`}
                   </Text>
                   <Text as="span" color="gray.500" fontSize="1.25em">
-                    {loan
-                      ? ` / $${numbro(wei(loan.loanAmount).toNumber()).format({
-                          trimMantissa: true,
-                          thousandSeparated: true,
-                          average: true,
-                          mantissa: 2,
-                          spaceSeparated: false,
-                        })}`
-                      : null}
+                    {` / $${numbro(wei(position.loan).toNumber()).format({
+                      trimMantissa: true,
+                      thousandSeparated: true,
+                      average: true,
+                      mantissa: 2,
+                      spaceSeparated: false,
+                    })}`}
                   </Text>
                 </Box>
-              )}
+              ) : null}
             </Flex>
             <LoanChart
-              loan={loan ? wei(loan.loanAmount).toNumber() : 100}
+              loan={position ? wei(position.loan).toNumber() : 100}
               startTime={
-                loan ? Number.parseInt(loan.startTime.toString()) : Math.floor(Date.now() / 1000)
+                position
+                  ? Number.parseInt(position.loanStartTime.toString())
+                  : Math.floor(Date.now() / 1000)
               }
               duration={365 * 24 * 60 * 60}
               pointsCount={50}
@@ -164,24 +152,25 @@ export function StakingPosition() {
               </Text>
               <Box>
                 <Text color="gray.50" fontSize="1.25em" fontWeight={500}>
-                  {isPendingPositionCollateral || isPendingSnxPrice ? '~' : null}
-                  {!(isPendingPositionCollateral || isPendingSnxPrice) &&
-                  positionCollateral &&
-                  snxPrice
-                    ? `${numbro(wei(positionCollateral).toNumber()).format({
-                        trimMantissa: true,
-                        thousandSeparated: true,
-                        average: true,
-                        mantissa: 2,
-                        spaceSeparated: false,
-                      })} SNX`
-                    : null}
+                  {isPendingPosition
+                    ? '~'
+                    : position
+                      ? `${numbro(wei(position.collateral).toNumber()).format({
+                          trimMantissa: true,
+                          thousandSeparated: true,
+                          average: true,
+                          mantissa: 2,
+                          spaceSeparated: false,
+                        })} SNX`
+                      : null}
                 </Text>
                 <Text color="gray.500" fontSize="1.0em">
-                  {isPendingPositionCollateral || isPendingSnxPrice
+                  {isPendingPosition
                     ? '~'
-                    : positionCollateral && snxPrice
-                      ? `$${numbro(wei(positionCollateral).mul(snxPrice).toNumber()).format({
+                    : position
+                      ? `$${numbro(
+                          wei(position.collateral).mul(position.collateralPrice).toNumber()
+                        ).format({
                           trimMantissa: true,
                           thousandSeparated: true,
                           average: true,
@@ -226,36 +215,12 @@ export function StakingPosition() {
         </Flex>
       </Flex>
 
-      <Flex direction="column">
-        <Flex direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }} gap={6}>
-          <Flex
-            direction="column"
-            flex={1}
-            gap={4}
-            display={{ base: 'none', sm: 'flex' }}
-            borderColor="gray.900"
-            borderWidth="1px"
-            borderRadius="base"
-            bg="navy.700"
-            p={{ base: 4, sm: 10 }}
-          >
-            <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
-              SNX Powered Yield Farming
-            </Text>
-            <Text fontSize="16px" lineHeight="24px" color="gray.500">
-              The 420 pool starts generating yield for you from Ethena and other yield sources
-              immediately.
-            </Text>
-            <Box mt={2}>
-              <Image rounded="6px" src={farming} width="100%" height="100%" objectFit="cover" />
-            </Box>
-          </Flex>
-          <PanelTvl />
-        </Flex>
-      </Flex>
-
+      <ModalConfirmUnstake
+        accountId={accountId}
+        isOpenUnstake={isOpenUnstake}
+        setIsOpenUnstake={setIsOpenUnstake}
+      />
       <ModalShare420 isOpenShare={isOpenShare} setIsOpenShare={setIsOpenShare} />
-      <ModalConfirmUnstake isOpenUnstake={isOpenUnstake} setIsOpenUnstake={setIsOpenUnstake} />
     </>
   );
 }

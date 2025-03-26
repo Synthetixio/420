@@ -9,11 +9,10 @@ const log = debug('snx:useLiquidityPositions');
 
 export type LiquidityPosition = {
   accountId: ethers.BigNumber;
-  debtAmount: ethers.BigNumber;
+  debt: ethers.BigNumber;
   cRatio: ethers.BigNumber;
-  collateralAmount: ethers.BigNumber;
+  collateral: ethers.BigNumber;
   collateralPrice: ethers.BigNumber;
-  collateralValue: ethers.BigNumber;
 };
 
 export function useLiquidityPositions() {
@@ -41,11 +40,10 @@ export function useLiquidityPositions() {
       const liquidityPositions = liquidityPositionsRaw.map(
         (liquidityPosition: LiquidityPosition) => ({
           accountId: liquidityPosition.accountId,
-          debtAmount: liquidityPosition.debtAmount,
+          debt: liquidityPosition.debt,
           cRatio: liquidityPosition.cRatio,
-          collateralAmount: liquidityPosition.collateralAmount,
+          collateral: liquidityPosition.collateral,
           collateralPrice: liquidityPosition.collateralPrice,
-          collateralValue: liquidityPosition.collateralValue,
         })
       );
       log('liquidityPositions', liquidityPositions);
