@@ -199,16 +199,16 @@ export function NetworkController() {
                 <Flex w="100%" justifyContent="space-between">
                   <Flex gap={2} alignItems="center">
                     {isPendingBalances ? (
-                      <Text fontSize="sm" color="grey.500">
+                      <Text fontSize="sm" color="gray.500">
                         Accounts loading...
                       </Text>
                     ) : balances && balances.length === 1 ? (
-                      <Text fontSize="sm" color="grey.500">
+                      <Text fontSize="sm" color="gray.500">
                         Account
                       </Text>
                     ) : balances ? (
                       <>
-                        <Text fontSize="sm" color="grey.500">
+                        <Text fontSize="sm" color="gray.500">
                           Accounts
                         </Text>
                         <Text
@@ -249,7 +249,7 @@ export function NetworkController() {
                     <Text
                       display="flex"
                       alignItems="center"
-                      color="grey.500"
+                      color="gray.500"
                       fontWeight={700}
                       fontSize="16px"
                       cursor="pointer"
@@ -260,7 +260,7 @@ export function NetworkController() {
                     <Text
                       display="flex"
                       alignItems="center"
-                      color="grey.500"
+                      color="gray.500"
                       fontWeight={700}
                       fontSize="16px"
                       cursor="pointer"
@@ -278,10 +278,10 @@ export function NetworkController() {
                         justifyContent="space-between"
                         width="100%"
                       >
-                        <Text color="grey.50" fontWeight={700} fontSize="md">
+                        <Text color="gray.50" fontWeight={700} fontSize="md">
                           {renderAccountId(accountId)}
                         </Text>
-                        <Text color="grey.500" fontSize="sm">{`${numbro(
+                        <Text color="gray.500" fontSize="sm">{`${numbro(
                           wei(collateralDeposited).toNumber()
                         ).format({
                           trimMantissa: true,
