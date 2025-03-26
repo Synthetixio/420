@@ -13,8 +13,8 @@ const gradients = {
     700: 'linear(to-tr, green.700, cyan.800)',
   },
 
-  grey: {
-    900: 'linear(to-tr, grey.900, blackAlpha.900)',
+  gray: {
+    900: 'linear(to-tr, gray.900, blackAlpha.900)',
   },
   dark: {
     500: 'linear(to-tr, #171923, #141414)',
@@ -109,7 +109,7 @@ const Button: ComponentStyleConfig = {
   variants: {
     solid: variantSolid,
     outline: (props) => {
-      if (props.colorScheme === 'gray' || props.colorScheme === 'grey') {
+      if (props.colorScheme === 'gray' || props.colorScheme === 'gray') {
         return {
           color: 'white',
           borderColor: 'gray.900',
