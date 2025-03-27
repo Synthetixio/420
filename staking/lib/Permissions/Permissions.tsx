@@ -1,7 +1,7 @@
-import { useAccounts } from '@_/useAccounts';
 import { Button, Flex, Heading, Image, Link, Text } from '@chakra-ui/react';
 import DelegationIcon from './DelegationIcon.svg';
 import { PermissionTable } from './PermissionTable';
+import { useAccounts } from './useAccounts';
 
 export function Permissions() {
   const { data: accounts, refetch: refetchAccounts } = useAccounts();

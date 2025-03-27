@@ -36,12 +36,14 @@ __metadata:
     "@_/Address": "workspace:*"
     "@_/format": "workspace:*"
     "@_/useAccountPermissions": "workspace:*"
-    "@_/useAccounts": "workspace:*"
     "@_/useBlockchain": "workspace:*"
     "@_/useManagePermissions": "workspace:*"
+    "@_/usePool420": "workspace:*"
     "@_/useTransferAccountId": "workspace:*"
     "@chakra-ui/icons": "npm:^2.1.1"
     "@chakra-ui/react": "npm:^2.8.2"
+    "@tanstack/react-query": "npm:^5.8.3"
+    debug: "npm:^4.4.0"
     ethers: "npm:^5.7.2"
     react: "npm:^18.2.0"
   languageName: unknown
@@ -86,7 +88,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/calculations@workspace:*, @_/calculations@workspace:staking/lib/calculations":
+"@_/calculations@workspace:staking/lib/calculations":
   version: 0.0.0-use.local
   resolution: "@_/calculations@workspace:staking/lib/calculations"
   dependencies:
@@ -199,18 +201,14 @@ __metadata:
     "@_/theme": "workspace:*"
     "@_/tsHelpers": "workspace:*"
     "@_/useAccountProxy": "workspace:*"
-    "@_/useAccounts": "workspace:*"
     "@_/useBlockchain": "workspace:*"
-    "@_/useCollateralTypes": "workspace:*"
     "@_/useContractErrorParser": "workspace:*"
     "@_/useCoreProxy": "workspace:*"
     "@_/useLegacyMarket": "workspace:*"
-    "@_/useLiquidityPosition": "workspace:*"
     "@_/useParams": "workspace:*"
     "@_/usePool420": "workspace:*"
     "@_/usePool420Withdraw": "workspace:*"
     "@_/usePositionManager420": "workspace:*"
-    "@_/usePythPrice": "workspace:*"
     "@_/useSNX": "workspace:*"
     "@_/useTreasuryMarketProxy": "workspace:*"
     "@_/useTrustedMulticallForwarder": "workspace:*"
@@ -227,6 +225,7 @@ __metadata:
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.5.11"
+    "@pythnetwork/pyth-evm-js": "npm:latest"
     "@safe-global/safe-apps-provider": "npm:^0.18.3"
     "@safe-global/safe-apps-sdk": "npm:^8.0.0"
     "@synthetixio/devtools-formatters": "workspace:*"
@@ -293,12 +292,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/txnReducer@workspace:staking/lib/txnReducer":
-  version: 0.0.0-use.local
-  resolution: "@_/txnReducer@workspace:staking/lib/txnReducer"
-  languageName: unknown
-  linkType: soft
-
 "@_/useAccountPermissions@workspace:*, @_/useAccountPermissions@workspace:staking/lib/useAccountInfo":
   version: 0.0.0-use.local
   resolution: "@_/useAccountPermissions@workspace:staking/lib/useAccountInfo"
@@ -319,19 +312,6 @@ __metadata:
     "@_/contracts": "workspace:*"
     "@_/useBlockchain": "workspace:*"
     "@tanstack/react-query": "npm:^5.8.3"
-  languageName: unknown
-  linkType: soft
-
-"@_/useAccounts@workspace:*, @_/useAccounts@workspace:staking/lib/useAccounts":
-  version: 0.0.0-use.local
-  resolution: "@_/useAccounts@workspace:staking/lib/useAccounts"
-  dependencies:
-    "@_/tsHelpers": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/usePool420": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
   languageName: unknown
   linkType: soft
 
@@ -356,38 +336,6 @@ __metadata:
     "@chakra-ui/react": "npm:^2.8.2"
     "@tanstack/react-query": "npm:^5.8.3"
     "@web3-onboard/react": "npm:^2.10.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/useCollateralPrices@workspace:staking/lib/useCollateralPrices":
-  version: 0.0.0-use.local
-  resolution: "@_/useCollateralPrices@workspace:staking/lib/useCollateralPrices"
-  dependencies:
-    "@_/tsHelpers": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@_/withERC7412": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/useCollateralTypes@workspace:*, @_/useCollateralTypes@workspace:staking/lib/useCollateralTypes":
-  version: 0.0.0-use.local
-  resolution: "@_/useCollateralTypes@workspace:staking/lib/useCollateralTypes"
-  dependencies:
-    "@_/constants": "workspace:*"
-    "@_/contracts": "workspace:*"
-    "@_/tsHelpers": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/useSNX": "workspace:*"
-    "@_/useSystemToken": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
     ethers: "npm:^5.7.2"
     react: "npm:^18.2.0"
   languageName: unknown
@@ -426,26 +374,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/useLiquidityPosition@workspace:*, @_/useLiquidityPosition@workspace:staking/lib/useLiquidityPosition":
-  version: 0.0.0-use.local
-  resolution: "@_/useLiquidityPosition@workspace:staking/lib/useLiquidityPosition"
-  dependencies:
-    "@_/calculations": "workspace:*"
-    "@_/constants": "workspace:*"
-    "@_/tsHelpers": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/useCollateralTypes": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@_/useSystemToken": "workspace:*"
-    "@_/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
 "@_/useManagePermissions@workspace:*, @_/useManagePermissions@workspace:staking/lib/useManagePermissions":
   version: 0.0.0-use.local
   resolution: "@_/useManagePermissions@workspace:staking/lib/useManagePermissions"
@@ -456,20 +384,6 @@ __metadata:
     "@tanstack/react-query": "npm:^5.8.3"
     debug: "npm:^4.4.0"
     ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
-"@_/useOraclePrice@workspace:staking/lib/useOraclePrice":
-  version: 0.0.0-use.local
-  resolution: "@_/useOraclePrice@workspace:staking/lib/useOraclePrice"
-  dependencies:
-    "@_/contracts": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/withERC7412": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
   languageName: unknown
   linkType: soft
 
@@ -516,18 +430,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/usePythPrice@workspace:*, @_/usePythPrice@workspace:staking/lib/usePythPrice":
-  version: 0.0.0-use.local
-  resolution: "@_/usePythPrice@workspace:staking/lib/usePythPrice"
-  dependencies:
-    "@_/constants": "workspace:*"
-    "@pythnetwork/pyth-evm-js": "npm:^1.42.0"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
 "@_/useSNX@workspace:*, @_/useSNX@workspace:staking/lib/contracts/useSNX":
   version: 0.0.0-use.local
   resolution: "@_/useSNX@workspace:staking/lib/contracts/useSNX"
@@ -539,7 +441,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/useSystemToken@workspace:*, @_/useSystemToken@workspace:staking/lib/contracts/useSystemToken":
+"@_/useSystemToken@workspace:staking/lib/contracts/useSystemToken":
   version: 0.0.0-use.local
   resolution: "@_/useSystemToken@workspace:staking/lib/contracts/useSystemToken"
   dependencies:
@@ -603,21 +505,6 @@ __metadata:
     "@_/useBlockchain": "workspace:*"
     "@tanstack/react-query": "npm:^5.8.3"
     react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/withERC7412@workspace:*, @_/withERC7412@workspace:staking/lib/withERC7412":
-  version: 0.0.0-use.local
-  resolution: "@_/withERC7412@workspace:staking/lib/withERC7412"
-  dependencies:
-    "@_/constants": "workspace:*"
-    "@_/contracts": "workspace:*"
-    "@_/parseContractError": "workspace:*"
-    "@_/tsHelpers": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@pythnetwork/pyth-evm-js": "npm:^1.42.0"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
   languageName: unknown
   linkType: soft
 
@@ -5067,18 +4954,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pythnetwork/price-service-client@npm:*":
-  version: 1.8.0
-  resolution: "@pythnetwork/price-service-client@npm:1.8.0"
+"@pythnetwork/price-service-client@npm:1.9.0":
+  version: 1.9.0
+  resolution: "@pythnetwork/price-service-client@npm:1.9.0"
   dependencies:
     "@pythnetwork/price-service-sdk": "npm:*"
     "@types/ws": "npm:^8.5.3"
-    axios: "npm:=1.1.0"
-    axios-retry: "npm:~3.3.0"
+    axios: "npm:^1.5.1"
+    axios-retry: "npm:^3.8.0"
     isomorphic-ws: "npm:^4.0.1"
     ts-log: "npm:^2.2.4"
     ws: "npm:^8.6.0"
-  checksum: 10/0dc347e7144f6bd7a83f19eee2a98d40d36af4adb7a8b5033a9b962345dbcc82caf025e5e2090c0219f32d2b707db3df84d984d57c860073d01751f0d26d2b62
+  checksum: 10/1d8840175317676eaea7f396ca9c3e6d211342b3f5b8d58d98e1ab88cbf08df71f97a7592ae126036ea4d14f21827dd5e0f43b7683a15b645f58a6e20470b59f
   languageName: node
   linkType: hard
 
@@ -5089,13 +4976,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pythnetwork/pyth-evm-js@npm:^1.42.0":
-  version: 1.42.0
-  resolution: "@pythnetwork/pyth-evm-js@npm:1.42.0"
+"@pythnetwork/pyth-evm-js@npm:latest":
+  version: 1.83.0
+  resolution: "@pythnetwork/pyth-evm-js@npm:1.83.0"
   dependencies:
-    "@pythnetwork/price-service-client": "npm:*"
+    "@pythnetwork/price-service-client": "npm:1.9.0"
     buffer: "npm:^6.0.3"
-  checksum: 10/1d79bcdac9c5d517b07e59a923a33d958e2af6378625081f4d46c616bd9f2012acd0ed7e19a8641d877224c2fab4abf668c5f1f3d7076ea486e86e70b21b56d1
+  checksum: 10/1898997c931bc889e6d2ffc930482ed29f6f8696634f24b30641f09e90d5a06dbcd78a729e77e7bed58cdb36c007bdfed48a846b149dd818564c877de460ee6d
   languageName: node
   linkType: hard
 
@@ -7930,24 +7817,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios-retry@npm:~3.3.0":
-  version: 3.3.1
-  resolution: "axios-retry@npm:3.3.1"
+"axios-retry@npm:^3.8.0":
+  version: 3.9.1
+  resolution: "axios-retry@npm:3.9.1"
   dependencies:
     "@babel/runtime": "npm:^7.15.4"
     is-retry-allowed: "npm:^2.2.0"
-  checksum: 10/c8312f7ca7608fc2434ea7b9c223c06926cf5060c91bdb952f20fce2e028ce46758f56e84346ff36c3475b629d93d41504e7579e402972332812577ef33d8d18
+  checksum: 10/9a28dd8aa4640c2af30789059a1a84549178b2a415bf765a35fe6bba9cd3d78b2ee2da07e448e823303c05f3a83bf98709f4aa64a43c0f6c2812e1665126b97e
   languageName: node
   linkType: hard
 
-"axios@npm:=1.1.0":
-  version: 1.1.0
-  resolution: "axios@npm:1.1.0"
+"axios@npm:^1.5.1":
+  version: 1.8.4
+  resolution: "axios@npm:1.8.4"
   dependencies:
-    follow-redirects: "npm:^1.15.0"
+    follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10/69f51ba46b772d3d2ce435a50264a246569574778f66de9c6a7818aae4bcf26bf7299a08e07a6d14b57b9c077d17e41b7782fa8b34106b7aea9af364703eaa59
+  checksum: 10/a10f0dd836613924e48cf03dc2eff3fd21b14f764807aedaee4880a70c0f142aaebdb21da7ce27104d4c16ca00d0e452a20a20851f60e385a8d5bad1ae909d46
   languageName: node
   linkType: hard
 
@@ -11018,13 +10905,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.15.0":
-  version: 1.15.6
-  resolution: "follow-redirects@npm:1.15.6"
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.15.6":
+  version: 1.15.9
+  resolution: "follow-redirects@npm:1.15.9"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 10/70c7612c4cab18e546e36b991bbf8009a1a41cf85354afe04b113d1117569abf760269409cb3eb842d9f7b03d62826687086b081c566ea7b1e6613cf29030bf7
+  checksum: 10/e3ab42d1097e90d28b913903841e6779eb969b62a64706a3eb983e894a5db000fbd89296f45f08885a0e54cd558ef62e81be1165da9be25a6c44920da10f424c
   languageName: node
   linkType: hard
 

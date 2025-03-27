@@ -1,11 +1,10 @@
 import { ContractError } from '@_/ContractError';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
-import type { CollateralType } from '@_/useCollateralTypes';
 import { useContractErrorParser } from '@_/useContractErrorParser';
-import { useLiquidityPosition } from '@_/useLiquidityPosition';
 import { usePool420 } from '@_/usePool420';
 import { usePool420Withdraw } from '@_/usePool420Withdraw';
+import { useSNX } from '@_/useSNX';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useToast } from '@chakra-ui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -13,17 +12,12 @@ import debug from 'debug';
 import { ethers } from 'ethers';
 import React from 'react';
 import { useAccountCollateralUnlockDate } from './useAccountCollateralUnlockDate';
+import { useBalance } from './useBalance';
 import { useCountdown } from './useCountdown';
 
-const log = debug('snx:useClosePosition420');
+const log = debug('snx:useWithdrawCollateral');
 
-export function useWithdrawCollateral({
-  accountId,
-  collateralType,
-}: {
-  accountId?: ethers.BigNumber;
-  collateralType?: CollateralType;
-}) {
+export function useWithdrawCollateral({ accountId }: { accountId: ethers.BigNumber }) {
   const signer = useSigner();
   const provider = useProvider();
   const { network } = useNetwork();
@@ -32,7 +26,9 @@ export function useWithdrawCollateral({
   const { data: Pool420Withdraw } = usePool420Withdraw();
   const { data: AccountProxy } = useAccountProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
-  const { data: liquidityPosition } = useLiquidityPosition({ accountId, collateralType });
+  const { data: balance } = useBalance({ accountId });
+
+  const { data: SNX } = useSNX();
 
   const { data: accountCollateralUnlockDate, isLoading: isLoadingAccountCollateralUnlockDate } =
     useAccountCollateralUnlockDate({ accountId });
@@ -43,7 +39,6 @@ export function useWithdrawCollateral({
 
   const isReady =
     accountId &&
-    collateralType &&
     network &&
     provider &&
     signer &&
@@ -51,8 +46,8 @@ export function useWithdrawCollateral({
     Pool420Withdraw &&
     Pool420 &&
     AccountProxy &&
-    liquidityPosition &&
-    liquidityPosition?.availableCollateral.gt(0) &&
+    SNX &&
+    balance?.collateralAvailable.gt(0) &&
     !timeToWithdraw &&
     true;
 
@@ -84,7 +79,7 @@ export function useWithdrawCollateral({
           target: Pool420Withdraw.address,
           callData: Pool420WithdrawInterface.encodeFunctionData('withdrawCollateral', [
             accountId,
-            collateralType.tokenAddress,
+            SNX.address,
           ]),
           requireSuccess: true,
         },
@@ -116,11 +111,6 @@ export function useWithdrawCollateral({
         [
           //
           'Pool 420',
-          //
-          'Accounts',
-          'LiquidityPosition',
-          'LiquidityPositions',
-          'AccountCollateralUnlockDate',
         ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
       );
 

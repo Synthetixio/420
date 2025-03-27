@@ -1,7 +1,3 @@
-import { useCollateralType } from '@_/useCollateralTypes';
-import { useLiquidityPosition } from '@_/useLiquidityPosition';
-import { type HomePageSchemaType, useParams } from '@_/useParams';
-import { usePythPrice } from '@_/usePythPrice';
 import { InfoIcon } from '@chakra-ui/icons';
 import {
   Alert,
@@ -33,8 +29,6 @@ import { useBalance } from './useBalance';
 import { useBalanceOfV2xUsd } from './useBalanceOfV2xUsd';
 import { useClosePositionPool420 } from './useClosePositionPool420';
 import { useCountdown } from './useCountdown';
-import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
-import { useLoan } from './useLoan';
 import { usePosition } from './usePosition';
 
 export function ModalConfirmUnstake({
@@ -161,7 +155,7 @@ export function ModalConfirmUnstake({
                           A portion of your SNX is still in escrow, and will be available to
                           withdraw on the vesting date
                         </Text>
-                        <EscrowTable />
+                        <EscrowTable accountId={accountId} />
                       </Flex>
                     }
                   >

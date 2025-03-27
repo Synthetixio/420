@@ -12,7 +12,8 @@ export function useAccountCollateralUnlockDate({ accountId }: { accountId?: ethe
   return useQuery({
     queryKey: [
       `${network?.id}-${network?.preset}`,
-      'AccountCollateralUnlockDate',
+      'Pool 420',
+      'useAccountCollateralUnlockDate',
       { accountId },
       { contractsHash: contractsHash([CoreProxy]) },
     ],

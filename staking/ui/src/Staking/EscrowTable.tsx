@@ -1,18 +1,13 @@
-import { useCollateralType } from '@_/useCollateralTypes';
-import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { Flex, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import { intlFormat } from 'date-fns';
-import { ethers } from 'ethers';
+import type { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
 import { useLocks } from './useLocks';
 
-export function EscrowTable() {
-  const [params] = useParams<HomePageSchemaType>();
-  const accountId = params.accountId ? ethers.BigNumber.from(params.accountId) : undefined;
-  const { data: collateralType } = useCollateralType('SNX');
-  const { data: locks, isPending } = useLocks({ accountId, collateralType });
+export function EscrowTable({ accountId }: { accountId: ethers.BigNumber }) {
+  const { data: locks, isPending } = useLocks({ accountId });
 
   return isPending ? (
     <Flex gap={8} justifyContent="space-between">

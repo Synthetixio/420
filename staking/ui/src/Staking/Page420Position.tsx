@@ -8,45 +8,105 @@ import { SectionPool420Position } from './SectionPool420Position';
 import { usePositions } from './usePositions';
 import { useTotals } from './useTotals';
 
+import { SectionMigrateV2xPosition } from './SectionMigrateV2xPosition';
 import { SectionMigrateV3Position } from './SectionMigrateV3Position';
 import { SectionWithdrawCollateral } from './SectionWithdrawCollateral';
 import { useBalance } from './useBalance';
+import { useBalances } from './useBalances';
 import { useLiquidityPosition } from './useLiquidityPosition';
+import { useLiquidityPositions } from './useLiquidityPositions';
 import { usePosition } from './usePosition';
+import { useV2xPosition } from './useV2xPosition';
 
-function StakingPositionItem({ accountId }: { accountId: ethers.BigNumber }) {
-  const { data: position } = usePosition({ accountId });
-  const { data: liquidityPosition } = useLiquidityPosition({ accountId });
-  const { data: balance } = useBalance({ accountId });
-  if (position?.loan.gt(0)) {
-    return <SectionPool420Position accountId={accountId} />;
-  }
-  if (liquidityPosition?.collateral.gt(0)) {
-    return <SectionMigrateV3Position accountId={accountId} />;
-  }
-  if (balance?.collateralAvailable.gt(0)) {
-    return <SectionWithdrawCollateral accountId={accountId} />;
-  }
-}
-
-export function PagePool420Position() {
-  const { data: totals, isPending: isPendingTotals } = useTotals();
+function PositionsList() {
   const { data: positions } = usePositions();
-  const sortedPositions = React.useMemo(() => {
+  const sorted420Positions = React.useMemo(() => {
     if (!positions) {
       return [];
     }
     return positions
       .filter((position) => position.collateral.gt(0))
-      .sort((position1, position2) =>
-        position1.collateral
-          .mul(position1.collateralPrice)
-          .gt(position2.collateral.mul(position2.collateralPrice))
-          ? -1
-          : 1
-      )
+      .sort((position1, position2) => (position1.collateral.gt(position2.collateral) ? -1 : 1))
       .sort((position1, position2) => (position1.loan.gt(position2.loan) ? -1 : 1));
   }, [positions]);
+
+  const { data: liquidityPositions } = useLiquidityPositions();
+  const sortedLiquidityPositions = React.useMemo(() => {
+    if (!liquidityPositions) {
+      return [];
+    }
+    return liquidityPositions
+      .filter((liquidityPosition) => liquidityPosition.collateral.gt(0))
+      .sort((position1, position2) => (position1.collateral.gt(position2.collateral) ? -1 : 1));
+  }, [liquidityPositions]);
+
+  const { data: balances } = useBalances();
+  const sortedbBalances = React.useMemo(() => {
+    if (!balances) {
+      return [];
+    }
+    return balances
+      .filter((balance) => balance.collateralAvailable.gt(0))
+      .sort((position1, position2) =>
+        position1.collateralAvailable
+          .add(position1.collateralLocked)
+          .gt(position2.collateralAvailable.add(position2.collateralLocked))
+          ? -1
+          : 1
+      );
+  }, [balances]);
+
+  const { data: v2xPosition } = useV2xPosition();
+
+  return (
+    <Flex direction="column" gap={10}>
+      {sorted420Positions.map((position) => (
+        <SectionPool420Position
+          key={`Pool 420 ${position.accountId.toString()}`}
+          accountId={position.accountId}
+        />
+      ))}
+      {v2xPosition?.debt.gt(0) ? (
+        <Flex
+          direction="column"
+          backgroundColor="whiteAlpha.50"
+          rounded="base"
+          p={{ base: 4, sm: 10 }}
+          gap={6}
+        >
+          <SectionMigrateV2xPosition />
+        </Flex>
+      ) : null}
+      {sortedLiquidityPositions.map((position) => (
+        <Flex
+          direction="column"
+          backgroundColor="whiteAlpha.50"
+          rounded="base"
+          key={`V3 Migrate ${position.accountId.toString()}`}
+          p={{ base: 4, sm: 10 }}
+          gap={6}
+        >
+          <SectionMigrateV3Position accountId={position.accountId} />
+        </Flex>
+      ))}
+      {sortedbBalances.map((balance) => (
+        <Flex
+          direction="column"
+          backgroundColor="whiteAlpha.50"
+          rounded="base"
+          key={`Withdraw ${balance.accountId.toString()}`}
+          p={{ base: 4, sm: 10 }}
+          gap={6}
+        >
+          <SectionWithdrawCollateral accountId={balance.accountId} />
+        </Flex>
+      ))}
+    </Flex>
+  );
+}
+
+export function Page420Position() {
+  const { data: totals, isPending: isPendingTotals } = useTotals();
   return (
     <>
       <Flex direction="column">
@@ -146,9 +206,7 @@ export function PagePool420Position() {
       </Flex>
 
       <Flex direction="column" gap={6}>
-        {sortedPositions.map((position) => (
-          <StakingPositionItem key={position.accountId.toString()} accountId={position.accountId} />
-        ))}
+        <PositionsList />
       </Flex>
     </>
   );

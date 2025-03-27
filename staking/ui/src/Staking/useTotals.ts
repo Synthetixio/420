@@ -35,16 +35,16 @@ export function useTotals() {
       if (!(provider && Pool420 && walletAddress)) {
         throw new Error('OMFG');
       }
-      log('walletAddress', walletAddress);
       const Pool420Contract = new ethers.Contract(Pool420.address, Pool420.abi, provider);
-      const totals = await Pool420Contract.getTotals(walletAddress);
-      log('totals', totals);
-      return {
-        deposit: totals.deposit,
-        loan: totals.loan,
-        burn: totals.burn,
-        collateralPrice: totals.collateralPrice,
+      const totalsRaw = await Pool420Contract.getTotals(walletAddress);
+      const totals = {
+        deposit: totalsRaw.deposit,
+        loan: totalsRaw.loan,
+        burn: totalsRaw.burn,
+        collateralPrice: totalsRaw.collateralPrice,
       };
+      log('totals', totals);
+      return totals;
     },
   });
 }

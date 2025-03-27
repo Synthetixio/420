@@ -17,7 +17,7 @@ export function useAccounts() {
     queryKey: [
       `${network?.id}-${network?.preset}`,
       'Pool 420',
-      'Accounts',
+      'useAccounts',
       { walletAddress },
       { contracts: [dataUpdatedAtPool420] },
     ],

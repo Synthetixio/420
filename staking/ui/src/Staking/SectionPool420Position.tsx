@@ -181,7 +181,7 @@ export function SectionPool420Position({ accountId }: { accountId: ethers.BigNum
                 </Text>
               </Box>
 
-              <EscrowedSNX />
+              <EscrowedSNX accountId={accountId} />
 
               <Button
                 width="100%"

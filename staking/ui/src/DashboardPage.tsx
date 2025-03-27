@@ -3,6 +3,7 @@ import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { Alert, AlertIcon, Collapse, Flex, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Page420Position } from './Staking/Page420Position';
 import { PageChangeNetwork } from './Staking/PageChangeNetwork';
 import { PageConnectYourWallet } from './Staking/PageConnectYourWallet';
 import { PageEmptyPosition } from './Staking/PageEmptyPosition';
@@ -10,12 +11,8 @@ import { PageEmptyV3Debt } from './Staking/PageEmptyV3Debt';
 import { PageLoading } from './Staking/PageLoading';
 import { PageMigrateFromV2x } from './Staking/PageMigrateFromV2x';
 import { PageMigrateFromV3 } from './Staking/PageMigrateFromV3';
-import { PagePool420Position } from './Staking/PagePool420Position';
 import { PageWithdrawPosition } from './Staking/PageWithdrawPosition';
-import { useBalances } from './Staking/useBalances';
-import { useLiquidityPositions } from './Staking/useLiquidityPositions';
-import { usePositions } from './Staking/usePositions';
-import { useV2xPosition } from './Staking/useV2xPosition';
+import { useFlags } from './Staking/useFlags';
 
 function HeaderDeposit() {
   return (
@@ -49,35 +46,183 @@ function Header420() {
   );
 }
 
-export function DashboardPage() {
-  const [params] = useParams<HomePageSchemaType>();
-  const { data: balances, isPending: isPendingBalances } = useBalances();
-  const { data: positions, isPending: isPendingPositions } = usePositions();
-  const { data: liquidityPositions, isPending: isPendingLiquidityPositions } =
-    useLiquidityPositions();
-  const { data: v2xPosition, isPending: isPendingV2xPosition } = useV2xPosition();
+function Page() {
   const { activeWallet } = useWallet();
   const { network } = useNetwork();
+  const { data: flags, isPending: isPendingFlags } = useFlags();
 
-  const isPending =
+  if (
+    // Wallet not connected, cannot show anything
+    !activeWallet
+  ) {
+    return (
+      <>
+        <HeaderDeposit />
+        <PageConnectYourWallet />
+      </>
+    );
+  }
+
+  if (
+    // Wallet connected but chain is not correct
     activeWallet &&
-    network &&
-    (isPendingPositions ||
-      isPendingBalances ||
-      isPendingLiquidityPositions ||
-      isPendingV2xPosition);
+    !network
+  ) {
+    return (
+      <>
+        <HeaderDeposit />
+        <PageChangeNetwork />
+      </>
+    );
+  }
 
-  const hasV2xPosition = v2xPosition?.debt.gt(0);
-  const hasV3Position = liquidityPositions?.some((liquidityPosition) =>
-    liquidityPosition.collateral.gt(0)
+  if (
+    // Wallet connected, network is supported but data is loading
+    isPendingFlags
+  ) {
+    return (
+      <>
+        <HeaderDeposit />
+        <PageLoading />
+      </>
+    );
+  }
+
+  if (
+    // Has 420 position, page will include all other scenarios
+    flags?.has420Position
+  ) {
+    return (
+      <>
+        <Header420 />
+        <Page420Position />
+      </>
+    );
+  }
+
+  if (
+    // Has v2x position, MIGRATE NOW!
+    flags?.hasV2xPosition
+  ) {
+    return (
+      <>
+        <HeaderDeposit />
+        <PageMigrateFromV2x />
+      </>
+    );
+  }
+
+  if (
+    // Has v3 position, but does not have any debt yet, new Simple Staking (coming soon!)
+    flags?.hasV3Position &&
+    !flags?.hasV3Debt
+  ) {
+    return (
+      <>
+        <HeaderDeposit />
+        <PageEmptyV3Debt />
+      </>
+    );
+  }
+
+  if (
+    // Has v3 position, and has debt, MIGRATE NOW!
+    flags?.hasV3Position &&
+    flags?.hasV3Debt
+  ) {
+    return (
+      <>
+        <HeaderDeposit />
+        <PageMigrateFromV3 />
+      </>
+    );
+  }
+
+  if (
+    // Has something to withdraw
+    flags?.hasAvailableCollateral
+  ) {
+    return (
+      <>
+        <Header420 />
+        <PageWithdrawPosition />
+      </>
+    );
+  }
+
+  // No position, no collateral to withdraw
+  return (
+    <>
+      <HeaderDeposit />
+      <PageEmptyPosition />
+    </>
   );
-  const hasV3Debt = liquidityPositions?.some((liquidityPosition) => liquidityPosition.debt.gt(0));
-  const hasAvailableCollateral = balances?.some((balance) => balance.collateralAvailable.gt(0));
+}
 
-  // Only show 420 position even if user has other v3 positions on the same account
-  const hasStakingPosition = positions?.some((position) => position.collateral.gt(0));
-
+function ShowAll() {
   let step = 1;
+  return (
+    <>
+      <Heading mt={16} color="red.500">
+        State {step++}. Loading
+      </Heading>
+      <HeaderDeposit />
+      <PageLoading />
+
+      <Heading mt={16} color="red.500">
+        State {step++}. Not connected
+      </Heading>
+      <HeaderDeposit />
+      <PageConnectYourWallet />
+
+      <Heading mt={16} color="red.500">
+        State {step++}. Connected wallet, wrong network
+      </Heading>
+      <HeaderDeposit />
+      <PageChangeNetwork />
+
+      <Heading mt={16} color="red.500">
+        State {step++}. Connected wallet, no v2x/v3 positions
+      </Heading>
+      <HeaderDeposit />
+      <PageEmptyPosition />
+
+      <Heading mt={16} color="red.500">
+        State {step++}. v3 position without debt
+      </Heading>
+      <HeaderDeposit />
+      <PageEmptyV3Debt />
+
+      <Heading mt={16} color="red.500">
+        State {step++}. Migrate v2x position
+      </Heading>
+      <HeaderDeposit />
+      <PageMigrateFromV2x />
+
+      <Heading mt={16} color="red.500">
+        State {step++}. Migrate v3 position
+      </Heading>
+      <HeaderDeposit />
+      <PageMigrateFromV3 />
+
+      <Heading mt={16} color="red.500">
+        State {step++}. Pool 420 existing position
+      </Heading>
+      <Header420 />
+      <Page420Position />
+
+      <Heading mt={16} color="red.500">
+        State {step++}. Pool 420 withdraw
+      </Heading>
+      <Header420 />
+      <PageWithdrawPosition />
+    </>
+  );
+}
+
+export function DashboardPage() {
+  const [params] = useParams<HomePageSchemaType>();
+  const { data: flags } = useFlags();
   return (
     <>
       <Helmet>
@@ -85,7 +230,7 @@ export function DashboardPage() {
         <meta name="description" content="Synthetix 420 Pool" />
       </Helmet>
       <Flex pt={8} direction="column" mb={16} width="100%">
-        <Collapse in={hasV2xPosition || hasV3Debt} animateOpacity unmountOnExit>
+        <Collapse in={flags?.hasV2xPosition || flags?.hasV3Debt} animateOpacity unmountOnExit>
           <Alert status="warning" mb="6">
             <AlertIcon />
             <Text>
@@ -96,138 +241,7 @@ export function DashboardPage() {
         </Collapse>
 
         <Flex direction="column" mt={6} gap={6}>
-          {params.showAll ? (
-            <Heading mt={16} color="red.500">
-              State {step++}. Loading
-            </Heading>
-          ) : null}
-          {params.showAll || isPending ? (
-            <>
-              <HeaderDeposit />
-              <PageLoading />
-            </>
-          ) : null}
-
-          {params.showAll ? (
-            <Heading mt={16} color="red.500">
-              State {step++}. Not connected
-            </Heading>
-          ) : null}
-          {params.showAll || !activeWallet ? (
-            <>
-              <HeaderDeposit />
-              <PageConnectYourWallet />
-            </>
-          ) : null}
-
-          {params.showAll ? (
-            <Heading mt={16} color="red.500">
-              State {step++}. Connected wallet, wrong network
-            </Heading>
-          ) : null}
-          {params.showAll || (activeWallet && !network) ? (
-            <>
-              <HeaderDeposit />
-              <PageChangeNetwork />
-            </>
-          ) : null}
-
-          {params.showAll ? (
-            <Heading mt={16} color="red.500">
-              State {step++}. Connected wallet, no v2x/v3 positions
-            </Heading>
-          ) : null}
-          {params.showAll ||
-          (activeWallet &&
-            network &&
-            !isPending &&
-            !hasV2xPosition &&
-            !hasV3Position &&
-            !hasStakingPosition &&
-            !hasAvailableCollateral) ? (
-            <>
-              <HeaderDeposit />
-              <PageEmptyPosition />
-            </>
-          ) : null}
-
-          {params.showAll ? (
-            <Heading mt={16} color="red.500">
-              State {step++}. v3 position without debt
-            </Heading>
-          ) : null}
-          {params.showAll ||
-          (activeWallet &&
-            network &&
-            !isPending &&
-            hasV3Position &&
-            !hasV3Debt &&
-            !hasStakingPosition) ? (
-            <>
-              <HeaderDeposit />
-              <PageEmptyV3Debt />
-            </>
-          ) : null}
-
-          {params.showAll ? (
-            <Heading mt={16} color="red.500">
-              State {step++}. Migrate v2x position
-            </Heading>
-          ) : null}
-          {params.showAll || (activeWallet && network && !isPending && hasV2xPosition) ? (
-            <>
-              <HeaderDeposit />
-              <PageMigrateFromV2x />
-            </>
-          ) : null}
-
-          {params.showAll ? (
-            <Heading mt={16} color="red.500">
-              State {step++}. Migrate v3 position
-            </Heading>
-          ) : null}
-          {params.showAll ||
-          (activeWallet &&
-            network &&
-            !isPending &&
-            hasV3Position &&
-            hasV3Debt &&
-            // We cannot migrate account if there is already POL position on same account
-            !hasStakingPosition) ? (
-            <>
-              <HeaderDeposit />
-              <PageMigrateFromV3 />
-            </>
-          ) : null}
-
-          {params.showAll ? (
-            <Heading mt={16} color="red.500">
-              State {step++}. Pool 420 existing position
-            </Heading>
-          ) : null}
-          {params.showAll || (activeWallet && network && !isPending && hasStakingPosition) ? (
-            <>
-              <Header420 />
-              <PagePool420Position />
-            </>
-          ) : null}
-
-          {params.showAll ? (
-            <Heading mt={16} color="red.500">
-              State {step++}. Pool 420 withdraw
-            </Heading>
-          ) : null}
-          {params.showAll ||
-          (activeWallet &&
-            network &&
-            !isPending &&
-            !hasStakingPosition &&
-            hasAvailableCollateral) ? (
-            <>
-              <Header420 />
-              <PageWithdrawPosition />
-            </>
-          ) : null}
+          {params.showAll ? <ShowAll /> : <Page />}
         </Flex>
       </Flex>
     </>

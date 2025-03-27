@@ -35,7 +35,7 @@ export function useMigratePool420V2x() {
     LegacyMarket &&
     targetCRatio &&
     v2xPosition &&
-    v2xPosition.collateralAmount.gt(0) &&
+    v2xPosition.collateral.gt(0) &&
     (v2xPosition.cRatio.lte(0) || v2xPosition.cRatio.gte(targetCRatio)) &&
     true;
 
@@ -104,11 +104,6 @@ export function useMigratePool420V2x() {
         [
           //
           'Pool 420',
-          //
-          'Accounts',
-          'LiquidityPosition',
-          'LiquidityPositions',
-          'AccountCollateralUnlockDate',
         ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
       );
 
