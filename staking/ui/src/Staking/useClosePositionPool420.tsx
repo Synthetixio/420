@@ -35,7 +35,6 @@ export function useClosePositionPool420({ accountId }: { accountId: ethers.BigNu
     AccountProxy &&
     position &&
     position.collateral.gt(0) &&
-    position.loan.gt(0) &&
     true;
 
   const toast = useToast({ isClosable: true, duration: 60_000 });
@@ -125,10 +124,6 @@ export function useClosePositionPool420({ accountId }: { accountId: ethers.BigNu
         [
           //
           'Pool 420',
-          //
-          'LiquidityPosition',
-          'LiquidityPositions',
-          'AccountCollateralUnlockDate',
         ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
       );
 

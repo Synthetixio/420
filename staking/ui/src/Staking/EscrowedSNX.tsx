@@ -1,26 +1,18 @@
-import { useCollateralType } from '@_/useCollateralTypes';
-import { useLiquidityPosition } from '@_/useLiquidityPosition';
-import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { Flex, Image, Text, Tooltip } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
-import { ethers } from 'ethers';
+import type { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
 import { EscrowTable } from './EscrowTable';
 import escrowed from './escrowed.svg';
+import { useBalance } from './useBalance';
 
-export function EscrowedSNX() {
-  const [params] = useParams<HomePageSchemaType>();
-  const { data: collateralType } = useCollateralType('SNX');
-
-  const accountId = params.accountId ? ethers.BigNumber.from(params.accountId) : undefined;
-
-  const { data: liquidityPosition, isPending: isPendingLiquidityPosition } = useLiquidityPosition({
+export function EscrowedSNX({ accountId }: { accountId: ethers.BigNumber }) {
+  const { data: balance, isPending: isPendingBalance } = useBalance({
     accountId,
-    collateralType,
   });
 
-  return liquidityPosition?.totalLocked.gt(0) ? (
+  return balance?.collateralLocked.gt(0) ? (
     <Tooltip
       closeDelay={500}
       openDelay={300}
@@ -32,7 +24,7 @@ export function EscrowedSNX() {
             A portion of your SNX is still in escrow, and will be available to withdraw on the
             vesting date
           </Text>
-          <EscrowTable />
+          <EscrowTable accountId={accountId} />
         </Flex>
       }
     >
@@ -53,10 +45,10 @@ export function EscrowedSNX() {
           Escrowed{' '}
         </Text>
         <Text color="gray.50" fontSize="1.0em">
-          {isPendingLiquidityPosition
+          {isPendingBalance
             ? '~'
-            : liquidityPosition
-              ? `${numbro(wei(liquidityPosition.totalLocked).toNumber()).format({
+            : balance
+              ? `${numbro(wei(balance.collateralLocked).toNumber()).format({
                   trimMantissa: true,
                   thousandSeparated: true,
                   average: true,

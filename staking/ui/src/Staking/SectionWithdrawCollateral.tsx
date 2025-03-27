@@ -56,7 +56,7 @@ export function SectionWithdrawCollateral({ accountId }: { accountId: ethers.Big
         </Text>
       </Box>
 
-      <EscrowedSNX />
+      <EscrowedSNX accountId={accountId} />
 
       <Button
         width="100%"

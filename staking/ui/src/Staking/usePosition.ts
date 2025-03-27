@@ -23,7 +23,6 @@ export function usePosition({ accountId }: { accountId: ethers.BigNumber }) {
       if (!(positions && accountId)) {
         throw new Error('OMFG');
       }
-      log('accountId', accountId);
       const position = positions.find((p) => p.accountId.eq(accountId));
       log('position', position);
       if (!position) {

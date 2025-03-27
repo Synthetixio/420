@@ -1,35 +1,30 @@
 import { contractsHash } from '@_/tsHelpers';
 import { useNetwork, useProviderForChain } from '@_/useBlockchain';
-import type { CollateralType } from '@_/useCollateralTypes';
 import { useCoreProxy } from '@_/useCoreProxy';
+import { useSNX } from '@_/useSNX';
 import { useQuery } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';
 
 const log = debug('snx:useLocks');
 
-export function useLocks({
-  accountId,
-  collateralType,
-}: {
-  accountId?: ethers.BigNumber;
-  collateralType?: CollateralType;
-}) {
+export function useLocks({ accountId }: { accountId: ethers.BigNumber }) {
   const { network } = useNetwork();
-  const { data: CoreProxy } = useCoreProxy();
   const provider = useProviderForChain();
+  const { data: CoreProxy } = useCoreProxy();
+  const { data: SNX } = useSNX();
 
   return useQuery({
-    enabled: Boolean(provider && CoreProxy && accountId && collateralType),
+    enabled: Boolean(provider && CoreProxy && accountId && SNX),
     queryKey: [
       `${network?.id}-${network?.preset}`,
       'Pool 420',
       'useLocks',
-      { accountId, collateralType },
-      { contractsHash: contractsHash([CoreProxy]) },
+      { accountId },
+      { contractsHash: contractsHash([CoreProxy, SNX]) },
     ],
     queryFn: async () => {
-      if (!(provider && CoreProxy && accountId && collateralType)) {
+      if (!(provider && CoreProxy && accountId && SNX)) {
         throw new Error('OMFG');
       }
       log('accountId', accountId);
@@ -38,7 +33,7 @@ export function useLocks({
       const allLocks: {
         amountD18: ethers.BigNumber;
         lockExpirationTime: ethers.BigNumber;
-      }[] = await CoreProxyContract.getLocks(accountId, collateralType.tokenAddress, 0, 100);
+      }[] = await CoreProxyContract.getLocks(accountId, SNX.address, 0, 100);
       const now = Math.floor(Date.now() / 1000);
       const locks = allLocks
         .filter((lock) => lock.lockExpirationTime.gt(now))
