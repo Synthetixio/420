@@ -1,21 +1,16 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Flex, Heading, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
-import type { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
 import { PanelTvl } from './PanelTvl';
-import { SectionPool420Position } from './SectionPool420Position';
-import { usePositions } from './usePositions';
-import { useTotals } from './useTotals';
-
 import { SectionMigrateV2xPosition } from './SectionMigrateV2xPosition';
 import { SectionMigrateV3Position } from './SectionMigrateV3Position';
+import { SectionPool420Position } from './SectionPool420Position';
 import { SectionWithdrawCollateral } from './SectionWithdrawCollateral';
-import { useBalance } from './useBalance';
 import { useBalances } from './useBalances';
-import { useLiquidityPosition } from './useLiquidityPosition';
 import { useLiquidityPositions } from './useLiquidityPositions';
-import { usePosition } from './usePosition';
+import { usePositions } from './usePositions';
+import { useTotals } from './useTotals';
 import { useV2xPosition } from './useV2xPosition';
 
 function PositionsList() {
@@ -70,7 +65,7 @@ function PositionsList() {
         <Flex
           direction="column"
           backgroundColor="whiteAlpha.50"
-          rounded="base"
+          borderRadius="base"
           p={{ base: 4, sm: 10 }}
           gap={6}
         >
@@ -81,7 +76,7 @@ function PositionsList() {
         <Flex
           direction="column"
           backgroundColor="whiteAlpha.50"
-          rounded="base"
+          borderRadius="base"
           key={`V3 Migrate ${position.accountId.toString()}`}
           p={{ base: 4, sm: 10 }}
           gap={6}
@@ -93,7 +88,7 @@ function PositionsList() {
         <Flex
           direction="column"
           backgroundColor="whiteAlpha.50"
-          rounded="base"
+          borderRadius="base"
           key={`Withdraw ${balance.accountId.toString()}`}
           p={{ base: 4, sm: 10 }}
           gap={6}
@@ -105,105 +100,147 @@ function PositionsList() {
   );
 }
 
-export function Page420Position() {
+function Totals() {
   const { data: totals, isPending: isPendingTotals } = useTotals();
   return (
     <>
-      <Flex direction="column">
-        <Flex direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }} gap={6}>
-          <Flex
-            direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
-            flexWrap="wrap"
-            flex={1}
-            gap={6}
-            borderColor="gray.900"
-            borderWidth="1px"
-            borderRadius="base"
-            bg="navy.700"
-            p={{ base: 4, sm: 10 }}
-            alignContent="flex-start"
-          >
-            <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50" width="100%">
-              420 Pool Balance
-            </Text>
+      <Flex
+        direction="column"
+        flex={1}
+        width="100%"
+        textAlign="center"
+        alignItems="center"
+        bg="whiteAlpha.50"
+        borderRadius="base"
+        p={{ base: 4, sm: 6 }}
+        gap={1}
+      >
+        <Text fontSize="sm" color="gray.500">
+          Total Deposited
+        </Text>
+        <Text fontSize="lg" color="gray.50">
+          {isPendingTotals
+            ? '~'
+            : totals
+              ? `${numbro(wei(totals.deposit).toNumber()).format({
+                  trimMantissa: true,
+                  thousandSeparated: true,
+                  average: true,
+                  mantissa: 2,
+                  spaceSeparated: false,
+                })} SNX`
+              : null}
+        </Text>
+        <Text fontSize="sm" color="gray.500">
+          {isPendingTotals
+            ? '~'
+            : totals
+              ? `$${numbro(wei(totals.deposit).mul(totals.collateralPrice).toNumber()).format({
+                  trimMantissa: true,
+                  thousandSeparated: true,
+                  average: true,
+                  mantissa: 2,
+                  spaceSeparated: false,
+                })}`
+              : null}
+        </Text>
+      </Flex>
 
-            <Flex direction="column" gap={1} flex={1}>
-              <Text fontSize="sm" color="gray.500">
-                Deposited
-              </Text>
-              <Text fontSize="lg" color="gray.50">
-                {isPendingTotals
-                  ? '~'
-                  : totals
-                    ? `${numbro(wei(totals.deposit).toNumber()).format({
-                        trimMantissa: true,
-                        thousandSeparated: true,
-                        average: true,
-                        mantissa: 2,
-                        spaceSeparated: false,
-                      })} SNX`
-                    : null}
-              </Text>
-              <Text fontSize="xs" color="gray.500">
-                {isPendingTotals
-                  ? '~'
-                  : totals
-                    ? `$${numbro(wei(totals.deposit).mul(totals.collateralPrice).toNumber()).format(
-                        {
-                          trimMantissa: true,
-                          thousandSeparated: true,
-                          average: true,
-                          mantissa: 2,
-                          spaceSeparated: false,
-                        }
-                      )}`
-                    : null}
-              </Text>
-            </Flex>
+      <Flex
+        direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
+        flexWrap="wrap"
+        flex={1}
+        alignContent="flex-start"
+        textAlign="center"
+        alignItems="center"
+        gap={6}
+      >
+        <Flex
+          direction="column"
+          flex={1}
+          bg="whiteAlpha.50"
+          borderRadius="base"
+          p={{ base: 4, sm: 6 }}
+          gap={1}
+        >
+          <Text fontSize="sm" color="gray.500">
+            Current Debt
+          </Text>
+          <Text fontSize="lg" color="gray.50">
+            {isPendingTotals
+              ? '~'
+              : totals
+                ? `$${numbro(wei(totals.loan).toNumber()).format({
+                    trimMantissa: true,
+                    thousandSeparated: true,
+                    average: true,
+                    mantissa: 2,
+                    spaceSeparated: false,
+                  })}`
+                : null}
+          </Text>
+        </Flex>
 
-            <Flex direction="column" gap={1} flex={1}>
-              <Text fontSize="sm" color="gray.500">
-                Current Debt
-              </Text>
-              <Text fontSize="lg" color="gray.50">
-                {isPendingTotals
-                  ? '~'
-                  : totals
-                    ? `$${numbro(wei(totals.loan).toNumber()).format({
-                        trimMantissa: true,
-                        thousandSeparated: true,
-                        average: true,
-                        mantissa: 2,
-                        spaceSeparated: false,
-                      })}`
-                    : null}
-              </Text>
-            </Flex>
+        <Flex
+          direction="column"
+          flex={1}
+          bg="whiteAlpha.50"
+          borderRadius="base"
+          p={{ base: 4, sm: 6 }}
+          gap={1}
+        >
+          <Text fontSize="sm" color="gray.500">
+            Debt Burned
+          </Text>
+          <Text fontSize="lg" color="gray.50">
+            {isPendingTotals
+              ? '~'
+              : totals
+                ? `$${numbro(wei(totals.burn).toNumber()).format({
+                    trimMantissa: true,
+                    thousandSeparated: true,
+                    average: true,
+                    mantissa: 2,
+                    spaceSeparated: false,
+                  })}`
+                : null}
+          </Text>
+        </Flex>
+      </Flex>
+    </>
+  );
+}
 
-            <Box />
-
-            <Flex direction="column" gap={1} flex={1}>
-              <Text fontSize="sm" color="gray.500">
-                Debt Burned
-              </Text>
-              <Text fontSize="lg" color="gray.50">
-                {isPendingTotals
-                  ? '~'
-                  : totals
-                    ? `$${numbro(wei(totals.burn).toNumber()).format({
-                        trimMantissa: true,
-                        thousandSeparated: true,
-                        average: true,
-                        mantissa: 2,
-                        spaceSeparated: false,
-                      })}`
-                    : null}
-              </Text>
-            </Flex>
-          </Flex>
+export function Page420Position() {
+  return (
+    <>
+      <Flex direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }} gap={6}>
+        <Flex
+          direction="column"
+          flex={1}
+          gap={6}
+          bg="navy.700"
+          borderRadius="base"
+          p={{ base: 4, sm: 10 }}
+          alignContent="flex-start"
+        >
+          <Totals />
+        </Flex>
+        <Flex
+          direction="column"
+          flex={1}
+          gap={4}
+          bg="navy.700"
+          borderRadius="base"
+          p={{ base: 4, sm: 10 }}
+        >
           <PanelTvl />
         </Flex>
       </Flex>
+
+      <Heading color="gray.50" fontSize={['20px', '30px']} lineHeight="120%">
+        Accounts
+      </Heading>
 
       <Flex direction="column" gap={6}>
         <PositionsList />

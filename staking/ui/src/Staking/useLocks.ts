@@ -1,4 +1,4 @@
-import { contractsHash } from '@_/tsHelpers';
+import { contractsHash } from '@_/format';
 import { useNetwork, useProviderForChain } from '@_/useBlockchain';
 import { useCoreProxy } from '@_/useCoreProxy';
 import { useSNX } from '@_/useSNX';

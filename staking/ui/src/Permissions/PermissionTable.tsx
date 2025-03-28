@@ -1,6 +1,4 @@
-import { Address } from '@_/Address';
 import { renderAccountId } from '@_/format';
-import { useAccountOwner, useAccountPermissions } from '@_/useAccountPermissions';
 import { useWallet } from '@_/useBlockchain';
 import {
   Badge,
@@ -12,7 +10,6 @@ import {
   TableContainer,
   Tbody,
   Td,
-  Text,
   Th,
   Thead,
   Tr,
@@ -20,11 +17,13 @@ import {
 } from '@chakra-ui/react';
 import type { ethers } from 'ethers';
 import { useMemo } from 'react';
+import { Address } from './Address';
 import { PermissionModal } from './PermissionModal';
 import { PermissionRow } from './PermissionRow';
 import { PermissionTableLoading } from './PermissionTableLoading';
 import { PermissionsInfo } from './PermissionsInfo';
 import { TransferOwnershipModal } from './TransferOwnershipModal';
+import { useAccountOwner, useAccountPermissions } from './useAccountPermissions';
 
 export function PermissionTable({
   accountId,
@@ -58,22 +57,9 @@ export function PermissionTable({
   );
   return (
     <>
-      <TableContainer
-        flexGrow="2"
-        borderColor="gray.900"
-        borderWidth="1px"
-        borderRadius="6px"
-        p={6}
-        sx={{
-          borderCollapse: 'separate',
-          borderSpacing: 0,
-        }}
-        bg="navy.700"
-      >
-        <Flex mb="2" w="100%" justifyContent="space-between">
-          <Heading size="md" mb="1">
-            Account {renderAccountId(accountId)}
-          </Heading>
+      <TableContainer flexGrow="2" bg="navy.700" borderRadius="base" p={6}>
+        <Flex mb={6} w="100%" justifyContent="space-between">
+          <Heading size="md">Account {renderAccountId(accountId)}</Heading>
           {isOwner && (
             <Button
               size="xs"
@@ -85,59 +71,35 @@ export function PermissionTable({
             </Button>
           )}
         </Flex>
-        <Table variant="simple">
+
+        <Table variant="unstyled">
           <Thead>
             <Tr>
-              <Th
-                py={5}
-                textTransform="unset"
-                color="gray.600"
-                fontFamily="heading"
-                fontSize="12px"
-                lineHeight="16px"
-                borderBottomColor="gray.900"
-              >
+              <Th textTransform="unset" color="gray.600" fontFamily="heading" fontSize="sm" pl={0}>
                 Address
               </Th>
-              <Th
-                py={5}
-                textTransform="unset"
-                color="gray.600"
-                fontFamily="heading"
-                fontSize="12px"
-                lineHeight="16px"
-                borderBottomColor="gray.900"
-              >
+              <Th textTransform="unset" color="gray.600" fontFamily="heading" fontSize="sm">
                 Permissions
                 <PermissionsInfo />
               </Th>
               <Th
-                py={5}
                 textTransform="unset"
                 color="gray.600"
                 fontFamily="heading"
-                fontSize="12px"
-                lineHeight="16px"
-                borderBottomColor="gray.900"
+                fontSize="sm"
+                pr={0}
               />
             </Tr>
           </Thead>
 
           <Tbody>
             <Tr>
-              <Td width={240} py={5} borderBottomColor="gray.900">
+              <Td width={240} pl={0}>
                 <Skeleton isLoaded={!loadingOwner}>
-                  {accountOwner && (
-                    <Address
-                      address={accountOwner}
-                      fontWeight={400}
-                      color="white"
-                      fontSize="16px"
-                    />
-                  )}
+                  {accountOwner && <Address address={accountOwner} />}
                 </Skeleton>
               </Td>
-              <Td py={5} borderBottomColor="gray.900">
+              <Td>
                 <Badge
                   color="cyan"
                   variant="outline"
@@ -148,7 +110,7 @@ export function PermissionTable({
                   OWNER
                 </Badge>
               </Td>
-              <Td py={5} borderBottomColor="gray.900" textAlign="end">
+              <Td textAlign="end" pr={0}>
                 {isOwner && (
                   <Button
                     size="xs"
@@ -165,9 +127,9 @@ export function PermissionTable({
               </Td>
             </Tr>
 
-            {isLoading && <PermissionTableLoading />}
-
-            {!isLoading &&
+            {isLoading ? (
+              <PermissionTableLoading />
+            ) : (
               permissions &&
               Object.keys(permissions)
                 .filter((target) => permissions[target]?.length > 0)
@@ -180,7 +142,8 @@ export function PermissionTable({
                     refetch={refetch}
                     isOwner={isOwner}
                   />
-                ))}
+                ))
+            )}
           </Tbody>
         </Table>
       </TableContainer>

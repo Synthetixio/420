@@ -1,5 +1,4 @@
 import { ContractError } from '@_/ContractError';
-import { POOL_ID } from '@_/constants';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
@@ -79,7 +78,7 @@ export function useMigratePool420({ accountId }: { accountId: ethers.BigNumber }
         {
           target: PositionManager420.address,
           callData: PositionManager420Interface.encodeFunctionData('migratePosition', [
-            ethers.BigNumber.from(POOL_ID),
+            ethers.BigNumber.from(1), // SC Pool ID == 1
             accountId,
           ]),
           requireSuccess: true,

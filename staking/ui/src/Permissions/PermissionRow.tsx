@@ -1,11 +1,11 @@
-import { Address } from '@_/Address';
-import { useManagePermissions } from '@_/useManagePermissions';
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
-import { Badge, Flex, IconButton, Td, Text, Tr, useDisclosure } from '@chakra-ui/react';
+import { Badge, Flex, IconButton, Td, Tr, useDisclosure } from '@chakra-ui/react';
 import type { ethers } from 'ethers';
 import { useEffect } from 'react';
 import { permissionsList } from './AccountPermissions';
+import { Address } from './Address';
 import { PermissionModal } from './PermissionModal';
+import { useManagePermissions } from './useManagePermissions';
 
 export function PermissionRow({
   address,
@@ -46,10 +46,10 @@ export function PermissionRow({
 
   return (
     <Tr>
-      <Td width={240} borderBottomColor="gray.900" py="4">
-        <Address address={address} fontWeight={400} color="white" fontSize="16px" />
+      <Td width={240} py="4">
+        <Address address={address} />
       </Td>
-      <Td borderBottomColor="gray.900">
+      <Td>
         <Flex py={2} flexWrap="wrap" gap={3}>
           {permissionsList.map((permission) => {
             const isActive = currentPermissions.includes(permission);
@@ -70,7 +70,7 @@ export function PermissionRow({
         </Flex>
       </Td>
 
-      <Td borderBottomColor="gray.900" textAlign="end">
+      <Td textAlign="end">
         {isOwner && (
           <>
             <PermissionModal

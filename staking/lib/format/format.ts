@@ -1,15 +1,6 @@
-import { type WeiSource, wei } from '@synthetixio/wei';
-import { ethers } from 'ethers';
+import type { ethers } from 'ethers';
 
-export const formatValue = (value: ethers.BigNumberish, decimals = 18) =>
-  Number.parseFloat(ethers.utils.formatUnits(value, decimals));
-
-export const parseUnits = (value: WeiSource, decimals = 18) => wei(value, decimals).toBN();
-
-export const compareAddress = (add1: string | null = '', add2: string | null = '') =>
-  !!add1 && !!add2 && add1.toLowerCase() === add2.toLowerCase();
-
-export const prettyString = (text: string, startLength = 6, endLength = 4) => {
+export const renderWalletAddress = (text: string, startLength = 6, endLength = 4) => {
   if (text.length <= startLength + endLength) {
     return text;
   }

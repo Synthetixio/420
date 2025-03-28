@@ -5,19 +5,6 @@ __metadata:
   version: 8
   cacheKey: 10
 
-"@_/Address@workspace:*, @_/Address@workspace:staking/lib/Address":
-  version: 0.0.0-use.local
-  resolution: "@_/Address@workspace:staking/lib/Address"
-  dependencies:
-    "@_/etherscanLink": "workspace:*"
-    "@_/format": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
 "@_/ContractError@workspace:*, @_/ContractError@workspace:staking/lib/ContractError":
   version: 0.0.0-use.local
   resolution: "@_/ContractError@workspace:staking/lib/ContractError"
@@ -25,26 +12,6 @@ __metadata:
     "@_/parseContractError": "workspace:*"
     "@chakra-ui/react": "npm:^2.8.2"
     date-fns: "npm:^4.1.0"
-    react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/Permissions@workspace:*, @_/Permissions@workspace:staking/lib/Permissions":
-  version: 0.0.0-use.local
-  resolution: "@_/Permissions@workspace:staking/lib/Permissions"
-  dependencies:
-    "@_/Address": "workspace:*"
-    "@_/format": "workspace:*"
-    "@_/useAccountPermissions": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/useManagePermissions": "workspace:*"
-    "@_/usePool420": "workspace:*"
-    "@_/useTransferAccountId": "workspace:*"
-    "@chakra-ui/icons": "npm:^2.1.1"
-    "@chakra-ui/react": "npm:^2.8.2"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
     react: "npm:^18.2.0"
   languageName: unknown
   linkType: soft
@@ -72,37 +39,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@_/TermsModal@workspace:staking/lib/TermsModal"
   dependencies:
-    "@_/constants": "workspace:*"
     "@_/theme": "workspace:*"
     "@chakra-ui/react": "npm:^2.8.2"
     react: "npm:^18.2.0"
     react-router-dom: "npm:^6.18.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/Tooltip@workspace:*, @_/Tooltip@workspace:staking/lib/Tooltip":
-  version: 0.0.0-use.local
-  resolution: "@_/Tooltip@workspace:staking/lib/Tooltip"
-  dependencies:
-    "@chakra-ui/react": "npm:^2.8.2"
-  languageName: unknown
-  linkType: soft
-
-"@_/calculations@workspace:staking/lib/calculations":
-  version: 0.0.0-use.local
-  resolution: "@_/calculations@workspace:staking/lib/calculations"
-  dependencies:
-    "@_/constants": "workspace:*"
-    "@synthetixio/wei": "npm:^2.74.4"
-  languageName: unknown
-  linkType: soft
-
-"@_/constants@workspace:*, @_/constants@workspace:staking/lib/constants":
-  version: 0.0.0-use.local
-  resolution: "@_/constants@workspace:staking/lib/constants"
-  dependencies:
-    "@synthetixio/wei": "npm:^2.74.4"
-    ethers: "npm:^5.7.2"
   languageName: unknown
   linkType: soft
 
@@ -124,17 +64,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@_/format@workspace:staking/lib/format"
   dependencies:
-    "@synthetixio/wei": "npm:^2.74.4"
     ethers: "npm:^5.7.2"
-    numbro: "npm:^2.5.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/formatters@workspace:staking/lib/formatters":
-  version: 0.0.0-use.local
-  resolution: "@_/formatters@workspace:staking/lib/formatters"
-  dependencies:
-    date-fns: "npm:^4.1.0"
   languageName: unknown
   linkType: soft
 
@@ -192,14 +122,11 @@ __metadata:
   resolution: "@_/staking@workspace:staking/ui"
   dependencies:
     "@_/ContractError": "workspace:*"
-    "@_/Permissions": "workspace:*"
     "@_/TermsModal": "workspace:*"
-    "@_/Tooltip": "workspace:*"
-    "@_/constants": "workspace:*"
+    "@_/etherscanLink": "workspace:*"
     "@_/format": "workspace:*"
     "@_/icons": "workspace:*"
     "@_/theme": "workspace:*"
-    "@_/tsHelpers": "workspace:*"
     "@_/useAccountProxy": "workspace:*"
     "@_/useBlockchain": "workspace:*"
     "@_/useContractErrorParser": "workspace:*"
@@ -225,7 +152,7 @@ __metadata:
     "@emotion/react": "npm:^11.11.1"
     "@emotion/styled": "npm:^11.11.0"
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.5.11"
-    "@pythnetwork/pyth-evm-js": "npm:latest"
+    "@pythnetwork/pyth-evm-js": "npm:^1.83.0"
     "@safe-global/safe-apps-provider": "npm:^0.18.3"
     "@safe-global/safe-apps-sdk": "npm:^8.0.0"
     "@synthetixio/devtools-formatters": "workspace:*"
@@ -286,25 +213,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/tsHelpers@workspace:*, @_/tsHelpers@workspace:staking/lib/tsHelpers":
-  version: 0.0.0-use.local
-  resolution: "@_/tsHelpers@workspace:staking/lib/tsHelpers"
-  languageName: unknown
-  linkType: soft
-
-"@_/useAccountPermissions@workspace:*, @_/useAccountPermissions@workspace:staking/lib/useAccountInfo":
-  version: 0.0.0-use.local
-  resolution: "@_/useAccountPermissions@workspace:staking/lib/useAccountInfo"
-  dependencies:
-    "@_/tsHelpers": "workspace:*"
-    "@_/useAccountProxy": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    ethers: "npm:^5.7.2"
-  languageName: unknown
-  linkType: soft
-
 "@_/useAccountProxy@workspace:*, @_/useAccountProxy@workspace:staking/lib/contracts/useAccountProxy":
   version: 0.0.0-use.local
   resolution: "@_/useAccountProxy@workspace:staking/lib/contracts/useAccountProxy"
@@ -330,7 +238,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@_/useBlockchain@workspace:staking/lib/useBlockchain"
   dependencies:
-    "@_/constants": "workspace:*"
     "@_/contracts": "workspace:*"
     "@_/icons": "workspace:*"
     "@chakra-ui/react": "npm:^2.8.2"
@@ -371,19 +278,6 @@ __metadata:
     "@_/useBlockchain": "workspace:*"
     "@tanstack/react-query": "npm:^5.8.3"
     react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/useManagePermissions@workspace:*, @_/useManagePermissions@workspace:staking/lib/useManagePermissions":
-  version: 0.0.0-use.local
-  resolution: "@_/useManagePermissions@workspace:staking/lib/useManagePermissions"
-  dependencies:
-    "@_/useBlockchain": "workspace:*"
-    "@_/useCoreProxy": "workspace:*"
-    "@_/useTrustedMulticallForwarder": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
   languageName: unknown
   linkType: soft
 
@@ -445,22 +339,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@_/useSystemToken@workspace:staking/lib/contracts/useSystemToken"
   dependencies:
-    "@_/constants": "workspace:*"
     "@_/contracts": "workspace:*"
     "@_/useBlockchain": "workspace:*"
     "@tanstack/react-query": "npm:^5.8.3"
-  languageName: unknown
-  linkType: soft
-
-"@_/useTransferAccountId@workspace:*, @_/useTransferAccountId@workspace:staking/lib/useTransferAccountId":
-  version: 0.0.0-use.local
-  resolution: "@_/useTransferAccountId@workspace:staking/lib/useTransferAccountId"
-  dependencies:
-    "@_/useAccountProxy": "workspace:*"
-    "@_/useBlockchain": "workspace:*"
-    "@tanstack/react-query": "npm:^5.8.3"
-    debug: "npm:^4.4.0"
-    ethers: "npm:^5.7.2"
   languageName: unknown
   linkType: soft
 
@@ -4976,7 +4857,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pythnetwork/pyth-evm-js@npm:latest":
+"@pythnetwork/pyth-evm-js@npm:^1.83.0":
   version: 1.83.0
   resolution: "@pythnetwork/pyth-evm-js@npm:1.83.0"
   dependencies:

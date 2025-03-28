@@ -1,4 +1,4 @@
-import { contractsHash } from '@_/tsHelpers';
+import { contractsHash } from '@_/format';
 import { useNetwork, useProvider, useWallet } from '@_/useBlockchain';
 import { usePool420 } from '@_/usePool420';
 import { useQuery } from '@tanstack/react-query';

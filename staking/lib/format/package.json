@@ -4,8 +4,6 @@
   "main": "index.ts",
   "version": "0.0.1",
   "dependencies": {
-    "@synthetixio/wei": "^2.74.4",
-    "ethers": "^5.7.2",
-    "numbro": "^2.5.0"
+    "ethers": "^5.7.2"
   }
 }

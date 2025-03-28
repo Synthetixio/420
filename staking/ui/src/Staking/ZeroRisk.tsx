@@ -9,7 +9,7 @@ export function ZeroRisk({ ...props }) {
         direction="row"
         color="gray.500"
         backgroundColor="whiteAlpha.200"
-        borderRadius="6px"
+        borderRadius="base"
         py={3}
         px={4}
         gap={3}

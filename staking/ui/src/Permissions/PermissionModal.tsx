@@ -1,5 +1,3 @@
-import { useAccountOwner, useAccountPermissions } from '@_/useAccountPermissions';
-import { useManagePermissions } from '@_/useManagePermissions';
 import {
   Badge,
   Button,
@@ -20,6 +18,8 @@ import { type ethers, utils } from 'ethers';
 import { useEffect, useMemo, useState } from 'react';
 import { permissionsList } from './AccountPermissions';
 import { PermissionsInfo } from './PermissionsInfo';
+import { useAccountOwner, useAccountPermissions } from './useAccountPermissions';
+import { useManagePermissions } from './useManagePermissions';
 
 export function PermissionModal({
   accountId,
@@ -71,12 +71,12 @@ export function PermissionModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent py={2} border="1px solid" rounded="base" borderColor="gray.900" bg="navy.700">
+      <ModalContent py={2} borderRadius="base" bg="navy.700">
         <ModalHeader>{target ? 'Edit' : 'New'} Permission</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Divider />
-          <Flex pt={6} flexDir="column" gap="5">
+          <Flex pt={6} direction="column" gap="5">
             {!target && (
               <>
                 <Text fontWeight={600} fontSize="14px" color="white">

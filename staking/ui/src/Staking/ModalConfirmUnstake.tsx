@@ -265,7 +265,7 @@ export function ModalConfirmUnstake({
               </GridItem>
             </Grid>
 
-            <Alert status="info" borderRadius="6px">
+            <Alert status="info" borderRadius="base">
               <AlertIcon />
               <Text fontSize="14px">
                 Withdrawals are locked for {unlockTimeout} after unstaking
@@ -273,14 +273,14 @@ export function ModalConfirmUnstake({
             </Alert>
 
             <Collapse in={Boolean(timeToUnstake)} animateOpacity>
-              <Alert status="warning" borderRadius="6px">
+              <Alert status="warning" borderRadius="base">
                 <AlertIcon />
                 <Text fontSize="14px">{timeToUnstake} until you can unstake</Text>
               </Alert>
             </Collapse>
 
             <Collapse in={needsMoreV2xUsd} animateOpacity>
-              <Alert status="warning" borderRadius="6px">
+              <Alert status="warning" borderRadius="base">
                 <AlertIcon />
                 <Text fontSize="14px">
                   {`You need $${numbro(wei(missingV2xUsdAmount).toNumber()).format({
