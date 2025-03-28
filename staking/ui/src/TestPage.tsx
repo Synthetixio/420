@@ -32,7 +32,7 @@ export function TestPage() {
           mt={6}
           borderColor="gray.900"
           borderWidth="1px"
-          borderRadius="6px"
+          borderRadius="base"
           bg="navy.700"
           p={6}
         >

@@ -1,5 +1,4 @@
 import { renderAccountId } from '@_/format';
-import { useTransferAccountId } from '@_/useTransferAccountId';
 import {
   Alert,
   AlertDescription,
@@ -20,6 +19,7 @@ import {
 } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 import { useMemo, useState } from 'react';
+import { useTransferAccountId } from './useTransferAccountId';
 
 export function TransferOwnershipModal({
   isOpen,
@@ -44,7 +44,7 @@ export function TransferOwnershipModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent pb={1} border="1px solid" rounded="base" borderColor="gray.900" bg="navy.700">
+      <ModalContent pb={1} borderRadius="base" bg="navy.700">
         <ModalHeader>Transfer Ownership</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -68,8 +68,8 @@ export function TransferOwnershipModal({
             value={to}
           />
         </ModalBody>
-        <ModalFooter display="flex" flexDirection="column" gap={4} justifyContent="center">
-          <Alert status="warning" borderRadius="6px">
+        <ModalFooter as={Flex} direction="column" gap={4} justifyContent="center">
+          <Alert status="warning" borderRadius="base">
             <AlertIcon />
             <Flex direction="column">
               <AlertDescription>This action cannot be undone</AlertDescription>

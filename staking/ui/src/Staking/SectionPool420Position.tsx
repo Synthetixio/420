@@ -1,13 +1,16 @@
+import { useWallet } from '@_/useBlockchain';
 import { InfoIcon } from '@chakra-ui/icons';
 import { Box, Button, Flex, Heading, Image, Text, Tooltip } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import type { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
+import { AccountId } from './AccountId';
 import { EscrowedSNX } from './EscrowedSNX';
 import { LoanChart } from './LoanChart';
 import { ModalConfirmUnstake } from './ModalConfirmUnstake';
 import { ModalShare420 } from './ModalShare420';
+import { WalletAddress } from './WalletAddress';
 import clock from './clock.svg';
 import share from './share.svg';
 import { useAccountUnstakingUnlockDate } from './useAccountUnstakingUnlockDate';
@@ -32,14 +35,14 @@ export function SectionPool420Position({ accountId }: { accountId: ethers.BigNum
   const [isOpenShare, setIsOpenShare] = React.useState(false);
   const [isOpenUnstake, setIsOpenUnstake] = React.useState(false);
 
+  const { activeWallet } = useWallet();
+
   return (
     <>
       <Flex
         direction="column"
-        borderColor="gray.900"
-        borderWidth="1px"
-        borderRadius="6px"
-        bg="navy.900"
+        bg="navy.700"
+        borderRadius="base"
         p={{ base: 4, sm: 10 }}
         pt={{ base: 6, sm: 10 }}
         gap={6}
@@ -60,13 +63,11 @@ export function SectionPool420Position({ accountId }: { accountId: ethers.BigNum
           gap={6}
         >
           <Flex
+            direction="column"
             order={{ base: 2, sm: 1, lg: 1, xl: 1 }}
             flex={{ base: 1, sm: 2, lg: 2, xl: 2 }}
-            borderColor="gray.900"
-            borderWidth="1px"
-            borderRadius="6px"
-            bg="navy.900"
-            direction="column"
+            bg="whiteAlpha.50"
+            borderRadius="base"
             p={{ base: 4, sm: 6 }}
             gap={3}
           >
@@ -114,102 +115,143 @@ export function SectionPool420Position({ accountId }: { accountId: ethers.BigNum
             />
           </Flex>
           <Flex
+            direction="column"
             order={{ base: 1, sm: 1, lg: 1, xl: 1 }}
             flex={{ base: 1, sm: 1, lg: 1, xl: 1 }}
-            direction="column"
-            borderColor="gray.900"
-            borderWidth="1px"
-            borderRadius="6px"
-            p={{ base: 4, sm: 6 }}
             gap={6}
-            justifyContent="space-between"
-            h="fit-content"
           >
             <Flex
-              minWidth="120px"
               direction="column"
-              gap={3}
-              textAlign="center"
-              alignItems="center"
+              bg="whiteAlpha.50"
+              borderRadius="base"
+              p={{ base: 4, sm: 6 }}
+              gap={6}
+              justifyContent="space-between"
+              h="fit-content"
             >
-              <Text color="gray.500">
-                Account Balance
-                <Tooltip
-                  closeDelay={500}
-                  openDelay={300}
-                  hasArrow={true}
-                  offset={[0, 10]}
-                  label={
-                    <Flex py={2} direction="column" gap={2.5}>
-                      <Text color="gray.500" fontWeight={400} textAlign="left">
-                        Account Balance consists of staked SNX and escrowed SNX
-                      </Text>
-                    </Flex>
-                  }
-                >
-                  <InfoIcon ml={1.5} h="14px" verticalAlign="baseline" />
-                </Tooltip>
-              </Text>
-              <Box>
-                <Text color="gray.50" fontSize="1.25em" fontWeight={500}>
-                  {isPendingPosition
-                    ? '~'
-                    : position
-                      ? `${numbro(wei(position.collateral).toNumber()).format({
-                          trimMantissa: true,
-                          thousandSeparated: true,
-                          average: true,
-                          mantissa: 2,
-                          spaceSeparated: false,
-                        })} SNX`
-                      : null}
-                </Text>
-                <Text color="gray.500" fontSize="1.0em">
-                  {isPendingPosition
-                    ? '~'
-                    : position
-                      ? `$${numbro(
-                          wei(position.collateral).mul(position.collateralPrice).toNumber()
-                        ).format({
-                          trimMantissa: true,
-                          thousandSeparated: true,
-                          average: true,
-                          mantissa: 2,
-                          spaceSeparated: false,
-                        })}`
-                      : null}
-                </Text>
-              </Box>
-
-              <EscrowedSNX accountId={accountId} />
-
-              <Button
-                width="100%"
-                variant="outline"
-                borderColor="gray.900"
-                color="gray.50"
-                isLoading={closePosition.isPending}
-                isDisabled={!(isReadyClosePosition && !closePosition.isPending && !timeToUnstake)}
-                onClick={() => setIsOpenUnstake(true)}
+              <Flex
+                minWidth="120px"
+                direction="column"
+                gap={3}
+                textAlign="center"
+                alignItems="center"
               >
-                Unstake
-              </Button>
-              {timeToUnstake ? (
-                <Flex
-                  backgroundColor="whiteAlpha.200"
-                  py="1"
-                  px="3"
-                  borderRadius="base"
-                  gap={0}
-                  justifyContent="center"
+                <Text color="gray.500">
+                  Account Balance
+                  <Tooltip
+                    closeDelay={500}
+                    openDelay={300}
+                    hasArrow={true}
+                    offset={[0, 10]}
+                    label={
+                      <Flex py={2} direction="column" gap={2.5}>
+                        <Text color="gray.500" fontWeight={400} textAlign="left">
+                          Account Balance consists of staked SNX and escrowed SNX
+                        </Text>
+                      </Flex>
+                    }
+                  >
+                    <InfoIcon ml={1.5} h="14px" verticalAlign="baseline" />
+                  </Tooltip>
+                </Text>
+                <Box>
+                  <Text color="gray.50" fontSize="1.25em" fontWeight={500}>
+                    {isPendingPosition
+                      ? '~'
+                      : position
+                        ? `${numbro(wei(position.collateral).toNumber()).format({
+                            trimMantissa: true,
+                            thousandSeparated: true,
+                            average: true,
+                            mantissa: 2,
+                            spaceSeparated: false,
+                          })} SNX`
+                        : null}
+                  </Text>
+                  <Text color="gray.500" fontSize="1.0em">
+                    {isPendingPosition
+                      ? '~'
+                      : position
+                        ? `$${numbro(
+                            wei(position.collateral).mul(position.collateralPrice).toNumber()
+                          ).format({
+                            trimMantissa: true,
+                            thousandSeparated: true,
+                            average: true,
+                            mantissa: 2,
+                            spaceSeparated: false,
+                          })}`
+                        : null}
+                  </Text>
+                </Box>
+
+                <EscrowedSNX accountId={accountId} />
+
+                <Button
+                  width="100%"
+                  variant="outline"
+                  borderColor="gray.900"
+                  color="gray.50"
+                  isLoading={closePosition.isPending}
+                  isDisabled={!(isReadyClosePosition && !closePosition.isPending && !timeToUnstake)}
+                  onClick={() => setIsOpenUnstake(true)}
                 >
-                  <Image mr={2} width="12px" src={clock} alt="Clock" />
-                  <Text
-                    color="gray.500"
-                    fontSize="12px"
-                  >{`${timeToUnstake} until you can unstake`}</Text>
+                  Unstake
+                </Button>
+                {timeToUnstake ? (
+                  <Flex
+                    backgroundColor="whiteAlpha.200"
+                    py="1"
+                    px="3"
+                    borderRadius="base"
+                    gap={0}
+                    justifyContent="center"
+                  >
+                    <Image mr={2} width="12px" src={clock} alt="Clock" />
+                    <Text
+                      color="gray.500"
+                      fontSize="12px"
+                    >{`${timeToUnstake} until you can unstake`}</Text>
+                  </Flex>
+                ) : null}
+              </Flex>
+            </Flex>
+
+            <Flex
+              direction="column"
+              bg="whiteAlpha.50"
+              borderRadius="base"
+              p={{ base: 4, sm: 6 }}
+              gap={6}
+              color="gray.500"
+              fontSize="sm"
+            >
+              <Flex minWidth="120px" direction="column" gap={3}>
+                <Flex
+                  direction="row"
+                  gap={1}
+                  flexWrap="wrap"
+                  alignContent="center"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Text>Account number</Text>
+                  <AccountId accountId={accountId} />
                 </Flex>
-              ) : null}
+                {activeWallet ? (
+                  <Flex
+                    direction="row"
+                    gap={1}
+                    flexWrap="wrap"
+                    alignContent="center"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Text>Address</Text>
+                    <WalletAddress address={activeWallet.address} ens={activeWallet.ens?.name} />
+                  </Flex>
+                ) : null}
+              </Flex>
             </Flex>
           </Flex>
         </Flex>

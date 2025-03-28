@@ -1,2 +1,3 @@
 export * from './format';
-export * from './currency';
+export * from './stringToHash';
+export * from './contractsHash';

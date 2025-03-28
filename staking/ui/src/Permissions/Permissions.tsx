@@ -7,8 +7,8 @@ export function Permissions() {
   const { data: accounts, refetch: refetchAccounts } = useAccounts();
 
   return (
-    <Flex flexDir="column" gap="7">
-      <Flex flexDir="column" gap={7}>
+    <Flex direction="column" gap="7">
+      <Flex direction="column" gap={7}>
         {accounts?.map((accountId) => (
           <PermissionTable
             key={accountId.toString()}
@@ -17,17 +17,7 @@ export function Permissions() {
           />
         ))}
       </Flex>
-      <Flex
-        flexGrow="1"
-        h="fit-content"
-        border="1px solid"
-        borderColor="gray.900"
-        rounded="base"
-        flexDir="column"
-        width="100%"
-        p="6"
-        bg="navy.700"
-      >
+      <Flex bg="navy.700" borderRadius="base" direction="column" width="100%" p="6">
         <Image src={DelegationIcon} width="48px" alt="Delegate permissions" />
         <Heading fontSize="14px" mt="6">
           Delegate Permissions

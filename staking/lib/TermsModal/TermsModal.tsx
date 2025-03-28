@@ -1,4 +1,3 @@
-import { SESSION_STORAGE_KEYS } from '@_/constants';
 import { theme } from '@_/theme';
 import {
   Box,
@@ -26,7 +25,7 @@ export const TermsModal = ({ defaultOpen = true }: TermsModalProps) => {
 
   const onSubmit = () => {
     if (enabled) {
-      localStorage.setItem(SESSION_STORAGE_KEYS.TERMS_CONDITIONS_ACCEPTED, JSON.stringify(true));
+      localStorage.setItem('TERMS_CONDITIONS_ACCEPTED', JSON.stringify(true));
       setOpen(false);
     }
   };
