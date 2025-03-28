@@ -6,7 +6,7 @@ contract Mainnet_Pool420_getters_Test is Pool420Test {
     constructor() {
         deployment = "1-main";
         forkUrl = vm.envString("RPC_MAINNET");
-        forkBlockNumber = 22030934;
+        forkBlockNumber = 22120630;
         initialize();
     }
 

@@ -1,4 +1,3 @@
-import { usePythPrice } from '@_/usePythPrice';
 import { Flex, Text } from '@chakra-ui/react';
 import { type Wei, wei } from '@synthetixio/wei';
 import type { ethers } from 'ethers';
@@ -20,16 +19,16 @@ function renderCRatio(rawValue?: Wei | ethers.BigNumber | number) {
 }
 
 export function MigrateStats({
-  collateralAmount,
+  collateral,
+  collateralPrice,
   debt,
   cRatio,
 }: {
-  collateralAmount?: ethers.BigNumber | Wei;
+  collateral?: ethers.BigNumber | Wei;
+  collateralPrice?: ethers.BigNumber | Wei;
   debt?: ethers.BigNumber | Wei;
   cRatio?: ethers.BigNumber | Wei;
 }) {
-  const { data: snxPrice } = usePythPrice('SNX');
-
   return (
     <Flex direction="column" gap={6}>
       <Text fontSize="1.25em" fontWeight={700}>
@@ -41,8 +40,8 @@ export function MigrateStats({
             Deposited
           </Text>
           <Text fontSize="18px" fontWeight={500}>
-            {collateralAmount
-              ? `${numbro(wei(collateralAmount).toNumber()).format({
+            {collateral
+              ? `${numbro(wei(collateral).toNumber()).format({
                   trimMantissa: true,
                   thousandSeparated: true,
                   average: true,
@@ -52,8 +51,8 @@ export function MigrateStats({
               : '~'}
           </Text>
           <Text color="gray.500" fontSize="0.75rem">
-            {snxPrice && collateralAmount
-              ? `$${numbro(wei(collateralAmount).mul(snxPrice).toNumber()).format({
+            {collateral && collateralPrice
+              ? `$${numbro(wei(collateral).mul(collateralPrice).toNumber()).format({
                   trimMantissa: true,
                   thousandSeparated: true,
                   average: true,

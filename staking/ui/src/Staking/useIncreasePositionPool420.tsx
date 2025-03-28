@@ -2,7 +2,6 @@ import { ContractError } from '@_/ContractError';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
-import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePositionManager420 } from '@_/usePositionManager420';
 import { useSNX } from '@_/useSNX';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
@@ -14,9 +13,7 @@ import React from 'react';
 
 const log = debug('snx:useIncreasePosition420');
 
-export function useIncreasePositionPool420() {
-  const [params] = useParams<HomePageSchemaType>();
-
+export function useIncreasePositionPool420({ accountId }: { accountId: ethers.BigNumber }) {
   const signer = useSigner();
   const provider = useProvider();
   const { network } = useNetwork();
@@ -72,14 +69,14 @@ export function useIncreasePositionPool420() {
           target: AccountProxy.address,
           callData: AccountProxyInterface.encodeFunctionData('approve', [
             PositionManager420.address,
-            ethers.BigNumber.from(params.accountId),
+            accountId,
           ]),
           requireSuccess: true,
         },
         {
           target: PositionManager420.address,
           callData: PositionManager420Interface.encodeFunctionData('increasePosition', [
-            ethers.BigNumber.from(params.accountId),
+            accountId,
             ethers.constants.MaxUint256, // All-in
           ]),
           requireSuccess: true,

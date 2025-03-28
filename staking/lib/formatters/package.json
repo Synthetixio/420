@@ -1,9 +1,0 @@
-{
-  "name": "@_/formatters",
-  "private": true,
-  "main": "index.ts",
-  "version": "0.0.0",
-  "dependencies": {
-    "date-fns": "^4.1.0"
-  }
-}

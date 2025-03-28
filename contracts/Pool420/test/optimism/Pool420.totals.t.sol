@@ -6,7 +6,7 @@ contract Optimism_Pool420_totals_Test is Pool420Test {
     constructor() {
         deployment = "10-main";
         forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
-        forkBlockNumber = 133373441;
+        forkBlockNumber = 133634421;
         initialize();
     }
 
@@ -25,12 +25,10 @@ contract Optimism_Pool420_totals_Test is Pool420Test {
         _setupPosition(300 ether);
         _setupPosition(600 ether);
 
-        uint128[] memory accounts = pool420.getAccounts();
-        assertEq(accounts.length, 3, "should have 3 accounts created");
-
-        uint256 loanedAmount = 1000 * snxPrice / 5;
-
-        assertEq(1000 ether, pool420.getTotalDeposit(), "should have combined deposit of 1000 SNX");
-        assertEq(loanedAmount, pool420.getTotalLoan(), "should have combined loan amount of (1000 * snxPrice / 5)");
+        Pool420.Totals memory totals = pool420.getTotals(ALICE);
+        assertEq(1000 ether, totals.deposit, "totals.deposit === 1000");
+        assertEq(1000 * snxPrice / 5, totals.loan, "totals.loan == 1000 * snxPrice / 5");
+        assertEq(0, totals.burn, "totals.burn == 0");
+        assertEq(snxPrice, totals.collateralPrice, "totals.collateralPrice == snxPrice");
     }
 }

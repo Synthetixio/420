@@ -1,7 +1,5 @@
-import { Tooltip } from '@_/Tooltip';
-import { prettyString, renderAccountId } from '@_/format';
+import { renderWalletAddress } from '@_/format';
 import { WalletIcon } from '@_/icons';
-import { useAccounts } from '@_/useAccounts';
 import {
   MAINNET,
   NetworkIcon,
@@ -11,9 +9,8 @@ import {
   useWallet,
 } from '@_/useBlockchain';
 import { makeSearch, useParams } from '@_/useParams';
-import { CopyIcon, SettingsIcon } from '@chakra-ui/icons';
+import { SettingsIcon } from '@chakra-ui/icons';
 import {
-  Badge,
   Button,
   Flex,
   IconButton,
@@ -24,58 +21,25 @@ import {
   MenuList,
   Text,
 } from '@chakra-ui/react';
-import { ethers } from 'ethers';
+import { wei } from '@synthetixio/wei';
+import numbro from 'numbro';
 import React from 'react';
+import { AccountId } from './Staking/AccountId';
+import { WalletAddress } from './Staking/WalletAddress';
+import { useBalances } from './Staking/useBalances';
 
 const mainnets = [MAINNET, OPTIMISM];
 
 export function NetworkController() {
-  const [params, setParams] = useParams();
+  const [, setParams] = useParams();
 
-  const [toolTipLabel, setTooltipLabel] = React.useState('Copy');
   const { activeWallet, walletsInfo, connect, disconnect } = useWallet();
   const { network: currentNetwork, setNetwork } = useNetwork();
-  const { data: accounts, isPending: isPendingAccounts } = useAccounts();
 
-  const paramsAccountId = React.useMemo(() => {
-    try {
-      if (params.accountId && params.accountId.length > 0) {
-        return ethers.BigNumber.from(params.accountId);
-      }
-    } catch {
-      // malformed account id in url
-    }
-  }, [params.accountId]);
+  const { data: balances, isPending: isPendingBalances } = useBalances();
 
   const notConnected = !activeWallet;
   const notSupported = activeWallet && !currentNetwork;
-
-  React.useEffect(() => {
-    if (notConnected) {
-      const { accountId: _, ...newParams } = params;
-      setParams(newParams);
-      return;
-    }
-    if (!isPendingAccounts && accounts) {
-      if (accounts.length > 0 && !params.accountId) {
-        setParams({ ...params, accountId: accounts[0].toString() });
-        return;
-      }
-      if (
-        accounts.length > 0 &&
-        paramsAccountId &&
-        !accounts.some((account) => account.eq(paramsAccountId))
-      ) {
-        setParams({ ...params, accountId: accounts[0].toString() });
-        return;
-      }
-      if (!accounts.length) {
-        const { accountId: _, ...newParams } = params;
-        setParams(newParams);
-        return;
-      }
-    }
-  }, [accounts, isPendingAccounts, notConnected, params, paramsAccountId, setParams]);
 
   React.useEffect(() => {
     if (window.$magicWallet) {
@@ -118,7 +82,7 @@ export function NetworkController() {
             {notSupported ? UNSUPPORTED_NETWORK.label : currentNetwork?.label}
           </Text>
         </MenuButton>
-        <MenuList border="1px" borderColor="gray.900">
+        <MenuList borderStyle="solid" borderWidth="1px" borderColor="gray.900" borderRadius="base">
           {mainnets.map(({ id, preset, label }) => (
             <MenuItem
               key={`${id}-${preset}`}
@@ -126,7 +90,7 @@ export function NetworkController() {
               isDisabled={window.$chainId ? window.$chainId !== id : false}
             >
               <NetworkIcon networkId={id} size="20px" />
-              <Text variant="nav" ml={2}>
+              <Text variant="nav" ml={4}>
                 {label}
               </Text>
             </MenuItem>
@@ -145,126 +109,177 @@ export function NetworkController() {
           whiteSpace="nowrap"
           data-cy="wallet button"
         >
-          <WalletIcon color="white" />
-          <Text
-            as="span"
-            ml={1}
-            color="white"
-            fontWeight={700}
-            fontSize="xs"
-            userSelect="none"
-            data-cy="short wallet address"
-          >
-            {activeWallet.ens?.name || prettyString(activeWallet.address)}
-          </Text>
+          <Flex alignItems="center" gap={1}>
+            {balances ? (
+              <Text
+                color="cyan.500"
+                fontSize="xs"
+                lineHeight="1em"
+                px={1}
+                py={0.5}
+                backgroundColor="whiteAlpha.100"
+                borderWidth="1px"
+                borderColor="cyan.500"
+                borderStyle="solid"
+                borderRadius="base"
+              >
+                {balances.length}
+              </Text>
+            ) : null}
+            <WalletIcon color="white" />
+            <Text
+              as="span"
+              color="white"
+              fontWeight={700}
+              fontSize="xs"
+              userSelect="none"
+              data-cy="short wallet address"
+            >
+              {activeWallet.ens?.name || renderWalletAddress(activeWallet.address)}
+            </Text>
+          </Flex>
         </MenuButton>
-        <MenuList>
-          <Flex
-            border="1px solid"
-            rounded="base"
-            borderColor="gray.900"
-            w="370px"
-            _hover={{ bg: 'navy.700' }}
-            backgroundColor="navy.700"
-            opacity={1}
-            p="4"
-          >
-            <Flex direction="column" w="100%" gap="2">
-              <Flex justifyContent="space-between">
-                <Text fontSize="14px" color="gray.500">
-                  Connected with {walletsInfo?.label}
-                </Text>
-                <Button
-                  onClick={() => {
-                    if (walletsInfo) {
-                      disconnect(walletsInfo);
-                    }
-                  }}
-                  size="xs"
-                  variant="outline"
-                  colorScheme="gray"
-                  color="white"
-                >
-                  Disconnect
-                </Button>
-              </Flex>
-              <Flex fontWeight={700} color="white" fontSize="16px" alignItems="center">
-                <Tooltip label={activeWallet.address} fontFamily="monospace" fontSize="0.9em">
-                  <Text>{prettyString(activeWallet.address)}</Text>
-                </Tooltip>
-                <Tooltip label={toolTipLabel} closeOnClick={false}>
-                  <CopyIcon
-                    ml="2"
-                    onClick={() => {
-                      navigator.clipboard.writeText(activeWallet.address);
-                      setTooltipLabel('Copied');
-                      setTimeout(() => {
-                        setTooltipLabel('Copy');
-                      }, 10000);
-                    }}
-                  />
-                </Tooltip>
-              </Flex>
-
-              {accounts && accounts.length > 0 ? (
-                <Flex
-                  direction="column"
-                  p="2"
-                  border="1px solid"
-                  borderColor="gray.900"
-                  rounded="base"
-                  gap="2"
-                >
-                  <Flex w="100%" justifyContent="space-between">
-                    <Text fontWeight={400} fontSize="14px">
-                      {accounts.length > 1 ? 'Accounts' : 'Account'}
+        <MenuList
+          borderStyle="solid"
+          borderWidth="1px"
+          borderColor="gray.900"
+          borderRadius="base"
+          p={3}
+        >
+          <Flex direction="column" w="100%" gap="3">
+            <Flex justifyContent="space-between" gap={3}>
+              <Text fontSize="14px" color="gray.500">
+                Connected with {walletsInfo?.label}
+              </Text>
+              <Button
+                onClick={() => {
+                  if (walletsInfo) {
+                    disconnect(walletsInfo);
+                  }
+                }}
+                size="xs"
+                variant="outline"
+                colorScheme="gray"
+                color="white"
+              >
+                Disconnect
+              </Button>
+            </Flex>
+            <Flex
+              fontWeight={700}
+              color="white"
+              fontSize="16px"
+              alignItems="center"
+              borderRadius="base"
+              backgroundColor="whiteAlpha.50"
+              p={3}
+              justifyContent="center"
+            >
+              <WalletAddress address={activeWallet.address} ens={activeWallet.ens?.name} />
+            </Flex>
+            <Flex
+              direction="column"
+              backgroundColor="whiteAlpha.50"
+              borderRadius="base"
+              gap={3}
+              p={3}
+            >
+              <Flex w="100%" justifyContent="space-between">
+                <Flex gap={2} alignItems="center">
+                  {isPendingBalances ? (
+                    <Text fontSize="sm" color="gray.500">
+                      Accounts loading...
                     </Text>
-                    <Link
-                      href={`?${makeSearch({ page: 'settings', accountId: params.accountId })}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setParams({ page: 'settings', accountId: params.accountId });
-                      }}
-                    >
-                      <IconButton
-                        variant="outline"
-                        colorScheme="gray"
-                        size="xs"
-                        icon={<SettingsIcon />}
-                        aria-label="account settings"
-                      />
-                    </Link>
-                  </Flex>
-                  <Flex data-cy="accounts list" direction="column">
-                    {accounts?.map((accountId) => (
-                      <Text
-                        key={accountId.toString()}
-                        display="flex"
-                        alignItems="center"
-                        color="white"
-                        fontWeight={700}
-                        fontSize="16px"
-                        cursor="pointer"
-                        p="3"
-                        data-cy="account id"
-                        data-account-id={accountId}
-                        _hover={{ bg: 'whiteAlpha.300' }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setParams({ ...params, accountId: accountId.toString() });
-                        }}
-                      >
-                        {renderAccountId(accountId)}
-                        {paramsAccountId && accountId.eq(paramsAccountId) ? (
-                          <Badge ml={2} colorScheme="cyan" variant="outline">
-                            Connected
-                          </Badge>
-                        ) : null}
+                  ) : balances && balances.length === 1 ? (
+                    <Text fontSize="sm" color="gray.500">
+                      Account
+                    </Text>
+                  ) : balances ? (
+                    <>
+                      <Text fontSize="sm" color="gray.500">
+                        Accounts
                       </Text>
-                    ))}
-                  </Flex>
+                      <Text
+                        color="cyan.500"
+                        fontSize="xs"
+                        lineHeight="1em"
+                        px={1}
+                        py={0.5}
+                        backgroundColor="whiteAlpha.100"
+                        borderWidth="1px"
+                        borderColor="cyan.500"
+                        borderStyle="solid"
+                        borderRadius="base"
+                      >
+                        {balances.length}
+                      </Text>
+                    </>
+                  ) : null}
                 </Flex>
-              ) : null}
+                <Link
+                  href={`?${makeSearch({ page: 'settings' })}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setParams({ page: 'settings' });
+                  }}
+                >
+                  <IconButton
+                    variant="outline"
+                    colorScheme="gray"
+                    size="xs"
+                    icon={<SettingsIcon />}
+                    aria-label="account settings"
+                  />
+                </Link>
+              </Flex>
+              <Flex data-cy="accounts list" direction="column" gap={3}>
+                {isPendingBalances ? (
+                  <Text
+                    display="flex"
+                    alignItems="center"
+                    color="gray.500"
+                    fontWeight={700}
+                    fontSize="16px"
+                    cursor="pointer"
+                  >
+                    ~
+                  </Text>
+                ) : balances && !balances.length ? (
+                  <Text
+                    display="flex"
+                    alignItems="center"
+                    color="gray.500"
+                    fontWeight={700}
+                    fontSize="16px"
+                    cursor="pointer"
+                  >
+                    No accounts
+                  </Text>
+                ) : (
+                  balances?.map(({ accountId, collateralDeposited }) => (
+                    <Flex
+                      key={accountId.toString()}
+                      alignItems="center"
+                      cursor="pointer"
+                      data-cy="account id"
+                      data-account-id={accountId}
+                      justifyContent="space-between"
+                      width="100%"
+                    >
+                      <AccountId accountId={accountId} />
+                      <Text color="gray.500" fontSize="sm">{`${numbro(
+                        wei(collateralDeposited).toNumber()
+                      ).format({
+                        trimMantissa: true,
+                        thousandSeparated: true,
+                        average: true,
+                        mantissa: 2,
+                        spaceSeparated: false,
+                      })} SNX`}</Text>
+                    </Flex>
+                  ))
+                )}
+              </Flex>
             </Flex>
           </Flex>
         </MenuList>

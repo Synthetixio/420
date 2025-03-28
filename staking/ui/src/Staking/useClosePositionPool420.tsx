@@ -2,7 +2,6 @@ import { ContractError } from '@_/ContractError';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
-import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePool420 } from '@_/usePool420';
 import { usePool420Withdraw } from '@_/usePool420Withdraw';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
@@ -11,15 +10,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';
 import React from 'react';
-import { useCurrentLoanedAmount } from './useCurrentLoanedAmount';
-import { usePositionCollateral } from './usePositionCollateral';
-import { useRepaymentPenalty } from './useRepaymentPenalty';
+import { usePosition } from './usePosition';
 
 const log = debug('snx:useClosePosition420');
 
-export function useClosePositionPool420() {
-  const [params] = useParams<HomePageSchemaType>();
-
+export function useClosePositionPool420({ accountId }: { accountId: ethers.BigNumber }) {
   const signer = useSigner();
   const provider = useProvider();
   const { network } = useNetwork();
@@ -28,9 +23,7 @@ export function useClosePositionPool420() {
   const { data: Pool420 } = usePool420();
   const { data: AccountProxy } = useAccountProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
-  const { data: positionCollateral } = usePositionCollateral();
-  const { data: loanedAmount } = useCurrentLoanedAmount();
-  const { data: repaymentPenalty } = useRepaymentPenalty();
+  const { data: position } = usePosition({ accountId });
 
   const isReady =
     network &&
@@ -40,10 +33,8 @@ export function useClosePositionPool420() {
     Pool420Withdraw &&
     Pool420 &&
     AccountProxy &&
-    positionCollateral &&
-    positionCollateral.gt(0) &&
-    loanedAmount &&
-    repaymentPenalty &&
+    position &&
+    position.collateral.gt(0) &&
     true;
 
   const toast = useToast({ isClosable: true, duration: 60_000 });
@@ -55,7 +46,7 @@ export function useClosePositionPool420() {
       if (!isReady) {
         throw new Error('Not ready');
       }
-      const repaymentAmount = loanedAmount.add(repaymentPenalty);
+      const repaymentAmount = position.loan.add(position.penalty);
 
       if (repaymentAmount.gt(0)) {
         const Pool420Contract = new ethers.Contract(Pool420.address, Pool420.abi, provider);
@@ -96,15 +87,13 @@ export function useClosePositionPool420() {
           target: AccountProxy.address,
           callData: AccountProxyInterface.encodeFunctionData('approve', [
             Pool420Withdraw.address,
-            ethers.BigNumber.from(params.accountId),
+            accountId,
           ]),
           requireSuccess: true,
         },
         {
           target: Pool420Withdraw.address,
-          callData: Pool420WithdrawInterface.encodeFunctionData('closePosition', [
-            ethers.BigNumber.from(params.accountId),
-          ]),
+          callData: Pool420WithdrawInterface.encodeFunctionData('closePosition', [accountId]),
           requireSuccess: true,
         },
       ];
@@ -135,10 +124,6 @@ export function useClosePositionPool420() {
         [
           //
           'Pool 420',
-          //
-          'LiquidityPosition',
-          'LiquidityPositions',
-          'AccountCollateralUnlockDate',
         ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
       );
 

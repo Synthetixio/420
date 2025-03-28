@@ -1,5 +1,4 @@
 import { TermsModal } from '@_/TermsModal';
-import { DEFAULT_QUERY_STALE_TIME, SESSION_STORAGE_KEYS } from '@_/constants';
 import { Fonts, theme } from '@_/theme';
 import { ChakraProvider, extendTheme, useColorMode } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -17,7 +16,7 @@ const queryClient = new QueryClient({
     queries: {
       retry: false,
       refetchInterval: false, //  if queries needs refetching we should be explicit about it, given erc7412
-      staleTime: DEFAULT_QUERY_STALE_TIME,
+      staleTime: 300_000, // 5min
       refetchOnWindowFocus: false,
       throwOnError: (e) => {
         console.error(e);
@@ -54,8 +53,7 @@ function ColorMode() {
 }
 
 export const App = () => {
-  const TERMS_CONDITIONS_ACCEPTED =
-    localStorage.getItem(SESSION_STORAGE_KEYS.TERMS_CONDITIONS_ACCEPTED) === 'true';
+  const TERMS_CONDITIONS_ACCEPTED = localStorage.getItem('TERMS_CONDITIONS_ACCEPTED') === 'true';
 
   return (
     <>

@@ -1,4 +1,3 @@
-import { INFURA_KEY } from '@_/constants';
 import { importPythERC7412Wrapper } from '@_/contracts';
 import { EthereumIcon, FailedIcon, OptimismIcon } from '@_/icons';
 import type { IconProps } from '@chakra-ui/react';
@@ -65,7 +64,7 @@ export const MAINNET: Network = {
   hexId: `0x${Number(1).toString(16)}`,
   token: 'ETH',
   name: 'mainnet',
-  rpcUrl: `https://mainnet.infura.io/v3/${INFURA_KEY}`,
+  rpcUrl: `https://mainnet.infura.io/v3/${process.env.INFURA_KEY || '8678fe160b1f4d45ad3f3f71502fc57b'}`,
   label: 'Ethereum',
   isSupported: true,
   publicRpcUrl: 'https://ethereum.publicnode.com',
@@ -78,7 +77,7 @@ export const OPTIMISM: Network = {
   hexId: `0x${Number(10).toString(16)}`,
   token: 'ETH',
   name: 'optimism-mainnet',
-  rpcUrl: `https://optimism-mainnet.infura.io/v3/${INFURA_KEY}`,
+  rpcUrl: `https://optimism-mainnet.infura.io/v3/${process.env.INFURA_KEY || '8678fe160b1f4d45ad3f3f71502fc57b'}`,
   label: 'Optimism',
   isSupported: true,
   publicRpcUrl: 'https://mainnet.optimism.io',

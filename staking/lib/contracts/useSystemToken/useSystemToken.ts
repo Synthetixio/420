@@ -1,4 +1,3 @@
-import { tokenOverrides } from '@_/constants';
 import { importSystemToken } from '@_/contracts';
 import { Network, useNetwork } from '@_/useBlockchain';
 import { useQuery } from '@tanstack/react-query';
@@ -15,16 +14,10 @@ export function useSystemToken(customNetwork?: Network) {
       symbol: string;
       name: string;
       decimals: number;
-      displaySymbol: string;
     }> {
       if (!network) throw new Error('OMFG');
       const systemToken = await importSystemToken(network.id, network.preset);
-      return {
-        ...systemToken,
-        displaySymbol:
-          tokenOverrides[`${network.id}-${network.preset}`]?.[systemToken.address]?.displaySymbol ??
-          systemToken.symbol,
-      };
+      return systemToken;
     },
     staleTime: Infinity,
     // On some chains this is not available, and that is expected
