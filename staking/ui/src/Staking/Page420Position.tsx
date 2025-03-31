@@ -1,17 +1,12 @@
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Flex, Heading, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import numbro from 'numbro';
 import React from 'react';
-import { LayoutPositionWithImage } from './LayoutPositionWithImage';
-import { PanelAccount } from './PanelAccount';
+import { LayoutMigrateV2xPosition } from './LayoutMigrateV2xPosition';
+import { LayoutMigrateV3Position } from './LayoutMigrateV3Position';
+import { LayoutPool420Position } from './LayoutPool420Position';
+import { LayoutWithdraw } from './LayoutWithdraw';
 import { PanelTvl } from './PanelTvl';
-import { SectionMigrateV2xPosition } from './SectionMigrateV2xPosition';
-import { SectionMigrateV3Position } from './SectionMigrateV3Position';
-import { SectionPool420Position } from './SectionPool420Position';
-import { SectionWithdrawCollateral } from './SectionWithdrawCollateral';
-import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
-import smallBurn from './burn-small.webp';
-import smallCoin from './coin-small.webp';
 import { useBalances } from './useBalances';
 import { useLiquidityPositions } from './useLiquidityPositions';
 import { usePositions } from './usePositions';
@@ -60,77 +55,38 @@ function PositionsList() {
 
   return (
     <Flex direction="column" gap={10}>
-      {sorted420Positions.map((position) => (
-        <SectionPool420Position
+      {sorted420Positions.map((position, i) => (
+        <LayoutPool420Position
           key={`Pool 420 ${position.accountId.toString()}`}
           accountId={position.accountId}
+          index={i + 1}
+          defaultIsOpen={i === 0}
+        />
+      ))}
+      {sortedbBalances.map((balance, i) => (
+        <LayoutWithdraw
+          key={`Withdraw ${balance.accountId.toString()}`}
+          accountId={balance.accountId}
+          index={sorted420Positions.length + i + 1}
+          defaultIsOpen={sorted420Positions.length === 0 && i === 0}
         />
       ))}
       {v2xPosition?.debt.gt(0) ? (
-        <LayoutPositionWithImage
-          imageSrc={smallBurn}
-          Subheader={() => (
-            <Text color="gray.500" fontSize="md">
-              Deposit now to fire up the burn and sleep easy.
-            </Text>
-          )}
-          Content={() => (
-            <>
-              <Flex flex="2" bg="whiteAlpha.50" borderRadius="base" p={{ base: 4, sm: 6 }}>
-                <SectionMigrateV2xPosition />
-              </Flex>
-            </>
-          )}
+        <LayoutMigrateV2xPosition
+          index={1}
+          defaultIsOpen={sorted420Positions.length === 0 && sortedbBalances.length === 0}
         />
       ) : null}
-      {sortedLiquidityPositions.map((position) => (
-        <LayoutPositionWithImage
+      {sortedLiquidityPositions.map((position, i) => (
+        <LayoutMigrateV3Position
           key={`V3 Migrate ${position.accountId.toString()}`}
-          imageSrc={smallBurn}
-          Subheader={() => (
-            <Text color="gray.500" fontSize="md">
-              Deposit now to fire up the burn and sleep easy.
-            </Text>
-          )}
-          Content={() => (
-            <>
-              <Flex
-                direction="column"
-                bg="whiteAlpha.50"
-                borderRadius="base"
-                p={{ base: 4, sm: 6 }}
-                gap={6}
-              >
-                <SectionMigrateV3Position accountId={position.accountId} />
-              </Flex>
-              <PanelAccount accountId={position.accountId} />
-            </>
-          )}
-        />
-      ))}
-      {sortedbBalances.map((balance) => (
-        <LayoutPositionWithImage
-          key={`Withdraw ${balance.accountId.toString()}`}
-          imageSrc={smallCoin}
-          Subheader={() => (
-            <Text color="gray.500" fontSize="md">
-              Your SNX has been unstaked.
-            </Text>
-          )}
-          Content={() => (
-            <>
-              <Flex
-                direction="column"
-                bg="whiteAlpha.50"
-                borderRadius="base"
-                p={{ base: 4, sm: 6 }}
-              >
-                <SectionWithdrawCollateral accountId={balance.accountId} />
-              </Flex>
-
-              <PanelAccount accountId={balance.accountId} />
-            </>
-          )}
+          accountId={position.accountId}
+          index={i + 1 + (v2xPosition?.debt.gt(0) ? 1 : 0)}
+          defaultIsOpen={
+            sorted420Positions.length === 0 &&
+            sortedbBalances.length === 0 &&
+            (v2xPosition?.debt.gt(0) ? false : i === 0)
+          }
         />
       ))}
     </Flex>

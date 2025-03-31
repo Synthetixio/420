@@ -7,7 +7,7 @@ import { ZeroRisk } from './ZeroRisk';
 import { useLiquidityPosition } from './useLiquidityPosition';
 import { useMigratePool420 } from './useMigratePool420';
 
-export function SectionMigrateV3Position({ accountId }: { accountId: ethers.BigNumber }) {
+export function PanelMigrateV3Position({ accountId }: { accountId: ethers.BigNumber }) {
   const [isOpenMigrate, setIsOpenMigrate] = React.useState(false);
   const { data: liquidityPosition } = useLiquidityPosition({ accountId });
   const { isReady } = useMigratePool420({ accountId });

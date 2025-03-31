@@ -1,6 +1,6 @@
 import React from 'react';
 import { LayoutWithImage } from './LayoutWithImage';
-import { SectionMigrateV2xPosition } from './SectionMigrateV2xPosition';
+import { PanelMigrateV2xPosition } from './PanelMigrateV2xPosition';
 import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
 import burn from './burn.webp';
 
@@ -9,7 +9,7 @@ export function PageMigrateFromV2x() {
     <LayoutWithImage
       imageSrc={burn}
       Subheader={() => <SubheaderMigrateAndEarn />}
-      Content={() => <SectionMigrateV2xPosition />}
+      Content={() => <PanelMigrateV2xPosition />}
     />
   );
 }

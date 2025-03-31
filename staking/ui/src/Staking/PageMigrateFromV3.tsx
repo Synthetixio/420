@@ -1,6 +1,6 @@
 import React from 'react';
 import { LayoutWithImage } from './LayoutWithImage';
-import { SectionMigrateV3Position } from './SectionMigrateV3Position';
+import { PanelMigrateV3Position } from './PanelMigrateV3Position';
 import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
 import burn from './burn.webp';
 import { useLiquidityPositions } from './useLiquidityPositions';
@@ -23,7 +23,7 @@ export function PageMigrateFromV3() {
     <LayoutWithImage
       imageSrc={burn}
       Subheader={() => <SubheaderMigrateAndEarn />}
-      Content={() => (accountId ? <SectionMigrateV3Position accountId={accountId} /> : null)}
+      Content={() => (accountId ? <PanelMigrateV3Position accountId={accountId} /> : null)}
     />
   );
 }

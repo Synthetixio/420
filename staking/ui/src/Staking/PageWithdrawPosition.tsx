@@ -1,7 +1,7 @@
 import { Text } from '@chakra-ui/react';
 import React from 'react';
 import { LayoutWithImage } from './LayoutWithImage';
-import { SectionWithdrawCollateral } from './SectionWithdrawCollateral';
+import { PanelWithdrawCollateral } from './PanelWithdrawCollateral';
 import coin from './coin.webp';
 import { useBalances } from './useBalances';
 
@@ -32,7 +32,7 @@ export function PageWithdrawPosition() {
           Your SNX has been unstaked.
         </Text>
       )}
-      Content={() => (accountId ? <SectionWithdrawCollateral accountId={accountId} /> : null)}
+      Content={() => (accountId ? <PanelWithdrawCollateral accountId={accountId} /> : null)}
     />
   );
 }

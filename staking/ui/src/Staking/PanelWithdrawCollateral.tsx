@@ -10,7 +10,7 @@ import { useBalance } from './useBalance';
 import { useCountdown } from './useCountdown';
 import { useWithdrawCollateral } from './useWithdrawCollateral';
 
-export function SectionWithdrawCollateral({ accountId }: { accountId: ethers.BigNumber }) {
+export function PanelWithdrawCollateral({ accountId }: { accountId: ethers.BigNumber }) {
   const { data: balance, isPending: isPendingBalance } = useBalance({ accountId });
   const { data: accountCollateralUnlockDate, isLoading: isLoadingAccountCollateralUnlockDate } =
     useAccountCollateralUnlockDate({ accountId });

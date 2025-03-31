@@ -6,7 +6,7 @@ import { ZeroRisk } from './ZeroRisk';
 import { useMigratePool420V2x } from './useMigratePool420V2x';
 import { useV2xPosition } from './useV2xPosition';
 
-export function SectionMigrateV2xPosition() {
+export function PanelMigrateV2xPosition() {
   const [isOpenMigrate, setIsOpenMigrate] = React.useState(false);
   const { isReady } = useMigratePool420V2x();
   const { data: v2xPosition } = useV2xPosition();
