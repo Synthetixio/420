@@ -1,12 +1,17 @@
-import { Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import numbro from 'numbro';
 import React from 'react';
+import { LayoutPositionWithImage } from './LayoutPositionWithImage';
+import { PanelAccount } from './PanelAccount';
 import { PanelTvl } from './PanelTvl';
 import { SectionMigrateV2xPosition } from './SectionMigrateV2xPosition';
 import { SectionMigrateV3Position } from './SectionMigrateV3Position';
 import { SectionPool420Position } from './SectionPool420Position';
 import { SectionWithdrawCollateral } from './SectionWithdrawCollateral';
+import { SubheaderMigrateAndEarn } from './SubheaderMigrateAndEarn';
+import smallBurn from './burn-small.webp';
+import smallCoin from './coin-small.webp';
 import { useBalances } from './useBalances';
 import { useLiquidityPositions } from './useLiquidityPositions';
 import { usePositions } from './usePositions';
@@ -62,39 +67,71 @@ function PositionsList() {
         />
       ))}
       {v2xPosition?.debt.gt(0) ? (
-        <Flex
-          direction="column"
-          backgroundColor="whiteAlpha.50"
-          borderRadius="base"
-          p={{ base: 4, sm: 10 }}
-          gap={6}
-        >
-          <SectionMigrateV2xPosition />
-        </Flex>
+        <LayoutPositionWithImage
+          imageSrc={smallBurn}
+          Subheader={() => (
+            <Text color="gray.500" fontSize="md">
+              Deposit now to fire up the burn and sleep easy.
+            </Text>
+          )}
+          Content={() => (
+            <>
+              <Flex flex="2" bg="whiteAlpha.50" borderRadius="base" p={{ base: 4, sm: 6 }}>
+                <SectionMigrateV2xPosition />
+              </Flex>
+            </>
+          )}
+        />
       ) : null}
       {sortedLiquidityPositions.map((position) => (
-        <Flex
-          direction="column"
-          backgroundColor="whiteAlpha.50"
-          borderRadius="base"
+        <LayoutPositionWithImage
           key={`V3 Migrate ${position.accountId.toString()}`}
-          p={{ base: 4, sm: 10 }}
-          gap={6}
-        >
-          <SectionMigrateV3Position accountId={position.accountId} />
-        </Flex>
+          imageSrc={smallBurn}
+          Subheader={() => (
+            <Text color="gray.500" fontSize="md">
+              Deposit now to fire up the burn and sleep easy.
+            </Text>
+          )}
+          Content={() => (
+            <>
+              <Flex
+                direction="column"
+                bg="whiteAlpha.50"
+                borderRadius="base"
+                p={{ base: 4, sm: 6 }}
+                gap={6}
+              >
+                <SectionMigrateV3Position accountId={position.accountId} />
+              </Flex>
+              <PanelAccount accountId={position.accountId} />
+            </>
+          )}
+        />
       ))}
       {sortedbBalances.map((balance) => (
-        <Flex
-          direction="column"
-          backgroundColor="whiteAlpha.50"
-          borderRadius="base"
+        <LayoutPositionWithImage
           key={`Withdraw ${balance.accountId.toString()}`}
-          p={{ base: 4, sm: 10 }}
-          gap={6}
-        >
-          <SectionWithdrawCollateral accountId={balance.accountId} />
-        </Flex>
+          imageSrc={smallCoin}
+          Subheader={() => (
+            <Text color="gray.500" fontSize="md">
+              Your SNX has been unstaked.
+            </Text>
+          )}
+          Content={() => (
+            <>
+              <Flex
+                direction="column"
+                bg="whiteAlpha.50"
+                borderRadius="base"
+                p={{ base: 4, sm: 6 }}
+              >
+                <SectionWithdrawCollateral accountId={balance.accountId} />
+              </Flex>
+
+              <PanelAccount accountId={balance.accountId} />
+            </>
+          )}
+        />
       ))}
     </Flex>
   );
@@ -147,7 +184,7 @@ function Totals() {
       </Flex>
 
       <Flex
-        direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }}
+        direction="row"
         flexWrap="wrap"
         flex={1}
         alignContent="flex-start"
