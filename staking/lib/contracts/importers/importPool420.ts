@@ -23,12 +23,12 @@ export async function importPool420(
   const deployment = `${Number(chainId).toFixed(0)}-${preset}`;
   switch (deployment) {
     case '1-main': {
-      // https://etherscan.io/address/0x67832b9Fc47eb3CdBF7275b95a29740EC58193D2#code
-      return { address: '0x67832b9Fc47eb3CdBF7275b95a29740EC58193D2', abi };
+      // https://etherscan.io/address/0x60C3fe179869e18A7A4d08e49070861B60bc1190#code
+      return { address: '0x60C3fe179869e18A7A4d08e49070861B60bc1190', abi };
     }
     case '10-main': {
-      // https://optimistic.etherscan.io/address/0x22f86f928a6575397359b3c93c8895d1e6201cdc#code
-      return { address: '0x22f86f928a6575397359b3c93c8895d1e6201cdc', abi };
+      // https://optimistic.etherscan.io/address/0xa3fDf801e44FB04F1895Adee105ae0Be5fb31bEa#code
+      return { address: '0xa3fDf801e44FB04F1895Adee105ae0Be5fb31bEa', abi };
     }
     default: {
       throw new Error(`Unsupported deployment ${deployment} for Pool420`);
