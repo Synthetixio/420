@@ -145,7 +145,7 @@ contract Pool420 {
             liquidityPositions[i] = LiquidityPosition({
                 accountId: accountIds[i],
                 debt: debt,
-                cRatio: debt > 0 ? collateralPrice * collateral / uint256(debt) / 1e18 : 0,
+                cRatio: debt > 0 ? collateralPrice * collateral / uint256(debt) : 0,
                 collateral: collateral,
                 collateralPrice: collateralPrice
             });

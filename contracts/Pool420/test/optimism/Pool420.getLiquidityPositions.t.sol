@@ -41,7 +41,7 @@ contract Optimism_Pool420_getLiquidityPositions_Test is Pool420Test {
         assertEq(300 * snxPrice / 5, uint256(lp[1].debt), "positions[1].debt == 300 * snxPrice / 5");
 
         assertEq(0, lp[0].cRatio, "positions[0].cRatio == 0");
-        assertEq(5, lp[1].cRatio, "positions[1].cRatio == 5");
+        assertEq(5 ether, lp[1].cRatio, "positions[1].cRatio == 5");
 
         assertEq(snxPrice, lp[0].collateralPrice, "positions[0].collateralPrice == snxPrice");
         assertEq(snxPrice, lp[1].collateralPrice, "positions[1].collateralPrice == snxPrice");
