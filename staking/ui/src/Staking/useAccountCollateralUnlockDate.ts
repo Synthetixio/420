@@ -1,4 +1,4 @@
-import { contractsHash } from '@_/tsHelpers';
+import { contractsHash } from '@_/format';
 import { useNetwork, useProvider } from '@_/useBlockchain';
 import { useCoreProxy } from '@_/useCoreProxy';
 import { useQuery } from '@tanstack/react-query';
@@ -12,7 +12,8 @@ export function useAccountCollateralUnlockDate({ accountId }: { accountId?: ethe
   return useQuery({
     queryKey: [
       `${network?.id}-${network?.preset}`,
-      'AccountCollateralUnlockDate',
+      'Pool 420',
+      'useAccountCollateralUnlockDate',
       { accountId },
       { contractsHash: contractsHash([CoreProxy]) },
     ],

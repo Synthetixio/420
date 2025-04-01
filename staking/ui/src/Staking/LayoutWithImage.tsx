@@ -1,9 +1,6 @@
-// import { LogoIcon } from '@_/icons';
-// import { Circle, Flex, Image, Text } from '@chakra-ui/react';
-import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Flex, Image } from '@chakra-ui/react';
 import type React from 'react';
-import { PanelTvl } from './PanelTvl';
-import farming from './farming.webp';
+import { PanelPromo } from './PanelPromo';
 
 export function LayoutWithImage({
   Subheader,
@@ -16,13 +13,7 @@ export function LayoutWithImage({
 }) {
   return (
     <>
-      <Flex
-        direction="column"
-        borderColor="gray.900"
-        borderWidth="1px"
-        borderRadius="6px"
-        bg="navy.700"
-      >
+      <Flex direction="column" borderRadius="base" bg="navy.700">
         <Flex direction="row" flexWrap="wrap" gap={4}>
           <Flex
             direction="column"
@@ -33,33 +24,14 @@ export function LayoutWithImage({
             justifyContent="center"
           >
             <Flex direction="column" gap={4}>
-              {/*
-            <Flex alignItems="center" gap={3}>
-              <Circle
-                size="32px"
-                bg="navy.900"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                boxShadow="0px 0px 15px 0px rgba(0, 209, 255, 0.60)"
-              >
-                <LogoIcon width="20px" height="14px" />
-              </Circle>
-              <Text fontSize="12px" color="gray.500" fontWeight={500}>
-                SNX 420 Pool
-              </Text>
-            </Flex>
-            */}
-
               <Subheader />
             </Flex>
 
             <Flex
-              borderColor="gray.900"
-              borderWidth="1px"
-              borderRadius="6px"
-              p={{ base: 4, sm: 6 }}
               direction="column"
+              bg="whiteAlpha.50"
+              borderRadius="base"
+              p={{ base: 4, sm: 6 }}
               gap={4}
             >
               <Content />
@@ -73,7 +45,7 @@ export function LayoutWithImage({
             overflow="hidden"
           >
             <Image
-              rounded="6px"
+              borderRadius="base"
               src={imageSrc}
               width="100%"
               height="100%"
@@ -86,33 +58,7 @@ export function LayoutWithImage({
         </Flex>
       </Flex>
 
-      <Flex direction="column">
-        <Flex direction={{ base: 'column', sm: 'column', md: 'column', lg: 'row' }} gap={6}>
-          <Flex
-            direction="column"
-            flex={1}
-            gap={4}
-            display={{ base: 'none', sm: 'flex' }}
-            borderColor="gray.900"
-            borderWidth="1px"
-            borderRadius="6px"
-            bg="navy.700"
-            p={{ base: 4, sm: 10 }}
-          >
-            <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
-              SNX Powered Yield Farming
-            </Text>
-            <Text fontSize="16px" lineHeight="24px" color="gray.500">
-              The 420 pool starts generating yield for you from Ethena and other yield sources
-              immediately.
-            </Text>
-            <Box mt={2}>
-              <Image rounded="6px" src={farming} width="100%" height="100%" objectFit="cover" />
-            </Box>
-          </Flex>
-          <PanelTvl />
-        </Flex>
-      </Flex>
+      <PanelPromo />
     </>
   );
 }

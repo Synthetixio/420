@@ -1,4 +1,4 @@
-import { contractsHash } from '@_/tsHelpers';
+import { contractsHash } from '@_/format';
 import { useNetwork, useProvider } from '@_/useBlockchain';
 import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 import { useQuery } from '@tanstack/react-query';
@@ -17,7 +17,7 @@ export function useTargetCRatio() {
     queryKey: [
       `${network?.id}-${network?.preset}`,
       'Pool 420',
-      'targetCRatio',
+      'useTargetCRatio',
       { contractsHash: contractsHash([TreasuryMarketProxy]) },
     ],
     enabled: Boolean(network && provider && TreasuryMarketProxy),

@@ -1,11 +1,7 @@
 import { ContractError } from '@_/ContractError';
-import { POOL_ID } from '@_/constants';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
-import { useCollateralType } from '@_/useCollateralTypes';
 import { useContractErrorParser } from '@_/useContractErrorParser';
-import { useLiquidityPosition } from '@_/useLiquidityPosition';
-import { type HomePageSchemaType, useParams } from '@_/useParams';
 import { usePositionManager420 } from '@_/usePositionManager420';
 import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
@@ -14,22 +10,18 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import debug from 'debug';
 import { ethers } from 'ethers';
 import React from 'react';
+import { useLiquidityPosition } from './useLiquidityPosition';
 import { useTargetCRatio } from './useTargetCRatio';
 
 const log = debug('snx:useMigrate420');
 
-export function useMigratePool420() {
-  const [params] = useParams<HomePageSchemaType>();
-
+export function useMigratePool420({ accountId }: { accountId: ethers.BigNumber }) {
   const signer = useSigner();
   const provider = useProvider();
   const { network } = useNetwork();
 
-  const { data: collateralType } = useCollateralType('SNX');
-
   const { data: liquidityPosition } = useLiquidityPosition({
-    accountId: params.accountId ? ethers.BigNumber.from(params.accountId) : undefined,
-    collateralType,
+    accountId,
   });
 
   const { data: PositionManager420 } = usePositionManager420();
@@ -48,7 +40,7 @@ export function useMigratePool420() {
     TreasuryMarketProxy &&
     targetCRatio &&
     liquidityPosition &&
-    liquidityPosition.collateralAmount.gt(0) &&
+    liquidityPosition.collateral.gt(0) &&
     (liquidityPosition.cRatio.lte(0) || liquidityPosition.cRatio.gte(targetCRatio)) &&
     true;
 
@@ -79,15 +71,15 @@ export function useMigratePool420() {
           target: AccountProxy.address,
           callData: AccountProxyInterface.encodeFunctionData('approve', [
             PositionManager420.address,
-            ethers.BigNumber.from(params.accountId),
+            accountId,
           ]),
           requireSuccess: true,
         },
         {
           target: PositionManager420.address,
           callData: PositionManager420Interface.encodeFunctionData('migratePosition', [
-            ethers.BigNumber.from(POOL_ID),
-            ethers.BigNumber.from(params.accountId),
+            ethers.BigNumber.from(1), // SC Pool ID == 1
+            accountId,
           ]),
           requireSuccess: true,
         },
@@ -119,11 +111,6 @@ export function useMigratePool420() {
         [
           //
           'Pool 420',
-          //
-          'Accounts',
-          'LiquidityPosition',
-          'LiquidityPositions',
-          'AccountCollateralUnlockDate',
         ].map((key) => queryClient.invalidateQueries({ queryKey: [deployment, key] }))
       );
 

@@ -1,6 +1,8 @@
-import { contractsHash } from '@_/tsHelpers';
+import { contractsHash } from '@_/format';
 import { useNetwork, useProvider, useWallet } from '@_/useBlockchain';
+import { useCoreProxy } from '@_/useCoreProxy';
 import { usePool420 } from '@_/usePool420';
+import { useSNX } from '@_/useSNX';
 import { useV2xSynthetix } from '@_/useV2xSynthetix';
 import { useQuery } from '@tanstack/react-query';
 import debug from 'debug';
@@ -12,8 +14,10 @@ export function useV2xPosition() {
   const provider = useProvider();
   const { network } = useNetwork();
 
+  const { data: CoreProxy } = useCoreProxy();
   const { data: Pool420 } = usePool420();
   const { data: V2xSynthetix } = useV2xSynthetix();
+  const { data: SNX } = useSNX();
 
   const { activeWallet } = useWallet();
   const walletAddress = activeWallet?.address;
@@ -24,11 +28,11 @@ export function useV2xPosition() {
       'Pool 420',
       'useV2xPosition',
       { walletAddress },
-      { contractsHash: contractsHash([V2xSynthetix, Pool420]) },
+      { contractsHash: contractsHash([CoreProxy, V2xSynthetix, Pool420, SNX]) },
     ],
-    enabled: Boolean(network && provider && V2xSynthetix && walletAddress),
+    enabled: Boolean(provider && CoreProxy && V2xSynthetix && Pool420 && SNX && walletAddress),
     queryFn: async () => {
-      if (!(network && provider && Pool420 && V2xSynthetix && walletAddress)) {
+      if (!(provider && CoreProxy && V2xSynthetix && Pool420 && SNX && walletAddress)) {
         throw new Error('OMFG');
       }
       log('walletAddress', walletAddress);
@@ -36,17 +40,21 @@ export function useV2xPosition() {
       const SynthetixProxyAddress = await Pool420Contract.getV2x();
       log('SynthetixProxyAddress', SynthetixProxyAddress);
 
+      const CoreProxyContract = new ethers.Contract(CoreProxy.address, CoreProxy.abi, provider);
+
+      const collateralPrice = await CoreProxyContract.getCollateralPrice(SNX.address);
+
       const V2xSynthetixContract = new ethers.Contract(
         SynthetixProxyAddress,
         V2xSynthetix.abi,
         provider
       );
 
-      const collateralAmount = await V2xSynthetixContract.collateral(walletAddress);
-      log('collateralAmount', collateralAmount);
+      const collateral = await V2xSynthetixContract.collateral(walletAddress);
+      log('collateral', collateral);
 
       let cRatio = ethers.BigNumber.from(0);
-      if (collateralAmount.gt(0)) {
+      if (collateral.gt(0)) {
         const collateralisationRatio =
           await V2xSynthetixContract.collateralisationRatio(walletAddress);
         if (collateralisationRatio.gt(0)) {
@@ -64,7 +72,7 @@ export function useV2xPosition() {
       );
       log('debt', debt);
 
-      return { collateralAmount, cRatio, debt };
+      return { collateralPrice, collateral, cRatio, debt };
     },
   });
 }

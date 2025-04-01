@@ -1,6 +1,6 @@
-import { Permissions } from '@_/Permissions';
 import { Flex, Heading } from '@chakra-ui/react';
 import { Helmet } from 'react-helmet';
+import { Permissions } from './Permissions/Permissions';
 
 export function AccountSettingsPage() {
   return (
@@ -9,7 +9,7 @@ export function AccountSettingsPage() {
         <title>Synthetix Account Settings</title>
         <meta name="description" content="Synthetix Liquidity V3 - Account Settings" />
       </Helmet>
-      <Flex flexDir="column" mb={16}>
+      <Flex direction="column" mb={16}>
         <Heading
           mt={{
             base: 2,

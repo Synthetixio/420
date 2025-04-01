@@ -6,7 +6,7 @@ contract Optimism_Pool420_getters_Test is Pool420Test {
     constructor() {
         deployment = "10-main";
         forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
-        forkBlockNumber = 133373441;
+        forkBlockNumber = 133634421;
         initialize();
     }
 

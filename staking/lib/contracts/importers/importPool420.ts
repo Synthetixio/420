@@ -7,12 +7,14 @@ const abi = [
   'function get$SNX() view returns (address $SNX)',
   'function get$sUSD() view returns (address $sUSD)',
   'function get$snxUSD() view returns (address $snxUSD)',
-  'function getAccounts() view returns (uint128[] accountIds)',
-  'function getTotalDeposit() view returns (uint256 totalDeposit)',
-  'function getTotalLoan() view returns (uint256 totalLoan)',
+  'function getAccounts(address walletAddress) view returns (uint128[] accountIds)',
+  'function getBalances(address walletAddress) view returns (tuple(uint128 accountId, uint256 usdAvailable, uint256 usdDeposited, uint256 usdAssigned, uint256 usdLocked, uint256 collateralPrice, uint256 collateralAvailable, uint256 collateralDeposited, uint256 collateralAssigned, uint256 collateralLocked)[] balances)',
+  'function getLiquidityPositions(address walletAddress) returns (tuple(uint128 accountId, int256 debt, uint256 cRatio, uint256 collateral, uint256 collateralPrice)[] liquidityPositions)',
+  'function getPositions(address walletAddress) view returns (tuple(uint128 accountId, uint256 loan, uint256 burn, uint256 penalty, uint256 collateral, uint256 initialLoan, uint64 loanStartTime, uint32 loanDuration, uint32 loanDecayPower, uint256 collateralPrice)[] positions)',
+  'function getTotals(address walletAddress) view returns (tuple(uint256 deposit, uint256 loan, uint256 burn, uint256 collateralPrice) totals)',
   'function getV2x() view returns (address v2x)',
   'function getV2xUsd() view returns (address v2xUsd)'
-];
+]
 
 export async function importPool420(
   chainId?: number,
@@ -21,12 +23,12 @@ export async function importPool420(
   const deployment = `${Number(chainId).toFixed(0)}-${preset}`;
   switch (deployment) {
     case '1-main': {
-      // https://etherscan.io/address/0x63ad1ce97c34f157f851944593d3dee952824e9c#code
-      return { address: '0x63ad1ce97c34f157f851944593d3dee952824e9c', abi };
+      // https://etherscan.io/address/0xA60df3c11b9aed1f6eA1Eb6AC0B188dfd18Be44c#code
+      return { address: '0xA60df3c11b9aed1f6eA1Eb6AC0B188dfd18Be44c', abi };
     }
     case '10-main': {
-      // https://optimistic.etherscan.io/address/0x22f86f928a6575397359b3c93c8895d1e6201cdc#code
-      return { address: '0x22f86f928a6575397359b3c93c8895d1e6201cdc', abi };
+      // https://optimistic.etherscan.io/address/0x5032c196d9cB343f22e09834e9b61Eef355fb675#code
+      return { address: '0x5032c196d9cB343f22e09834e9b61Eef355fb675', abi };
     }
     default: {
       throw new Error(`Unsupported deployment ${deployment} for Pool420`);

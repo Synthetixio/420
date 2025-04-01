@@ -103,9 +103,14 @@ export function LoanChart({
   return (
     <svg
       viewBox={`-100 -60 ${config.width + 100 + 20} ${config.height + 60 + config.fontSize + 20}`}
-      width="100%"
+      width={`${config.width}px`}
+      height={`${config.height}px`}
       aria-label="Debt Burn Chart"
       role="img"
+      style={{
+        maxWidth: '100%',
+        maxHeight: 'fit-content',
+      }}
     >
       <line x1={-3} y1={0} x2={3} y2={0} stroke="#2d2d38" strokeWidth="1" />
       <line

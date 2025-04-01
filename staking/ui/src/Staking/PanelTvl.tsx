@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Text } from '@chakra-ui/react';
+import { Divider, Flex, Text } from '@chakra-ui/react';
 import numbro from 'numbro';
 import type React from 'react';
 import { TvlChart } from './TvlChart';
@@ -7,16 +7,7 @@ import { useTvl420 } from './useTvl420';
 export function PanelTvl() {
   const { data: tvl420 } = useTvl420({ networkName: 'cross', span: 'daily' });
   return (
-    <Flex
-      direction="column"
-      flex={1}
-      gap={4}
-      borderColor="gray.900"
-      borderWidth="1px"
-      borderRadius="6px"
-      bg="navy.700"
-      p={{ base: 4, sm: 10 }}
-    >
+    <>
       <Flex display={{ base: 'flex', sm: 'none' }} direction="column" gap={4}>
         <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
           SNX Powered Yield Farming
@@ -50,6 +41,6 @@ export function PanelTvl() {
         </Text>
       </Flex>
       <TvlChart data={tvl420} />
-    </Flex>
+    </>
   );
 }
