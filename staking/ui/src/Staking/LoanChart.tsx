@@ -34,7 +34,7 @@ export function LoanChart({
   pointsCount,
   config = {
     width: 880,
-    height: 360,
+    height: 330,
     fontSize: 30,
   },
 }: {
@@ -158,7 +158,7 @@ export function LoanChart({
       <text
         x={10}
         y={config.height + config.fontSize + 10}
-        fill="#9999ac"
+        fill="#575768"
         fontSize={config.fontSize}
         textAnchor="start"
       >
@@ -171,7 +171,7 @@ export function LoanChart({
       <text
         x={config.width - 10}
         y={config.height + config.fontSize + 10}
-        fill="#9999ac"
+        fill="#575768"
         fontSize={config.fontSize}
         textAnchor="end"
       >
@@ -184,7 +184,7 @@ export function LoanChart({
       <text
         x={-15}
         y={config.fontSize / 2 - 5}
-        fill="#9999ac"
+        fill="#575768"
         fontSize={config.fontSize}
         textAnchor="end"
       >
@@ -201,7 +201,7 @@ export function LoanChart({
       <text
         x={-15}
         y={config.height + config.fontSize / 2 - 5}
-        fill="#9999ac"
+        fill="#575768"
         fontSize={config.fontSize}
         textAnchor="end"
       >

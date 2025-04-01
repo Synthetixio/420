@@ -20,7 +20,7 @@ function HeaderDeposit() {
       <Heading
         color="gray.50"
         maxWidth="40rem"
-        fontSize={['4xl', '6xl']}
+        fontSize={['5xl', '6xl']}
         lineHeight="120%"
         letterSpacing="tight"
         fontWeight={500}
@@ -43,7 +43,7 @@ function Header420() {
       <Heading
         color="gray.50"
         maxWidth="40rem"
-        fontSize={['4xl', '6xl']}
+        fontSize={['5xl', '6xl']}
         lineHeight="120%"
         letterSpacing="tight"
         fontWeight={500}

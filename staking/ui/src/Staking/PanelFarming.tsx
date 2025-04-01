@@ -5,7 +5,13 @@ import farming from './farming.webp';
 export function PanelFarming() {
   return (
     <>
-      <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
+      <Text
+        fontSize={['xl', '2xl']}
+        fontWeight={500}
+        lineHeight="120%"
+        color="gray.50"
+        letterSpacing="tight"
+      >
         SNX Powered Yield Farming
       </Text>
       <Text fontSize="16px" lineHeight="24px" color="gray.500">

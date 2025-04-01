@@ -53,7 +53,7 @@ export function LayoutPool420Position({
       >
         <Flex direction="column" gap={1}>
           <Text color="gray.50" fontSize="lg">
-            Migrated account #{index}
+            Migrated Account #{index}
           </Text>
           <Text color="gray.500" fontSize="sm" opacity={isOpen ? 0 : 1} transition="opacity 100ms">
             <AccountId accountId={accountId} />

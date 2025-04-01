@@ -71,7 +71,7 @@ export function PanelPool420Position({ accountId }: { accountId: ethers.BigNumbe
                 offset={[0, 10]}
                 label={
                   <Flex py={2} direction="column" gap={2.5}>
-                    <Text color="gray.500" fontWeight={400} textAlign="left">
+                    <Text color="gray.50" fontWeight={400} textAlign="left">
                       Account Balance consists of staked SNX and escrowed SNX
                     </Text>
                   </Flex>

@@ -111,7 +111,7 @@ function Totals() {
         <Text fontSize="sm" color="gray.500">
           Total Deposited
         </Text>
-        <Text fontSize="lg" color="gray.50">
+        <Text fontSize="lg" color="gray.50" fontWeight={500}>
           {isPendingTotals
             ? '~'
             : totals
@@ -124,7 +124,7 @@ function Totals() {
               })} SNX`
             : null}
         </Text>
-        <Text fontSize="sm" color="gray.500">
+        <Text fontSize="sm" color="gray.500" fontWeight={500}>
           {isPendingTotals
             ? '~'
             : totals
@@ -159,7 +159,7 @@ function Totals() {
           <Text fontSize="sm" color="gray.500">
             Current Debt
           </Text>
-          <Text fontSize="lg" color="gray.50">
+          <Text fontSize="lg" color="gray.50" fontWeight={500}>
             {isPendingTotals
               ? '~'
               : totals
@@ -185,7 +185,7 @@ function Totals() {
           <Text fontSize="sm" color="gray.500">
             Debt Burned
           </Text>
-          <Text fontSize="lg" color="gray.50">
+          <Text fontSize="lg" color="gray.50" fontWeight={500}>
             {isPendingTotals
               ? '~'
               : totals
@@ -233,7 +233,7 @@ export function Page420Position() {
 
       <Heading
         color="gray.50"
-        fontSize={['2xl', '3xl']}
+        fontSize="3xl"
         lineHeight="120%"
         letterSpacing="tight"
         fontWeight={500}
