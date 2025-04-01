@@ -26,8 +26,8 @@ export function LayoutMigrateV2xPosition({
         cursor="pointer"
         gap={6}
       >
-        <Flex direction="column" gap={1}>
-          <Text color="gray.50" fontSize="lg">
+        <Flex direction="column" gap={1} justifyContent="center">
+          <Text color="gray.50" fontSize="lg" fontWeight={500}>
             Legacy Account #{index}
           </Text>
         </Flex>
@@ -36,13 +36,14 @@ export function LayoutMigrateV2xPosition({
           direction="column"
           textAlign="right"
           gap={1}
+          justifyContent="center"
           opacity={isOpen ? 0 : 1}
-          transition="opacity 100ms"
+          transition="opacity 300ms"
         >
-          <Text color="gray.500" fontSize="sm">
+          <Text color="gray.500" fontSize="xs">
             Current Debt
           </Text>
-          <Text color="gray.50" fontSize="lg">
+          <Text color="gray.50" fontSize="sm" fontWeight={500}>
             {isPendingV2xPosition
               ? '~'
               : v2xPosition
@@ -61,13 +62,14 @@ export function LayoutMigrateV2xPosition({
           direction="column"
           textAlign="right"
           gap={1}
+          justifyContent="center"
           opacity={isOpen ? 0 : 1}
-          transition="opacity 100ms"
+          transition="opacity 300ms"
         >
-          <Text color="gray.500" fontSize="sm">
+          <Text color="gray.500" fontSize="xs">
             Debt Burned
           </Text>
-          <Text color="gray.50" fontSize="lg">
+          <Text color="gray.50" fontSize="sm" fontWeight={500}>
             -
           </Text>
         </Flex>
@@ -76,13 +78,14 @@ export function LayoutMigrateV2xPosition({
           direction="column"
           textAlign="right"
           gap={1}
+          justifyContent="center"
           opacity={isOpen ? 0 : 1}
-          transition="opacity 100ms"
+          transition="opacity 300ms"
         >
-          <Text color="gray.500" fontSize="sm">
+          <Text color="gray.500" fontSize="xs">
             Account Balance
           </Text>
-          <Text color="gray.50" fontSize="lg">
+          <Text color="gray.50" fontSize="sm" fontWeight={500}>
             {isPendingV2xPosition
               ? '~'
               : v2xPosition
@@ -94,7 +97,7 @@ export function LayoutMigrateV2xPosition({
                     spaceSeparated: false,
                   })} SNX`
                 : null}{' '}
-            <Text as="span" color="gray.500" fontSize="sm">
+            <Text as="span" color="gray.500" fontSize="sm" fontWeight={500}>
               {isPendingV2xPosition
                 ? '~'
                 : v2xPosition
@@ -116,7 +119,7 @@ export function LayoutMigrateV2xPosition({
           <BadgeMigrateNow opacity={1} />
           <ChevronDownIcon
             transform={isOpen ? 'rotate(-180deg)' : ''}
-            transition="transform 100ms"
+            transition="transform 300ms"
             w={6}
             h={6}
           />

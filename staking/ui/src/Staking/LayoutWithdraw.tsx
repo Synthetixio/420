@@ -37,7 +37,13 @@ export function LayoutWithdraw({
           <Text color="gray.50" fontSize="lg">
             Migrated Account #{index}
           </Text>
-          <Text color="gray.500" fontSize="sm" opacity={isOpen ? 0 : 1} transition="opacity 100ms">
+          <Text
+            color="gray.500"
+            fontSize="sm"
+            opacity={isOpen ? 0 : 1}
+            transition="opacity 300ms"
+            pointerEvents="none"
+          >
             <AccountId accountId={accountId} />
           </Text>
         </Flex>
@@ -46,13 +52,14 @@ export function LayoutWithdraw({
           direction="column"
           textAlign="right"
           gap={1}
+          justifyContent="center"
           opacity={isOpen ? 0 : 1}
-          transition="opacity 100ms"
+          transition="opacity 300ms"
         >
-          <Text color="gray.500" fontSize="sm">
+          <Text color="gray.500" fontSize="xs">
             Current Debt
           </Text>
-          <Text color="gray.50" fontSize="lg">
+          <Text color="gray.50" fontSize="sm" fontWeight={500}>
             $0
           </Text>
         </Flex>
@@ -61,13 +68,14 @@ export function LayoutWithdraw({
           direction="column"
           textAlign="right"
           gap={1}
+          justifyContent="center"
           opacity={isOpen ? 0 : 1}
-          transition="opacity 100ms"
+          transition="opacity 300ms"
         >
-          <Text color="gray.500" fontSize="sm">
+          <Text color="gray.500" fontSize="xs">
             Debt Burned
           </Text>
-          <Text color="gray.50" fontSize="lg">
+          <Text color="gray.50" fontSize="sm" fontWeight={500}>
             -
           </Text>
         </Flex>
@@ -76,13 +84,14 @@ export function LayoutWithdraw({
           direction="column"
           textAlign="right"
           gap={1}
+          justifyContent="center"
           opacity={isOpen ? 0 : 1}
-          transition="opacity 100ms"
+          transition="opacity 300ms"
         >
-          <Text color="gray.500" fontSize="sm">
+          <Text color="gray.500" fontSize="xs">
             Available to Withdraw
           </Text>
-          <Text color="gray.50" fontSize="lg">
+          <Text color="gray.50" fontSize="sm" fontWeight={500}>
             {isPendingBalance
               ? '~'
               : balance
@@ -94,7 +103,7 @@ export function LayoutWithdraw({
                     spaceSeparated: false,
                   })} SNX`
                 : null}{' '}
-            <Text as="span" color="gray.500" fontSize="sm">
+            <Text as="span" color="gray.500" fontSize="sm" fontWeight={500}>
               {isPendingBalance
                 ? '~'
                 : balance
@@ -116,7 +125,7 @@ export function LayoutWithdraw({
           <BadgeMigrateNow opacity={0} />
           <ChevronDownIcon
             transform={isOpen ? 'rotate(-180deg)' : ''}
-            transition="transform 100ms"
+            transition="transform 300ms"
             w={6}
             h={6}
           />

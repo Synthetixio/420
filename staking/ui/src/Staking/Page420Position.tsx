@@ -115,27 +115,27 @@ function Totals() {
           {isPendingTotals
             ? '~'
             : totals
-            ? `${numbro(wei(totals.deposit).toNumber()).format({
-                trimMantissa: true,
-                thousandSeparated: true,
-                average: true,
-                mantissa: 2,
-                spaceSeparated: false,
-              })} SNX`
-            : null}
+              ? `${numbro(wei(totals.deposit).toNumber()).format({
+                  trimMantissa: true,
+                  thousandSeparated: true,
+                  average: true,
+                  mantissa: 2,
+                  spaceSeparated: false,
+                })} SNX`
+              : null}
         </Text>
         <Text fontSize="sm" color="gray.500" fontWeight={500}>
           {isPendingTotals
             ? '~'
             : totals
-            ? `$${numbro(wei(totals.deposit).mul(totals.collateralPrice).toNumber()).format({
-                trimMantissa: true,
-                thousandSeparated: true,
-                average: true,
-                mantissa: 2,
-                spaceSeparated: false,
-              })}`
-            : null}
+              ? `$${numbro(wei(totals.deposit).mul(totals.collateralPrice).toNumber()).format({
+                  trimMantissa: true,
+                  thousandSeparated: true,
+                  average: true,
+                  mantissa: 2,
+                  spaceSeparated: false,
+                })}`
+              : null}
         </Text>
       </Flex>
 
@@ -163,14 +163,14 @@ function Totals() {
             {isPendingTotals
               ? '~'
               : totals
-              ? `$${numbro(wei(totals.loan).toNumber()).format({
-                  trimMantissa: true,
-                  thousandSeparated: true,
-                  average: true,
-                  mantissa: 2,
-                  spaceSeparated: false,
-                })}`
-              : null}
+                ? `$${numbro(wei(totals.loan).toNumber()).format({
+                    trimMantissa: true,
+                    thousandSeparated: true,
+                    average: true,
+                    mantissa: 2,
+                    spaceSeparated: false,
+                  })}`
+                : null}
           </Text>
         </Flex>
 
@@ -189,14 +189,14 @@ function Totals() {
             {isPendingTotals
               ? '~'
               : totals
-              ? `$${numbro(wei(totals.burn).toNumber()).format({
-                  trimMantissa: true,
-                  thousandSeparated: true,
-                  average: true,
-                  mantissa: 2,
-                  spaceSeparated: false,
-                })}`
-              : null}
+                ? `$${numbro(wei(totals.burn).toNumber()).format({
+                    trimMantissa: true,
+                    thousandSeparated: true,
+                    average: true,
+                    mantissa: 2,
+                    spaceSeparated: false,
+                  })}`
+                : null}
           </Text>
         </Flex>
       </Flex>

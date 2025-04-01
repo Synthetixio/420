@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Flex } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import type { ethers } from 'ethers';
 import numbro from 'numbro';

@@ -51,11 +51,17 @@ export function LayoutPool420Position({
         cursor="pointer"
         gap={6}
       >
-        <Flex direction="column" gap={1}>
-          <Text color="gray.50" fontSize="lg">
+        <Flex direction="column" gap={1} justifyContent="center">
+          <Text color="gray.50" fontSize="lg" fontWeight={500}>
             Migrated Account #{index}
           </Text>
-          <Text color="gray.500" fontSize="sm" opacity={isOpen ? 0 : 1} transition="opacity 100ms">
+          <Text
+            color="gray.500"
+            fontSize="sm"
+            opacity={isOpen ? 0 : 1}
+            transition="opacity 300ms"
+            pointerEvents="none"
+          >
             <AccountId accountId={accountId} />
           </Text>
         </Flex>
@@ -64,13 +70,14 @@ export function LayoutPool420Position({
           direction="column"
           textAlign="right"
           gap={1}
+          justifyContent="center"
           opacity={isOpen ? 0 : 1}
-          transition="opacity 100ms"
+          transition="opacity 300ms"
         >
-          <Text color="gray.500" fontSize="sm">
+          <Text color="gray.500" fontSize="xs">
             Current Debt
           </Text>
-          <Text color="gray.50" fontSize="lg">
+          <Text color="gray.50" fontSize="sm" fontWeight={500}>
             {isPendingPosition
               ? '~'
               : position
@@ -89,13 +96,14 @@ export function LayoutPool420Position({
           direction="column"
           textAlign="right"
           gap={1}
+          justifyContent="center"
           opacity={isOpen ? 0 : 1}
-          transition="opacity 100ms"
+          transition="opacity 300ms"
         >
-          <Text color="gray.500" fontSize="sm">
+          <Text color="gray.500" fontSize="xs">
             Debt Burned
           </Text>
-          <Text color="gray.50" fontSize="lg">
+          <Text color="gray.50" fontSize="sm" fontWeight={500}>
             {isPendingPosition
               ? '~'
               : position
@@ -114,13 +122,14 @@ export function LayoutPool420Position({
           direction="column"
           textAlign="right"
           gap={1}
+          justifyContent="center"
           opacity={isOpen ? 0 : 1}
-          transition="opacity 100ms"
+          transition="opacity 300ms"
         >
-          <Text color="gray.500" fontSize="sm">
+          <Text color="gray.500" fontSize="xs">
             Account Balance
           </Text>
-          <Text color="gray.50" fontSize="lg">
+          <Text color="gray.50" fontSize="sm" fontWeight={500}>
             {isPendingPosition
               ? '~'
               : position
@@ -132,7 +141,7 @@ export function LayoutPool420Position({
                     spaceSeparated: false,
                   })} SNX`
                 : null}{' '}
-            <Text as="span" color="gray.500" fontSize="sm">
+            <Text as="span" color="gray.500" fontSize="sm" fontWeight={500}>
               {isPendingPosition
                 ? '~'
                 : position
@@ -154,7 +163,7 @@ export function LayoutPool420Position({
           <BadgeMigrateNow opacity={0} />
           <ChevronDownIcon
             transform={isOpen ? 'rotate(-180deg)' : ''}
-            transition="transform 100ms"
+            transition="transform 300ms"
             w={6}
             h={6}
           />
