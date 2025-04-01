@@ -57,11 +57,11 @@ export function PanelPool420Position({ accountId }: { accountId: ethers.BigNumbe
           bg="whiteAlpha.50"
           borderRadius="md"
           p={{ base: 4, sm: 6 }}
-          gap={6}
+          gap={4}
           justifyContent="space-between"
           h="fit-content"
         >
-          <Flex direction="column" textAlign="center" alignItems="center" gap={6}>
+          <Flex direction="column" textAlign="center" alignItems="center" gap={4}>
             <Text color="gray.500">
               Account Balance
               <Tooltip
@@ -81,7 +81,7 @@ export function PanelPool420Position({ accountId }: { accountId: ethers.BigNumbe
               </Tooltip>
             </Text>
             <Box>
-              <Text color="gray.50" fontSize="1.25em" fontWeight={500}>
+              <Text color="gray.50" fontSize="lg" fontWeight={500}>
                 {isPendingPosition
                   ? '~'
                   : position
@@ -94,7 +94,7 @@ export function PanelPool420Position({ accountId }: { accountId: ethers.BigNumbe
                       })} SNX`
                     : null}
               </Text>
-              <Text color="gray.500" fontSize="1.0em">
+              <Text color="gray.500" fontSize="sm" fontWeight={500}>
                 {isPendingPosition
                   ? '~'
                   : position

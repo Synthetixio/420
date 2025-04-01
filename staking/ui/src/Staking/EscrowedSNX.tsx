@@ -20,7 +20,7 @@ export function EscrowedSNX({ accountId }: { accountId: ethers.BigNumber }) {
       offset={[0, 10]}
       label={
         <Flex py={2} direction="column" gap={2.5}>
-          <Text color="gray.500" fontWeight={400} textAlign="left">
+          <Text fontWeight={400} textAlign="left">
             A portion of your SNX is still in escrow, and will be available to withdraw on the
             vesting date
           </Text>
