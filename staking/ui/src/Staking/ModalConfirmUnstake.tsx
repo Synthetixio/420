@@ -101,7 +101,7 @@ export function ModalConfirmUnstake({
             <Grid
               backgroundColor="whiteAlpha.200"
               p="3"
-              borderRadius="base"
+              borderRadius="md"
               gap={3}
               templateColumns="repeat(2, 1fr)"
               fontWeight={700}
@@ -200,7 +200,7 @@ export function ModalConfirmUnstake({
             <Grid
               backgroundColor="whiteAlpha.200"
               p="3"
-              borderRadius="base"
+              borderRadius="md"
               gap={3}
               templateColumns="repeat(2, 1fr)"
               fontSize="12px"

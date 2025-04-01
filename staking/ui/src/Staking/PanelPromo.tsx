@@ -13,7 +13,7 @@ export function PanelPromo() {
           gap={4}
           display={{ base: 'none', sm: 'flex' }}
           bg="navy.700"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 10 }}
         >
           <PanelFarming />
@@ -23,7 +23,7 @@ export function PanelPromo() {
           flex={1}
           gap={4}
           bg="navy.700"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 10 }}
         >
           <PanelTvl />

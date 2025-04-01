@@ -104,7 +104,7 @@ function Totals() {
         textAlign="center"
         alignItems="center"
         bg="whiteAlpha.50"
-        borderRadius="base"
+        borderRadius="md"
         p={{ base: 4, sm: 6 }}
         gap={1}
       >
@@ -115,27 +115,27 @@ function Totals() {
           {isPendingTotals
             ? '~'
             : totals
-              ? `${numbro(wei(totals.deposit).toNumber()).format({
-                  trimMantissa: true,
-                  thousandSeparated: true,
-                  average: true,
-                  mantissa: 2,
-                  spaceSeparated: false,
-                })} SNX`
-              : null}
+            ? `${numbro(wei(totals.deposit).toNumber()).format({
+                trimMantissa: true,
+                thousandSeparated: true,
+                average: true,
+                mantissa: 2,
+                spaceSeparated: false,
+              })} SNX`
+            : null}
         </Text>
         <Text fontSize="sm" color="gray.500">
           {isPendingTotals
             ? '~'
             : totals
-              ? `$${numbro(wei(totals.deposit).mul(totals.collateralPrice).toNumber()).format({
-                  trimMantissa: true,
-                  thousandSeparated: true,
-                  average: true,
-                  mantissa: 2,
-                  spaceSeparated: false,
-                })}`
-              : null}
+            ? `$${numbro(wei(totals.deposit).mul(totals.collateralPrice).toNumber()).format({
+                trimMantissa: true,
+                thousandSeparated: true,
+                average: true,
+                mantissa: 2,
+                spaceSeparated: false,
+              })}`
+            : null}
         </Text>
       </Flex>
 
@@ -152,7 +152,7 @@ function Totals() {
           direction="column"
           flex={1}
           bg="whiteAlpha.50"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 6 }}
           gap={1}
         >
@@ -163,14 +163,14 @@ function Totals() {
             {isPendingTotals
               ? '~'
               : totals
-                ? `$${numbro(wei(totals.loan).toNumber()).format({
-                    trimMantissa: true,
-                    thousandSeparated: true,
-                    average: true,
-                    mantissa: 2,
-                    spaceSeparated: false,
-                  })}`
-                : null}
+              ? `$${numbro(wei(totals.loan).toNumber()).format({
+                  trimMantissa: true,
+                  thousandSeparated: true,
+                  average: true,
+                  mantissa: 2,
+                  spaceSeparated: false,
+                })}`
+              : null}
           </Text>
         </Flex>
 
@@ -178,7 +178,7 @@ function Totals() {
           direction="column"
           flex={1}
           bg="whiteAlpha.50"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 6 }}
           gap={1}
         >
@@ -189,14 +189,14 @@ function Totals() {
             {isPendingTotals
               ? '~'
               : totals
-                ? `$${numbro(wei(totals.burn).toNumber()).format({
-                    trimMantissa: true,
-                    thousandSeparated: true,
-                    average: true,
-                    mantissa: 2,
-                    spaceSeparated: false,
-                  })}`
-                : null}
+              ? `$${numbro(wei(totals.burn).toNumber()).format({
+                  trimMantissa: true,
+                  thousandSeparated: true,
+                  average: true,
+                  mantissa: 2,
+                  spaceSeparated: false,
+                })}`
+              : null}
           </Text>
         </Flex>
       </Flex>
@@ -213,7 +213,7 @@ export function Page420Position() {
           flex={1}
           gap={6}
           bg="navy.700"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 10 }}
           alignContent="flex-start"
         >
@@ -224,14 +224,21 @@ export function Page420Position() {
           flex={1}
           gap={4}
           bg="navy.700"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 10 }}
         >
           <PanelTvl />
         </Flex>
       </Flex>
 
-      <Heading color="gray.50" fontSize={['20px', '30px']} lineHeight="120%">
+      <Heading
+        color="gray.50"
+        fontSize={['2xl', '3xl']}
+        lineHeight="120%"
+        letterSpacing="tight"
+        fontWeight={500}
+        mt={10}
+      >
         Accounts
       </Heading>
 

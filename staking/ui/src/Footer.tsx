@@ -3,7 +3,7 @@ import { Container, Flex, Link } from '@chakra-ui/react';
 
 export const Footer = () => {
   return (
-    <Flex borderTop="1px solid" borderTopColor="gray.900" bg="navy.700">
+    <Flex borderTop="1px solid" borderTopColor="whiteAlpha.200" bg="navy.700">
       <Container
         maxW="1236px"
         as={Flex}

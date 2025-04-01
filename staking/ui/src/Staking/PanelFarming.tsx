@@ -13,7 +13,7 @@ export function PanelFarming() {
         immediately.
       </Text>
       <Box mt={2}>
-        <Image borderRadius="base" src={farming} width="100%" height="100%" objectFit="cover" />
+        <Image borderRadius="md" src={farming} width="100%" height="100%" objectFit="cover" />
       </Box>
     </>
   );

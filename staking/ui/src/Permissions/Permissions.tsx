@@ -17,7 +17,7 @@ export function Permissions() {
           />
         ))}
       </Flex>
-      <Flex bg="navy.700" borderRadius="base" direction="column" width="100%" p="6">
+      <Flex bg="navy.700" borderRadius="md" direction="column" width="100%" p="6">
         <Image src={DelegationIcon} width="48px" alt="Delegate permissions" />
         <Heading fontSize="14px" mt="6">
           Delegate Permissions

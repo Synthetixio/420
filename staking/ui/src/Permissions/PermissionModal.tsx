@@ -71,7 +71,7 @@ export function PermissionModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent py={2} borderRadius="base" bg="navy.700">
+      <ModalContent py={2} borderRadius="md" bg="navy.700">
         <ModalHeader>{target ? 'Edit' : 'New'} Permission</ModalHeader>
         <ModalCloseButton />
         <ModalBody>

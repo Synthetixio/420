@@ -43,7 +43,7 @@ export function LayoutPool420Position({
   const { data: position, isPending: isPendingPosition } = usePosition({ accountId });
   const { isOpen, onToggle } = useDisclosure({ defaultIsOpen });
   return (
-    <Box bg="navy.700" borderRadius="base" p={{ base: 4, sm: 10 }}>
+    <Box bg="navy.700" borderRadius="md" p={{ base: 4, sm: 10 }}>
       <Flex
         direction="row"
         justifyContent="space-between"

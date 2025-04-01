@@ -75,7 +75,7 @@ export function PanelWithdrawCollateral({ accountId }: { accountId: ethers.BigNu
           backgroundColor="whiteAlpha.200"
           py="1"
           px="3"
-          borderRadius="base"
+          borderRadius="md"
           gap={0}
           justifyContent="center"
           width="100%"

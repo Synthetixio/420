@@ -25,7 +25,7 @@ export function LayoutMigrateV3Position({
   });
   const { isOpen, onToggle } = useDisclosure({ defaultIsOpen });
   return (
-    <Box bg="navy.700" borderRadius="base" p={{ base: 4, sm: 10 }}>
+    <Box bg="navy.700" borderRadius="md" p={{ base: 4, sm: 10 }}>
       <Flex
         direction="row"
         justifyContent="space-between"
@@ -146,7 +146,7 @@ export function LayoutMigrateV3Position({
               <Flex
                 direction="column"
                 bg="whiteAlpha.50"
-                borderRadius="base"
+                borderRadius="md"
                 p={{ base: 4, sm: 6 }}
                 gap={6}
               >
@@ -162,7 +162,7 @@ export function LayoutMigrateV3Position({
               overflow="hidden"
             >
               <Image
-                borderRadius="base"
+                borderRadius="md"
                 src={smallBurn}
                 width="100%"
                 height="100%"

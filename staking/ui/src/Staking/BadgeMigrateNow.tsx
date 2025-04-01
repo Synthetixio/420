@@ -5,7 +5,7 @@ export function BadgeMigrateNow(props: TextProps) {
     <Text
       color="cyan.500"
       fontSize="sm"
-      borderRadius="base"
+      borderRadius="md"
       borderWidth="1px"
       borderColor="cyan.500"
       borderStyle="solid"

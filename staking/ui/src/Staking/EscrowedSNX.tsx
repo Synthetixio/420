@@ -32,7 +32,7 @@ export function EscrowedSNX({ accountId }: { accountId: ethers.BigNumber }) {
         py="1"
         px="2"
         backgroundColor="whiteAlpha.200"
-        borderRadius="base"
+        borderRadius="md"
         color="gray.50"
         gap={2}
         justifyContent="center"

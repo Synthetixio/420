@@ -55,7 +55,7 @@ export function PanelPool420Position({ accountId }: { accountId: ethers.BigNumbe
         <Flex
           direction="column"
           bg="whiteAlpha.50"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 6 }}
           gap={6}
           justifyContent="space-between"
@@ -130,7 +130,7 @@ export function PanelPool420Position({ accountId }: { accountId: ethers.BigNumbe
                 backgroundColor="whiteAlpha.200"
                 py="1"
                 px="3"
-                borderRadius="base"
+                borderRadius="md"
                 gap={0}
                 justifyContent="center"
               >
