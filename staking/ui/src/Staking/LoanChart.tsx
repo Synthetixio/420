@@ -158,7 +158,7 @@ export function LoanChart({
       <text
         x={10}
         y={config.height + config.fontSize + 10}
-        fill="#575768"
+        fill="#6C6C7E"
         fontSize={config.fontSize}
         textAnchor="start"
       >
@@ -171,7 +171,7 @@ export function LoanChart({
       <text
         x={config.width - 10}
         y={config.height + config.fontSize + 10}
-        fill="#575768"
+        fill="#6C6C7E"
         fontSize={config.fontSize}
         textAnchor="end"
       >
@@ -184,7 +184,7 @@ export function LoanChart({
       <text
         x={-15}
         y={config.fontSize / 2 - 5}
-        fill="#575768"
+        fill="#6C6C7E"
         fontSize={config.fontSize}
         textAnchor="end"
       >
@@ -201,7 +201,7 @@ export function LoanChart({
       <text
         x={-15}
         y={config.height + config.fontSize / 2 - 5}
-        fill="#575768"
+        fill="#6C6C7E"
         fontSize={config.fontSize}
         textAnchor="end"
       >

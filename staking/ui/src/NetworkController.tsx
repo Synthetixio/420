@@ -240,7 +240,7 @@ export function NetworkController() {
                     alignItems="center"
                     color="gray.500"
                     fontWeight={700}
-                    fontSize="16px"
+                    fontSize="md"
                     cursor="pointer"
                   >
                     ~
@@ -251,7 +251,7 @@ export function NetworkController() {
                     alignItems="center"
                     color="gray.500"
                     fontWeight={700}
-                    fontSize="16px"
+                    fontSize="md"
                     cursor="pointer"
                   >
                     No accounts
