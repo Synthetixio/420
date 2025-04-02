@@ -26,6 +26,32 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@_/Pool420Migrate@workspace:contracts/Pool420Migrate":
+  version: 0.0.0-use.local
+  resolution: "@_/Pool420Migrate@workspace:contracts/Pool420Migrate"
+  dependencies:
+    "@synthetixio/core-contracts": "npm:^3.10.1"
+    "@synthetixio/core-modules": "npm:^3.10.1"
+    "@synthetixio/main": "npm:^3.10.1"
+    "@synthetixio/oracle-manager": "npm:^3.10.1"
+    "@synthetixio/pyth-erc7412-wrapper": "npm:^3.10.1"
+    forge-std: "github:foundry-rs/forge-std"
+  languageName: unknown
+  linkType: soft
+
+"@_/Pool420Stake@workspace:contracts/Pool420Stake":
+  version: 0.0.0-use.local
+  resolution: "@_/Pool420Stake@workspace:contracts/Pool420Stake"
+  dependencies:
+    "@synthetixio/core-contracts": "npm:^3.10.1"
+    "@synthetixio/core-modules": "npm:^3.10.1"
+    "@synthetixio/main": "npm:^3.10.1"
+    "@synthetixio/oracle-manager": "npm:^3.10.1"
+    "@synthetixio/pyth-erc7412-wrapper": "npm:^3.10.1"
+    forge-std: "github:foundry-rs/forge-std"
+  languageName: unknown
+  linkType: soft
+
 "@_/Pool420Withdraw@workspace:contracts/Pool420Withdraw":
   version: 0.0.0-use.local
   resolution: "@_/Pool420Withdraw@workspace:contracts/Pool420Withdraw"
@@ -83,19 +109,6 @@ __metadata:
     "@_/contracts": "workspace:*"
     ethers: "npm:^5.7.2"
     react: "npm:^18.2.0"
-  languageName: unknown
-  linkType: soft
-
-"@_/position-manager-new-pool@workspace:contracts/PositionManager420":
-  version: 0.0.0-use.local
-  resolution: "@_/position-manager-new-pool@workspace:contracts/PositionManager420"
-  dependencies:
-    "@synthetixio/core-contracts": "npm:^3.10.1"
-    "@synthetixio/core-modules": "npm:^3.10.1"
-    "@synthetixio/main": "npm:^3.10.1"
-    "@synthetixio/oracle-manager": "npm:^3.10.1"
-    "@synthetixio/pyth-erc7412-wrapper": "npm:^3.10.1"
-    forge-std: "github:foundry-rs/forge-std"
   languageName: unknown
   linkType: soft
 
