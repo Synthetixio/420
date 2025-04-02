@@ -1,26 +1,10 @@
 pragma solidity ^0.8.21;
 
-import {
-    ICoreProxy,
-    PoolCollateralConfiguration,
-    CollateralConfiguration,
-    MarketConfiguration
-} from "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
-import {IAccountProxy} from "@synthetixio/v3-contracts/1-main/IAccountProxy.sol";
-import {ITreasuryMarketProxy} from "@synthetixio/v3-contracts/1-main/ITreasuryMarketProxy.sol";
-import {IUSDProxy} from "@synthetixio/v3-contracts/1-main/IUSDProxy.sol";
-import {ILegacyMarketProxy} from "@synthetixio/v3-contracts/1-main/ILegacyMarketProxy.sol";
-import {IV2x} from "@synthetixio/v3-contracts/1-main/IV2x.sol";
-import {IV2xUsd} from "@synthetixio/v3-contracts/1-main/IV2xUsd.sol";
-import {IERC20} from "@synthetixio/core-contracts/contracts/interfaces/IERC20.sol";
-import {IAddressResolver} from "../../src/IAddressResolver.sol";
+import {PoolCollateralConfiguration, CollateralConfiguration} from "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
+import "../../src/Pool420Migrate.sol";
+import "forge-std/src/Test.sol";
 
-import {PositionManager420} from "../../src/PositionManager420.sol";
-import {Test} from "forge-std/src/Test.sol";
-import {Vm} from "forge-std/src/Vm.sol";
-import {console} from "forge-std/src/console.sol";
-
-contract PositionManagerTest is Test {
+contract Pool420MigrateTest is Test {
     ICoreProxy internal CoreProxy;
     IAccountProxy internal AccountProxy;
     ITreasuryMarketProxy internal TreasuryMarketProxy;
@@ -37,7 +21,7 @@ contract PositionManagerTest is Test {
     string internal deployment;
     string internal forkUrl;
 
-    PositionManager420 internal positionManager;
+    Pool420Migrate internal pool420Migrate;
 
     function initialize() internal {
         string memory root = vm.projectRoot();
@@ -74,33 +58,31 @@ contract PositionManagerTest is Test {
         // Pyth bypass
         vm.etch(0x1234123412341234123412341234123412341234, "FORK");
 
-        positionManager = new PositionManager420(
+        pool420Migrate = new Pool420Migrate(
             //
             address(CoreProxy),
             address(AccountProxy),
             address(TreasuryMarketProxy),
             address(LegacyMarketProxy)
         );
-        vm.label(address(positionManager), "PositionManager420");
+        vm.label(address(pool420Migrate), "Pool420Migrate");
 
-        $SNX = IERC20(positionManager.get$SNX());
+        $SNX = IERC20(pool420Migrate.get$SNX());
         vm.label(address($SNX), "$SNX");
 
-        $snxUSD = IERC20(positionManager.get$snxUSD());
+        $snxUSD = IERC20(pool420Migrate.get$snxUSD());
         vm.label(address($snxUSD), "$snxUSD");
 
-        $sUSD = IERC20(positionManager.get$sUSD());
+        $sUSD = IERC20(pool420Migrate.get$sUSD());
         vm.label(address($sUSD), "$sUSD");
 
-        V2x = IV2x(positionManager.getV2x());
+        V2x = IV2x(pool420Migrate.getV2x());
         vm.label(address(V2x), "V2x");
 
-        V2xResolver = IAddressResolver(positionManager.V2xResolver());
+        V2xResolver = IAddressResolver(pool420Migrate.V2xResolver());
         vm.label(address(V2xResolver), "V2xResolver");
 
-        _bypassTimeouts(address(positionManager));
-        _bypassTimeouts(address(TreasuryMarketProxy));
-        _fundPool();
+        _bypassTimeouts(address(pool420Migrate));
     }
 
     function _bypassTimeouts(address addr) internal {

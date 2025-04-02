@@ -1,9 +1,9 @@
 pragma solidity ^0.8.21;
 
-import "../lib/PositionManagerTest.sol";
+import "../lib/Pool420MigrateTest.sol";
 import "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
 
-contract Optimism_PositionManager_migratePosition_v2x_Test is PositionManagerTest {
+contract Optimism_Pool420Migrate_migratePosition_v2x_Test is Pool420MigrateTest {
     constructor() {
         deployment = "10-main";
         forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
@@ -31,6 +31,7 @@ contract Optimism_PositionManager_migratePosition_v2x_Test is PositionManagerTes
 
         uint128 accountId = 888;
         vm.startPrank(ALICE);
+        TreasuryMarketProxy.rebalance();
         LegacyMarketProxy.migrate(accountId);
         TreasuryMarketProxy.saddle(accountId);
 
@@ -49,7 +50,7 @@ contract Optimism_PositionManager_migratePosition_v2x_Test is PositionManagerTes
             positionDebt,
             uint256(CoreProxy.getPositionDebt(accountId, TreasuryMarketProxy.poolId(), address($SNX))),
             0.1 ether,
-            "Virtual debt for SNX position should be half of collateral value (C-Ratio 200%)"
+            "Virtual debt for SNX position should be at the target C-Ratio (amount * snxPrice / targetCratio)"
         );
         assertEq(
             collateral,

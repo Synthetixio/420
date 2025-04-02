@@ -1,9 +1,9 @@
 pragma solidity ^0.8.21;
 
-import "../lib/PositionManagerTest.sol";
+import "../lib/Pool420MigrateTest.sol";
 import "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
 
-contract Mainnet_PositionManager_migratePosition_negativeDebt_Test is PositionManagerTest {
+contract Mainnet_Pool420Migrate_migratePosition_negativeDebt_Test is Pool420MigrateTest {
     constructor() {
         deployment = "1-main";
         forkUrl = vm.envString("RPC_MAINNET");
@@ -45,8 +45,8 @@ contract Mainnet_PositionManager_migratePosition_negativeDebt_Test is PositionMa
         }
         assertEq(0, $snxUSD.balanceOf(ALICE), "wallet has no $snxUSD");
 
-        AccountProxy.approve(address(positionManager), accountId);
-        positionManager.migratePosition(oldPoolId, accountId);
+        AccountProxy.approve(address(pool420Migrate), accountId);
+        pool420Migrate.migratePosition(oldPoolId, accountId);
 
         assertEq(ALICE, AccountProxy.ownerOf(accountId));
 

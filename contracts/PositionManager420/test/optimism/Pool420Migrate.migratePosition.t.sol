@@ -1,13 +1,13 @@
 pragma solidity ^0.8.21;
 
-import "../lib/PositionManagerTest.sol";
+import "../lib/Pool420MigrateTest.sol";
 import "@synthetixio/v3-contracts/1-main/ICoreProxy.sol";
 
-contract Mainnet_PositionManager_migratePosition_Test is PositionManagerTest {
+contract Optimism_Pool420Migrate_migratePosition_Test is Pool420MigrateTest {
     constructor() {
-        deployment = "1-main";
-        forkUrl = vm.envString("RPC_MAINNET");
-        forkBlockNumber = 21921167;
+        deployment = "10-main";
+        forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
+        forkBlockNumber = 132431079;
         initialize();
     }
 
@@ -68,8 +68,8 @@ contract Mainnet_PositionManager_migratePosition_Test is PositionManagerTest {
         );
         assertEq(0, $snxUSD.balanceOf(ALICE), "Wallet balance of $snxUSD should be 0");
 
-        AccountProxy.approve(address(positionManager), accountId);
-        positionManager.migratePosition(oldPoolId, accountId);
+        AccountProxy.approve(address(pool420Migrate), accountId);
+        pool420Migrate.migratePosition(oldPoolId, accountId);
 
         assertEq(ALICE, AccountProxy.ownerOf(accountId));
 
@@ -88,7 +88,7 @@ contract Mainnet_PositionManager_migratePosition_Test is PositionManagerTest {
             1000 * snxPrice * 1 ether / targetCratio,
             uint256(CoreProxy.getPositionDebt(accountId, TreasuryMarketProxy.poolId(), address($SNX))),
             0.1 ether,
-            "Virtual debt for $SNX position should be at C-Ratio 200%"
+            "Virtual debt for $SNX position should be at the target C-Ratio (amount * snxPrice / targetCratio)"
         );
         assertEq(
             1000 ether,
