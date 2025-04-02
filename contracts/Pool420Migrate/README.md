@@ -1,9 +1,17 @@
-# Position Manager contract
+# Pool420Migrate contract
+
+Contract for Pool420 to migrate v3 positions
 
 ## Running tests
 
 ```sh
 forge test -vvvvv --watch src test
+```
+
+Install `genhtml`:
+
+```sh
+brew install lcov
 ```
 
 Coverage report
@@ -12,23 +20,7 @@ Coverage report
 ./cov.sh
 ```
 
-or
-
-```sh
-forge coverage -vvvvv --report lcov --report-file /tmp/lcov.info
-lcov --rc derive_function_end_line=0 --remove /tmp/lcov.info -o /tmp/clean.lcov.info '../../node_modules/' 'test/'
-genhtml --rc derive_function_end_line=0 /tmp/clean.lcov.info --output-directory coverage
-```
-
-To install `genhtml`:
-
-```sh
-brew install lcov
-```
-
-## Deploy
-
-Mainnet
+## Deploy Mainnet
 
 ```sh
 export ETHERSCAN_API_KEY=
@@ -62,9 +54,12 @@ forge create \
       $_AccountProxy \
       $_TreasuryMarketProxy \
       $_LegacyMarketProxy
+
+# Get the readable abi and update importPool420Migrate.ts
+node ../../readableAbi.js "$(cat ./out/Pool420Migrate.sol/Pool420Migrate.json | jq -c '.metadata.output.abi')"
 ```
 
-Optimism Mainnet
+## Deploy Optimism
 
 ```sh
 export OPTIMISTIC_ETHERSCAN_API_KEY=
@@ -98,9 +93,12 @@ forge create \
       $_AccountProxy \
       $_TreasuryMarketProxy \
       $_LegacyMarketProxy
+
+# Get the readable abi and update importPool420Migrate.ts
+node ../../readableAbi.js "$(cat ./out/Pool420Migrate.sol/Pool420Migrate.json | jq -c '.metadata.output.abi')"
 ```
 
-Local
+## Deploy Local
 
 ```sh
 export _root=$(yarn workspace root exec pwd)
@@ -112,6 +110,11 @@ export _TreasuryMarketProxy=$(cat $_meta | jq -r '.contracts.TreasuryMarketProxy
 export _LegacyMarketProxy=$(cat $_meta | jq -r '.contracts.LegacyMarketProxy')
 
 export TEST_PK=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+
+echo _CoreProxy $_CoreProxy
+echo _AccountProxy $_AccountProxy
+echo _TreasuryMarketProxy $_TreasuryMarketProxy
+echo _LegacyMarketProxy $_LegacyMarketProxy
 
 forge create \
   --broadcast \
@@ -245,9 +248,9 @@ export _TreasuryMarketProxy=$(cat $_meta | jq -r '.contracts.TreasuryMarketProxy
 export _LegacyMarketProxy=$(cat $_meta | jq -r '.contracts.LegacyMarketProxy')
 export _SNX=$(cat $_meta | jq -r '.contracts.CollateralToken_SNX')
 export rpc="$RPC_OPTIMISM_MAINNET"
-export block=132431079
+export block=133988587
 
-for i in {1136..1236}; do
+for i in {1800..1900}; do
   account_readable=$(cast call --rpc-url "$rpc" --block $block "$_AccountProxy" "function tokenByIndex(uint256 index) view returns (uint256)" "$i")
   account=$(echo "$account_readable" | awk '{print $1}')
   wallet=$(cast call --rpc-url "$rpc" --block $block "$_AccountProxy" "function ownerOf(uint256 tokenId) view returns (address)" "$account")

@@ -134,8 +134,8 @@ __metadata:
     "@_/useLegacyMarket": "workspace:*"
     "@_/useParams": "workspace:*"
     "@_/usePool420": "workspace:*"
+    "@_/usePool420Migrate": "workspace:*"
     "@_/usePool420Withdraw": "workspace:*"
-    "@_/usePositionManager420": "workspace:*"
     "@_/useSNX": "workspace:*"
     "@_/useTreasuryMarketProxy": "workspace:*"
     "@_/useTrustedMulticallForwarder": "workspace:*"
@@ -254,7 +254,7 @@ __metadata:
   dependencies:
     "@_/parseContractError": "workspace:*"
     "@_/useAllErrors": "workspace:*"
-    "@_/usePositionManager420": "workspace:*"
+    "@_/usePool420Migrate": "workspace:*"
     react: "npm:^18.2.0"
   languageName: unknown
   linkType: soft
@@ -302,9 +302,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/usePool420Withdraw@workspace:*, @_/usePool420Withdraw@workspace:staking/lib/contracts/usePool420Withdraw":
+"@_/usePool420Migrate@workspace:*, @_/usePool420Migrate@workspace:staking/lib/contracts/usePool420Migrate":
   version: 0.0.0-use.local
-  resolution: "@_/usePool420Withdraw@workspace:staking/lib/contracts/usePool420Withdraw"
+  resolution: "@_/usePool420Migrate@workspace:staking/lib/contracts/usePool420Migrate"
   dependencies:
     "@_/contracts": "workspace:*"
     "@_/useBlockchain": "workspace:*"
@@ -313,9 +313,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/usePositionManager420@workspace:*, @_/usePositionManager420@workspace:staking/lib/contracts/usePositionManager420":
+"@_/usePool420Withdraw@workspace:*, @_/usePool420Withdraw@workspace:staking/lib/contracts/usePool420Withdraw":
   version: 0.0.0-use.local
-  resolution: "@_/usePositionManager420@workspace:staking/lib/contracts/usePositionManager420"
+  resolution: "@_/usePool420Withdraw@workspace:staking/lib/contracts/usePool420Withdraw"
   dependencies:
     "@_/contracts": "workspace:*"
     "@_/useBlockchain": "workspace:*"

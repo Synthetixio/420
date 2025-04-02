@@ -2,7 +2,7 @@ import { ContractError } from '@_/ContractError';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
-import { usePositionManager420 } from '@_/usePositionManager420';
+import { usePool420Migrate } from '@_/usePool420Migrate';
 import { useTreasuryMarketProxy } from '@_/useTreasuryMarketProxy';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useToast } from '@chakra-ui/react';
@@ -24,7 +24,7 @@ export function useMigratePool420({ accountId }: { accountId: ethers.BigNumber }
     accountId,
   });
 
-  const { data: PositionManager420 } = usePositionManager420();
+  const { data: Pool420Migrate } = usePool420Migrate();
   const { data: AccountProxy } = useAccountProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
   const { data: targetCRatio } = useTargetCRatio();
@@ -35,7 +35,7 @@ export function useMigratePool420({ accountId }: { accountId: ethers.BigNumber }
     provider &&
     signer &&
     TrustedMulticallForwarder &&
-    PositionManager420 &&
+    Pool420Migrate &&
     AccountProxy &&
     TreasuryMarketProxy &&
     targetCRatio &&
@@ -58,7 +58,7 @@ export function useMigratePool420({ accountId }: { accountId: ethers.BigNumber }
       toast({ title: 'Migrating...', variant: 'left-accent' });
 
       const AccountProxyInterface = new ethers.utils.Interface(AccountProxy.abi);
-      const PositionManager420Interface = new ethers.utils.Interface(PositionManager420.abi);
+      const Pool420MigrateInterface = new ethers.utils.Interface(Pool420Migrate.abi);
       const TreasuryMarketProxyInterface = new ethers.utils.Interface(TreasuryMarketProxy.abi);
 
       const multicall = [
@@ -70,14 +70,14 @@ export function useMigratePool420({ accountId }: { accountId: ethers.BigNumber }
         {
           target: AccountProxy.address,
           callData: AccountProxyInterface.encodeFunctionData('approve', [
-            PositionManager420.address,
+            Pool420Migrate.address,
             accountId,
           ]),
           requireSuccess: true,
         },
         {
-          target: PositionManager420.address,
-          callData: PositionManager420Interface.encodeFunctionData('migratePosition', [
+          target: Pool420Migrate.address,
+          callData: Pool420MigrateInterface.encodeFunctionData('migratePosition', [
             ethers.BigNumber.from(1), // SC Pool ID == 1
             accountId,
           ]),
