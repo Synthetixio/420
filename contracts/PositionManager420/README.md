@@ -56,7 +56,7 @@ forge create \
   --verifier-url $ETHERSCAN_API_URL \
   --etherscan-api-key $ETHERSCAN_API_KEY \
   --verify \
-  src/PositionManager420.sol:PositionManager420 \
+  src/Pool420Migrate.sol:Pool420Migrate \
   --constructor-args \
       $_CoreProxy \
       $_AccountProxy \
@@ -92,7 +92,7 @@ forge create \
   --verifier-url $OPTIMISTIC_ETHERSCAN_API_URL \
   --etherscan-api-key $OPTIMISTIC_ETHERSCAN_API_KEY \
   --verify \
-  src/PositionManager420.sol:PositionManager420 \
+  src/Pool420Migrate.sol:Pool420Migrate \
   --constructor-args \
       $_CoreProxy \
       $_AccountProxy \
@@ -117,15 +117,15 @@ forge create \
   --broadcast \
   --no-cache \
   --private-key $TEST_PK \
-  src/PositionManager420.sol:PositionManager420 \
+  src/Pool420Migrate.sol:Pool420Migrate \
   --constructor-args \
       $_CoreProxy \
       $_AccountProxy \
       $_TreasuryMarketProxy \
       $_LegacyMarketProxy
 
-# Get the readable abi and update importPositionManager420.ts
-node ../../readableAbi.js "$(cat ./out/PositionManager420.sol/PositionManager420.json | jq -c '.metadata.output.abi')"
+# Get the readable abi and update importPool420Migrate.ts
+node ../../readableAbi.js "$(cat ./out/Pool420Migrate.sol/Pool420Migrate.json | jq -c '.metadata.output.abi')"
 ```
 
 Additional cast commands to setup and configure the new pool
@@ -133,21 +133,21 @@ Additional cast commands to setup and configure the new pool
 ```sh
 cast rpc anvil_autoImpersonateAccount true
 
-export _PositionManager="0x6C3F7ed79b9D75486D0250946f7a20BDA74844Ba"
+export _Pool420Migrate="0x6C3F7ed79b9D75486D0250946f7a20BDA74844Ba"
 
-cast selectors $(cast code $_PositionManager)
+cast selectors $(cast code $_Pool420Migrate)
 
-cast call $_PositionManager 'function AccountProxy() view returns (address)'
-cast call $_PositionManager 'function CoreProxy() view returns (address)'
-cast call $_PositionManager 'function LegacyMarketProxy() view returns (address)'
-cast call $_PositionManager 'function TreasuryMarketProxy() view returns (address)'
-cast call $_PositionManager 'function V2xResolver() view returns (address)'
+cast call $_Pool420Migrate 'function AccountProxy() view returns (address)'
+cast call $_Pool420Migrate 'function CoreProxy() view returns (address)'
+cast call $_Pool420Migrate 'function LegacyMarketProxy() view returns (address)'
+cast call $_Pool420Migrate 'function TreasuryMarketProxy() view returns (address)'
+cast call $_Pool420Migrate 'function V2xResolver() view returns (address)'
 
-cast call $_PositionManager 'function get$SNX() view returns (address $SNX)'
-cast call $_PositionManager 'function get$sUSD() view returns (address $sUSD)'
-cast call $_PositionManager 'function get$snxUSD() view returns (address $snxUSD)'
-cast call $_PositionManager 'function getV2x() view returns (address v2x)'
-cast call $_PositionManager 'function getV2xUsd() view returns (address v2xUsd)'
+cast call $_Pool420Migrate 'function get$SNX() view returns (address $SNX)'
+cast call $_Pool420Migrate 'function get$sUSD() view returns (address $sUSD)'
+cast call $_Pool420Migrate 'function get$snxUSD() view returns (address $snxUSD)'
+cast call $_Pool420Migrate 'function getV2x() view returns (address v2x)'
+cast call $_Pool420Migrate 'function getV2xUsd() view returns (address v2xUsd)'
 
 
 # Disable timeouts
@@ -163,13 +163,13 @@ cast send --unlocked --from $_owner $_CoreProxy "function setConfig(bytes32 k, b
   "$(cast keccak "$(cast abi-encode "f(bytes32,address,uint128)" $_senderOverrideMinDelegateTime $_TreasuryMarketProxy "$(cast to-uint256 1)")")" \
   "$(cast to-uint256 1)"
 cast send --unlocked --from $_owner $_CoreProxy "function setConfig(bytes32 k, bytes32 v)" \
-  "$(cast keccak "$(cast abi-encode "f(bytes32,address,uint128)" $_senderOverrideMinDelegateTime $_PositionManager "$(cast to-uint256 1)")")" \
+  "$(cast keccak "$(cast abi-encode "f(bytes32,address,uint128)" $_senderOverrideMinDelegateTime $_Pool420Migrate "$(cast to-uint256 1)")")" \
   "$(cast to-uint256 1)"
 cast send --unlocked --from $_owner $_CoreProxy "function setConfig(bytes32 k, bytes32 v)" \
   "$(cast keccak "$(cast abi-encode "f(bytes32,address,uint128)" $_senderOverrideWithdrawTimeout $_TreasuryMarketProxy "$(cast to-uint256 1)")")" \
   "$(cast to-uint256 1)"
 cast send --unlocked --from $_owner $_CoreProxy "function setConfig(bytes32 k, bytes32 v)" \
-  "$(cast keccak "$(cast abi-encode "f(bytes32,address,uint128)" $_senderOverrideWithdrawTimeout $_PositionManager "$(cast to-uint256 1)")")" \
+  "$(cast keccak "$(cast abi-encode "f(bytes32,address,uint128)" $_senderOverrideWithdrawTimeout $_Pool420Migrate "$(cast to-uint256 1)")")" \
   "$(cast to-uint256 1)"
 
 # Setup SNX Jubilee pool (no longer needed)
@@ -177,20 +177,20 @@ cast send --unlocked --from $_owner $_CoreProxy "function setConfig(bytes32 k, b
 # cast call $_CoreProxy "function getPoolConfiguration(uint128 poolId) view returns (tuple(uint128, uint128, int128)[])" $_poolId
 
 # Fund SNX Jubilee pool with 10k SNX position
-export _SNX=$(cast call $_PositionManager 'function get$SNX() view returns (address $SNX)')
-export _sUSD=$(cast call $_PositionManager 'function get$sUSD() view returns (address $sUSD)')
-export _snxUSD=$(cast call $_PositionManager 'function get$snxUSD() view returns (address $snxUSD)')
+export _SNX=$(cast call $_Pool420Migrate 'function get$SNX() view returns (address $SNX)')
+export _sUSD=$(cast call $_Pool420Migrate 'function get$sUSD() view returns (address $sUSD)')
+export _snxUSD=$(cast call $_Pool420Migrate 'function get$snxUSD() view returns (address $snxUSD)')
 
 cast rpc anvil_setBalance $_CoreProxy $(cast to-wei 10)
 cast send --unlocked --from $_CoreProxy $_SNX "function transfer(address to, uint256 amount) returns (bool)" 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 $(cast to-wei 10000)
-cast send --unlocked --from 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 $_SNX "function approve(address spender, uint256 amount) returns (bool)" $_PositionManager $(cast to-wei 10000)
-cast send --unlocked --from 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 $_PositionManager "function setupPosition(uint256 snxAmount)" $(cast to-wei 10000)
+cast send --unlocked --from 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 $_SNX "function approve(address spender, uint256 amount) returns (bool)" $_Pool420Migrate $(cast to-wei 10000)
+cast send --unlocked --from 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 $_Pool420Migrate "function setupPosition(uint256 snxAmount)" $(cast to-wei 10000)
 
 cast send --unlocked --from $_CoreProxy $_SNX "function transfer(address to, uint256 amount) returns (bool)" 0xc3Cf311e04c1f8C74eCF6a795Ae760dc6312F345 $(cast to-wei 1000)
 
-cast call --from 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 $_PositionManager 'function getTotalDeposit() view returns (uint256 totalDeposit)'
-cast call --from 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 $_PositionManager 'function getTotalLoan() view returns (uint256 totalLoan)'
-cast call --from 0xc3Cf311e04c1f8C74eCF6a795Ae760dc6312F345 $_PositionManager 'function getTotalDeposit() view returns (uint256 totalDeposit)'
+cast call --from 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 $_Pool420Migrate 'function getTotalDeposit() view returns (uint256 totalDeposit)'
+cast call --from 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 $_Pool420Migrate 'function getTotalLoan() view returns (uint256 totalLoan)'
+cast call --from 0xc3Cf311e04c1f8C74eCF6a795Ae760dc6312F345 $_Pool420Migrate 'function getTotalDeposit() view returns (uint256 totalDeposit)'
 ```
 
 ## Find accounts with negative debt
