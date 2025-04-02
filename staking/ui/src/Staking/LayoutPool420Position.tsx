@@ -17,7 +17,7 @@ function Subheader() {
   return (
     <>
       <Flex direction={{ base: 'column', sm: 'row' }} gap={4} justifyContent="space-between">
-        <Text color="gray.500" maxWidth="40em">
+        <Text color="gray.500" maxWidth="40em" fontSize={['sm', 'md']}>
           Your position is fully delegated to Synthetix, and your debt is being forgiven
           automatically over time with zero risk of liquidation.
         </Text>
@@ -45,11 +45,12 @@ export function LayoutPool420Position({
   return (
     <Box bg="navy.700" borderRadius="md" p={{ base: 4, sm: 10 }}>
       <Flex
-        direction="row"
+        direction={{ base: 'column', lg: 'row' }}
         justifyContent="space-between"
         onClick={onToggle}
         cursor="pointer"
-        gap={6}
+        gap={{ base: '2', lg: '6' }}
+        position="relative"
       >
         <Flex direction="column" gap={1} justifyContent="center">
           <Text color="gray.50" fontSize="lg" fontWeight={500}>
@@ -58,8 +59,8 @@ export function LayoutPool420Position({
           <Text
             color="gray.500"
             fontSize="sm"
-            opacity={isOpen ? 0 : 1}
-            transition="opacity 300ms"
+            display={isOpen ? 'none' : 'flex'}
+            transition="all 300ms"
             pointerEvents="none"
           >
             <AccountId accountId={accountId} />
@@ -67,12 +68,14 @@ export function LayoutPool420Position({
         </Flex>
 
         <Flex
-          direction="column"
+          direction={{ base: 'row', lg: 'column' }}
           textAlign="right"
           gap={1}
-          justifyContent="center"
-          opacity={isOpen ? 0 : 1}
-          transition="opacity 300ms"
+          justifyContent={{ base: 'space-between', lg: 'center' }}
+          alignItems={{ base: 'center', lg: 'flex-end' }}
+          display={isOpen ? 'none' : 'flex'}
+          transition="all 300ms"
+          mt={{ base: '4', lg: '0' }}
         >
           <Text color="gray.500" fontSize="xs">
             Current Debt
@@ -93,12 +96,13 @@ export function LayoutPool420Position({
         </Flex>
 
         <Flex
-          direction="column"
+          direction={{ base: 'row', lg: 'column' }}
           textAlign="right"
           gap={1}
-          justifyContent="center"
-          opacity={isOpen ? 0 : 1}
-          transition="opacity 300ms"
+          justifyContent={{ base: 'space-between', lg: 'center' }}
+          alignItems={{ base: 'center', lg: 'flex-end' }}
+          display={isOpen ? 'none' : 'flex'}
+          transition="all 300ms"
         >
           <Text color="gray.500" fontSize="xs">
             Debt Burned
@@ -119,12 +123,13 @@ export function LayoutPool420Position({
         </Flex>
 
         <Flex
-          direction="column"
+          direction={{ base: 'row', lg: 'column' }}
           textAlign="right"
           gap={1}
-          justifyContent="center"
-          opacity={isOpen ? 0 : 1}
-          transition="opacity 300ms"
+          justifyContent={{ base: 'space-between', lg: 'center' }}
+          alignItems={{ base: 'center', lg: 'flex-end' }}
+          display={isOpen ? 'none' : 'flex'}
+          transition="all 300ms"
         >
           <Text color="gray.500" fontSize="xs">
             Account Balance
@@ -159,7 +164,15 @@ export function LayoutPool420Position({
           </Text>
         </Flex>
 
-        <Flex direction="row" textAlign="right" gap={6} flex={0}>
+        <Flex
+          direction="row"
+          textAlign="right"
+          gap={6}
+          flex={0}
+          position={{ base: 'absolute', lg: 'static' }}
+          top={0}
+          right={0}
+        >
           <BadgeMigrateNow opacity={0} />
           <ChevronDownIcon
             transform={isOpen ? 'rotate(-180deg)' : ''}
@@ -171,7 +184,7 @@ export function LayoutPool420Position({
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <Flex direction="column" flexWrap="wrap" gap={6}>
+        <Flex direction="column" flexWrap="wrap" gap={6} mt={4}>
           <Subheader />
 
           <Flex direction={{ base: 'column', lg: 'row' }} flexWrap="wrap" gap={6}>
