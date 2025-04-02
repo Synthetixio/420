@@ -26,9 +26,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@_/Pool420Migrate@workspace:contracts/PositionManager420":
+"@_/Pool420Migrate@workspace:contracts/Pool420Migrate":
   version: 0.0.0-use.local
-  resolution: "@_/Pool420Migrate@workspace:contracts/PositionManager420"
+  resolution: "@_/Pool420Migrate@workspace:contracts/Pool420Migrate"
   dependencies:
     "@synthetixio/core-contracts": "npm:^3.10.1"
     "@synthetixio/core-modules": "npm:^3.10.1"
