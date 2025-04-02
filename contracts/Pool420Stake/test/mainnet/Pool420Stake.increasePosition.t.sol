@@ -27,24 +27,6 @@ contract Mainnet_Pool420Stake_increasePosition_Test is Pool420StakeTest {
         pool420Stake.setupPosition(1000 ether);
         uint128 accountId = uint128(AccountProxy.tokenOfOwnerByIndex(ALICE, 0));
 
-        //        uint128 accountId = CoreProxy.createAccount();
-        //
-        //        $SNX.approve(address(CoreProxy), 1000 ether);
-        //        CoreProxy.deposit(
-        //            //
-        //            accountId,
-        //            address($SNX),
-        //            1000 ether
-        //        );
-        //        CoreProxy.delegateCollateral(
-        //            //
-        //            accountId,
-        //            TreasuryMarketProxy.poolId(),
-        //            address($SNX),
-        //            1000 ether,
-        //            1e18
-        //        );
-
         uint256 snxPrice = CoreProxy.getCollateralPrice(address($SNX));
         uint256 targetCratio = TreasuryMarketProxy.targetCratio();
         uint256 virtualDebt = 1000 * snxPrice * 1 ether / targetCratio;

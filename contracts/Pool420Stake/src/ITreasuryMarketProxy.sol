@@ -61,6 +61,7 @@ interface ITreasuryMarketProxy {
             uint128 penaltyStart,
             uint128 penaltyEnd
         );
+    function depositRewardPenalty(uint128 accountId, address depositRewardToken) external view returns (uint256);
     function depositRewards(uint128, address)
         external
         view

@@ -7,12 +7,12 @@ contract Mainnet_Pool420Stake_setupPosition_Test is Pool420StakeTest {
         deployment = "1-main";
         //        forkUrl = vm.envString("RPC_MAINNET");
         //        forkBlockNumber = 22043658;
-        forkUrl = "http://127.0.0.1:8545";
+        forkUrl = "http://127.0.0.1:8545"; // TODO: remove after deployment
         initialize();
     }
 
     function test_setupPosition() public {
-        TreasuryMarketProxy.depositRewardConfigurations(0);
+        _setupRewards(); // TODO: remove after deployment
 
         address ALICE = vm.addr(0xA11CE);
         vm.label(ALICE, "0xA11CE");
@@ -79,16 +79,41 @@ contract Mainnet_Pool420Stake_setupPosition_Test is Pool420StakeTest {
 
         // Go forward half a year
         vm.warp(ts + 365 * 24 * 3600 / 2);
+        uint256 halfWayRewards = 1000 ether * 0.2 / 2;
         assertEq(
-            1000 ether * 0.2 * 0.5,
+            halfWayRewards,
             TreasuryMarketProxy.depositRewardAvailable(accountId, address($SNX)),
             "should have half of rewards"
         );
-
         assertEq(
-            1000 ether * 0.2 * 0.5,
-            TreasuryMarketProxy.repaymentPenalty(accountId, 1000 ether * 0.2),
-            "reards penalty should be a half of rewards"
+            halfWayRewards * 3 / 4,
+            TreasuryMarketProxy.depositRewardPenalty(accountId, address($SNX)),
+            "rewards penalty should be 3/4 of rewards"
         );
+
+        // Go forward a year -1s
+        vm.warp(ts + 365 * 24 * 3600 - 1);
+        uint256 fullWayRewards = 1000 ether * 0.2;
+        assertApproxEqAbs(
+            fullWayRewards,
+            TreasuryMarketProxy.depositRewardAvailable(accountId, address($SNX)),
+            0.1 ether,
+            "should have (almost) all the rewards"
+        );
+        assertApproxEqAbs(
+            fullWayRewards * 1 / 2,
+            TreasuryMarketProxy.depositRewardPenalty(accountId, address($SNX)),
+            0.1 ether,
+            "rewards penalty should be (approximately) 1/2 of rewards"
+        );
+
+        // Go forward full year!
+        vm.warp(ts + 365 * 24 * 3600);
+        assertEq(
+            fullWayRewards,
+            TreasuryMarketProxy.depositRewardAvailable(accountId, address($SNX)),
+            "should have all the rewards"
+        );
+        assertEq(0, TreasuryMarketProxy.depositRewardPenalty(accountId, address($SNX)), "rewards penalty should be 0");
     }
 }

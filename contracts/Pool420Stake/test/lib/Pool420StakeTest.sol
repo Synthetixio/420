@@ -1,5 +1,6 @@
 pragma solidity ^0.8.21;
 
+import {ITreasuryMarket} from "../../src/ITreasuryMarketProxy.sol";
 import "../../src/Pool420Stake.sol";
 import "forge-std/src/Test.sol";
 
@@ -81,9 +82,6 @@ contract Pool420StakeTest is Test {
 
         V2xResolver = IAddressResolver(pool420Stake.V2xResolver());
         vm.label(address(V2xResolver), "V2xResolver");
-
-        //_bypassTimeouts(address(pool420Stake));
-        // _setupRewards();
     }
 
     function _setupRewards() internal {
@@ -92,9 +90,9 @@ contract Pool420StakeTest is Test {
         bytes32 constOneOracle = 0x066ef68c9d9ca51eee861aeb5bce51a12e61f06f10bf62243c563671ae3a9733;
         configs[0] = ITreasuryMarket.DepositRewardConfiguration({
             token: address($SNX),
-            power: 1,
-            duration: 365 * 24 * 3600,
-            percent: 0.2 ether,
+            power: 1, // for easier calculations in tests make rewards penalty LINEAR
+            duration: 24 * 3600, // 1 day
+            percent: 10 ether, // 1000%
             valueRatioOracle: constOneOracle,
             penaltyStart: 1.0 ether,
             penaltyEnd: 0.5 ether

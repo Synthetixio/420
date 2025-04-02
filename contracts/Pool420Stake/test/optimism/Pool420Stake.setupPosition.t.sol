@@ -5,12 +5,15 @@ import "../lib/Pool420StakeTest.sol";
 contract Optimism_Pool420Stake_setupPosition_Test is Pool420StakeTest {
     constructor() {
         deployment = "10-main";
-        forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
-        forkBlockNumber = 133373441;
+        //        forkUrl = vm.envString("RPC_OPTIMISM_MAINNET");
+        //        forkBlockNumber = 133373441;
+        forkUrl = "http://127.0.0.1:8545"; // TODO: remove after deployment
         initialize();
     }
 
     function test_setupPosition() public {
+        _setupRewards();
+
         address ALICE = vm.addr(0xA11CE);
         vm.label(ALICE, "0xA11CE");
 
@@ -53,5 +56,64 @@ contract Optimism_Pool420Stake_setupPosition_Test is Pool420StakeTest {
             "account should not have any $snxUSD available as it is all sent to user wallet"
         );
         assertEq(0, $snxUSD.balanceOf(ALICE), "should have no $snxUSD in the wallet");
+
+        uint256 ts = vm.getBlockTimestamp();
+
+        (uint64 startTime, uint32 power, uint32 duration, uint128 loanAmount) =
+            TreasuryMarketProxy.depositRewards(accountId, address($SNX));
+
+        assertEq(ts, startTime, "rewards should start now");
+        assertEq(1, power, "power should be linear 1");
+        assertEq(24 * 3600, duration, "duration should be 1 day");
+        assertEq(1000 ether * 10, loanAmount, "total rewards should be 1000% of deposit amount as configured");
+        assertEq(
+            0,
+            TreasuryMarketProxy.availableDepositRewards(address($SNX)),
+            "market should have no deposit rewards to give"
+        );
+        assertEq(
+            0,
+            TreasuryMarketProxy.depositRewardAvailable(accountId, address($SNX)),
+            "ALICE account should have no deposit rewards at the start"
+        );
+
+        // Go forward half a year
+        vm.warp(ts + duration / 2);
+        uint256 halfWayRewards = loanAmount / 2;
+        assertEq(
+            halfWayRewards,
+            TreasuryMarketProxy.depositRewardAvailable(accountId, address($SNX)),
+            "should have half of rewards"
+        );
+        assertEq(
+            halfWayRewards * 3 / 4,
+            TreasuryMarketProxy.depositRewardPenalty(accountId, address($SNX)),
+            "rewards penalty should be 3/4 of rewards"
+        );
+
+        // Go forward a year -1s
+        vm.warp(ts + duration - 1);
+        uint256 fullWayRewards = loanAmount;
+        assertApproxEqAbs(
+            fullWayRewards,
+            TreasuryMarketProxy.depositRewardAvailable(accountId, address($SNX)),
+            0.2 ether,
+            "should have (almost) all the rewards"
+        );
+        assertApproxEqAbs(
+            fullWayRewards * 1 / 2,
+            TreasuryMarketProxy.depositRewardPenalty(accountId, address($SNX)),
+            0.2 ether,
+            "rewards penalty should be (approximately) 1/2 of rewards"
+        );
+
+        // Go forward full year!
+        vm.warp(ts + duration);
+        assertEq(
+            fullWayRewards,
+            TreasuryMarketProxy.depositRewardAvailable(accountId, address($SNX)),
+            "should have all the rewards"
+        );
+        assertEq(0, TreasuryMarketProxy.depositRewardPenalty(accountId, address($SNX)), "rewards penalty should be 0");
     }
 }
