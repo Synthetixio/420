@@ -35,6 +35,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@_/Pool420Stake@workspace:contracts/Pool420Stake":
+  version: 0.0.0-use.local
+  resolution: "@_/Pool420Stake@workspace:contracts/Pool420Stake"
+  dependencies:
+    "@synthetixio/core-contracts": "npm:^3.10.1"
+    forge-std: "github:foundry-rs/forge-std"
+  languageName: unknown
+  linkType: soft
+
 "@_/Pool420Withdraw@workspace:contracts/Pool420Withdraw":
   version: 0.0.0-use.local
   resolution: "@_/Pool420Withdraw@workspace:contracts/Pool420Withdraw"

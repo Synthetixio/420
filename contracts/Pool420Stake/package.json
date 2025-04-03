@@ -1,0 +1,28 @@
+{
+  "name": "@_/Pool420Stake",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.js",
+  "files": [
+    "src",
+    "*.toml"
+  ],
+  "repository": "Synthetixio/420",
+  "author": "Synthetix",
+  "license": "MIT",
+  "scripts": {
+    "build": "forge build",
+    "test": "forge test -vvvvv",
+    "cov": "./cov.sh"
+  },
+  "devDependencies": {
+    "@synthetixio/core-contracts": "^3.10.1",
+    "forge-std": "github:foundry-rs/forge-std"
+  },
+  "depcheck": {
+    "ignoreMatches": [
+      "@synthetixio/core-contracts",
+      "forge-std"
+    ]
+  }
+}
