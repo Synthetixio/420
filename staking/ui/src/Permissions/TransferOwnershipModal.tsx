@@ -44,7 +44,7 @@ export function TransferOwnershipModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent pb={1} borderRadius="base" bg="navy.700">
+      <ModalContent pb={1} borderRadius="md" bg="navy.700">
         <ModalHeader>Transfer Ownership</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
@@ -69,7 +69,7 @@ export function TransferOwnershipModal({
           />
         </ModalBody>
         <ModalFooter as={Flex} direction="column" gap={4} justifyContent="center">
-          <Alert status="warning" borderRadius="base">
+          <Alert status="warning" borderRadius="md">
             <AlertIcon />
             <Flex direction="column">
               <AlertDescription>This action cannot be undone</AlertDescription>

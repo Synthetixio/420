@@ -144,7 +144,8 @@ export function NetworkController() {
           borderWidth="1px"
           borderColor="gray.900"
           borderRadius="base"
-          p={3}
+          p={4}
+          mt={0}
         >
           <Flex direction="column" w="100%" gap="3">
             <Flex justifyContent="space-between" gap={3}>
@@ -239,7 +240,7 @@ export function NetworkController() {
                     alignItems="center"
                     color="gray.500"
                     fontWeight={700}
-                    fontSize="16px"
+                    fontSize="md"
                     cursor="pointer"
                   >
                     ~
@@ -250,7 +251,7 @@ export function NetworkController() {
                     alignItems="center"
                     color="gray.500"
                     fontWeight={700}
-                    fontSize="16px"
+                    fontSize="md"
                     cursor="pointer"
                   >
                     No accounts

@@ -11,7 +11,7 @@ export function PanelAccount({ accountId }: { accountId: ethers.BigNumber }) {
     <Flex
       direction="column"
       bg="whiteAlpha.50"
-      borderRadius="base"
+      borderRadius="md"
       p={{ base: 4, sm: 6 }}
       gap={6}
       color="gray.500"

@@ -17,12 +17,19 @@ import { useFlags } from './Staking/useFlags';
 function HeaderDeposit() {
   return (
     <Flex direction="column" gap={3}>
-      <Heading color="gray.50" maxWidth="40rem" fontSize={['2rem', '3rem']} lineHeight="120%">
+      <Heading
+        color="gray.50"
+        maxWidth="40rem"
+        fontSize={['5xl', '6xl']}
+        lineHeight="120%"
+        letterSpacing="tight"
+        fontWeight={500}
+      >
         Deposit
       </Heading>
 
       <Flex justifyContent="space-between" alignItems="center" gap={6} flexWrap="wrap">
-        <Text color="gray.500" fontSize="1rem" lineHeight={6}>
+        <Text color="gray.500" fontSize="lg" lineHeight={6} fontWeight={500}>
           Deposit into the 420 Pool to start earning yield
         </Text>
       </Flex>
@@ -33,12 +40,19 @@ function HeaderDeposit() {
 function Header420() {
   return (
     <Flex direction="column" gap={3}>
-      <Heading color="gray.50" maxWidth="40rem" fontSize={['2rem', '3rem']} lineHeight="120%">
+      <Heading
+        color="gray.50"
+        maxWidth="40rem"
+        fontSize={['5xl', '6xl']}
+        lineHeight="120%"
+        letterSpacing="tight"
+        fontWeight={500}
+      >
         420 Pool
       </Heading>
 
       <Flex justifyContent="space-between" alignItems="center" gap={6} flexWrap="wrap">
-        <Text color="gray.500" fontSize="1rem" lineHeight={6}>
+        <Text color="gray.500" fontSize="lg" lineHeight={6} fontWeight={500}>
           Simple SNX staking for maximum yield
         </Text>
       </Flex>
@@ -229,7 +243,7 @@ export function DashboardPage() {
         <title>Synthetix 420 Pool</title>
         <meta name="description" content="Synthetix 420 Pool" />
       </Helmet>
-      <Flex pt={8} direction="column" mb={16} width="100%">
+      <Flex pt={['0', '8']} direction="column" mb={16} width="100%">
         <Collapse in={flags?.hasV2xPosition || flags?.hasV3Debt} animateOpacity unmountOnExit>
           <Alert status="warning" mb="6">
             <AlertIcon />

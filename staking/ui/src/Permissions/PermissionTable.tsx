@@ -57,7 +57,7 @@ export function PermissionTable({
   );
   return (
     <>
-      <TableContainer flexGrow="2" bg="navy.700" borderRadius="base" p={6}>
+      <TableContainer flexGrow="2" bg="navy.700" borderRadius="md" p={6}>
         <Flex mb={6} w="100%" justifyContent="space-between">
           <Heading size="md">Account {renderAccountId(accountId)}</Heading>
           {isOwner && (

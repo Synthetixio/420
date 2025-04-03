@@ -104,14 +104,14 @@ function Totals() {
         textAlign="center"
         alignItems="center"
         bg="whiteAlpha.50"
-        borderRadius="base"
+        borderRadius="md"
         p={{ base: 4, sm: 6 }}
         gap={1}
       >
         <Text fontSize="sm" color="gray.500">
           Total Deposited
         </Text>
-        <Text fontSize="lg" color="gray.50">
+        <Text fontSize="lg" color="gray.50" fontWeight={500}>
           {isPendingTotals
             ? '~'
             : totals
@@ -124,7 +124,7 @@ function Totals() {
                 })} SNX`
               : null}
         </Text>
-        <Text fontSize="sm" color="gray.500">
+        <Text fontSize="sm" color="gray.500" fontWeight={500}>
           {isPendingTotals
             ? '~'
             : totals
@@ -152,14 +152,14 @@ function Totals() {
           direction="column"
           flex={1}
           bg="whiteAlpha.50"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 6 }}
           gap={1}
         >
           <Text fontSize="sm" color="gray.500">
             Current Debt
           </Text>
-          <Text fontSize="lg" color="gray.50">
+          <Text fontSize="lg" color="gray.50" fontWeight={500}>
             {isPendingTotals
               ? '~'
               : totals
@@ -178,14 +178,14 @@ function Totals() {
           direction="column"
           flex={1}
           bg="whiteAlpha.50"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 6 }}
           gap={1}
         >
           <Text fontSize="sm" color="gray.500">
             Debt Burned
           </Text>
-          <Text fontSize="lg" color="gray.50">
+          <Text fontSize="lg" color="gray.50" fontWeight={500}>
             {isPendingTotals
               ? '~'
               : totals
@@ -213,7 +213,7 @@ export function Page420Position() {
           flex={1}
           gap={6}
           bg="navy.700"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 10 }}
           alignContent="flex-start"
         >
@@ -224,14 +224,21 @@ export function Page420Position() {
           flex={1}
           gap={4}
           bg="navy.700"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 10 }}
         >
           <PanelTvl />
         </Flex>
       </Flex>
 
-      <Heading color="gray.50" fontSize={['20px', '30px']} lineHeight="120%">
+      <Heading
+        color="gray.50"
+        fontSize="3xl"
+        lineHeight="120%"
+        letterSpacing="tight"
+        fontWeight={500}
+        mt={10}
+      >
         Accounts
       </Heading>
 

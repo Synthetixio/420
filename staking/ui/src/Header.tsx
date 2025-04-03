@@ -14,7 +14,7 @@ export default function Header() {
   }, [location, onClose]);
 
   return (
-    <Flex bg="navy.700" mb="4" py="3" borderBottomWidth="1px" borderBottomColor="gray.900">
+    <Flex bg="navy.700" mb="4" py="3" borderBottomWidth="1px" borderBottomColor="whiteAlpha.200">
       <Container maxW="1236px" as={Flex} justifyContent="space-between" alignItems="center">
         <Flex
           as={RouterLink}

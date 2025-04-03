@@ -33,8 +33,8 @@ export function LoanChart({
   duration,
   pointsCount,
   config = {
-    width: 1000,
-    height: 350,
+    width: 880,
+    height: 330,
     fontSize: 30,
   },
 }: {
@@ -102,7 +102,7 @@ export function LoanChart({
 
   return (
     <svg
-      viewBox={`-100 -60 ${config.width + 100 + 20} ${config.height + 60 + config.fontSize + 20}`}
+      viewBox={`-60 -60 ${config.width + 100 + 20} ${config.height + 60 + config.fontSize + 20}`}
       width={`${config.width}px`}
       height={`${config.height}px`}
       aria-label="Debt Burn Chart"
@@ -158,7 +158,7 @@ export function LoanChart({
       <text
         x={10}
         y={config.height + config.fontSize + 10}
-        fill="#9999ac"
+        fill="#6C6C7E"
         fontSize={config.fontSize}
         textAnchor="start"
       >
@@ -171,7 +171,7 @@ export function LoanChart({
       <text
         x={config.width - 10}
         y={config.height + config.fontSize + 10}
-        fill="#9999ac"
+        fill="#6C6C7E"
         fontSize={config.fontSize}
         textAnchor="end"
       >
@@ -184,7 +184,7 @@ export function LoanChart({
       <text
         x={-15}
         y={config.fontSize / 2 - 5}
-        fill="#9999ac"
+        fill="#6C6C7E"
         fontSize={config.fontSize}
         textAnchor="end"
       >
@@ -201,7 +201,7 @@ export function LoanChart({
       <text
         x={-15}
         y={config.height + config.fontSize / 2 - 5}
-        fill="#9999ac"
+        fill="#6C6C7E"
         fontSize={config.fontSize}
         textAnchor="end"
       >

@@ -9,7 +9,13 @@ export function PanelTvl() {
   return (
     <>
       <Flex display={{ base: 'flex', sm: 'none' }} direction="column" gap={4}>
-        <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
+        <Text
+          fontSize={['xl', '2xl']}
+          fontWeight={500}
+          lineHeight="120%"
+          color="gray.50"
+          letterSpacing="tight"
+        >
           SNX Powered Yield Farming
         </Text>
         <Text fontSize="16px" lineHeight="24px" color="gray.500">
@@ -26,7 +32,13 @@ export function PanelTvl() {
         flexWrap="nowrap"
         alignItems="baseline"
       >
-        <Text fontSize="24px" fontWeight={500} lineHeight="32px" color="gray.50">
+        <Text
+          fontSize={['xl', '2xl']}
+          fontWeight={500}
+          lineHeight="120%"
+          color="gray.50"
+          letterSpacing="tight"
+        >
           TVL
         </Text>
         <Text fontSize="18px" fontWeight={500} color="gray.50">

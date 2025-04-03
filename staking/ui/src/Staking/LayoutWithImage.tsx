@@ -13,7 +13,7 @@ export function LayoutWithImage({
 }) {
   return (
     <>
-      <Flex direction="column" borderRadius="base" bg="navy.700">
+      <Flex direction="column" borderRadius="md" bg="navy.700">
         <Flex direction="row" flexWrap="wrap" gap={4}>
           <Flex
             direction="column"
@@ -30,7 +30,7 @@ export function LayoutWithImage({
             <Flex
               direction="column"
               bg="whiteAlpha.50"
-              borderRadius="base"
+              borderRadius="md"
               p={{ base: 4, sm: 6 }}
               gap={4}
             >
@@ -45,7 +45,7 @@ export function LayoutWithImage({
             overflow="hidden"
           >
             <Image
-              borderRadius="base"
+              borderRadius="md"
               src={imageSrc}
               width="100%"
               height="100%"

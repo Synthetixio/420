@@ -47,7 +47,7 @@ export function ModalShare420({
               borderWidth="1px"
               borderColor="gray.900"
               borderStyle="solid"
-              borderRadius="base"
+              borderRadius="md"
             />
             <Flex gap={2}>
               <Button

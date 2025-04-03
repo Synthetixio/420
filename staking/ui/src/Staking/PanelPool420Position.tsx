@@ -55,13 +55,13 @@ export function PanelPool420Position({ accountId }: { accountId: ethers.BigNumbe
         <Flex
           direction="column"
           bg="whiteAlpha.50"
-          borderRadius="base"
+          borderRadius="md"
           p={{ base: 4, sm: 6 }}
-          gap={6}
+          gap={4}
           justifyContent="space-between"
           h="fit-content"
         >
-          <Flex direction="column" textAlign="center" alignItems="center" gap={6}>
+          <Flex direction="column" textAlign="center" alignItems="center" gap={4}>
             <Text color="gray.500">
               Account Balance
               <Tooltip
@@ -71,7 +71,7 @@ export function PanelPool420Position({ accountId }: { accountId: ethers.BigNumbe
                 offset={[0, 10]}
                 label={
                   <Flex py={2} direction="column" gap={2.5}>
-                    <Text color="gray.500" fontWeight={400} textAlign="left">
+                    <Text color="gray.50" fontWeight={400} textAlign="left">
                       Account Balance consists of staked SNX and escrowed SNX
                     </Text>
                   </Flex>
@@ -81,7 +81,7 @@ export function PanelPool420Position({ accountId }: { accountId: ethers.BigNumbe
               </Tooltip>
             </Text>
             <Box>
-              <Text color="gray.50" fontSize="1.25em" fontWeight={500}>
+              <Text color="gray.50" fontSize="lg" fontWeight={500}>
                 {isPendingPosition
                   ? '~'
                   : position
@@ -94,7 +94,7 @@ export function PanelPool420Position({ accountId }: { accountId: ethers.BigNumbe
                       })} SNX`
                     : null}
               </Text>
-              <Text color="gray.500" fontSize="1.0em">
+              <Text color="gray.500" fontSize="sm" fontWeight={500}>
                 {isPendingPosition
                   ? '~'
                   : position
@@ -130,7 +130,7 @@ export function PanelPool420Position({ accountId }: { accountId: ethers.BigNumbe
                 backgroundColor="whiteAlpha.200"
                 py="1"
                 px="3"
-                borderRadius="base"
+                borderRadius="md"
                 gap={0}
                 justifyContent="center"
               >
