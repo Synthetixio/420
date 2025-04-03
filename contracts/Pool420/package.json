@@ -1,9 +1,7 @@
 {
   "name": "@_/Pool420",
   "version": "0.0.0",
-  "publishConfig": {
-    "access": "public"
-  },
+  "private": true,
   "main": "index.js",
   "files": [
     "src",

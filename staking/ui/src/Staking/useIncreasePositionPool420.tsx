@@ -2,7 +2,7 @@ import { ContractError } from '@_/ContractError';
 import { useAccountProxy } from '@_/useAccountProxy';
 import { useNetwork, useProvider, useSigner } from '@_/useBlockchain';
 import { useContractErrorParser } from '@_/useContractErrorParser';
-import { usePositionManager420 } from '@_/usePositionManager420';
+import { usePool420Migrate } from '@_/usePool420Migrate';
 import { useSNX } from '@_/useSNX';
 import { useTrustedMulticallForwarder } from '@_/useTrustedMulticallForwarder';
 import { useToast } from '@chakra-ui/react';
@@ -18,7 +18,7 @@ export function useIncreasePositionPool420({ accountId }: { accountId: ethers.Bi
   const provider = useProvider();
   const { network } = useNetwork();
 
-  const { data: PositionManager420 } = usePositionManager420();
+  const { data: Pool420Migrate } = usePool420Migrate();
   const { data: AccountProxy } = useAccountProxy();
   const { data: TrustedMulticallForwarder } = useTrustedMulticallForwarder();
   const { data: SNX } = useSNX();
@@ -28,7 +28,7 @@ export function useIncreasePositionPool420({ accountId }: { accountId: ethers.Bi
     provider &&
     signer &&
     TrustedMulticallForwarder &&
-    PositionManager420 &&
+    Pool420Migrate &&
     AccountProxy &&
     SNX &&
     true;
@@ -51,10 +51,10 @@ export function useIncreasePositionPool420({ accountId }: { accountId: ethers.Bi
       const SNXContract = new ethers.Contract(SNX.address, SNX.abi, signer);
       const snxBalance = await SNXContract.balanceOf(walletAddress);
       const snxAppoveGasLimit = await SNXContract.estimateGas.approve(
-        PositionManager420.address,
+        Pool420Migrate.address,
         snxBalance
       );
-      await SNXContract.approve(PositionManager420.address, snxBalance, {
+      await SNXContract.approve(Pool420Migrate.address, snxBalance, {
         gasLimit: snxAppoveGasLimit.mul(15).div(10),
       });
 
@@ -62,20 +62,20 @@ export function useIncreasePositionPool420({ accountId }: { accountId: ethers.Bi
       toast({ title: 'Updating position...', variant: 'left-accent' });
 
       const AccountProxyInterface = new ethers.utils.Interface(AccountProxy.abi);
-      const PositionManager420Interface = new ethers.utils.Interface(PositionManager420.abi);
+      const Pool420MigrateInterface = new ethers.utils.Interface(Pool420Migrate.abi);
 
       const multicall = [
         {
           target: AccountProxy.address,
           callData: AccountProxyInterface.encodeFunctionData('approve', [
-            PositionManager420.address,
+            Pool420Migrate.address,
             accountId,
           ]),
           requireSuccess: true,
         },
         {
-          target: PositionManager420.address,
-          callData: PositionManager420Interface.encodeFunctionData('increasePosition', [
+          target: Pool420Migrate.address,
+          callData: Pool420MigrateInterface.encodeFunctionData('increasePosition', [
             accountId,
             ethers.constants.MaxUint256, // All-in
           ]),

@@ -343,8 +343,8 @@ workflows:
           working_directory: 'contracts/Pool420Withdraw'
 
       - contract-test:
-          name: PositionManager420
-          working_directory: 'contracts/PositionManager420'
+          name: Pool420Migrate
+          working_directory: 'contracts/Pool420Migrate'
 
       #- cy
       - e2e:

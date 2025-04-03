@@ -6,7 +6,7 @@
   "dependencies": {
     "@_/parseContractError": "workspace:*",
     "@_/useAllErrors": "workspace:*",
-    "@_/usePositionManager420": "workspace:*",
+    "@_/usePool420Migrate": "workspace:*",
     "react": "^18.2.0"
   }
 }
