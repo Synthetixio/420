@@ -1,9 +1,9 @@
-import { ChevronDownIcon } from '@chakra-ui/icons';
-import { Box, Collapse, Flex, Image, Text, useDisclosure } from '@chakra-ui/react';
+import { Flex, Image, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import numbro from 'numbro';
 import React from 'react';
 import { BadgeMigrateNow } from './BadgeMigrateNow';
+import { LayoutPositionSummary } from './LayoutPositionSummary';
 import { PanelMigrateV2xPosition } from './PanelMigrateV2xPosition';
 import smallBurn from './burn-small.webp';
 import { useV2xPosition } from './useV2xPosition';
@@ -16,81 +16,29 @@ export function LayoutMigrateV2xPosition({
   defaultIsOpen: boolean;
 }) {
   const { data: v2xPosition, isPending: isPendingV2xPosition } = useV2xPosition();
-  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen });
   return (
-    <Box bg="navy.700" borderRadius="md" p={{ base: 4, sm: 10 }}>
-      <Flex
-        direction={{ base: 'column', lg: 'row' }}
-        justifyContent="space-between"
-        onClick={onToggle}
-        cursor="pointer"
-        gap={{ base: '2', lg: '6' }}
-        position="relative"
-      >
-        <Flex direction="column" gap={1} justifyContent="center">
-          <Text color="gray.50" fontSize="lg" fontWeight={500}>
-            Legacy Account #{index}
-          </Text>
-        </Flex>
-
-        <Flex
-          direction={{ base: 'row', lg: 'column' }}
-          textAlign="right"
-          gap={1}
-          justifyContent={{ base: 'space-between', lg: 'center' }}
-          alignItems={{ base: 'center', lg: 'flex-end' }}
-          display={isOpen ? 'none' : 'flex'}
-          transition="all 300ms"
-          mt={{ base: '4', lg: '0' }}
-        >
-          <Text color="gray.500" fontSize="xs">
-            Current Debt
-          </Text>
-          <Text color="gray.50" fontSize="sm" fontWeight={500}>
-            {isPendingV2xPosition
-              ? '~'
-              : v2xPosition
-                ? `$${numbro(wei(v2xPosition.debt).toNumber()).format({
-                    trimMantissa: true,
-                    thousandSeparated: true,
-                    average: true,
-                    mantissa: 2,
-                    spaceSeparated: false,
-                  })}`
-                : null}
-          </Text>
-        </Flex>
-
-        <Flex
-          direction={{ base: 'row', lg: 'column' }}
-          textAlign="right"
-          gap={1}
-          justifyContent={{ base: 'space-between', lg: 'center' }}
-          alignItems={{ base: 'center', lg: 'flex-end' }}
-          display={isOpen ? 'none' : 'flex'}
-          transition="all 300ms"
-        >
-          <Text color="gray.500" fontSize="xs">
-            Debt Burned
-          </Text>
-          <Text color="gray.50" fontSize="sm" fontWeight={500}>
-            -
-          </Text>
-        </Flex>
-
-        <Flex
-          direction={{ base: 'row', lg: 'column' }}
-          textAlign="right"
-          gap={1}
-          justifyContent={{ base: 'space-between', lg: 'center' }}
-          alignItems={{ base: 'center', lg: 'flex-end' }}
-          display={isOpen ? 'none' : 'flex'}
-          transition="all 300ms"
-        >
-          <Text color="gray.500" fontSize="xs">
-            Account Balance
-          </Text>
-          <Text color="gray.50" fontSize="sm" fontWeight={500}>
+    <LayoutPositionSummary
+      defaultIsOpen={defaultIsOpen}
+      header={{
+        c1: [`Legacy Account #${index}`, null],
+        c2: [
+          'Current Debt',
+          isPendingV2xPosition
+            ? '~'
+            : v2xPosition
+              ? `$${numbro(wei(v2xPosition.debt).toNumber()).format({
+                  trimMantissa: true,
+                  thousandSeparated: true,
+                  average: true,
+                  mantissa: 2,
+                  spaceSeparated: false,
+                })}`
+              : null,
+        ],
+        c3: ['Debt Burned', '-'],
+        c4: [
+          'Account Balance',
+          <>
             {isPendingV2xPosition
               ? '~'
               : v2xPosition
@@ -102,7 +50,7 @@ export function LayoutMigrateV2xPosition({
                     spaceSeparated: false,
                   })} SNX`
                 : null}{' '}
-            <Text as="span" color="gray.500" fontSize="sm" fontWeight={500}>
+            <Text key="$" as="span" color="gray.500" fontSize="sm" fontWeight={500}>
               {isPendingV2xPosition
                 ? '~'
                 : v2xPosition
@@ -117,30 +65,12 @@ export function LayoutMigrateV2xPosition({
                     })}`
                   : null}
             </Text>
-          </Text>
-        </Flex>
-
-        <Flex
-          direction="row"
-          textAlign="right"
-          gap={['3', '6']}
-          flex={0}
-          position={{ base: 'absolute', lg: 'static' }}
-          top={0}
-          right={0}
-        >
-          <BadgeMigrateNow opacity={1} />
-          <ChevronDownIcon
-            transform={isOpen ? 'rotate(-180deg)' : ''}
-            transition="transform 300ms"
-            w={6}
-            h={6}
-          />
-        </Flex>
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity>
-        <Flex direction="column" flexWrap="wrap" gap={6} mt={4}>
+          </>,
+        ],
+      }}
+      Badge={(props) => <BadgeMigrateNow opacity={1} {...props} />}
+      Content={() => (
+        <>
           <Text color="gray.500" fontSize="md">
             Deposit now to fire up the burn and sleep easy.
           </Text>
@@ -176,8 +106,8 @@ export function LayoutMigrateV2xPosition({
               />
             </Flex>
           </Flex>
-        </Flex>
-      </Collapse>
-    </Box>
+        </>
+      )}
+    />
   );
 }

@@ -1,11 +1,11 @@
-import { ChevronDownIcon } from '@chakra-ui/icons';
-import { Box, Collapse, Flex, Image, Text, useDisclosure } from '@chakra-ui/react';
+import { renderAccountId } from '@_/format';
+import { Flex, Image, Text } from '@chakra-ui/react';
 import { wei } from '@synthetixio/wei';
 import type { ethers } from 'ethers';
 import numbro from 'numbro';
 import React from 'react';
-import { AccountId } from './AccountId';
 import { BadgeMigrateNow } from './BadgeMigrateNow';
+import { LayoutPositionSummary } from './LayoutPositionSummary';
 import { PanelAccount } from './PanelAccount';
 import { PanelMigrateV3Position } from './PanelMigrateV3Position';
 import smallBurn from './burn-small.webp';
@@ -23,90 +23,29 @@ export function LayoutMigrateV3Position({
   const { data: liquidityPosition, isPending: isPendingLiquidityPosition } = useLiquidityPosition({
     accountId,
   });
-  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen });
   return (
-    <Box bg="navy.700" borderRadius="md" p={{ base: 4, sm: 10 }}>
-      <Flex
-        direction={{ base: 'column', lg: 'row' }}
-        justifyContent="space-between"
-        onClick={onToggle}
-        cursor="pointer"
-        gap={{ base: '2', lg: '6' }}
-        position="relative"
-      >
-        <Flex direction="column" gap={1} justifyContent="center">
-          <Text color="gray.50" fontSize="lg" fontWeight={500}>
-            Legacy Account #{index}
-          </Text>
-          <Text
-            color="gray.500"
-            fontSize="sm"
-            display={isOpen ? 'none' : 'flex'}
-            transition="all 300ms"
-            pointerEvents="none"
-          >
-            <AccountId accountId={accountId} />
-          </Text>
-        </Flex>
-
-        <Flex
-          direction={{ base: 'row', lg: 'column' }}
-          textAlign="right"
-          gap={1}
-          justifyContent={{ base: 'space-between', lg: 'center' }}
-          alignItems={{ base: 'center', lg: 'flex-end' }}
-          display={isOpen ? 'none' : 'flex'}
-          transition="all 300ms"
-          mt={{ base: '4', lg: '0' }}
-        >
-          <Text color="gray.500" fontSize="xs">
-            Current Debt
-          </Text>
-          <Text color="gray.50" fontSize="sm" fontWeight={500}>
-            {isPendingLiquidityPosition
-              ? '~'
-              : liquidityPosition
-                ? `$${numbro(wei(liquidityPosition.debt).toNumber()).format({
-                    trimMantissa: true,
-                    thousandSeparated: true,
-                    average: true,
-                    mantissa: 2,
-                    spaceSeparated: false,
-                  })}`
-                : null}
-          </Text>
-        </Flex>
-
-        <Flex
-          direction={{ base: 'row', lg: 'column' }}
-          textAlign="right"
-          gap={1}
-          justifyContent={{ base: 'space-between', lg: 'center' }}
-          alignItems={{ base: 'center', lg: 'flex-end' }}
-          display={isOpen ? 'none' : 'flex'}
-          transition="all 300ms"
-        >
-          <Text color="gray.500" fontSize="xs">
-            Debt Burned
-          </Text>
-          <Text color="gray.50" fontSize="sm" fontWeight={500}>
-            -
-          </Text>
-        </Flex>
-
-        <Flex
-          direction={{ base: 'row', lg: 'column' }}
-          textAlign="right"
-          gap={1}
-          justifyContent={{ base: 'space-between', lg: 'center' }}
-          alignItems={{ base: 'center', lg: 'flex-end' }}
-          display={isOpen ? 'none' : 'flex'}
-          transition="all 300ms"
-        >
-          <Text color="gray.500" fontSize="xs">
-            Account Balance
-          </Text>
-          <Text color="gray.50" fontSize="sm" fontWeight={500}>
+    <LayoutPositionSummary
+      defaultIsOpen={defaultIsOpen}
+      header={{
+        c1: [`Legacy Account #${index}`, renderAccountId(accountId)],
+        c2: [
+          'Current Debt',
+          isPendingLiquidityPosition
+            ? '~'
+            : liquidityPosition
+              ? `$${numbro(wei(liquidityPosition.debt).toNumber()).format({
+                  trimMantissa: true,
+                  thousandSeparated: true,
+                  average: true,
+                  mantissa: 2,
+                  spaceSeparated: false,
+                })}`
+              : null,
+        ],
+        c3: ['Debt Burned', '-'],
+        c4: [
+          'Account Balance',
+          <>
             {isPendingLiquidityPosition
               ? '~'
               : liquidityPosition
@@ -118,7 +57,7 @@ export function LayoutMigrateV3Position({
                     spaceSeparated: false,
                   })} SNX`
                 : null}{' '}
-            <Text as="span" color="gray.500" fontSize="sm" fontWeight={500}>
+            <Text key="$" as="span" color="gray.500" fontSize="sm" fontWeight={500}>
               {isPendingLiquidityPosition
                 ? '~'
                 : liquidityPosition
@@ -135,30 +74,12 @@ export function LayoutMigrateV3Position({
                     })}`
                   : null}
             </Text>
-          </Text>
-        </Flex>
-
-        <Flex
-          direction="row"
-          textAlign="right"
-          gap={['3', '6']}
-          flex={0}
-          position={{ base: 'absolute', lg: 'static' }}
-          top={0}
-          right={0}
-        >
-          <BadgeMigrateNow opacity={1} />
-          <ChevronDownIcon
-            transform={isOpen ? 'rotate(-180deg)' : ''}
-            transition="transform 300ms"
-            w={6}
-            h={6}
-          />
-        </Flex>
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity>
-        <Flex direction="column" flexWrap="wrap" gap={6} mt={4}>
+          </>,
+        ],
+      }}
+      Badge={(props) => <BadgeMigrateNow opacity={1} {...props} />}
+      Content={() => (
+        <>
           <Text color="gray.500" fontSize="md">
             Deposit now to fire up the burn and sleep easy.
           </Text>
@@ -195,8 +116,8 @@ export function LayoutMigrateV3Position({
               />
             </Flex>
           </Flex>
-        </Flex>
-      </Collapse>
-    </Box>
+        </>
+      )}
+    />
   );
 }
